@@ -722,6 +722,7 @@
 
   .site-header .navbar {
     padding-top: 0.7rem;
+
     padding-bottom: 0.7rem;
   }
 
@@ -739,11 +740,37 @@
 
 
   /* -------------------------------------------------------
-     Hide desktop-only actions
+     Hide all desktop-only header controls
+     
+     This includes:
+       - Desktop Advertise With Us
+       - Desktop List Your Business
+       - Desktop Sign in
+       - Desktop Account / Profile dropdown
   ------------------------------------------------------- */
 
   .site-header
   .header-desktop-action {
+    display: none !important;
+  }
+
+
+  .site-header
+  #headerSignIn {
+    display: none !important;
+  }
+
+
+  .site-header
+  #headerAccount {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+
+  .site-header
+  #headerAccount.show {
     display: none !important;
   }
 
@@ -804,7 +831,7 @@
 
   /* =======================================================
      LOGGED-IN MOBILE ACTIONS
-     
+
      These controls intentionally do not use:
        btn-solid
        btn-outline
@@ -821,11 +848,15 @@
   > .nin-mobile-action {
 
     width: 100% !important;
+
     min-width: 100% !important;
+
     max-width: 100% !important;
 
     height: 46px !important;
+
     min-height: 46px !important;
+
     max-height: 46px !important;
 
     box-sizing: border-box !important;
@@ -833,6 +864,7 @@
     display: flex !important;
 
     align-items: center !important;
+
     justify-content: center !important;
 
     margin:
@@ -1077,6 +1109,7 @@
   .site-header
   #navDrawer
   #mobileAccountLoggedOut {
+
     width: 100%;
   }
 
@@ -1095,6 +1128,7 @@
     display: flex !important;
 
     align-items: center !important;
+
     justify-content: center !important;
 
     box-sizing: border-box !important;
@@ -1217,6 +1251,25 @@
 
     display:
       none !important;
+  }
+
+
+  /* Desktop Sign in / account behavior is allowed here */
+
+  .site-header
+  #headerSignIn {
+    display:
+      inline-flex !important;
+  }
+
+
+  .site-header
+  #headerAccount {
+    visibility:
+      visible;
+
+    pointer-events:
+      auto;
   }
 
 }
@@ -1493,10 +1546,21 @@
   > button.nin-mobile-signout {
 
     background-color:
-      rgba(220, 53, 69, 0.10) !important;
+      rgba(
+        220,
+        53,
+        69,
+        0.10
+      ) !important;
 
     border:
-      1px solid rgba(220, 53, 69, 0.22) !important;
+      1px solid
+      rgba(
+        220,
+        53,
+        69,
+        0.22
+      ) !important;
 
     color:
       #ff6b78 !important;

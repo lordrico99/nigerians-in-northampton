@@ -18,6 +18,173 @@
 
 
   /* =========================================================
+     RESPONSIVE HEADER STATE
+  ========================================================= */
+
+  const mobileHeaderQuery =
+    window.matchMedia("(max-width: 991.98px)");
+
+  let currentAuthState =
+    "logged-out";
+
+
+  /*
+   * Desktop:
+   *   Logged out  -> Sign in visible
+   *   Logged in   -> Account dropdown visible
+   *
+   * Mobile:
+   *   Sign in and account dropdown are ALWAYS hidden.
+   *   Authentication actions live inside the hamburger drawer.
+   */
+
+  function syncHeaderAccountVisibility() {
+
+    const signIn =
+      document.getElementById(
+        "headerSignIn"
+      );
+
+    const account =
+      document.getElementById(
+        "headerAccount"
+      );
+
+
+    const isMobile =
+      mobileHeaderQuery.matches;
+
+
+    /* -------------------------------------------------------
+       MOBILE
+    ------------------------------------------------------- */
+
+    if (isMobile) {
+
+      if (signIn) {
+
+        signIn.style.setProperty(
+          "display",
+          "none",
+          "important"
+        );
+
+      }
+
+
+      if (account) {
+
+        account.style.setProperty(
+          "display",
+          "none",
+          "important"
+        );
+
+      }
+
+      return;
+
+    }
+
+
+    /* -------------------------------------------------------
+       DESKTOP — LOGGED IN
+    ------------------------------------------------------- */
+
+    if (
+      currentAuthState ===
+      "logged-in"
+    ) {
+
+      if (signIn) {
+
+        signIn.style.setProperty(
+          "display",
+          "none",
+          "important"
+        );
+
+      }
+
+
+      if (account) {
+
+        account.style.setProperty(
+          "display",
+          "flex",
+          "important"
+        );
+
+      }
+
+      return;
+
+    }
+
+
+    /* -------------------------------------------------------
+       DESKTOP — LOGGED OUT
+    ------------------------------------------------------- */
+
+    if (signIn) {
+
+      signIn.style.setProperty(
+        "display",
+        "inline-flex",
+        "important"
+      );
+
+    }
+
+
+    if (account) {
+
+      account.style.setProperty(
+        "display",
+        "none",
+        "important"
+      );
+
+    }
+
+  }
+
+
+  /* ---------------------------------------------------------
+     KEEP DESKTOP / MOBILE HEADER IN SYNC WHEN SCREEN SIZE
+     CHANGES WITHOUT RELOADING THE PAGE.
+  --------------------------------------------------------- */
+
+  function handleHeaderBreakpointChange() {
+
+    syncHeaderAccountVisibility();
+
+  }
+
+
+  if (
+    typeof mobileHeaderQuery.addEventListener ===
+    "function"
+  ) {
+
+    mobileHeaderQuery.addEventListener(
+      "change",
+      handleHeaderBreakpointChange
+    );
+
+  } else if (
+    typeof mobileHeaderQuery.addListener ===
+    "function"
+  ) {
+
+    mobileHeaderQuery.addListener(
+      handleHeaderBreakpointChange
+    );
+
+  }
+
+
+  /* =========================================================
      CACHE
   ========================================================= */
 
@@ -61,7 +228,9 @@
 
     } catch {
 
-      // Ignore localStorage errors.
+      /*
+       * Ignore localStorage errors.
+       */
 
     }
 
@@ -94,10 +263,12 @@
         "headerAccount"
       );
 
+
     const button =
       document.getElementById(
         "accountButton"
       );
+
 
     const dropdown =
       document.getElementById(
@@ -137,15 +308,31 @@
 
   function openAccountDropdown() {
 
+    /*
+     * Never open the desktop account dropdown
+     * on mobile.
+     */
+
+    if (
+      mobileHeaderQuery.matches
+    ) {
+
+      return;
+
+    }
+
+
     const account =
       document.getElementById(
         "headerAccount"
       );
 
+
     const button =
       document.getElementById(
         "accountButton"
       );
+
 
     const dropdown =
       document.getElementById(
@@ -189,53 +376,21 @@
 
   function showLoggedOut() {
 
+    currentAuthState =
+      "logged-out";
+
 
     /* -------------------------------------------------------
-       DESKTOP
+       DESKTOP / MOBILE HEADER
     ------------------------------------------------------- */
-
-    const signIn =
-      document.getElementById(
-        "headerSignIn"
-      );
-
-    const account =
-      document.getElementById(
-        "headerAccount"
-      );
-
-
-    if (signIn) {
-
-      signIn.style.setProperty(
-        "display",
-        "inline-flex",
-        "important"
-      );
-
-    }
-
-
-    if (account) {
-
-      account.style.setProperty(
-        "display",
-        "none",
-        "important"
-      );
-
-      account.classList.remove(
-        "show"
-      );
-
-    }
-
 
     closeAccountDropdown();
 
+    syncHeaderAccountVisibility();
+
 
     /* -------------------------------------------------------
-       MOBILE
+       MOBILE DRAWER
     ------------------------------------------------------- */
 
     const mobileLoggedOut =
@@ -243,10 +398,12 @@
         "mobileAccountLoggedOut"
       );
 
+
     const mobileLoggedIn =
       document.getElementById(
         "mobileAccountLoggedIn"
       );
+
 
     const mobileIdentity =
       document.getElementById(
@@ -254,7 +411,9 @@
       );
 
 
-    /* Show logged-out actions */
+    /* -------------------------------------------------------
+       SHOW LOGGED-OUT MOBILE ACTIONS
+    ------------------------------------------------------- */
 
     if (mobileLoggedOut) {
 
@@ -267,7 +426,9 @@
     }
 
 
-    /* Hide logged-in actions */
+    /* -------------------------------------------------------
+       HIDE LOGGED-IN MOBILE ACTIONS
+    ------------------------------------------------------- */
 
     if (mobileLoggedIn) {
 
@@ -280,7 +441,9 @@
     }
 
 
-    /* Hide logged-in identity */
+    /* -------------------------------------------------------
+       HIDE LOGGED-IN USER IDENTITY
+    ------------------------------------------------------- */
 
     if (mobileIdentity) {
 
@@ -297,7 +460,8 @@
 
     cacheUser(null);
 
-    window.NINCurrentUser = null;
+    window.NINCurrentUser =
+      null;
 
   }
 
@@ -308,46 +472,17 @@
 
   function showLoggedIn(user) {
 
+    currentAuthState =
+      "logged-in";
+
 
     /* -------------------------------------------------------
-       DESKTOP
+       DESKTOP / MOBILE HEADER
     ------------------------------------------------------- */
 
-    const signIn =
-      document.getElementById(
-        "headerSignIn"
-      );
+    closeAccountDropdown();
 
-    const account =
-      document.getElementById(
-        "headerAccount"
-      );
-
-
-    if (signIn) {
-
-      signIn.style.setProperty(
-        "display",
-        "none",
-        "important"
-      );
-
-    }
-
-
-    if (account) {
-
-      account.style.setProperty(
-        "display",
-        "flex",
-        "important"
-      );
-
-      account.classList.remove(
-        "show"
-      );
-
-    }
+    syncHeaderAccountVisibility();
 
 
     /* -------------------------------------------------------
@@ -355,13 +490,18 @@
     ------------------------------------------------------- */
 
     const name =
-      user?.name || "Account";
+      user?.name ||
+      "Account";
+
 
     const email =
-      user?.email || "";
+      user?.email ||
+      "";
+
 
     const role =
-      user?.role || "Member";
+      user?.role ||
+      "Member";
 
 
     /* -------------------------------------------------------
@@ -373,20 +513,24 @@
         "accountButtonName"
       );
 
+
     const accountAvatar =
       document.getElementById(
         "accountAvatar"
       );
+
 
     const dropdownName =
       document.getElementById(
         "accountDropdownName"
       );
 
+
     const dropdownEmail =
       document.getElementById(
         "accountDropdownEmail"
       );
+
 
     const dropdownRole =
       document.getElementById(
@@ -443,6 +587,7 @@
         "mobileAccountLoggedOut"
       );
 
+
     const mobileLoggedIn =
       document.getElementById(
         "mobileAccountLoggedIn"
@@ -461,12 +606,6 @@
 
 
     if (mobileLoggedIn) {
-
-      /*
-       * IMPORTANT:
-       * Use block so all mobile actions
-       * remain stacked vertically.
-       */
 
       mobileLoggedIn.style.setProperty(
         "display",
@@ -487,15 +626,18 @@
         "mobileLoggedInIdentity"
       );
 
+
     const mobileName =
       document.getElementById(
         "mobileAccountName"
       );
 
+
     const mobileEmail =
       document.getElementById(
         "mobileAccountEmail"
       );
+
 
     const mobileAvatar =
       document.getElementById(
@@ -503,7 +645,9 @@
       );
 
 
-    /* Show identity above Home */
+    /* -------------------------------------------------------
+       SHOW IDENTITY ABOVE HOME
+    ------------------------------------------------------- */
 
     if (mobileIdentity) {
 
@@ -514,7 +658,9 @@
     }
 
 
-    /* Name */
+    /* -------------------------------------------------------
+       MOBILE NAME
+    ------------------------------------------------------- */
 
     if (mobileName) {
 
@@ -524,7 +670,9 @@
     }
 
 
-    /* Email */
+    /* -------------------------------------------------------
+       MOBILE EMAIL
+    ------------------------------------------------------- */
 
     if (mobileEmail) {
 
@@ -534,7 +682,9 @@
     }
 
 
-    /* Initials */
+    /* -------------------------------------------------------
+       MOBILE INITIALS
+    ------------------------------------------------------- */
 
     if (mobileAvatar) {
 
@@ -556,7 +706,8 @@
 
     if (mobileProfileLink) {
 
-      mobileProfileLink.href = "#";
+      mobileProfileLink.href =
+        "#";
 
     }
 
@@ -567,7 +718,8 @@
 
     cacheUser(user);
 
-    window.NINCurrentUser = user;
+    window.NINCurrentUser =
+      user;
 
   }
 
@@ -579,7 +731,10 @@
   function getInitials(name) {
 
     const parts =
-      String(name || "Account")
+      String(
+        name ||
+        "Account"
+      )
         .trim()
         .split(/\s+/)
         .filter(Boolean);
@@ -619,10 +774,12 @@
         "accountButton"
       );
 
+
     const accountDropdown =
       document.getElementById(
         "accountDropdown"
       );
+
 
     const account =
       document.getElementById(
@@ -664,8 +821,23 @@
       function (event) {
 
         event.preventDefault();
-
         event.stopPropagation();
+
+
+        /*
+         * Do not allow the desktop account
+         * dropdown to operate on mobile.
+         */
+
+        if (
+          mobileHeaderQuery.matches
+        ) {
+
+          closeAccountDropdown();
+
+          return;
+
+        }
 
 
         const isOpen =
@@ -733,7 +905,8 @@
       function (event) {
 
         if (
-          event.key === "Escape"
+          event.key ===
+          "Escape"
         ) {
 
           closeAccountDropdown();
@@ -756,6 +929,7 @@
       document.getElementById(
         "profileMenuLink"
       );
+
 
     const mobileProfile =
       document.getElementById(
@@ -834,6 +1008,7 @@
     window.NINCurrentUser =
       null;
 
+
     window.location.reload();
 
   }
@@ -849,6 +1024,7 @@
       document.getElementById(
         "desktopSignOut"
       );
+
 
     const mobileSignOut =
       document.getElementById(
@@ -1028,6 +1204,20 @@
     setupProfileLinks();
 
     updateAuthLinks();
+
+
+    /*
+     * Establish initial header visibility before
+     * authentication is checked.
+     */
+
+    currentAuthState =
+      getCachedUser()
+        ? "logged-in"
+        : "logged-out";
+
+
+    syncHeaderAccountVisibility();
 
 
     /* -------------------------------------------------------
