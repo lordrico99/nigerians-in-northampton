@@ -547,42 +547,88 @@
      MOBILE NAVIGATION
 ====================================================== -->
 
+<!-- =====================================================
+     MOBILE NAVIGATION DRAWER
+====================================================== -->
+
 <dialog
   class="drawer drawer-end"
-  tabindex="-1"
   id="navDrawer"
-  aria-labelledby="navDrawerLabel"
 >
+
+  <!-- DRAWER HEADER -->
 
   <div class="drawer-header">
 
-    <h5
-      class="drawer-title"
-      id="navDrawerLabel"
-    >
+    <strong>
       Menu
-    </h5>
+    </strong>
 
     <button
       type="button"
       class="btn-close"
-      data-bs-dismiss="drawer"
-      aria-label="Close navigation"
+      aria-label="Close menu"
+      data-bs-dismiss="dialog"
     ></button>
 
   </div>
 
 
+  <!-- DRAWER BODY -->
+
   <div class="drawer-body">
+
+
+    <!-- =================================================
+         LOGGED-IN USER IDENTITY
+         Appears above Home
+    ================================================== -->
+
+    <div
+      class="mobile-user-identity"
+      id="mobileLoggedInIdentity"
+    >
+
+      <div class="mobile-user-avatar">
+        <span
+          id="mobileAccountAvatar"
+          aria-hidden="true"
+        >
+          U
+        </span>
+      </div>
+
+      <div class="mobile-user-details">
+
+        <strong id="mobileAccountName">
+          Member
+        </strong>
+
+        <span id="mobileAccountEmail">
+          member@example.com
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+         MAIN MOBILE NAVIGATION
+    ================================================== -->
 
     <ul class="nav navbar-nav">
 
-      <li class="nav-item">
+      <!-- HOME -->
+
+      <li
+        class="nav-item"
+        data-header-page="home"
+      >
 
         <a
           class="nav-link"
           href="index.html"
-          data-header-page="home"
         >
           Home
         </a>
@@ -590,122 +636,57 @@
       </li>
 
 
-      <li class="nav-item">
+      <!-- BUSINESSES -->
 
-        <button
-          class="nav-link"
-          type="button"
-          data-bs-toggle="menu"
+      <li
+        class="nav-item dropdown"
+        data-header-page="businesses"
+      >
+
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
           aria-expanded="false"
-          data-header-page="businesses"
         >
-
           Businesses
+        </a>
 
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="m3 6 5 5 5-5"/>
-          </svg>
+        <!--
+          KEEP YOUR EXISTING BUSINESSES SUBMENU HERE.
+          Do not change the links you already have.
+        -->
 
-        </button>
+        <ul class="dropdown-menu">
 
+          <li>
+            <a
+              class="dropdown-item"
+              href="businesses.html"
+            >
+              All Businesses
+            </a>
+          </li>
 
-        <div class="menu">
+          <!-- Keep your other existing business
+               categories/submenu items here -->
 
-          <a
-            class="menu-item"
-            href="businesses.html"
-          >
-            Browse all businesses
-          </a>
-
-          <hr class="menu-divider">
-
-          <a
-            class="menu-item"
-            href="businesses.html?category=food"
-          >
-            Restaurants &amp; Food
-          </a>
-
-          <a
-            class="menu-item"
-            href="businesses.html?category=beauty"
-          >
-            Hair &amp; Beauty
-          </a>
-
-          <a
-            class="menu-item"
-            href="businesses.html?category=shopping"
-          >
-            Shopping
-          </a>
-
-          <a
-            class="menu-item"
-            href="businesses.html?category=property"
-          >
-            Property &amp; Home
-          </a>
-
-          <a
-            class="menu-item"
-            href="businesses.html?category=professional"
-          >
-            Professional Services
-          </a>
-
-          <a
-            class="menu-item"
-            href="businesses.html?category=transport"
-          >
-            Transport
-          </a>
-
-          <a
-            class="menu-item"
-            href="businesses.html?category=health"
-          >
-            Health &amp; Wellness
-          </a>
-
-          <a
-            class="menu-item"
-            href="businesses.html?category=events"
-          >
-            Events &amp; Entertainment
-          </a>
-
-          <hr class="menu-divider">
-
-          <a
-            class="menu-item"
-            href="businesses.html"
-          >
-            View all categories
-          </a>
-
-        </div>
+        </ul>
 
       </li>
 
 
-      <li class="nav-item">
+      <!-- COMMUNITY -->
+
+      <li
+        class="nav-item"
+        data-header-page="community"
+      >
 
         <a
           class="nav-link"
-          href="index.html#news"
-          data-header-page="community"
+          href="community.html"
         >
           Community
         </a>
@@ -713,12 +694,16 @@
       </li>
 
 
-      <li class="nav-item">
+      <!-- EVENTS -->
+
+      <li
+        class="nav-item"
+        data-header-page="events"
+      >
 
         <a
           class="nav-link"
-          href="index.html#events"
-          data-header-page="events"
+          href="events.html"
         >
           Events
         </a>
@@ -726,12 +711,16 @@
       </li>
 
 
-      <li class="nav-item">
+      <!-- GUIDES -->
+
+      <li
+        class="nav-item"
+        data-header-page="guides"
+      >
 
         <a
           class="nav-link"
-          href="index.html#guides"
-          data-header-page="guides"
+          href="guides.html"
         >
           Guides
         </a>
@@ -739,12 +728,16 @@
       </li>
 
 
-      <li class="nav-item">
+      <!-- ABOUT -->
+
+      <li
+        class="nav-item"
+        data-header-page="about"
+      >
 
         <a
           class="nav-link"
-          href="index.html#about"
-          data-header-page="about"
+          href="about.html"
         >
           About
         </a>
@@ -754,135 +747,90 @@
     </ul>
 
 
-    <!-- =====================================================
-     MOBILE ACCOUNT / ACTIONS
-====================================================== -->
+    <!-- =================================================
+         MOBILE ACCOUNT / ACTIONS
+         Logged out OR logged in
+    ================================================== -->
 
-<div class="mobile-only-actions mt-4 pt-4 border-top">
+    <div class="mobile-only-actions">
 
-  <!-- LOGGED OUT -->
+      <!-- ===============================================
+           LOGGED OUT
+      ================================================ -->
 
-  <div
-    class="mobile-account-area"
-    id="mobileAccountLoggedOut"
-  >
+      <div
+        class="mobile-account-area"
+        id="mobileAccountLoggedOut"
+      >
 
-    <a
-      class="mobile-account-action btn-outline theme-secondary"
-      href="login.html?mode=login&next=index.html"
-    >
-      Sign in
-    </a>
-
-    <a
-      class="mobile-account-action btn-solid theme-primary"
-      href="login.html?mode=signup&next=index.html"
-    >
-      Create account
-    </a>
-
-  </div>
-
-
-  <!-- LOGGED IN -->
-
-  <div
-    class="mobile-account-area"
-    id="mobileAccountLoggedIn"
-  >
-
-    <!-- USER IDENTITY -->
-
-    <div class="mobile-account-card">
-
-      <div class="mobile-account-identity">
-
-        <span
-          class="mobile-account-avatar"
-          id="mobileAccountAvatar"
-          aria-hidden="true"
+        <a
+          class="mobile-final-action mobile-action-outline"
+          href="login.html?mode=login&next=index.html"
         >
-          U
-        </span>
+          Sign in
+        </a>
 
-        <div class="mobile-account-details">
-
-          <strong id="mobileAccountName">
-            Member
-          </strong>
-
-          <span id="mobileAccountEmail">
-            member@example.com
-          </span>
-
-        </div>
+        <a
+          class="mobile-final-action mobile-action-primary"
+          href="login.html?mode=signup&next=index.html"
+        >
+          Create account
+        </a>
 
       </div>
 
-    </div>
 
+      <!-- ===============================================
+           LOGGED IN
+      ================================================ -->
 
-    <!-- ACCOUNT MENU -->
-
-    <div class="mobile-account-menu">
-
-      <a
-        class="mobile-account-row"
-        href="#"
-        id="mobileProfileLink"
+      <div
+        class="mobile-account-area"
+        id="mobileAccountLoggedIn"
       >
 
-        <span class="mobile-account-row-label">
-          Profile
-        </span>
+        <!-- LIST YOUR BUSINESS -->
 
-        <span
-          class="mobile-account-row-arrow"
-          aria-hidden="true"
+        <a
+          class="mobile-final-action mobile-action-primary"
+          href="list-your-business.html"
         >
-          ›
-        </span>
-
-      </a>
+          List Your Business
+        </a>
 
 
-      <button
-        type="button"
-        class="mobile-account-row mobile-account-signout"
-        id="mobileSignOut"
-      >
+        <!-- ADVERTISE WITH US -->
 
-        <span class="mobile-account-row-label">
+        <a
+          class="mobile-final-action mobile-action-outline"
+          href="index.html#advertise"
+        >
+          Advertise With Us
+        </a>
+
+
+        <!-- PROFILE -->
+
+        <a
+          class="mobile-final-action mobile-action-profile"
+          href="#"
+          id="mobileProfileLink"
+        >
+          Profile
+        </a>
+
+
+        <!-- SIGN OUT -->
+
+        <button
+          type="button"
+          class="mobile-final-action mobile-action-signout"
+          id="mobileSignOut"
+        >
           Sign out
-        </span>
+        </button>
 
-      </button>
-
-    </div>
-
-
-    <!-- LIST YOUR BUSINESS -->
-
-    <a
-      class="mobile-account-action btn-solid theme-primary mobile-full-width-action"
-      href="list-your-business.html"
-    >
-      List Your Business
-    </a>
-
-  </div>
-
-
-  <!-- ADVERTISE -->
-
-  <a
-    class="mobile-account-action btn-outline theme-secondary mobile-full-width-action mobile-advertise-action"
-    href="index.html#advertise"
-  >
-    Advertise With Us
-  </a>
-
-</div>
+      </div>
 
     </div>
 
