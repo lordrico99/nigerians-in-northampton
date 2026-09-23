@@ -1,0 +1,3479 @@
+<!doctype html>
+
+<html lang="en" data-bs-theme="light">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>
+    Sign in — Nigerians in Northampton
+  </title>
+
+  <meta
+    name="description"
+    content="Create an account or sign in to manage your Nigerians in Northampton business listings and community activity."
+  >
+
+  <!-- =======================================================
+       GLOBAL STYLES
+  ======================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="assets/vendor/bootstrap6/css/bootstrap.min.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/base.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/style.css"
+  >
+
+
+  <!-- =======================================================
+       API CONFIG
+       MUST LOAD BEFORE LOGIN JAVASCRIPT
+  ======================================================== -->
+
+  <script src="assets/js/config.js"></script>
+
+
+  <style>
+
+    :root {
+
+      --auth-brand:
+        var(--bs-primary, #0f766e);
+
+      --auth-ink:
+        #0f172a;
+
+      --auth-muted:
+        #64748b;
+
+      --auth-border:
+        rgba(15, 23, 42, .10);
+
+      --auth-soft:
+        rgba(15, 118, 110, .08);
+
+      --auth-shadow:
+        0 24px 80px rgba(15, 23, 42, .12);
+
+    }
+
+
+    body.auth-page {
+
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(15, 118, 110, .08),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 90% 90%,
+          rgba(15, 23, 42, .055),
+          transparent 28%
+        ),
+
+        var(--bs-body-bg);
+
+    }
+
+
+    /* =====================================================
+       HEADER
+    ====================================================== */
+
+    .auth-header {
+
+      position: relative;
+
+      z-index: 10;
+
+      border-bottom:
+        1px solid
+        var(--auth-border);
+
+      background:
+        color-mix(
+          in srgb,
+          var(--bs-body-bg) 94%,
+          transparent
+        );
+
+      backdrop-filter:
+        blur(12px);
+
+      -webkit-backdrop-filter:
+        blur(12px);
+
+    }
+
+
+    .auth-header-inner {
+
+      min-height:
+        72px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        16px;
+
+    }
+
+
+    .auth-brand {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        11px;
+
+      color:
+        inherit;
+
+      text-decoration:
+        none;
+
+    }
+
+
+    .auth-brand-mark {
+
+      width:
+        38px;
+
+      height:
+        38px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border-radius:
+        11px;
+
+      background:
+        var(--auth-brand);
+
+      color:
+        #fff;
+
+      font-size:
+        18px;
+
+      font-weight:
+        800;
+
+      box-shadow:
+        0 6px 20px
+        rgba(15, 118, 110, .18);
+
+    }
+
+
+    /* =====================================================
+       MAIN
+    ====================================================== */
+
+    .auth-main {
+
+      min-height:
+        calc(100vh - 72px);
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      padding:
+        44px 0 60px;
+
+    }
+
+
+    .auth-shell {
+
+      width:
+        min(
+          1080px,
+          calc(100vw - 30px)
+        );
+
+      margin:
+        0 auto;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        minmax(0, 1.03fr)
+        minmax(400px, .97fr);
+
+      border:
+        1px solid
+        var(--auth-border);
+
+      border-radius:
+        26px;
+
+      overflow:
+        hidden;
+
+      background:
+        var(--bs-body-bg);
+
+      box-shadow:
+        var(--auth-shadow);
+
+    }
+
+
+    /* =====================================================
+       VISUAL PANEL
+    ====================================================== */
+
+    .auth-visual {
+
+      position:
+        relative;
+
+      min-height:
+        660px;
+
+      padding:
+        48px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      justify-content:
+        space-between;
+
+      color:
+        #fff;
+
+      isolation:
+        isolate;
+
+      overflow:
+        hidden;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(15, 23, 42, .93),
+          rgba(15, 118, 110, .82)
+        ),
+
+        url(
+          "img/Northampton_Market_Square.jpg"
+        )
+        center /
+        cover
+        no-repeat;
+
+    }
+
+
+    .auth-visual::before {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      z-index:
+        -1;
+
+      background:
+        radial-gradient(
+          circle at 80% 15%,
+          rgba(255,255,255,.13),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 15% 80%,
+          rgba(255,255,255,.08),
+          transparent 35%
+        );
+
+    }
+
+
+    .auth-visual-kicker {
+
+      font-size:
+        12px;
+
+      letter-spacing:
+        .10em;
+
+      text-transform:
+        uppercase;
+
+      font-weight:
+        800;
+
+      opacity:
+        .78;
+
+    }
+
+
+    .auth-visual h1 {
+
+      max-width:
+        470px;
+
+      margin:
+        12px 0 16px;
+
+      font-size:
+        clamp(
+          34px,
+          4.4vw,
+          54px
+        );
+
+      line-height:
+        1.02;
+
+      letter-spacing:
+        -.04em;
+
+      text-wrap:
+        balance;
+
+    }
+
+
+    .auth-visual-copy {
+
+      max-width:
+        470px;
+
+      margin:
+        0;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .80
+        );
+
+      font-size:
+        16px;
+
+      line-height:
+        1.7;
+
+    }
+
+
+    .auth-benefits {
+
+      display:
+        grid;
+
+      gap:
+        12px;
+
+      margin:
+        30px 0 0;
+
+      padding:
+        0;
+
+      list-style:
+        none;
+
+    }
+
+
+    .auth-benefit {
+
+      display:
+        flex;
+
+      align-items:
+        flex-start;
+
+      gap:
+        12px;
+
+      padding:
+        12px 0;
+
+      border-top:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          .12
+        );
+
+    }
+
+
+    .auth-benefit-icon {
+
+      width:
+        30px;
+
+      height:
+        30px;
+
+      flex:
+        0 0 30px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border-radius:
+        9px;
+
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          .10
+        );
+
+    }
+
+
+    .auth-benefit strong {
+
+      display:
+        block;
+
+      font-size:
+        14px;
+
+      margin-bottom:
+        2px;
+
+    }
+
+
+    .auth-benefit span {
+
+      display:
+        block;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .68
+        );
+
+      font-size:
+        12px;
+
+      line-height:
+        1.55;
+
+    }
+
+
+    .auth-visual-footer {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        15px;
+
+      flex-wrap:
+        wrap;
+
+      margin-top:
+        35px;
+
+      color:
+        rgba(
+          255,
+          255,
+          255,
+          .58
+        );
+
+      font-size:
+        11px;
+
+    }
+
+
+    /* =====================================================
+       FORM PANEL
+    ====================================================== */
+
+    .auth-panel {
+
+      padding:
+        44px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+    }
+
+
+    .auth-panel-inner {
+
+      width:
+        100%;
+
+      max-width:
+        450px;
+
+    }
+
+
+    .auth-panel-head {
+
+      margin-bottom:
+        25px;
+
+    }
+
+
+    .auth-panel-kicker {
+
+      margin:
+        0 0 8px;
+
+      color:
+        var(--auth-brand);
+
+      font-size:
+        12px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        .08em;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .auth-panel-title {
+
+      margin:
+        0 0 8px;
+
+      font-size:
+        clamp(
+          27px,
+          3vw,
+          34px
+        );
+
+      line-height:
+        1.08;
+
+      letter-spacing:
+        -.035em;
+
+    }
+
+
+    .auth-panel-subtitle {
+
+      margin:
+        0;
+
+      color:
+        var(--bs-secondary-color);
+
+      line-height:
+        1.6;
+
+      font-size:
+        14px;
+
+    }
+
+
+    /* =====================================================
+       MODE SWITCH
+    ====================================================== */
+
+    .auth-mode-switch {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        4px;
+
+      padding:
+        4px;
+
+      margin-bottom:
+        24px;
+
+      border:
+        1px solid
+        var(--auth-border);
+
+      border-radius:
+        12px;
+
+      background:
+        var(--bs-tertiary-bg);
+
+    }
+
+
+    .auth-mode-button {
+
+      min-height:
+        42px;
+
+      border:
+        0;
+
+      border-radius:
+        9px;
+
+      background:
+        transparent;
+
+      color:
+        var(--bs-secondary-color);
+
+      font-size:
+        13px;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+
+      transition:
+        .18s ease;
+
+    }
+
+
+    .auth-mode-button.active {
+
+      color:
+        var(--bs-body-color);
+
+      background:
+        var(--bs-body-bg);
+
+      box-shadow:
+        0 2px 10px
+        rgba(
+          15,
+          23,
+          42,
+          .07
+        );
+
+    }
+
+
+    /* =====================================================
+       FORMS
+    ====================================================== */
+
+    .auth-form {
+
+      display:
+        none;
+
+    }
+
+
+    .auth-form.active {
+
+      display:
+        block;
+
+    }
+
+
+    .auth-field {
+
+      position:
+        relative;
+
+      margin-bottom:
+        17px;
+
+    }
+
+
+    .auth-label {
+
+      display:
+        block;
+
+      margin-bottom:
+        7px;
+
+      color:
+        var(--bs-body-color);
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .auth-required {
+
+      color:
+        var(--auth-brand);
+
+    }
+
+
+    .auth-input-wrap {
+
+      position:
+        relative;
+
+    }
+
+
+    .auth-input {
+
+      width:
+        100%;
+
+      min-height:
+        48px;
+
+      padding:
+        12px 14px;
+
+      border:
+        1px solid
+        var(--auth-border);
+
+      border-radius:
+        11px;
+
+      background:
+        var(--bs-body-bg);
+
+      color:
+        var(--bs-body-color);
+
+      outline:
+        none;
+
+      transition:
+        border-color .18s ease,
+        box-shadow .18s ease;
+
+    }
+
+
+    .auth-input.has-toggle {
+
+      padding-right:
+        50px;
+
+    }
+
+
+    .auth-input:focus {
+
+      border-color:
+        var(--auth-brand);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(
+          15,
+          118,
+          110,
+          .09
+        );
+
+    }
+
+
+    .auth-password-toggle {
+
+      position:
+        absolute;
+
+      top:
+        50%;
+
+      right:
+        9px;
+
+      transform:
+        translateY(-50%);
+
+      width:
+        34px;
+
+      height:
+        34px;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border:
+        0;
+
+      border-radius:
+        8px;
+
+      background:
+        transparent;
+
+      color:
+        var(--bs-secondary-color);
+
+      cursor:
+        pointer;
+
+    }
+
+
+    .auth-password-toggle:hover {
+
+      background:
+        var(--bs-tertiary-bg);
+
+    }
+
+
+    .auth-row {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        12px;
+
+      flex-wrap:
+        wrap;
+
+      margin:
+        6px 0 19px;
+
+    }
+
+
+    .auth-checkbox {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      color:
+        var(--bs-secondary-color);
+
+      font-size:
+        12px;
+
+      cursor:
+        pointer;
+
+    }
+
+
+    .auth-checkbox input {
+
+      width:
+        15px;
+
+      height:
+        15px;
+
+      accent-color:
+        var(--auth-brand);
+
+    }
+
+
+    .auth-link {
+
+      color:
+        var(--auth-brand);
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+
+      text-decoration:
+        none;
+
+    }
+
+
+    .auth-link:hover {
+
+      text-decoration:
+        underline;
+
+    }
+
+
+    .auth-primary {
+
+      width:
+        100%;
+
+      min-height:
+        49px;
+
+      border:
+        0;
+
+      border-radius:
+        11px;
+
+      background:
+        var(--auth-brand);
+
+      color:
+        #fff;
+
+      font-weight:
+        750;
+
+      box-shadow:
+        0 8px 22px
+        rgba(
+          15,
+          118,
+          110,
+          .16
+        );
+
+    }
+
+
+    .auth-primary:hover {
+
+      filter:
+        brightness(.96);
+
+    }
+
+
+    .auth-primary:disabled {
+
+      opacity:
+        .65;
+
+      cursor:
+        not-allowed;
+
+    }
+
+
+    /* =====================================================
+       MESSAGES
+    ====================================================== */
+
+    .auth-message {
+
+      display:
+        none;
+
+      margin-bottom:
+        18px;
+
+      padding:
+        12px 13px;
+
+      border-radius:
+        10px;
+
+      font-size:
+        12px;
+
+      line-height:
+        1.55;
+
+    }
+
+
+    .auth-message.is-visible {
+
+      display:
+        block;
+
+    }
+
+
+    .auth-message.error {
+
+      border:
+        1px solid
+        #fecaca;
+
+      color:
+        #991b1b;
+
+      background:
+        #fef2f2;
+
+    }
+
+
+    .auth-message.success {
+
+      border:
+        1px solid
+        #bbf7d0;
+
+      color:
+        #166534;
+
+      background:
+        #f0fdf4;
+
+    }
+
+
+    /* =====================================================
+       DIVIDER / NOTES
+    ====================================================== */
+
+    .auth-divider {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        12px;
+
+      margin:
+        20px 0;
+
+      color:
+        var(--bs-secondary-color);
+
+      font-size:
+        11px;
+
+    }
+
+
+    .auth-divider::before,
+    .auth-divider::after {
+
+      content:
+        "";
+
+      height:
+        1px;
+
+      flex:
+        1;
+
+      background:
+        var(--auth-border);
+
+    }
+
+
+    .auth-note {
+
+      margin-top:
+        17px;
+
+      color:
+        var(--bs-secondary-color);
+
+      font-size:
+        11px;
+
+      line-height:
+        1.65;
+
+      text-align:
+        center;
+
+    }
+
+
+    .auth-note a {
+
+      color:
+        inherit;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .auth-security {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        7px;
+
+      margin-top:
+        19px;
+
+      color:
+        var(--bs-secondary-color);
+
+      font-size:
+        10px;
+
+    }
+
+
+    /* =====================================================
+       PASSWORD STRENGTH
+    ====================================================== */
+
+    .password-strength {
+
+      display:
+        none;
+
+      margin-top:
+        8px;
+
+    }
+
+
+    .password-strength.is-visible {
+
+      display:
+        block;
+
+    }
+
+
+    .strength-track {
+
+      height:
+        5px;
+
+      overflow:
+        hidden;
+
+      border-radius:
+        999px;
+
+      background:
+        var(--bs-tertiary-bg);
+
+    }
+
+
+    .strength-fill {
+
+      width:
+        0;
+
+      height:
+        100%;
+
+      border-radius:
+        inherit;
+
+      transition:
+        width .2s ease,
+        background .2s ease;
+
+    }
+
+
+    .strength-row {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      gap:
+        10px;
+
+      margin-top:
+        6px;
+
+      font-size:
+        10px;
+
+      color:
+        var(--bs-secondary-color);
+
+    }
+
+
+    .auth-confirm-note {
+
+      margin-top:
+        -7px;
+
+      margin-bottom:
+        16px;
+
+      color:
+        var(--bs-secondary-color);
+
+      font-size:
+        11px;
+
+      line-height:
+        1.55;
+
+    }
+
+
+    .auth-check-list {
+
+      display:
+        grid;
+
+      gap:
+        6px;
+
+      margin-top:
+        6px;
+
+      color:
+        var(--bs-secondary-color);
+
+      font-size:
+        10px;
+
+    }
+
+
+    .auth-check-list span {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        6px;
+
+    }
+
+
+    .auth-check-list .ok {
+
+      color:
+        #15803d;
+
+    }
+
+
+    /* =====================================================
+       DARK MODE
+    ====================================================== */
+
+    [data-bs-theme="dark"]
+    .auth-header {
+
+      background:
+        color-mix(
+          in srgb,
+          var(--bs-body-bg) 95%,
+          transparent
+        );
+
+    }
+
+
+    [data-bs-theme="dark"]
+    .auth-visual {
+
+      background:
+
+        linear-gradient(
+          145deg,
+          rgba(2, 6, 23, .94),
+          rgba(15, 118, 110, .72)
+        ),
+
+        url(
+          "img/Northampton_Market_Square.jpg"
+        )
+        center /
+        cover
+        no-repeat;
+
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ====================================================== */
+
+    @media (max-width: 900px) {
+
+      .auth-shell {
+
+        grid-template-columns:
+          1fr;
+
+        max-width:
+          620px;
+
+      }
+
+
+      .auth-visual {
+
+        min-height:
+          0;
+
+        padding:
+          34px;
+
+      }
+
+
+      .auth-visual-footer {
+
+        display:
+          none;
+
+      }
+
+
+      .auth-panel {
+
+        padding:
+          34px;
+
+      }
+
+    }
+
+
+    @media (max-width: 575.98px) {
+
+      .auth-main {
+
+        padding:
+          22px 0 35px;
+
+      }
+
+
+      .auth-shell {
+
+        width:
+          min(
+            100%,
+            calc(100vw - 20px)
+          );
+
+        border-radius:
+          18px;
+
+      }
+
+
+      .auth-visual,
+      .auth-panel {
+
+        padding:
+          24px;
+
+      }
+
+
+      .auth-visual h1 {
+
+        font-size:
+          34px;
+
+      }
+
+
+      .auth-benefits {
+
+        margin-top:
+          22px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body class="auth-page">
+
+
+  <!-- =======================================================
+       HEADER
+  ======================================================== -->
+
+  <header class="auth-header">
+
+    <div class="container">
+
+      <div class="auth-header-inner">
+
+        <a
+          class="auth-brand"
+          href="index.html"
+          aria-label="Nigerians in Northampton home"
+        >
+
+          <span
+            class="auth-brand-mark"
+            aria-hidden="true"
+          >
+            N
+          </span>
+
+
+          <span>
+
+            <strong class="d-block">
+              Nigerians in Northampton
+            </strong>
+
+
+            <span class="fs-xs fg-3">
+              Community &amp; Business Directory
+            </span>
+
+          </span>
+
+        </a>
+
+
+        <a
+          class="btn-outline theme-secondary btn-sm"
+          href="businesses.html"
+        >
+          Browse directory
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =======================================================
+       MAIN
+  ======================================================== -->
+
+  <main class="auth-main">
+
+    <div class="auth-shell">
+
+
+      <!-- ===================================================
+           LEFT / VISUAL
+      ==================================================== -->
+
+      <section
+        class="auth-visual"
+        aria-labelledby="authVisualTitle"
+      >
+
+        <div>
+
+          <div class="auth-visual-kicker">
+            Your community account
+          </div>
+
+
+          <h1 id="authVisualTitle">
+            Stay connected. Manage your presence.
+          </h1>
+
+
+          <p class="auth-visual-copy">
+            Create a free account to manage your business listings
+            and take part in more of the directory's member features.
+          </p>
+
+
+          <ul class="auth-benefits">
+
+
+            <li class="auth-benefit">
+
+              <span
+                class="auth-benefit-icon"
+                aria-hidden="true"
+              >
+                ✓
+              </span>
+
+
+              <div>
+
+                <strong>
+                  List and manage your business
+                </strong>
+
+                <span>
+                  Submit a listing and keep your business information
+                  connected to your account.
+                </span>
+
+              </div>
+
+            </li>
+
+
+            <li class="auth-benefit">
+
+              <span
+                class="auth-benefit-icon"
+                aria-hidden="true"
+              >
+                ☆
+              </span>
+
+
+              <div>
+
+                <strong>
+                  Save useful businesses
+                </strong>
+
+                <span>
+                  Keep a personal shortlist of businesses and
+                  services you want to revisit.
+                </span>
+
+              </div>
+
+            </li>
+
+
+            <li class="auth-benefit">
+
+              <span
+                class="auth-benefit-icon"
+                aria-hidden="true"
+              >
+                ↗
+              </span>
+
+
+              <div>
+
+                <strong>
+                  Track your submissions
+                </strong>
+
+                <span>
+                  See whether a submitted business is pending,
+                  approved or needs changes.
+                </span>
+
+              </div>
+
+            </li>
+
+
+          </ul>
+
+        </div>
+
+
+        <div class="auth-visual-footer">
+
+          <span>
+            Free community account
+          </span>
+
+
+          <span>
+            Northampton, UK
+          </span>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           RIGHT / AUTH PANEL
+      ==================================================== -->
+
+      <section
+        class="auth-panel"
+        aria-label="Account access"
+      >
+
+        <div class="auth-panel-inner">
+
+
+          <div class="auth-panel-head">
+
+            <p class="auth-panel-kicker">
+              Member access
+            </p>
+
+
+            <h2
+              class="auth-panel-title"
+              id="authPanelTitle"
+            >
+              Welcome back
+            </h2>
+
+
+            <p
+              class="auth-panel-subtitle"
+              id="authPanelSubtitle"
+            >
+              Sign in to manage your account and business listings.
+            </p>
+
+          </div>
+
+
+          <!-- MODE -->
+
+          <div
+            class="auth-mode-switch"
+            role="tablist"
+            aria-label="Account access mode"
+          >
+
+            <button
+              type="button"
+              class="auth-mode-button active"
+              data-mode="login"
+              role="tab"
+              aria-selected="true"
+            >
+              Sign in
+            </button>
+
+
+            <button
+              type="button"
+              class="auth-mode-button"
+              data-mode="signup"
+              role="tab"
+              aria-selected="false"
+            >
+              Create account
+            </button>
+
+          </div>
+
+
+          <!-- MESSAGE -->
+
+          <div
+            id="authMessage"
+            class="auth-message"
+            role="alert"
+            aria-live="polite"
+          ></div>
+
+
+          <!-- =================================================
+               LOGIN FORM
+          ================================================== -->
+
+          <form
+            id="loginForm"
+            class="auth-form active"
+            novalidate
+          >
+
+            <div class="auth-field">
+
+              <label
+                class="auth-label"
+                for="loginEmail"
+              >
+                Email address
+                <span class="auth-required">
+                  *
+                </span>
+              </label>
+
+
+              <input
+                class="auth-input"
+                id="loginEmail"
+                type="email"
+                autocomplete="email"
+                inputmode="email"
+                placeholder="you@example.com"
+                required
+              >
+
+            </div>
+
+
+            <div class="auth-field">
+
+              <label
+                class="auth-label"
+                for="loginPassword"
+              >
+                Password
+                <span class="auth-required">
+                  *
+                </span>
+              </label>
+
+
+              <div class="auth-input-wrap">
+
+                <input
+                  class="auth-input has-toggle"
+                  id="loginPassword"
+                  type="password"
+                  autocomplete="current-password"
+                  placeholder="Enter your password"
+                  required
+                >
+
+
+                <button
+                  type="button"
+                  class="auth-password-toggle"
+                  data-password-toggle="loginPassword"
+                  aria-label="Show password"
+                >
+                  ◉
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="auth-row">
+
+              <label class="auth-checkbox">
+
+                <input
+                  type="checkbox"
+                  id="rememberMe"
+                >
+
+                Keep me signed in
+
+              </label>
+
+
+              <a
+                class="auth-link"
+                href="#"
+                id="forgotPasswordLink"
+              >
+                Forgot password?
+              </a>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="auth-primary"
+              id="loginButton"
+            >
+              Sign in
+            </button>
+
+
+            <div class="auth-divider">
+              or
+            </div>
+
+
+            <p class="auth-note">
+
+              Don't have an account?
+
+              <a
+                href="#signup"
+                data-switch-mode="signup"
+              >
+                Create one free
+              </a>
+
+            </p>
+
+          </form>
+
+
+          <!-- =================================================
+               SIGNUP FORM
+          ================================================== -->
+
+          <form
+            id="signupForm"
+            class="auth-form"
+            novalidate
+          >
+
+            <div class="auth-field">
+
+              <label
+                class="auth-label"
+                for="signupName"
+              >
+                Full name
+                <span class="auth-required">
+                  *
+                </span>
+              </label>
+
+
+              <input
+                class="auth-input"
+                id="signupName"
+                type="text"
+                autocomplete="name"
+                maxlength="120"
+                placeholder="Your full name"
+                required
+              >
+
+            </div>
+
+
+            <div class="auth-field">
+
+              <label
+                class="auth-label"
+                for="signupEmail"
+              >
+                Email address
+                <span class="auth-required">
+                  *
+                </span>
+              </label>
+
+
+              <input
+                class="auth-input"
+                id="signupEmail"
+                type="email"
+                autocomplete="email"
+                inputmode="email"
+                maxlength="160"
+                placeholder="you@example.com"
+                required
+              >
+
+            </div>
+
+
+            <div class="auth-field">
+
+              <label
+                class="auth-label"
+                for="signupPassword"
+              >
+                Create a password
+                <span class="auth-required">
+                  *
+                </span>
+              </label>
+
+
+              <div class="auth-input-wrap">
+
+                <input
+                  class="auth-input has-toggle"
+                  id="signupPassword"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="8"
+                  placeholder="At least 8 characters"
+                  required
+                >
+
+
+                <button
+                  type="button"
+                  class="auth-password-toggle"
+                  data-password-toggle="signupPassword"
+                  aria-label="Show password"
+                >
+                  ◉
+                </button>
+
+              </div>
+
+
+              <div
+                class="password-strength"
+                id="passwordStrength"
+              >
+
+                <div class="strength-track">
+
+                  <div
+                    class="strength-fill"
+                    id="strengthFill"
+                  ></div>
+
+                </div>
+
+
+                <div class="strength-row">
+
+                  <span id="strengthLabel">
+                    Password strength
+                  </span>
+
+
+                  <span id="strengthCount">
+                    0 / 4
+                  </span>
+
+                </div>
+
+
+                <div
+                  class="auth-check-list"
+                  id="passwordChecks"
+                >
+
+                  <span id="checkLength">
+                    ○ At least 8 characters
+                  </span>
+
+
+                  <span id="checkLower">
+                    ○ Lowercase letter
+                  </span>
+
+
+                  <span id="checkUpper">
+                    ○ Uppercase letter
+                  </span>
+
+
+                  <span id="checkNumber">
+                    ○ Number or symbol
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="auth-field">
+
+              <label
+                class="auth-label"
+                for="signupPasswordConfirm"
+              >
+                Confirm password
+                <span class="auth-required">
+                  *
+                </span>
+              </label>
+
+
+              <input
+                class="auth-input"
+                id="signupPasswordConfirm"
+                type="password"
+                autocomplete="new-password"
+                minlength="8"
+                placeholder="Re-enter your password"
+                required
+              >
+
+            </div>
+
+
+            <p class="auth-confirm-note">
+              Use a password you do not reuse on other important accounts.
+            </p>
+
+
+            <label
+              class="auth-checkbox"
+              style="align-items:flex-start; margin-bottom:17px;"
+            >
+
+              <input
+                type="checkbox"
+                id="termsAgreement"
+                style="margin-top:2px;"
+                required
+              >
+
+
+              <span>
+
+                I agree to the directory's
+
+                <a
+                  class="auth-link"
+                  href="terms.html"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Terms
+                </a>
+
+                and
+
+                <a
+                  class="auth-link"
+                  href="privacy.html"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Privacy Policy
+                </a>.
+
+              </span>
+
+            </label>
+
+
+            <button
+              type="submit"
+              class="auth-primary"
+              id="signupButton"
+            >
+              Create account
+            </button>
+
+
+            <div class="auth-divider">
+              already a member?
+            </div>
+
+
+            <p class="auth-note">
+
+              <a
+                href="#login"
+                data-switch-mode="login"
+              >
+                Sign in to your account
+              </a>
+
+            </p>
+
+          </form>
+
+
+          <!-- SECURITY -->
+
+          <div
+            class="auth-security"
+            aria-label="Security information"
+          >
+
+            <span aria-hidden="true">
+              🔒
+            </span>
+
+
+            <span>
+              Your password is never displayed in this page's HTML.
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+
+        /* ===================================================
+           API
+        ==================================================== */
+
+        const API_BASE_URL = (
+
+          window.NIN_API_BASE_URL ||
+
+          "https://nigerians-in-northampton-backend.onrender.com/api"
+
+        ).replace(
+          /\/$/,
+          ""
+        );
+
+
+        console.log(
+          "Login API:",
+          API_BASE_URL
+        );
+
+
+        /* ===================================================
+           STORAGE
+        ==================================================== */
+
+        const STORAGE_KEY =
+          "nin_auth_user_cache";
+
+
+        /* ===================================================
+           URL
+        ==================================================== */
+
+        const params =
+          new URLSearchParams(
+            window.location.search
+          );
+
+
+        /*
+          Only allow a relative internal path
+          as the login destination.
+        */
+
+        function getSafeNextPath() {
+
+          const requested =
+            params.get("next") ||
+            "index.html";
+
+
+          if (
+            !requested ||
+            requested.startsWith("//") ||
+            requested.startsWith("http://") ||
+            requested.startsWith("https://") ||
+            requested.startsWith("javascript:")
+          ) {
+
+            return "index.html";
+
+          }
+
+
+          return requested;
+
+        }
+
+
+        const nextPath =
+          getSafeNextPath();
+
+
+        /* ===================================================
+           ELEMENTS
+        ==================================================== */
+
+        const modeButtons =
+          document.querySelectorAll(
+            "[data-mode]"
+          );
+
+
+        const switchLinks =
+          document.querySelectorAll(
+            "[data-switch-mode]"
+          );
+
+
+        const loginForm =
+          document.getElementById(
+            "loginForm"
+          );
+
+
+        const signupForm =
+          document.getElementById(
+            "signupForm"
+          );
+
+
+        const loginButton =
+          document.getElementById(
+            "loginButton"
+          );
+
+
+        const signupButton =
+          document.getElementById(
+            "signupButton"
+          );
+
+
+        const message =
+          document.getElementById(
+            "authMessage"
+          );
+
+
+        const title =
+          document.getElementById(
+            "authPanelTitle"
+          );
+
+
+        const subtitle =
+          document.getElementById(
+            "authPanelSubtitle"
+          );
+
+
+        const signupPassword =
+          document.getElementById(
+            "signupPassword"
+          );
+
+
+        const strengthWrap =
+          document.getElementById(
+            "passwordStrength"
+          );
+
+
+        const strengthFill =
+          document.getElementById(
+            "strengthFill"
+          );
+
+
+        const strengthLabel =
+          document.getElementById(
+            "strengthLabel"
+          );
+
+
+        const strengthCount =
+          document.getElementById(
+            "strengthCount"
+          );
+
+
+        /* ===================================================
+           MESSAGE
+        ==================================================== */
+
+        function showMessage(
+          text,
+          type = "error"
+        ) {
+
+          message.textContent =
+            text || "";
+
+
+          message.className =
+            text
+              ? `auth-message is-visible ${type}`
+              : "auth-message";
+
+        }
+
+
+        /* ===================================================
+           MODE
+        ==================================================== */
+
+        function setMode(
+          mode
+        ) {
+
+          const signup =
+            mode === "signup";
+
+
+          modeButtons.forEach(
+            (button) => {
+
+              const active =
+                button.dataset.mode ===
+                mode;
+
+
+              button.classList.toggle(
+                "active",
+                active
+              );
+
+
+              button.setAttribute(
+                "aria-selected",
+                String(active)
+              );
+
+            }
+          );
+
+
+          loginForm.classList.toggle(
+            "active",
+            !signup
+          );
+
+
+          signupForm.classList.toggle(
+            "active",
+            signup
+          );
+
+
+          title.textContent =
+            signup
+              ? "Create your account"
+              : "Welcome back";
+
+
+          subtitle.textContent =
+            signup
+
+              ? "Join the community and manage your business presence from one account."
+
+              : "Sign in to manage your account and business listings.";
+
+
+          showMessage("");
+
+
+          const nextQuery =
+            new URLSearchParams();
+
+
+          nextQuery.set(
+            "mode",
+            mode
+          );
+
+
+          if (
+            nextPath &&
+            nextPath !== "index.html"
+          ) {
+
+            nextQuery.set(
+              "next",
+              nextPath
+            );
+
+          }
+
+
+          history.replaceState(
+            null,
+            "",
+            `${window.location.pathname}?${nextQuery.toString()}`
+          );
+
+        }
+
+
+        modeButtons.forEach(
+          (button) => {
+
+            button.addEventListener(
+              "click",
+              () => {
+
+                setMode(
+                  button.dataset.mode
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+        switchLinks.forEach(
+          (link) => {
+
+            link.addEventListener(
+              "click",
+              (event) => {
+
+                event.preventDefault();
+
+
+                setMode(
+                  link.dataset.switchMode
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+        /* ===================================================
+           PASSWORD TOGGLE
+        ==================================================== */
+
+        document
+          .querySelectorAll(
+            "[data-password-toggle]"
+          )
+          .forEach(
+            (button) => {
+
+              button.addEventListener(
+                "click",
+                () => {
+
+                  const input =
+                    document.getElementById(
+                      button.dataset.passwordToggle
+                    );
+
+
+                  if (!input) {
+                    return;
+                  }
+
+
+                  const showing =
+                    input.type ===
+                    "text";
+
+
+                  input.type =
+                    showing
+                      ? "password"
+                      : "text";
+
+
+                  button.setAttribute(
+                    "aria-label",
+                    showing
+                      ? "Show password"
+                      : "Hide password"
+                  );
+
+
+                  button.textContent =
+                    showing
+                      ? "◉"
+                      : "◌";
+
+                }
+              );
+
+            }
+          );
+
+
+        /* ===================================================
+           PASSWORD STRENGTH
+        ==================================================== */
+
+        function updatePasswordStrength(
+          value
+        ) {
+
+          if (!value) {
+
+            strengthWrap.classList.remove(
+              "is-visible"
+            );
+
+            return;
+
+          }
+
+
+          strengthWrap.classList.add(
+            "is-visible"
+          );
+
+
+          const tests = [
+
+            value.length >= 8,
+
+            /[a-z]/.test(
+              value
+            ),
+
+            /[A-Z]/.test(
+              value
+            ),
+
+            /[^A-Za-z0-9]/.test(
+              value
+            ) ||
+            /\d/.test(
+              value
+            )
+
+          ];
+
+
+          const score =
+            tests.filter(
+              Boolean
+            ).length;
+
+
+          const labels = [
+
+            "Very weak",
+
+            "Weak",
+
+            "Fair",
+
+            "Good",
+
+            "Strong"
+
+          ];
+
+
+          const widths = [
+
+            "8%",
+
+            "28%",
+
+            "50%",
+
+            "75%",
+
+            "100%"
+
+          ];
+
+
+          strengthFill.style.width =
+            widths[score];
+
+
+          strengthFill.style.background =
+            score <= 1
+              ? "#dc2626"
+              : score === 2
+                ? "#d97706"
+                : score === 3
+                  ? "#2563eb"
+                  : "#15803d";
+
+
+          strengthLabel.textContent =
+            labels[score];
+
+
+          strengthCount.textContent =
+            `${score} / 4`;
+
+
+          const checks = [
+
+            [
+              "checkLength",
+              tests[0],
+              "At least 8 characters"
+            ],
+
+            [
+              "checkLower",
+              tests[1],
+              "Lowercase letter"
+            ],
+
+            [
+              "checkUpper",
+              tests[2],
+              "Uppercase letter"
+            ],
+
+            [
+              "checkNumber",
+              tests[3],
+              "Number or symbol"
+            ]
+
+          ];
+
+
+          checks.forEach(
+            ([id, ok, label]) => {
+
+              const element =
+                document.getElementById(
+                  id
+                );
+
+
+              if (!element) {
+                return;
+              }
+
+
+              element.textContent =
+                `${ok ? "✓" : "○"} ${label}`;
+
+
+              element.classList.toggle(
+                "ok",
+                ok
+              );
+
+            }
+          );
+
+        }
+
+
+        signupPassword.addEventListener(
+          "input",
+          () => {
+
+            updatePasswordStrength(
+              signupPassword.value
+            );
+
+          }
+        );
+
+
+        /* ===================================================
+           API REQUEST
+        ==================================================== */
+
+        async function apiRequest(
+          path,
+          options = {}
+        ) {
+
+          let response;
+
+
+          try {
+
+            response =
+              await fetch(
+                `${API_BASE_URL}${path}`,
+                {
+                  ...options,
+
+                  credentials:
+                    "include",
+
+                  cache:
+                    "no-store",
+
+                  headers: {
+
+                    "Content-Type":
+                      "application/json",
+
+                    ...(options.headers || {})
+
+                  }
+
+                }
+              );
+
+          }
+          catch (error) {
+
+            console.error(
+              "Authentication request failed:",
+              error
+            );
+
+
+            throw new Error(
+              "We could not connect to the account service. Please check your internet connection and try again."
+            );
+
+          }
+
+
+          let payload =
+            {};
+
+
+          try {
+
+            payload =
+              await response.json();
+
+          }
+          catch {
+
+            payload =
+              {};
+
+          }
+
+
+          if (!response.ok) {
+
+            const requestError =
+              new Error(
+                payload?.message ||
+                `Request failed (${response.status}).`
+              );
+
+
+            requestError.status =
+              response.status;
+
+
+            requestError.payload =
+              payload;
+
+
+            throw requestError;
+
+          }
+
+
+          return payload;
+
+        }
+
+
+        /* ===================================================
+           CACHE
+        ==================================================== */
+
+        function setCachedUser(
+          user
+        ) {
+
+          try {
+
+            if (user) {
+
+              localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(user)
+              );
+
+            }
+            else {
+
+              localStorage.removeItem(
+                STORAGE_KEY
+              );
+
+            }
+
+          }
+          catch {
+
+            // Local storage may be unavailable.
+
+          }
+
+        }
+
+
+        /* ===================================================
+           VERIFY SESSION
+        ==================================================== */
+
+        async function verifySession() {
+
+          const response =
+            await fetch(
+              `${API_BASE_URL}/auth/me`,
+              {
+                method:
+                  "GET",
+
+                credentials:
+                  "include",
+
+                cache:
+                  "no-store"
+              }
+            );
+
+
+          let payload =
+            {};
+
+
+          try {
+
+            payload =
+              await response.json();
+
+          }
+          catch {
+
+            payload =
+              {};
+
+          }
+
+
+          if (
+            !response.ok ||
+            payload?.success !== true ||
+            !payload?.user
+          ) {
+
+            const error =
+              new Error(
+                payload?.message ||
+                "The login session could not be verified."
+              );
+
+
+            error.status =
+              response.status;
+
+
+            error.payload =
+              payload;
+
+
+            throw error;
+
+          }
+
+
+          return payload;
+
+        }
+
+
+        /* ===================================================
+           COMPLETE LOGIN
+        ==================================================== */
+
+        async function completeLogin(
+          payload
+        ) {
+
+          /*
+            Do not redirect immediately after login.
+
+            First verify /auth/me using the same
+            browser session. This confirms that
+            the nin_session cookie is available.
+          */
+
+          try {
+
+            const verified =
+              await verifySession();
+
+
+            setCachedUser(
+              verified?.user ||
+              payload?.user ||
+              null
+            );
+
+
+            showMessage(
+              "Sign in successful. Redirecting…",
+              "success"
+            );
+
+
+            window.setTimeout(
+              () => {
+
+                window.location.replace(
+                  nextPath
+                );
+
+              },
+              150
+            );
+
+          }
+          catch (error) {
+
+            console.error(
+              "Session verification failed after login:",
+              error
+            );
+
+
+            setCachedUser(null);
+
+
+            showMessage(
+              "Your password was accepted, but the login session could not be verified. Please refresh the page and sign in again.",
+              "error"
+            );
+
+
+            throw error;
+
+          }
+
+        }
+
+
+        /* ===================================================
+           LOGIN
+        ==================================================== */
+
+        loginForm.addEventListener(
+          "submit",
+          async (event) => {
+
+            event.preventDefault();
+
+
+            showMessage("");
+
+
+            const email =
+              document
+                .getElementById(
+                  "loginEmail"
+                )
+                .value
+                .trim()
+                .toLowerCase();
+
+
+            const password =
+              document
+                .getElementById(
+                  "loginPassword"
+                )
+                .value;
+
+
+            const remember =
+              document
+                .getElementById(
+                  "rememberMe"
+                )
+                .checked;
+
+
+            if (
+              !email ||
+              !password
+            ) {
+
+              showMessage(
+                "Please enter your email address and password."
+              );
+
+
+              return;
+
+            }
+
+
+            if (
+              !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                email
+              )
+            ) {
+
+              showMessage(
+                "Please enter a valid email address."
+              );
+
+
+              return;
+
+            }
+
+
+            loginButton.disabled =
+              true;
+
+
+            loginButton.textContent =
+              "Signing in…";
+
+
+            try {
+
+              const payload =
+                await apiRequest(
+                  "/auth/login",
+                  {
+                    method:
+                      "POST",
+
+                    body:
+                      JSON.stringify(
+                        {
+                          email,
+                          password,
+                          remember
+                        }
+                      )
+                  }
+                );
+
+
+              await completeLogin(
+                payload
+              );
+
+            }
+            catch (error) {
+
+              /*
+                Do not replace a useful
+                session-verification message.
+              */
+
+              if (
+                !message.classList.contains(
+                  "is-visible"
+                )
+              ) {
+
+                showMessage(
+                  error.message ||
+                  "We could not sign you in."
+                );
+
+              }
+
+            }
+            finally {
+
+              loginButton.disabled =
+                false;
+
+
+              loginButton.textContent =
+                "Sign in";
+
+            }
+
+          }
+        );
+
+
+        /* ===================================================
+           SIGNUP
+        ==================================================== */
+
+        signupForm.addEventListener(
+          "submit",
+          async (event) => {
+
+            event.preventDefault();
+
+
+            showMessage("");
+
+
+            const name =
+              document
+                .getElementById(
+                  "signupName"
+                )
+                .value
+                .trim();
+
+
+            const email =
+              document
+                .getElementById(
+                  "signupEmail"
+                )
+                .value
+                .trim()
+                .toLowerCase();
+
+
+            const password =
+              signupPassword.value;
+
+
+            const confirm =
+              document
+                .getElementById(
+                  "signupPasswordConfirm"
+                )
+                .value;
+
+
+            const terms =
+              document
+                .getElementById(
+                  "termsAgreement"
+                )
+                .checked;
+
+
+            if (
+              name.length < 2
+            ) {
+
+              showMessage(
+                "Please enter your full name."
+              );
+
+
+              return;
+
+            }
+
+
+            if (
+              !email ||
+              !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                email
+              )
+            ) {
+
+              showMessage(
+                "Please enter a valid email address."
+              );
+
+
+              return;
+
+            }
+
+
+            if (
+              password.length < 8
+            ) {
+
+              showMessage(
+                "Your password must be at least 8 characters long."
+              );
+
+
+              return;
+
+            }
+
+
+            if (
+              password !==
+              confirm
+            ) {
+
+              showMessage(
+                "Your passwords do not match."
+              );
+
+
+              return;
+
+            }
+
+
+            if (!terms) {
+
+              showMessage(
+                "Please accept the Terms and Privacy Policy to create an account."
+              );
+
+
+              return;
+
+            }
+
+
+            signupButton.disabled =
+              true;
+
+
+            signupButton.textContent =
+              "Creating account…";
+
+
+            try {
+
+              const payload =
+                await apiRequest(
+                  "/auth/register",
+                  {
+                    method:
+                      "POST",
+
+                    body:
+                      JSON.stringify(
+                        {
+                          name,
+                          email,
+                          password
+                        }
+                      )
+                  }
+                );
+
+
+              await completeLogin(
+                payload
+              );
+
+            }
+            catch (error) {
+
+              /*
+                Session verification errors
+                already display their own message.
+              */
+
+              if (
+                !message.classList.contains(
+                  "is-visible"
+                )
+              ) {
+
+                showMessage(
+                  error.message ||
+                  "We could not create your account."
+                );
+
+              }
+
+            }
+            finally {
+
+              signupButton.disabled =
+                false;
+
+
+              signupButton.textContent =
+                "Create account";
+
+            }
+
+          }
+        );
+
+
+        /* ===================================================
+           FORGOT PASSWORD
+        ==================================================== */
+
+        document
+          .getElementById(
+            "forgotPasswordLink"
+          )
+          .addEventListener(
+            "click",
+            (event) => {
+
+              event.preventDefault();
+
+
+              showMessage(
+                "Password recovery will use the email address on your account. The recovery email service still needs to be connected to the backend.",
+                "success"
+              );
+
+            }
+          );
+
+
+        /* ===================================================
+           INITIAL MODE
+        ==================================================== */
+
+        const requestedMode =
+          params.get(
+            "mode"
+          );
+
+
+        if (
+          requestedMode ===
+          "signup"
+        ) {
+
+          setMode(
+            "signup"
+          );
+
+        }
+
+
+        /* ===================================================
+           DEBUG
+        ==================================================== */
+
+        console.log(
+          "Login destination:",
+          nextPath
+        );
+
+
+        console.log(
+          "NIN API:",
+          API_BASE_URL
+        );
+
+      }
+
+    );
+
+  </script>
+
+
+  <!-- =======================================================
+       BOOTSTRAP
+  ======================================================== -->
+
+  <script
+    src="assets/vendor/bootstrap6/js/bootstrap.bundle.min.js"
+  ></script>
+
+
+  <!-- =======================================================
+       MAIN JS
+  ======================================================== -->
+
+  <script
+    type="module"
+    src="assets/js/main.js"
+  ></script>
+
+
+</body>
+
+</html>

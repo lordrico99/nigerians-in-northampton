@@ -1,0 +1,861 @@
+/* =========================================================
+   NIGERIANS IN NORTHAMPTON
+   SHARED SITE HEADER
+========================================================= */
+
+
+/* =========================================================
+   MAIN HEADER
+========================================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 5000;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+
+  overflow: visible;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.site-header .navbar {
+  position: relative;
+
+  min-height: 0;
+
+  padding-top: 0.85rem;
+  padding-bottom: 0.7rem;
+
+  overflow: visible;
+
+  z-index: 1;
+}
+
+
+.site-header .navbar > .container {
+  position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  column-gap: 1rem;
+  row-gap: 0;
+
+  overflow: visible;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.site-header .navbar-brand {
+  flex: 0 0 auto;
+
+  white-space: nowrap;
+
+  letter-spacing: -0.018em;
+
+  font-size: 1rem;
+}
+
+
+/* =========================================================
+   TOP-RIGHT ACTIONS
+========================================================= */
+
+.site-header .header-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.55rem;
+
+  margin-left: auto;
+
+  overflow: visible;
+}
+
+
+.site-header .header-search-btn {
+  width: 40px;
+  height: 40px;
+
+  flex: 0 0 auto;
+
+  border-radius: 0.7rem;
+}
+
+
+.site-header .header-theme-btn {
+  width: 40px;
+  height: 40px;
+
+  flex: 0 0 auto;
+
+  border-radius: 0.7rem;
+}
+
+
+.site-header .header-cta {
+  min-height: 40px;
+
+  border-radius: 0.7rem;
+
+  font-size: 0.88rem;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+.site-header .header-cta.btn-solid {
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================================================
+   DESKTOP NAVIGATION
+========================================================= */
+
+.desktop-nav-row {
+  order: 3;
+
+  flex: 0 0 100%;
+
+  width: 100%;
+
+  margin: 0;
+
+  padding: 0.7rem 0 0;
+
+  position: relative;
+
+  z-index: 20;
+
+  overflow: visible;
+}
+
+
+/* ---------------------------------------------------------
+   DESKTOP NAVIGATION LIST
+--------------------------------------------------------- */
+
+.desktop-nav-row .navbar-nav {
+  display: flex;
+
+  flex-direction: row;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-wrap: nowrap;
+
+  width: 100%;
+
+  margin: 0;
+
+  padding: 0;
+
+  gap: 0.15rem;
+
+  list-style: none;
+
+  overflow: visible;
+}
+
+
+/* ---------------------------------------------------------
+   DESKTOP NAV ITEM
+--------------------------------------------------------- */
+
+.desktop-nav-row .nav-item {
+  position: relative;
+
+  flex: 0 0 auto;
+
+  display: block;
+
+  overflow: visible;
+}
+
+
+/* ---------------------------------------------------------
+   DESKTOP NAV LINK
+--------------------------------------------------------- */
+
+.desktop-nav-row .nav-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 0.35rem;
+
+  min-height: 38px;
+
+  padding: 0.48rem 0.9rem;
+
+  border: 0;
+
+  border-radius: 0.6rem;
+
+  font-size: 0.88rem;
+
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  text-decoration: none;
+
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+
+.desktop-nav-row .nav-link:hover {
+  background: rgba(0, 0, 0, 0.045);
+}
+
+
+.desktop-nav-row .nav-link.active {
+  color: var(--bs-primary);
+
+  font-weight: 600;
+
+  background:
+    rgba(var(--bs-primary-rgb), 0.07);
+}
+
+
+/* ---------------------------------------------------------
+   DESKTOP BUSINESSES ITEM
+--------------------------------------------------------- */
+
+.desktop-nav-row .nav-item:has(> .menu) {
+  position: relative;
+
+  overflow: visible;
+
+  z-index: 30;
+}
+
+
+/* ---------------------------------------------------------
+   DESKTOP BUSINESSES DROPDOWN
+
+   The normal Locale .menu styling remains responsible
+   for the actual visual dropdown. We only ensure it can
+   escape the header and sit above the hero.
+--------------------------------------------------------- */
+
+.desktop-nav-row .nav-item > .menu {
+  z-index: 10000;
+}
+
+
+/* =========================================================
+   MOBILE DRAWER
+========================================================= */
+
+/*
+   The mobile drawer is intentionally NOT styled as a
+   desktop navigation.
+
+   Locale's original drawer styles handle its mobile
+   appearance and behaviour.
+*/
+
+@media (max-width: 991.98px) {
+
+  .desktop-nav-row {
+    display: none !important;
+  }
+
+
+  .site-header .navbar {
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+
+
+  .site-header .navbar > .container {
+    flex-wrap: nowrap;
+  }
+
+
+  .site-header .header-actions {
+    gap: 0.4rem;
+  }
+
+
+  .site-header .header-desktop-action {
+    display: none !important;
+  }
+
+
+  .site-header .mobile-menu-toggle {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    border-radius: 0.7rem;
+  }
+
+
+  .site-header .mobile-only-actions {
+    display: block;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE DRAWER SAFETY
+========================================================= */
+
+.site-header #navDrawer {
+  overflow: visible;
+}
+
+
+/* =========================================================
+   ACCOUNT
+========================================================= */
+
+.site-header .header-account {
+  position: relative;
+
+  display: none;
+
+  flex: 0 0 auto;
+}
+
+
+.site-header .header-account.is-visible {
+  display: block;
+}
+
+
+/* ---------------------------------------------------------
+   ACCOUNT BUTTON
+--------------------------------------------------------- */
+
+.account-button {
+  min-height: 40px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 4px 9px 4px 5px;
+
+  border:
+    1px solid
+    rgba(15, 23, 42, 0.10);
+
+  border-radius: 0.75rem;
+
+  background: #ffffff;
+
+  color: #212529;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+
+.account-button:hover {
+  background: #f8f9fa;
+
+  border-color:
+    rgba(var(--bs-primary-rgb), 0.22);
+}
+
+
+/* ---------------------------------------------------------
+   ACCOUNT AVATAR
+--------------------------------------------------------- */
+
+.account-avatar {
+  width: 31px;
+  height: 31px;
+
+  flex: 0 0 31px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(var(--bs-primary-rgb), 0.12);
+
+  color: var(--bs-primary);
+
+  font-size: 0.73rem;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+}
+
+
+/* ---------------------------------------------------------
+   ACCOUNT NAME
+--------------------------------------------------------- */
+
+.account-button-name {
+  max-width: 110px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-size: 0.83rem;
+
+  font-weight: 650;
+}
+
+
+/* ---------------------------------------------------------
+   ACCOUNT CHEVRON
+--------------------------------------------------------- */
+
+.account-chevron {
+  width: 12px;
+  height: 12px;
+
+  transition:
+    transform 0.18s ease;
+}
+
+
+.account-button[aria-expanded="true"]
+.account-chevron {
+  transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   ACCOUNT DROPDOWN
+========================================================= */
+
+.account-dropdown {
+  position: absolute;
+
+  top: calc(100% + 9px);
+
+  right: 0;
+
+  z-index: 10000;
+
+  width: 270px;
+
+  padding: 8px;
+
+  border:
+    1px solid
+    #dee2e6;
+
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  color: #212529;
+
+  box-shadow:
+    0 18px 45px
+    rgba(15, 23, 42, 0.18);
+
+  display: none;
+
+  overflow: hidden;
+}
+
+
+.account-dropdown.is-open {
+  display: block;
+}
+
+
+/* ---------------------------------------------------------
+   ACCOUNT DROPDOWN HEADER
+--------------------------------------------------------- */
+
+.account-dropdown-head {
+  padding: 12px;
+
+  border-bottom:
+    1px solid
+    #e9ecef;
+
+  margin-bottom: 6px;
+}
+
+
+.account-dropdown-name {
+  display: block;
+
+  font-size: 0.88rem;
+
+  font-weight: 700;
+
+  color: #212529;
+}
+
+
+.account-dropdown-email {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #6c757d;
+
+  font-size: 0.74rem;
+
+  overflow-wrap: anywhere;
+}
+
+
+.account-dropdown-role {
+  display: inline-flex;
+
+  margin-top: 8px;
+
+  padding: 4px 7px;
+
+  border-radius: 999px;
+
+  background: #f1f3f5;
+
+  color: #6c757d;
+
+  font-size: 0.67rem;
+
+  font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------
+   ACCOUNT LINKS / BUTTONS
+--------------------------------------------------------- */
+
+.account-dropdown-link,
+.account-dropdown-button {
+  width: 100%;
+
+  min-height: 40px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 9px 11px;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #212529;
+
+  text-align: left;
+
+  text-decoration: none;
+
+  font-size: 0.8rem;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+.account-dropdown-link:hover,
+.account-dropdown-button:hover {
+  background: #f8f9fa;
+}
+
+
+.account-dropdown-button.signout {
+  color: #dc3545;
+}
+
+
+.account-dropdown-divider {
+  height: 1px;
+
+  margin: 7px 4px;
+
+  background: #e9ecef;
+}
+
+
+/* =========================================================
+   MOBILE ACCOUNT
+========================================================= */
+
+.mobile-account-area {
+  display: none;
+}
+
+
+@media (max-width: 991.98px) {
+
+  .mobile-account-area {
+    display: none;
+  }
+
+
+  .mobile-account-area.is-visible {
+    display: block;
+  }
+
+
+  .mobile-account-card {
+    padding: 12px 13px;
+
+    margin-bottom: 10px;
+
+    border-radius: 11px;
+
+    background: var(--bs-tertiary-bg);
+  }
+
+
+  .mobile-account-card strong {
+    display: block;
+
+    font-size: 0.83rem;
+  }
+
+
+  .mobile-account-card span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--bs-secondary-color);
+
+    font-size: 0.72rem;
+
+    overflow-wrap: anywhere;
+  }
+
+
+  .mobile-account-action {
+    width: 100%;
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    padding: 10px 12px;
+
+    margin-bottom: 7px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 0.83rem;
+
+    font-weight: 600;
+  }
+
+
+  .mobile-account-action:last-child {
+    margin-bottom: 0;
+  }
+
+}
+
+
+/* =========================================================
+   DARK MODE - HEADER
+========================================================= */
+
+[data-bs-theme="dark"] .site-header {
+  background:
+    rgba(15, 23, 42, 0.95);
+
+  border-bottom-color:
+    rgba(255, 255, 255, 0.08);
+}
+
+
+[data-bs-theme="dark"]
+.desktop-nav-row
+.nav-link:hover {
+  background:
+    rgba(255, 255, 255, 0.06);
+}
+
+
+/* =========================================================
+   DARK MODE - ACCOUNT
+========================================================= */
+
+[data-bs-theme="dark"] .account-button {
+  background: #212529;
+
+  color: #f8f9fa;
+
+  border-color:
+    rgba(255, 255, 255, 0.10);
+}
+
+
+[data-bs-theme="dark"]
+.account-button:hover {
+  background: #343a40;
+}
+
+
+[data-bs-theme="dark"]
+.account-dropdown {
+  background: #212529;
+
+  color: #f8f9fa;
+
+  border-color: #343a40;
+
+  box-shadow:
+    0 18px 45px
+    rgba(0, 0, 0, 0.35);
+}
+
+
+[data-bs-theme="dark"]
+.account-dropdown-head {
+  border-bottom-color: #343a40;
+}
+
+
+[data-bs-theme="dark"]
+.account-dropdown-name {
+  color: #f8f9fa;
+}
+
+
+[data-bs-theme="dark"]
+.account-dropdown-email {
+  color: #adb5bd;
+}
+
+
+[data-bs-theme="dark"]
+.account-dropdown-role {
+  background: #343a40;
+
+  color: #adb5bd;
+}
+
+
+[data-bs-theme="dark"]
+.account-dropdown-link,
+[data-bs-theme="dark"]
+.account-dropdown-button {
+  background: #212529;
+
+  color: #f8f9fa;
+}
+
+
+[data-bs-theme="dark"]
+.account-dropdown-link:hover,
+[data-bs-theme="dark"]
+.account-dropdown-button:hover {
+  background: #343a40;
+}
+
+
+[data-bs-theme="dark"]
+.account-dropdown-divider {
+  background: #343a40;
+}
+
+/* =========================================================
+   AUTH STATE VISIBILITY
+========================================================= */
+
+.site-header #headerSignIn {
+  display: inline-flex;
+}
+
+.site-header #headerAccount {
+  position: relative;
+  display: none;
+  align-items: center;
+}
+
+
+.site-header .account-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-header .account-dropdown {
+  display: none;
+}
+
+.site-header #headerAccount.show .account-dropdown {
+  display: block;
+}
+
+
+/* Mobile account sections */
+
+.site-header #mobileAccountLoggedOut {
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header #mobileAccountLoggedIn {
+  display: none;
+}

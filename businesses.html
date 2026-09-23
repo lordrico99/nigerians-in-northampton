@@ -1,0 +1,5261 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Business Directory — Nigerians in Northampton</title>
+
+  <meta
+    name="description"
+    content="Browse Nigerian-owned businesses and services in Northampton by category, area and business features."
+  >
+
+  <!-- =========================================================
+       GLOBAL CSS
+  ========================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="assets/vendor/bootstrap6/css/bootstrap.min.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/base.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/style.css"
+  >
+
+  <!-- =========================================================
+       SHARED SITE HEADER CSS
+  ========================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="assets/css/header.css"
+  >
+
+  <!-- =========================================================
+       LEAFLET
+  ========================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+  >
+
+
+  <style>
+
+    /* =========================================================
+       DIRECTORY MAP
+    ========================================================= */
+
+    .directory-live-map {
+      position: relative;
+
+      width: 100%;
+
+      height: 560px;
+
+      min-height: 420px;
+
+      overflow: hidden;
+
+      border-radius: 0.9rem;
+
+      isolation: isolate;
+    }
+
+
+    #directoryMap {
+      position: absolute;
+
+      inset: 0;
+
+      width: 100%;
+
+      height: 100%;
+
+      min-width: 0;
+      min-height: 0;
+
+      background:
+        var(--bs-tertiary-bg);
+    }
+
+
+    #directoryMap.leaflet-container {
+      width: 100%;
+      height: 100%;
+
+      font-family: inherit;
+    }
+
+
+    #directoryMap
+    .leaflet-control-attribution {
+
+      font-size: 10px;
+
+      line-height: 1.4;
+    }
+
+
+    .directory-map-marker-wrap {
+      background: transparent;
+
+      border: 0;
+    }
+
+
+    .directory-map-marker {
+      width: 32px;
+      height: 32px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius:
+        50% 50% 50% 0;
+
+      transform:
+        rotate(-45deg);
+
+      background:
+        #dc2626 !important;
+
+      border:
+        3px solid #ffffff;
+
+      box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.28);
+
+      transition:
+        transform 0.15s ease,
+        background-color 0.15s ease;
+    }
+
+
+    .directory-map-marker span {
+      display: block;
+
+      transform:
+        rotate(45deg);
+
+      color: #fff;
+
+      font-size: 11px;
+
+      line-height: 1;
+
+      font-weight: 700;
+    }
+
+
+    .directory-map-marker.is-active {
+      background:
+        #b91c1c !important;
+
+      transform:
+        rotate(-45deg) scale(1.15);
+    }
+
+
+    .directory-map-popup-title {
+      font-weight: 700;
+
+      font-size: 15px;
+
+      line-height: 1.3;
+
+      margin-bottom: 5px;
+    }
+
+
+    .directory-map-popup-meta {
+      color:
+        var(--bs-secondary-color);
+
+      font-size: 12px;
+
+      line-height: 1.4;
+
+      margin-bottom: 10px;
+    }
+
+
+    .directory-map-popup-link {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-decoration: none;
+    }
+
+
+    .directory-map-popup-link {
+      color: #ffffff !important;
+
+      -webkit-text-fill-color: #ffffff !important;
+
+      font-weight: 600;
+
+      text-decoration: none !important;
+    }
+
+
+    .directory-map-popup-link:hover,
+    .directory-map-popup-link:focus,
+    .directory-map-popup-link:active {
+      color: #ffffff !important;
+
+      -webkit-text-fill-color: #ffffff !important;
+
+      text-decoration: none !important;
+    }
+
+
+    .map-status {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 12px;
+    }
+
+
+    .directory-listing.is-map-active {
+      outline:
+        2px solid var(--bs-primary);
+
+      outline-offset: 3px;
+    }
+
+
+    /* =========================================================
+       LISTING IMAGE
+    ========================================================= */
+
+    .directory-listing .listing-media {
+      overflow: hidden;
+    }
+
+
+    .directory-listing .listing-image {
+      position: relative;
+
+      width: 100%;
+
+      aspect-ratio: 16 / 9;
+
+      min-height: 0;
+
+      display: flex;
+
+      align-items: flex-end;
+
+      padding: 14px;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(20, 32, 54, 0.95),
+          rgba(53, 89, 110, 0.9)
+        );
+
+      background-size: cover;
+
+      background-position: center;
+
+      color: #fff;
+
+      text-shadow:
+        0 1px 4px rgba(0, 0, 0, 0.65);
+    }
+
+
+    .directory-listing .listing-image::after {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.03),
+          rgba(0, 0, 0, 0.34)
+        );
+
+      pointer-events: none;
+    }
+
+
+    .directory-listing .listing-image-label {
+      position: relative;
+
+      z-index: 2;
+    }
+
+
+    .directory-listing .listing-image.no-image {
+      background:
+        linear-gradient(
+          135deg,
+          #24364b,
+          #4d6e7e
+        );
+    }
+
+
+    /* =========================================================
+       RESULT AREA
+    ========================================================= */
+
+    .directory-loading {
+      padding: 55px 25px;
+
+      text-align: center;
+
+      border-radius: 0.9rem;
+
+      background:
+        var(--bs-tertiary-bg);
+    }
+
+
+    .directory-error {
+      padding: 45px 25px;
+
+      text-align: center;
+
+      border: 1px solid
+        var(--bs-border-color);
+
+      border-radius: 0.9rem;
+
+      background:
+        var(--bs-body-bg);
+    }
+
+
+    .directory-empty {
+      padding: 55px 25px;
+
+      text-align: center;
+
+      border-radius: 0.9rem;
+
+      background:
+        var(--bs-tertiary-bg);
+    }
+
+
+    @media (max-width: 991.98px) {
+
+      .directory-live-map {
+        height: 420px;
+
+        min-height: 360px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SKIP LINK
+========================================================= -->
+
+<a
+  class="visually-hidden-focusable btn-solid theme-primary m-2"
+  href="#results"
+>
+  Skip to business results
+</a>
+
+
+<!-- =========================================================
+     SHARED SITE HEADER
+
+     Loaded from:
+     partials/header.html
+
+     Controlled by:
+     assets/js/site-header.js
+========================================================= -->
+
+<div id="siteHeader"></div>
+
+
+
+<!-- =========================================================
+     DIRECTORY HERO
+========================================================= -->
+
+<section class="section bg-2">
+
+  <div class="container">
+
+    <div class="text-center section-narrow">
+
+      <p class="eyebrow fs-sm fg-primary mb-2">
+        Business Directory
+      </p>
+
+
+      <h1
+        class="fs-4xl fw-bold mb-3"
+        style="letter-spacing:-.03em"
+      >
+        Find Nigerian Businesses &amp; Services in Northampton
+      </h1>
+
+
+      <p class="fs-lg fg-2 mb-5">
+        Discover Nigerian-owned businesses, professionals,
+        services and community-friendly organisations across Northampton.
+      </p>
+
+
+
+      <!-- SEARCH -->
+
+      <form
+        class="search-bar"
+        id="directorySearchForm"
+        role="search"
+      >
+
+
+        <!-- KEYWORD -->
+
+        <div class="form-control form-adorn">
+
+          <div class="form-adorn-icon">
+
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              aria-hidden="true"
+            >
+
+              <circle
+                cx="7"
+                cy="7"
+                r="4.5"
+              />
+
+              <path
+                d="m10.5 10.5 4 4"
+                stroke-linecap="round"
+              />
+
+            </svg>
+
+          </div>
+
+
+          <input
+            type="search"
+            class="form-ghost"
+            id="directorySearch"
+            placeholder="Search businesses, services or keywords..."
+            aria-label="Search businesses, services or keywords"
+          >
+
+        </div>
+
+
+
+        <!-- AREA -->
+
+        <button
+          class="form-control combobox-toggle"
+          type="button"
+          data-bs-toggle="combobox"
+          data-bs-search="true"
+          data-bs-name="area"
+          data-bs-placeholder="Any area"
+          id="directoryArea"
+        >
+
+          <span class="combobox-value">
+            Any area
+          </span>
+
+
+          <svg
+            class="combobox-caret"
+            width="10"
+            height="16"
+            viewBox="0 0 10 16"
+            fill="none"
+            aria-hidden="true"
+          >
+
+            <path
+              d="M0.46967 5.46967C0.762563 5.17678 1.23744 5.17678 1.53033 5.46967L5 8.93934L8.46967 5.46967C8.76256 5.17678 9.23744 5.17678 9.53033 5.46967C9.82322 5.76256 9.82322 6.23744 9.53033 6.53033L5.53033 10.5303C5.23756 10.8232 4.76244 10.8232 4.46967 10.5303L0.46967 6.53033C0.176777 6.23744 0.176777 6.53033 0.46967 5.53033Z"
+              fill="currentcolor"
+            />
+
+          </svg>
+
+        </button>
+
+
+        <div class="menu">
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="all"
+          >
+            All Northampton
+          </button>
+
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="town-centre"
+          >
+            Town Centre
+          </button>
+
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="abington"
+          >
+            Abington
+          </button>
+
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="duston"
+          >
+            Duston
+          </button>
+
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="east-northampton"
+          >
+            East Northampton
+          </button>
+
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="west-northampton"
+          >
+            West Northampton
+          </button>
+
+        </div>
+
+
+
+        <!-- CATEGORY -->
+
+        <button
+          class="form-control combobox-toggle"
+          type="button"
+          data-bs-toggle="combobox"
+          data-bs-search="true"
+          data-bs-multiple="true"
+          data-bs-name="category"
+          data-bs-placeholder="All categories"
+          id="directoryCategory"
+        >
+
+          <span class="combobox-value">
+            All categories
+          </span>
+
+
+          <svg
+            class="combobox-caret"
+            width="10"
+            height="16"
+            viewBox="0 0 10 16"
+            fill="none"
+            aria-hidden="true"
+          >
+
+            <path
+              d="M0.46967 5.46967C0.76256 5.23744 1.23744 5.23744 1.53033 5.53033L5 9L8.46967 5.53033C8.76256 5.82322 9.23744 5.82322 9.53033 5.53033C9.82322 5.82322 9.82322 6.2981 9.53033 6.59099L5.53033 10.591C5.23744 10.8839 4.76256 10.8839 4.46967 10.591L0.46967 6.59099C0.176777 6.2981 0.23744 5.82322 0.46967 5.53033Z"
+              fill="currentcolor"
+            />
+
+          </svg>
+
+        </button>
+
+
+        <div class="menu">
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="food"
+          >
+            Restaurants &amp; Food
+          </button>
+
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="beauty"
+          >
+            Hair &amp; Beauty
+          </button>
+
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="property"
+          >
+            Property &amp; Home
+          </button>
+
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="professional"
+          >
+            Professional Services
+          </button>
+
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="transport"
+          >
+            Transport
+          </button>
+
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="shopping"
+          >
+            Shopping
+          </button>
+
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="health"
+          >
+            Health &amp; Wellness
+          </button>
+
+
+          <button
+            class="menu-item"
+            type="button"
+            data-bs-value="events"
+          >
+            Events &amp; Entertainment
+          </button>
+
+        </div>
+
+
+
+        <button
+          class="btn-solid theme-primary btn-lg"
+          type="submit"
+        >
+          Search
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     MAIN DIRECTORY
+========================================================= -->
+
+<main
+  id="main"
+  class="section"
+>
+
+  <div class="container">
+
+
+    <!-- CATEGORY TABS -->
+
+    <ul
+      class="nav nav-pills mb-5"
+      data-bs-toggle="nav-overflow"
+    >
+
+      <li class="nav-item">
+
+        <a
+          class="nav-link active"
+          aria-current="page"
+          href="businesses.html"
+          data-category-tab="all"
+        >
+          All
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a
+          class="nav-link"
+          href="businesses.html?category=food"
+          data-category-tab="food"
+        >
+          Restaurants
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a
+          class="nav-link"
+          href="businesses.html?category=beauty"
+          data-category-tab="beauty"
+        >
+          Hair &amp; Beauty
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a
+          class="nav-link"
+          href="businesses.html?category=shopping"
+          data-category-tab="shopping"
+        >
+          Groceries
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a
+          class="nav-link"
+          href="businesses.html?category=property"
+          data-category-tab="property"
+        >
+          Property
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a
+          class="nav-link"
+          href="businesses.html?category=professional"
+          data-category-tab="professional"
+        >
+          Professional Services
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a
+          class="nav-link"
+          href="businesses.html?category=transport"
+          data-category-tab="transport"
+        >
+          Transport
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a
+          class="nav-link"
+          href="businesses.html?category=health"
+          data-category-tab="health"
+        >
+          Health
+        </a>
+
+      </li>
+
+
+      <li class="nav-item">
+
+        <a
+          class="nav-link"
+          href="businesses.html?category=events"
+          data-category-tab="events"
+        >
+          Events
+        </a>
+
+      </li>
+
+    </ul>
+
+
+
+    <div class="row g-5">
+
+
+      <!-- ===================================================
+           RESULTS COLUMN
+      ==================================================== -->
+
+      <div
+        class="lg:col-8"
+        id="results"
+      >
+
+
+        <!-- RESULTS HEADER -->
+
+        <div
+          class="d-flex flex-wrap align-items-center gap-2 mb-4"
+        >
+
+          <div class="me-auto">
+
+            <p class="fs-sm fg-2 mb-1">
+
+              <strong
+                class="fg-1"
+                id="resultCount"
+              >
+                0
+              </strong>
+
+              businesses and services
+
+            </p>
+
+
+            <p
+              class="fs-xs fg-3 mb-0"
+            >
+              Northampton, UK
+            </p>
+
+          </div>
+
+
+          <button
+            class="btn-outline theme-secondary btn-sm"
+            type="button"
+            data-bs-toggle="drawer"
+            data-bs-target="#filterDrawer"
+          >
+
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+
+              <path
+                d="M2 4h12M4 8h8M6 12h4"
+              />
+
+            </svg>
+
+            Filters
+
+          </button>
+
+
+
+          <button
+            class="btn-outline theme-secondary btn-sm"
+            type="button"
+            data-bs-toggle="menu"
+            aria-expanded="false"
+            id="sortButton"
+          >
+            Recommended
+          </button>
+
+
+          <div
+            class="menu"
+            id="sortMenu"
+          >
+
+            <button
+              class="menu-item"
+              type="button"
+              data-sort="recommended"
+            >
+              Recommended
+            </button>
+
+
+            <button
+              class="menu-item"
+              type="button"
+              data-sort="featured"
+            >
+              Featured
+            </button>
+
+
+            <button
+              class="menu-item"
+              type="button"
+              data-sort="rating"
+            >
+              Highest rated
+            </button>
+
+
+            <button
+              class="menu-item"
+              type="button"
+              data-sort="nearest"
+            >
+              Nearest
+            </button>
+
+
+            <button
+              class="menu-item"
+              type="button"
+              data-sort="recent"
+            >
+              Recently added
+            </button>
+
+
+            <button
+              class="menu-item"
+              type="button"
+              data-sort="name"
+            >
+              A–Z
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ACTIVE FILTERS -->
+
+        <div
+          class="filter-bar mb-4 d-flex flex-wrap align-items-center gap-2"
+        >
+
+          <div
+            id="activeFilters"
+            class="d-flex flex-wrap gap-2"
+          >
+          </div>
+
+
+          <button
+            class="btn-text btn-sm"
+            type="button"
+            id="clearFiltersButton"
+          >
+            Clear all
+          </button>
+
+        </div>
+
+
+
+        <!-- RESULTS -->
+
+        <div
+          class="row g-4"
+          id="businessResultsGrid"
+        >
+
+          <div class="col-12">
+
+            <div class="directory-loading">
+
+              <div
+                class="spinner-border"
+                role="status"
+                aria-hidden="true"
+              >
+              </div>
+
+
+              <p class="fg-3 mt-3 mb-0">
+                Loading businesses...
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- PAGINATION SUMMARY -->
+
+        <div
+          class="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-6"
+        >
+
+          <p
+            class="fs-xs fg-3 mb-0"
+            id="paginationSummary"
+          >
+            Loading...
+          </p>
+
+
+          <nav
+            aria-label="Business directory pages"
+            aria-hidden="true"
+          >
+
+            <ul
+              class="pagination mb-0"
+            >
+
+              <li class="page-item disabled">
+
+                <span class="page-link">
+                  1
+                </span>
+
+              </li>
+
+            </ul>
+
+          </nav>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ===================================================
+           MAP
+      ==================================================== -->
+
+      <aside
+        class="lg:col-4 d-none lg:d-block"
+      >
+
+        <div class="map-rail">
+
+          <div
+            class="directory-live-map"
+          >
+
+            <div
+              id="directoryMap"
+              aria-label="Interactive map showing businesses across Northampton"
+            >
+            </div>
+
+          </div>
+
+
+          <div class="p-3 bg-2">
+
+            <div class="map-status">
+
+              <strong class="fs-sm">
+                Businesses across Northampton
+              </strong>
+
+
+              <button
+                type="button"
+                class="btn-text btn-sm"
+                id="fitMapButton"
+              >
+                Fit map
+              </button>
+
+            </div>
+
+
+            <p
+              class="fs-xs fg-3 mt-2 mb-0"
+            >
+              Click a marker to view the business.
+              The map updates automatically when you search
+              or filter the directory.
+            </p>
+
+          </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+
+<!-- =========================================================
+     BUSINESS OWNER CTA
+========================================================= -->
+
+<section class="section bg-2">
+
+  <div class="container">
+
+    <div
+      class="section-narrow text-center"
+    >
+
+      <p class="eyebrow fs-sm fg-primary mb-2">
+        Are you a business owner?
+      </p>
+
+
+      <h2
+        class="fs-3xl fw-bold mb-3"
+        style="letter-spacing:-.02em"
+      >
+        Get your business listed
+      </h2>
+
+
+      <p class="fs-lg fg-2 mb-5">
+        Help members of the community find your business,
+        products and services.
+      </p>
+
+
+      <div
+        class="d-flex flex-wrap justify-content-center gap-3"
+      >
+
+        <a
+          class="btn-solid theme-primary btn-lg"
+          href="list-your-business.html"
+        >
+          List Your Business
+        </a>
+
+
+        <a
+          class="btn-outline theme-secondary btn-lg"
+          href="index.html#advertise"
+        >
+          Advertise With Us
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="site-footer bg-2 py-6">
+
+  <div class="container">
+
+    <div class="row g-5">
+
+
+      <!-- BRAND -->
+
+      <div class="lg:col-4">
+
+        <a
+          class="navbar-brand d-inline-flex align-items-center gap-2 fw-semibold mb-3"
+          href="index.html"
+        >
+
+          <span
+            class="brand-mark"
+            aria-hidden="true"
+          >
+            N
+          </span>
+
+          Nigerians in Northampton
+
+        </a>
+
+
+        <p class="fg-3 fs-sm mb-0">
+          Connecting Nigerians, supporting local businesses
+          and sharing useful information across Northampton.
+        </p>
+
+      </div>
+
+
+
+      <!-- COMMUNITY -->
+
+      <div class="sm:col-6 lg:col-2">
+
+        <h3 class="fs-sm fw-semibold mb-3">
+          Community
+        </h3>
+
+
+        <ul
+          class="list-unstyled mb-0"
+        >
+
+          <li class="mb-2">
+
+            <a href="index.html#about">
+              About Us
+            </a>
+
+          </li>
+
+
+          <li class="mb-2">
+
+            <a href="index.html#news">
+              News
+            </a>
+
+          </li>
+
+
+          <li class="mb-2">
+
+            <a href="index.html#events">
+              Events
+            </a>
+
+          </li>
+
+
+          <li class="mb-2">
+
+            <a href="index.html#guides">
+              Newcomer's Guide
+            </a>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+
+
+      <!-- BUSINESSES -->
+
+      <div class="sm:col-6 lg:col-2">
+
+        <h3 class="fs-sm fw-semibold mb-3">
+          Businesses
+        </h3>
+
+
+        <ul
+          class="list-unstyled mb-0"
+        >
+
+          <li class="mb-2">
+
+            <a href="businesses.html">
+              Directory
+            </a>
+
+          </li>
+
+
+          <li class="mb-2">
+
+            <a href="businesses.html">
+              Categories
+            </a>
+
+          </li>
+
+
+          <li class="mb-2">
+
+            <a href="list-your-business.html">
+              List Your Business
+            </a>
+
+          </li>
+
+
+          <li class="mb-2">
+
+            <a href="index.html#advertise">
+              Advertise with us
+            </a>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+
+
+      <!-- INFORMATION -->
+
+      <div class="sm:col-6 lg:col-2">
+
+        <h3 class="fs-sm fw-semibold mb-3">
+          Information
+        </h3>
+
+
+        <ul
+          class="list-unstyled mb-0"
+        >
+
+          <li class="mb-2">
+
+            <a href="index.html#about">
+              About
+            </a>
+
+          </li>
+
+
+          <li class="mb-2">
+
+            <a href="#">
+              Contact
+            </a>
+
+          </li>
+
+
+          <li class="mb-2">
+
+            <a href="#">
+              Privacy
+            </a>
+
+          </li>
+
+
+          <li class="mb-2">
+
+            <a href="#">
+              Terms
+            </a>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+
+
+      <!-- CONNECT -->
+
+      <div class="sm:col-6 lg:col-2">
+
+        <h3 class="fs-sm fw-semibold mb-3">
+          Connect
+        </h3>
+
+
+        <ul
+          class="list-unstyled mb-0"
+        >
+
+          <li class="mb-2">
+
+            <a href="#">
+              WhatsApp Community
+            </a>
+
+          </li>
+
+
+          <li class="mb-2">
+
+            <a href="#">
+              Facebook
+            </a>
+
+          </li>
+
+
+          <li class="mb-2">
+
+            <a href="#">
+              Instagram
+            </a>
+
+          </li>
+
+
+          <li class="mb-2">
+
+            <a href="#">
+              Email Us
+            </a>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+
+
+    <hr class="my-5">
+
+
+
+    <div
+      class="d-flex flex-wrap justify-content-between align-items-center gap-3"
+    >
+
+      <p class="fg-3 fs-xs mb-0">
+
+        &copy;
+
+        <span data-year>
+          2026
+        </span>
+
+        Nigerians in Northampton.
+        All rights reserved.
+
+      </p>
+
+
+      <p class="fg-3 fs-xs mb-0">
+        Community • Business • Information
+      </p>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     FILTER DRAWER
+========================================================= -->
+
+<dialog
+  class="drawer drawer-end"
+  tabindex="-1"
+  id="filterDrawer"
+  aria-labelledby="filterDrawerLabel"
+>
+
+  <div class="drawer-header">
+
+    <h5
+      class="drawer-title"
+      id="filterDrawerLabel"
+    >
+      Filter businesses
+    </h5>
+
+
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="drawer"
+      aria-label="Close filters"
+    >
+    </button>
+
+  </div>
+
+
+  <div class="drawer-body">
+
+
+    <!-- CATEGORY -->
+
+    <div class="filter-drawer-group">
+
+      <h3 class="fs-sm fw-semibold mb-3">
+        Category
+      </h3>
+
+
+      <div
+        class="option-row d-flex flex-wrap gap-2"
+      >
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-category="food"
+          >
+
+          Restaurants
+
+        </label>
+
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-category="beauty"
+          >
+
+          Beauty
+
+        </label>
+
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-category="property"
+          >
+
+          Property
+
+        </label>
+
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-category="professional"
+          >
+
+          Professional
+
+        </label>
+
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-category="transport"
+          >
+
+          Transport
+
+        </label>
+
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-category="shopping"
+          >
+
+          Shopping
+
+        </label>
+
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-category="health"
+          >
+
+          Health
+
+        </label>
+
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-category="events"
+          >
+
+          Events
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- AREA -->
+
+    <div class="filter-drawer-group">
+
+      <h3 class="fs-sm fw-semibold mb-3">
+        Area
+      </h3>
+
+
+      <div
+        class="option-row d-flex flex-wrap gap-2"
+      >
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-area="town-centre"
+          >
+
+          Town Centre
+
+        </label>
+
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-area="abington"
+          >
+
+          Abington
+
+        </label>
+
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-area="duston"
+          >
+
+          Duston
+
+        </label>
+
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-area="east-northampton"
+          >
+
+          East Northampton
+
+        </label>
+
+
+        <label
+          class="btn-check btn-outline theme-primary"
+        >
+
+          <input
+            type="checkbox"
+            data-filter-area="west-northampton"
+          >
+
+          West Northampton
+
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- RATING -->
+
+    <div class="filter-drawer-group">
+
+      <h3 class="fs-sm fw-semibold mb-3">
+        Minimum rating
+      </h3>
+
+
+      <div
+        class="form-range"
+        data-bs-bubble
+      >
+
+        <input
+          type="range"
+          class="form-range-input"
+          id="ratingRange"
+          min="0"
+          max="5"
+          step="0.5"
+          value="0"
+          aria-label="Minimum rating"
+        >
+
+      </div>
+
+
+      <p class="fs-xs fg-3 mb-0">
+
+        <strong
+          class="fg-1"
+          id="ratingOut"
+        >
+          0.0
+        </strong>
+
+        stars and up
+
+      </p>
+
+    </div>
+
+
+
+    <!-- FEATURES -->
+
+    <div class="filter-drawer-group">
+
+      <h3 class="fs-sm fw-semibold mb-3">
+        Business features
+      </h3>
+
+
+      <div class="form-field mb-2">
+
+        <input
+          type="checkbox"
+          class="check"
+          id="fVerified"
+        >
+
+        <label for="fVerified">
+          Verified businesses
+        </label>
+
+      </div>
+
+
+      <div class="form-field mb-2">
+
+        <input
+          type="checkbox"
+          class="check"
+          id="fWhatsApp"
+        >
+
+        <label for="fWhatsApp">
+          Contactable on WhatsApp
+        </label>
+
+      </div>
+
+
+      <div class="form-field mb-2">
+
+        <input
+          type="checkbox"
+          class="check"
+          id="fWebsite"
+        >
+
+        <label for="fWebsite">
+          Has website
+        </label>
+
+      </div>
+
+
+      <div class="form-field mb-2">
+
+        <input
+          type="checkbox"
+          class="check"
+          id="fOnline"
+        >
+
+        <label for="fOnline">
+          Online services available
+        </label>
+
+      </div>
+
+
+      <div class="form-field mb-2">
+
+        <input
+          type="checkbox"
+          class="check"
+          id="fFeatured"
+        >
+
+        <label for="fFeatured">
+          Featured listings
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- AVAILABILITY -->
+
+    <div class="filter-drawer-group">
+
+      <h3 class="fs-sm fw-semibold mb-3">
+        Availability
+      </h3>
+
+
+      <div class="form-field mb-2">
+
+        <input
+          type="checkbox"
+          class="check"
+          id="fOpen"
+        >
+
+        <label for="fOpen">
+          Open now
+        </label>
+
+      </div>
+
+
+      <div class="form-field">
+
+        <input
+          type="checkbox"
+          class="check"
+          id="fBooking"
+        >
+
+        <label for="fBooking">
+          Appointments / bookings
+        </label>
+
+      </div>
+
+    </div>
+
+
+
+    <button
+      class="btn-solid theme-primary w-100 mt-5"
+      type="button"
+      data-bs-dismiss="drawer"
+    >
+      Apply Filters
+    </button>
+
+  </div>
+
+</dialog>
+
+
+
+<!-- =========================================================
+     STATIC DIRECTORY LABELS / FALLBACK DATA
+========================================================= -->
+
+<script src="assets/js/business-data.js"></script>
+
+
+
+<!-- =========================================================
+     LEAFLET
+========================================================= -->
+
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  crossorigin=""
+></script>
+
+
+
+<!-- =========================================================
+     DIRECTORY FUNCTIONALITY
+========================================================= -->
+
+<script>
+
+document.addEventListener(
+  "DOMContentLoaded",
+  async function () {
+
+
+    /* =======================================================
+       BASIC REFERENCES
+    ======================================================= */
+
+    const data =
+      window.NINBusinessData || {};
+
+
+
+    const categoryLabels = {
+
+      food:
+        data.categoryLabels?.food ||
+        "Restaurants & Food",
+
+      beauty:
+        data.categoryLabels?.beauty ||
+        "Hair & Beauty",
+
+      shopping:
+        data.categoryLabels?.shopping ||
+        "Shopping",
+
+      property:
+        data.categoryLabels?.property ||
+        "Property & Home",
+
+      professional:
+        data.categoryLabels?.professional ||
+        "Professional Services",
+
+      transport:
+        data.categoryLabels?.transport ||
+        "Transport",
+
+      health:
+        data.categoryLabels?.health ||
+        "Health & Wellness",
+
+      events:
+        data.categoryLabels?.events ||
+        "Events & Entertainment"
+
+    };
+
+
+
+    const areaLabels = {
+
+      northampton:
+        data.areaLabels?.northampton ||
+        "Northampton",
+
+      "town-centre":
+        data.areaLabels?.["town-centre"] ||
+        "Town Centre",
+
+      abington:
+        data.areaLabels?.abington ||
+        "Abington",
+
+      duston:
+        data.areaLabels?.duston ||
+        "Duston",
+
+      "east-northampton":
+        data.areaLabels?.["east-northampton"] ||
+        "East Northampton",
+
+      "west-northampton":
+        data.areaLabels?.["west-northampton"] ||
+        "West Northampton"
+
+    };
+
+
+
+    const grid =
+      document.getElementById(
+        "businessResultsGrid"
+      );
+
+
+    const resultCount =
+      document.getElementById(
+        "resultCount"
+      );
+
+
+    const paginationSummary =
+      document.getElementById(
+        "paginationSummary"
+      );
+
+
+    const searchInput =
+      document.getElementById(
+        "directorySearch"
+      );
+
+
+    const areaButton =
+      document.getElementById(
+        "directoryArea"
+      );
+
+
+    const categoryButton =
+      document.getElementById(
+        "directoryCategory"
+      );
+
+
+    const ratingRange =
+      document.getElementById(
+        "ratingRange"
+      );
+
+
+    const ratingOut =
+      document.getElementById(
+        "ratingOut"
+      );
+
+
+    const activeFilters =
+      document.getElementById(
+        "activeFilters"
+      );
+
+
+    const sortButton =
+      document.getElementById(
+        "sortButton"
+      );
+
+
+    const mapElement =
+      document.getElementById(
+        "directoryMap"
+      );
+
+
+
+    /* =======================================================
+       API
+    ======================================================= */
+
+    const API_BASE_URL = (
+      window.NIN_API_BASE_URL ||
+      "https://nigerians-in-northampton-backend.onrender.com/api"
+    ).replace(/\/$/, "");
+
+
+
+    const API_ORIGIN =
+      new URL(
+        API_BASE_URL,
+        window.location.href
+      ).origin;
+
+
+
+    /* =======================================================
+       IMAGE URL NORMALISER
+    ======================================================= */
+
+    function imageURL(value) {
+
+      const raw =
+        String(value || "").trim();
+
+
+      if (!raw) {
+        return "";
+      }
+
+
+      if (
+        /^https?:\/\//i.test(raw)
+      ) {
+
+        return raw;
+
+      }
+
+
+      if (
+        raw.startsWith("/")
+      ) {
+
+        return (
+          API_ORIGIN +
+          raw
+        );
+
+      }
+
+
+      return (
+        API_ORIGIN +
+        "/" +
+        raw.replace(/^\/+/, "")
+      );
+
+    }
+
+
+
+    /* =======================================================
+       HTML ESCAPING
+    ======================================================= */
+
+    function escapeHTML(value) {
+
+      return String(value ?? "")
+        .replaceAll(
+          "&",
+          "&amp;"
+        )
+        .replaceAll(
+          "<",
+          "&lt;"
+        )
+        .replaceAll(
+          ">",
+          "&gt;"
+        )
+        .replaceAll(
+          '"',
+          "&quot;"
+        )
+        .replaceAll(
+          "'",
+          "&#039;"
+        );
+
+    }
+
+
+
+    /* =======================================================
+       HOURS / OPEN STATUS
+    ======================================================= */
+
+    function getLondonTimeParts() {
+
+      const parts =
+        new Intl.DateTimeFormat(
+          "en-GB",
+          {
+            timeZone:
+              "Europe/London",
+
+            weekday:
+              "long",
+
+            hour:
+              "2-digit",
+
+            minute:
+              "2-digit",
+
+            hour12:
+              false
+          }
+        ).formatToParts(
+          new Date()
+        );
+
+
+      const values = {};
+
+
+      parts.forEach(
+        (part) => {
+
+          values[
+            part.type
+          ] =
+            part.value;
+
+        }
+      );
+
+
+      return values;
+
+    }
+
+
+
+    function isBusinessOpen(hours) {
+
+      if (
+        !hours ||
+        typeof hours !== "object"
+      ) {
+
+        return null;
+
+      }
+
+
+      const london =
+        getLondonTimeParts();
+
+
+      const todayKey =
+        String(
+          london.weekday || ""
+        ).toLowerCase();
+
+
+      const todayHours =
+        hours[todayKey];
+
+
+      if (!todayHours) {
+
+        return null;
+
+      }
+
+
+      const clean =
+        String(
+          todayHours
+        ).trim();
+
+
+      if (
+        !clean ||
+        clean.toLowerCase() === "closed"
+      ) {
+
+        return false;
+
+      }
+
+
+      const match =
+        clean.match(
+          /^(\d{2}):(\d{2})\s*-\s*(\d{2}):(\d{2})$/
+        );
+
+
+      if (!match) {
+
+        return null;
+
+      }
+
+
+      const nowMinutes =
+        Number(
+          london.hour
+        ) * 60 +
+        Number(
+          london.minute
+        );
+
+
+      const openMinutes =
+        Number(
+          match[1]
+        ) * 60 +
+        Number(
+          match[2]
+        );
+
+
+      const closeMinutes =
+        Number(
+          match[3]
+        ) * 60 +
+        Number(
+          match[4]
+        );
+
+
+      if (
+        closeMinutes >=
+        openMinutes
+      ) {
+
+        return (
+          nowMinutes >=
+            openMinutes &&
+          nowMinutes <=
+            closeMinutes
+        );
+
+      }
+
+
+      return (
+        nowMinutes >=
+          openMinutes ||
+        nowMinutes <=
+          closeMinutes
+      );
+
+    }
+
+
+
+    /* =======================================================
+       NORMALISE MONGODB BUSINESS
+    ======================================================= */
+
+    function normaliseBusiness(raw) {
+
+const id =
+  raw._id ||
+  raw.id ||
+  raw.slug ||
+  "";
+
+
+      const services =
+        Array.isArray(
+          raw.services
+        )
+          ? raw.services
+          : [];
+
+
+      const image =
+        imageURL(
+          raw.coverImage?.url ||
+          raw.image ||
+          ""
+        );
+
+
+      const galleryImages =
+        Array.isArray(
+          raw.galleryImages
+        )
+          ? raw.galleryImages
+              .map(
+                (item) =>
+                  imageURL(
+                    item?.url ||
+                    ""
+                  )
+              )
+              .filter(Boolean)
+          : [];
+
+
+      const categoryKey =
+        raw.categoryKey ||
+        raw.category ||
+        "";
+
+
+      const areaKey =
+        raw.areaKey ||
+        raw.area ||
+        "northampton";
+
+
+      const category =
+        categoryLabels[
+          categoryKey
+        ] ||
+        raw.categoryLabel ||
+        raw.category ||
+        categoryKey ||
+        "Business";
+
+
+      const area =
+        areaLabels[
+          areaKey
+        ] ||
+        raw.areaLabel ||
+        raw.area ||
+        areaKey ||
+        "Northampton";
+
+
+      const rating =
+        Number(
+          raw.rating || 0
+        );
+
+
+      const reviews =
+        Number(
+          raw.reviewCount ??
+          raw.reviews ??
+          0
+        );
+
+
+      const featured =
+        Boolean(
+          raw.featured
+        );
+
+
+      const verified =
+        Boolean(
+          raw.verified
+        );
+
+
+      const whatsapp =
+        Boolean(
+          raw.hasWhatsApp ??
+          raw.whatsapp
+        );
+
+
+      const online =
+        Boolean(
+          raw.hasOnline ??
+          raw.online
+        );
+
+
+      const booking =
+        Boolean(
+          raw.hasBooking ??
+          raw.booking
+        );
+
+
+      const latValue =
+        Number(
+          raw.lat
+        );
+
+
+      const lngValue =
+        Number(
+          raw.lng
+        );
+
+
+      const lat =
+        Number.isFinite(
+          latValue
+        )
+          ? latValue
+          : null;
+
+
+      const lng =
+        Number.isFinite(
+          lngValue
+        )
+          ? lngValue
+          : null;
+
+
+      const hours =
+        raw.hours &&
+        typeof raw.hours === "object"
+          ? raw.hours
+          : {};
+
+
+      const open =
+        isBusinessOpen(
+          hours
+        );
+
+
+      const statusText =
+        open === true
+          ? "Open now"
+          : open === false
+            ? "Currently closed"
+            : "Listed";
+
+
+      const secondaryStatus = [];
+
+
+      if (whatsapp) {
+        secondaryStatus.push(
+          "WhatsApp"
+        );
+      }
+
+
+      if (online) {
+        secondaryStatus.push(
+          "Online services"
+        );
+      }
+
+
+      if (booking) {
+        secondaryStatus.push(
+          "Bookings"
+        );
+      }
+
+
+      return {
+
+        ...raw,
+
+        id:
+          String(id),
+
+slug:
+  String(
+    raw.slug ||
+    raw._id ||
+    raw.id ||
+    ""
+  ),
+
+        name:
+          raw.businessName ||
+          raw.name ||
+          "Business",
+
+        categoryKey,
+
+        category,
+
+        areaKey,
+
+        area,
+
+        rating,
+
+        reviews,
+
+        featured,
+
+        verified,
+
+        whatsapp,
+
+        online,
+
+        booking,
+
+        image,
+
+        galleryImages,
+
+        tags:
+          services.slice(
+            0,
+            6
+          ),
+
+        services,
+
+        phone:
+          raw.phone ||
+          "",
+
+        whatsappNumber:
+          raw.whatsappNumber ||
+          raw.phone ||
+          "",
+
+        email:
+          raw.email ||
+          "",
+
+        website:
+          raw.website ||
+          "",
+
+        description:
+          raw.description ||
+          "",
+
+        address:
+          raw.address ||
+          "",
+
+        postcode:
+          raw.postcode ||
+          "",
+
+        town:
+          raw.town ||
+          "Northampton",
+
+        lat,
+
+        lng,
+
+        hours,
+
+        open,
+
+        statusText,
+
+        secondaryStatus,
+
+        coverLabel:
+          category,
+
+        createdAt:
+          raw.createdAt ||
+          raw.updatedAt ||
+          "",
+
+        searchText:
+          [
+            raw.businessName,
+            raw.name,
+            raw.description,
+            category,
+            area,
+            raw.town,
+            ...services
+          ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase()
+
+      };
+
+    }
+
+
+
+    /* =======================================================
+       LOAD BUSINESSES
+    ======================================================= */
+
+    let businesses = [];
+
+
+    try {
+
+      const response =
+        await fetch(
+          `${API_BASE_URL}/businesses?limit=100`
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          `Directory API returned ${response.status}`
+        );
+
+      }
+
+
+      const payload =
+        await response.json();
+
+
+      if (
+        !payload ||
+        payload.success !== true ||
+        !Array.isArray(
+          payload.businesses
+        )
+      ) {
+
+        throw new Error(
+          "The directory API returned an invalid response."
+        );
+
+      }
+
+
+      businesses =
+        payload.businesses.map(
+          normaliseBusiness
+        );
+
+
+      console.log(
+        "Directory API loaded:",
+        businesses
+      );
+
+    }
+    catch (error) {
+
+      console.error(
+        "Could not load businesses from API:",
+        error
+      );
+
+
+      if (
+        Array.isArray(
+          data.businesses
+        )
+      ) {
+
+        businesses =
+          data.businesses.map(
+            normaliseBusiness
+          );
+
+        console.warn(
+          "Using static business-data.js fallback."
+        );
+
+      }
+      else {
+
+        grid.innerHTML = `
+
+          <div class="col-12">
+
+            <div class="directory-error">
+
+              <h3 class="h5 mb-2">
+                Business directory unavailable
+              </h3>
+
+              <p class="fg-3 mb-4">
+                The business directory could not connect to the server.
+                Please make sure the backend is running and try again.
+              </p>
+
+              <button
+                type="button"
+                class="btn-solid theme-primary"
+                onclick="window.location.reload()"
+              >
+                Try again
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+
+        if (resultCount) {
+          resultCount.textContent =
+            "0";
+        }
+
+
+        if (paginationSummary) {
+          paginationSummary.textContent =
+            "Directory unavailable";
+        }
+
+
+        return;
+
+      }
+
+    }
+
+
+
+    /* =======================================================
+       URL STATE
+    ======================================================= */
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const initialCategory =
+      params.get(
+        "category"
+      );
+
+
+    const initialCategories =
+      initialCategory
+        ? initialCategory
+            .split(",")
+            .map(
+              (value) =>
+                value.trim()
+            )
+            .filter(Boolean)
+        : [];
+
+
+    const state = {
+
+      search:
+        params.get(
+          "search"
+        ) || "",
+
+      area:
+        params.get(
+          "area"
+        ) || "all",
+
+      categories:
+        initialCategories.length
+          ? initialCategories
+          : ["all"],
+
+      minRating:
+        Number(
+          params.get(
+            "rating"
+          ) || "0"
+        ),
+
+      sort:
+        params.get(
+          "sort"
+        ) || "recommended",
+
+      verified:
+        params.get(
+          "verified"
+        ) === "1",
+
+      whatsapp:
+        params.get(
+          "whatsapp"
+        ) === "1",
+
+      website:
+        params.get(
+          "website"
+        ) === "1",
+
+      online:
+        params.get(
+          "online"
+        ) === "1",
+
+      featured:
+        params.get(
+          "featured"
+        ) === "1",
+
+      open:
+        params.get(
+          "open"
+        ) === "1",
+
+      booking:
+        params.get(
+          "booking"
+        ) === "1"
+
+    };
+
+
+
+    /* =======================================================
+       FEATURE CHECKS
+    ======================================================= */
+
+    const featureKeys = [
+
+      "verified",
+
+      "whatsapp",
+
+      "website",
+
+      "online",
+
+      "featured",
+
+      "open",
+
+      "booking"
+
+    ];
+
+
+    const featureChecks =
+      Object.fromEntries(
+
+        featureKeys.map(
+          (key) => [
+
+            key,
+
+            document.getElementById(
+              `f${
+                key.charAt(0).toUpperCase()
+              }${
+                key.slice(1)
+              }`
+            )
+
+          ]
+        )
+
+      );
+
+
+    featureKeys.forEach(
+      (key) => {
+
+        if (
+          featureChecks[key]
+        ) {
+
+          featureChecks[key]
+            .checked =
+              Boolean(
+                state[key]
+              );
+
+        }
+
+      }
+    );
+
+
+
+    /* =======================================================
+       FILTER HELPERS
+    ======================================================= */
+
+    function selectedCategories() {
+
+      return state.categories
+        .filter(
+          (category) =>
+            category &&
+            category !== "all"
+        );
+
+    }
+
+
+
+    function distanceFromNorthampton(
+      business
+    ) {
+
+      if (
+        !Number.isFinite(
+          Number(
+            business.lat
+          )
+        ) ||
+        !Number.isFinite(
+          Number(
+            business.lng
+          )
+        )
+      ) {
+
+        return Number.POSITIVE_INFINITY;
+
+      }
+
+
+      return Math.hypot(
+
+        (
+          Number(
+            business.lat
+          ) - 52.2405
+        ) * 111,
+
+        (
+          Number(
+            business.lng
+          ) + 0.9027
+        ) * 67
+
+      );
+
+    }
+
+
+
+    function matches(
+      business
+    ) {
+
+      const query =
+        state.search
+          .trim()
+          .toLowerCase();
+
+
+      if (
+        query &&
+        !business.searchText.includes(
+          query
+        )
+      ) {
+
+        return false;
+
+      }
+
+
+      if (
+        state.area !== "all" &&
+        business.areaKey !==
+          state.area
+      ) {
+
+        return false;
+
+      }
+
+
+      const categories =
+        selectedCategories();
+
+
+      if (
+        categories.length &&
+        !categories.includes(
+          business.categoryKey
+        )
+      ) {
+
+        return false;
+
+      }
+
+
+      if (
+        Number(
+          business.rating || 0
+        ) < state.minRating
+      ) {
+
+        return false;
+
+      }
+
+
+      for (
+        const key of featureKeys
+      ) {
+
+        if (
+          state[key] &&
+          !business[key]
+        ) {
+
+          return false;
+
+        }
+
+      }
+
+
+      return true;
+
+    }
+
+
+
+    /* =======================================================
+       SORT
+    ======================================================= */
+
+    function sorted(
+      items
+    ) {
+
+      return items
+        .slice()
+        .sort(
+          (a, b) => {
+
+            switch (
+              state.sort
+            ) {
+
+              case "featured":
+
+                return (
+                  Number(
+                    b.featured
+                  ) -
+                  Number(
+                    a.featured
+                  )
+                  ||
+                  b.rating -
+                    a.rating
+                  ||
+                  b.reviews -
+                    a.reviews
+                );
+
+
+              case "rating":
+
+                return (
+                  b.rating -
+                    a.rating
+                  ||
+                  b.reviews -
+                    a.reviews
+                );
+
+
+              case "nearest":
+
+                return (
+                  distanceFromNorthampton(
+                    a
+                  ) -
+                  distanceFromNorthampton(
+                    b
+                  )
+                );
+
+
+              case "recent":
+
+                return String(
+                  b.createdAt ||
+                    ""
+                ).localeCompare(
+                  String(
+                    a.createdAt ||
+                      ""
+                  )
+                );
+
+
+              case "name":
+
+                return String(
+                  a.name
+                ).localeCompare(
+                  String(
+                    b.name
+                  )
+                );
+
+
+              case "recommended":
+
+              default:
+
+                return (
+                  Number(
+                    b.featured
+                  ) -
+                  Number(
+                    a.featured
+                  )
+                  ||
+                  b.rating -
+                    a.rating
+                  ||
+                  b.reviews -
+                    a.reviews
+                );
+
+            }
+
+          }
+        );
+
+    }
+
+
+
+    /* =======================================================
+       URL SYNC
+    ======================================================= */
+
+    function syncURL() {
+
+      const query =
+        new URLSearchParams();
+
+
+      if (
+        state.search.trim()
+      ) {
+
+        query.set(
+          "search",
+          state.search.trim()
+        );
+
+      }
+
+
+      if (
+        state.area !== "all"
+      ) {
+
+        query.set(
+          "area",
+          state.area
+        );
+
+      }
+
+
+      const categories =
+        selectedCategories();
+
+
+      if (
+        categories.length
+      ) {
+
+        query.set(
+          "category",
+          categories.join(",")
+        );
+
+      }
+
+
+      if (
+        state.minRating > 0
+      ) {
+
+        query.set(
+          "rating",
+          state.minRating
+        );
+
+      }
+
+
+      if (
+        state.sort !==
+        "recommended"
+      ) {
+
+        query.set(
+          "sort",
+          state.sort
+        );
+
+      }
+
+
+      featureKeys.forEach(
+        (key) => {
+
+          if (
+            state[key]
+          ) {
+
+            query.set(
+              key,
+              "1"
+            );
+
+          }
+
+        }
+      );
+
+
+      const queryString =
+        query.toString();
+
+
+      const nextURL =
+        `${window.location.pathname}${
+          queryString
+            ? `?${queryString}`
+            : ""
+        }#results`;
+
+
+      window.history.replaceState(
+        {},
+        "",
+        nextURL
+      );
+
+    }
+
+
+
+    /* =======================================================
+       CONTROLS
+    ======================================================= */
+
+    function updateControls() {
+
+
+      if (searchInput) {
+
+        searchInput.value =
+          state.search;
+
+      }
+
+
+      if (ratingRange) {
+
+        ratingRange.value =
+          String(
+            state.minRating
+          );
+
+      }
+
+
+      if (ratingOut) {
+
+        ratingOut.textContent =
+          Number(
+            state.minRating
+          ).toFixed(1);
+
+      }
+
+
+      if (areaButton) {
+
+        const value =
+          areaButton.querySelector(
+            ".combobox-value"
+          );
+
+
+        if (value) {
+
+          value.textContent =
+            state.area === "all"
+              ? "Any area"
+              : (
+                  areaLabels[
+                    state.area
+                  ] ||
+                  state.area
+                );
+
+        }
+
+      }
+
+
+      if (categoryButton) {
+
+        const value =
+          categoryButton.querySelector(
+            ".combobox-value"
+          );
+
+
+        const categories =
+          selectedCategories();
+
+
+        if (value) {
+
+          value.textContent =
+            categories.length
+              ? categories
+                  .map(
+                    (key) =>
+                      categoryLabels[
+                        key
+                      ] ||
+                      key
+                  )
+                  .join(", ")
+              : "All categories";
+
+        }
+
+      }
+
+
+      const labels = [];
+
+
+      if (
+        state.search.trim()
+      ) {
+
+        labels.push(
+          `Search: ${state.search.trim()}`
+        );
+
+      }
+
+
+      if (
+        state.area !== "all"
+      ) {
+
+        labels.push(
+          areaLabels[
+            state.area
+          ] ||
+          state.area
+        );
+
+      }
+
+
+      selectedCategories()
+        .forEach(
+          (key) => {
+
+            labels.push(
+              categoryLabels[
+                key
+              ] ||
+              key
+            );
+
+          }
+        );
+
+
+      if (
+        state.minRating > 0
+      ) {
+
+        labels.push(
+          `${Number(
+            state.minRating
+          ).toFixed(1)}★+`
+        );
+
+      }
+
+
+      const featureLabels = {
+
+        verified:
+          "Verified",
+
+        whatsapp:
+          "WhatsApp",
+
+        website:
+          "Website",
+
+        online:
+          "Online services",
+
+        featured:
+          "Featured",
+
+        open:
+          "Open now",
+
+        booking:
+          "Bookings"
+
+      };
+
+
+      Object.entries(
+        featureLabels
+      ).forEach(
+        ([key, label]) => {
+
+          if (
+            state[key]
+          ) {
+
+            labels.push(
+              label
+            );
+
+          }
+
+        }
+      );
+
+
+      if (activeFilters) {
+
+        activeFilters.innerHTML =
+          labels
+            .map(
+              (label) => `
+
+                <span class="chip">
+                  ${escapeHTML(
+                    label
+                  )}
+                </span>
+
+              `
+            )
+            .join("");
+
+      }
+
+
+      if (sortButton) {
+
+        const sortLabels = {
+
+          recommended:
+            "Recommended",
+
+          featured:
+            "Featured",
+
+          rating:
+            "Highest rated",
+
+          nearest:
+            "Nearest",
+
+          recent:
+            "Recently added",
+
+          name:
+            "A–Z"
+
+        };
+
+
+        sortButton.textContent =
+          sortLabels[
+            state.sort
+          ] ||
+          "Recommended";
+
+      }
+
+
+      document
+        .querySelectorAll(
+          "[data-category-tab]"
+        )
+        .forEach(
+          (tab) => {
+
+            const category =
+              tab.dataset.categoryTab;
+
+
+            const active =
+              category === "all"
+                ? selectedCategories()
+                    .length === 0
+                : selectedCategories()
+                    .includes(
+                      category
+                    );
+
+
+            tab.classList.toggle(
+              "active",
+              active
+            );
+
+
+            if (active) {
+
+              tab.setAttribute(
+                "aria-current",
+                "page"
+              );
+
+            }
+            else {
+
+              tab.removeAttribute(
+                "aria-current"
+              );
+
+            }
+
+          }
+        );
+
+    }
+
+
+
+    /* =======================================================
+       CARD
+    ======================================================= */
+
+    function createCard(
+      business
+    ) {
+
+      const image =
+        business.image;
+
+
+      const imageStyle =
+        image
+          ? `
+            background-image:
+              linear-gradient(
+                180deg,
+                rgba(0,0,0,.04),
+                rgba(0,0,0,.32)
+              ),
+              url('${escapeHTML(
+                image
+              )}');
+          `
+          : `
+            background-image:
+              linear-gradient(
+                135deg,
+                #24364b,
+                #4d6e7e
+              );
+          `;
+
+
+      const tags =
+        Array.isArray(
+          business.tags
+        )
+          ? business.tags
+              .slice(
+                0,
+                4
+              )
+          : [];
+
+
+      const secondaryStatus =
+        Array.isArray(
+          business.secondaryStatus
+        )
+          ? business.secondaryStatus
+          : [];
+
+
+const listingId =
+  business._id ||
+  business.id ||
+  business.slug;
+
+
+      return `
+
+        <div
+          class="md:col-6 directory-listing-wrap"
+          data-business-id="${escapeHTML(
+            business.id
+          )}"
+        >
+
+          <article
+            class="listing surface lift directory-listing"
+            tabindex="0"
+          >
+
+
+            <!-- IMAGE -->
+
+            <div
+              class="listing-media"
+            >
+
+              ${
+                business.featured
+                  ? `
+                    <span
+                      class="badge theme-primary listing-flag"
+                    >
+                      Featured
+                    </span>
+                  `
+                  : ""
+              }
+
+
+              ${
+                !business.featured &&
+                business.createdAt >=
+                  "2026-09-15"
+                  ? `
+                    <span
+                      class="badge badge-subtle theme-success listing-flag"
+                    >
+                      New
+                    </span>
+                  `
+                  : ""
+              }
+
+
+              <button
+                class="btn-icon btn-sm listing-save"
+                type="button"
+                aria-label="Save ${escapeHTML(
+                  business.name
+                )}"
+              >
+                ♡
+              </button>
+
+
+              <a
+                href="listing.html?id=${encodeURIComponent(
+                  listingId
+                )}"
+                class="d-block text-decoration-none"
+              >
+
+                <div
+                  class="listing-image ${
+                    image
+                      ? ""
+                      : "no-image"
+                  }"
+                  style="
+                    ${imageStyle}
+
+                    background-size:
+                      cover;
+
+                    background-position:
+                      center;
+
+                    color:
+                      #fff;
+
+                    text-shadow:
+                      0 1px 4px
+                      rgba(
+                        0,
+                        0,
+                        0,
+                        0.65
+                      );
+                  "
+                >
+
+                  <span
+                    class="listing-image-label"
+                  >
+
+                    ${escapeHTML(
+                      business.coverLabel ||
+                      business.category ||
+                      "Business"
+                    )}
+
+                  </span>
+
+                </div>
+
+              </a>
+
+            </div>
+
+
+
+            <!-- BODY -->
+
+            <div
+              class="listing-body"
+            >
+
+
+              <h3
+                class="listing-title"
+              >
+
+                <a
+                  href="listing.html?id=${encodeURIComponent(
+                    listingId
+                  )}"
+                >
+
+                  ${escapeHTML(
+                    business.name
+                  )}
+
+                </a>
+
+              </h3>
+
+
+
+              <!-- META -->
+
+              <div
+                class="listing-meta mb-2"
+              >
+
+                <span
+                  class="rating"
+                >
+
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+
+                    <path
+                      d="m8 1.5 1.9 4 4.35.6-3.15 3.05.76 4.35L8 11.45 4.14 13.5l.76-4.35L1.75 6.1 6.1 5.5z"
+                    />
+
+                  </svg>
+
+
+                  ${escapeHTML(
+                    Number(
+                      business.rating
+                    ).toFixed(
+                      1
+                    )
+                  )}
+
+                </span>
+
+
+                <span>
+
+                  ${escapeHTML(
+                    business.reviews
+                  )}
+
+                  reviews
+
+                </span>
+
+
+                <span
+                  aria-hidden="true"
+                >
+                  ·
+                </span>
+
+
+                <span>
+
+                  ${escapeHTML(
+                    business.category
+                  )}
+
+                </span>
+
+
+                <span
+                  aria-hidden="true"
+                >
+                  ·
+                </span>
+
+
+                <span>
+
+                  ${escapeHTML(
+                    business.area
+                  )}
+
+                </span>
+
+              </div>
+
+
+
+              <!-- DESCRIPTION -->
+
+              <p
+                class="fg-2 fs-sm mb-3"
+              >
+
+                ${escapeHTML(
+                  business.description
+                )}
+
+              </p>
+
+
+
+              <!-- TAGS -->
+
+              ${
+                tags.length
+                  ? `
+
+                    <div
+                      class="d-flex flex-wrap gap-2 mb-3"
+                    >
+
+                      ${tags
+                        .map(
+                          (tag) => `
+
+                            <span
+                              class="chip"
+                            >
+                              ${escapeHTML(
+                                tag
+                              )}
+                            </span>
+
+                          `
+                        )
+                        .join("")}
+
+                    </div>
+
+                  `
+                  : ""
+              }
+
+
+
+              <!-- STATUS -->
+
+              <p
+                class="listing-meta mb-0 mt-auto"
+              >
+
+                <span
+                  class="open-now"
+                >
+
+                  ${escapeHTML(
+                    business.statusText
+                  )}
+
+                </span>
+
+
+                ${
+                  secondaryStatus.length
+                    ? secondaryStatus
+                        .map(
+                          (status) => `
+
+                            <span
+                              aria-hidden="true"
+                            >
+                              ·
+                            </span>
+
+                            ${escapeHTML(
+                              status
+                            )}
+
+                          `
+                        )
+                        .join("")
+                    : ""
+                }
+
+              </p>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      `;
+
+    }
+
+
+
+    /* =======================================================
+       MAP
+    ======================================================= */
+
+    let map = null;
+
+
+    const markers =
+      new Map();
+
+
+    function markerIcon(
+      number
+    ) {
+
+      return L.divIcon({
+
+        className:
+          "directory-map-marker-wrap",
+
+        html: `
+
+          <div
+            class="directory-map-marker"
+          >
+
+            <span>
+              ${escapeHTML(
+                number
+              )}
+            </span>
+
+          </div>
+
+        `,
+
+        iconSize:
+          [
+            32,
+            32
+          ],
+
+        iconAnchor:
+          [
+            16,
+            32
+          ],
+
+        popupAnchor:
+          [
+            0,
+            -32
+          ]
+
+      });
+
+    }
+
+
+
+    function initialiseMap() {
+
+      if (
+        !window.L ||
+        !mapElement
+      ) {
+
+        return;
+
+      }
+
+
+      map =
+        L.map(
+          mapElement,
+          {
+            scrollWheelZoom:
+              false,
+
+            zoomControl:
+              true
+          }
+        )
+          .setView(
+            [
+              52.2405,
+              -0.9027
+            ],
+            13
+          );
+
+
+      L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+
+          maxZoom:
+            19,
+
+          attribution:
+            "&copy; OpenStreetMap contributors"
+
+        }
+      )
+        .addTo(
+          map
+        );
+
+
+      window.setTimeout(
+        () => {
+
+          map.invalidateSize();
+
+        },
+        150
+      );
+
+
+      window.setTimeout(
+        () => {
+
+          map.invalidateSize();
+
+        },
+        500
+      );
+
+
+      if (
+        "ResizeObserver" in
+        window
+      ) {
+
+        const observer =
+          new ResizeObserver(
+            () => {
+
+              map.invalidateSize();
+
+            }
+          );
+
+
+        observer.observe(
+          mapElement
+        );
+
+      }
+
+
+      window.addEventListener(
+        "resize",
+        () => {
+
+          map.invalidateSize();
+
+        }
+      );
+
+    }
+
+
+
+    function highlightBusiness(
+      businessId
+    ) {
+
+      document
+        .querySelectorAll(
+          ".directory-listing"
+        )
+        .forEach(
+          (listing) => {
+
+            listing.classList.remove(
+              "is-map-active"
+            );
+
+          }
+        );
+
+
+      const wrapper =
+        document.querySelector(
+          `[data-business-id="${CSS.escape(
+            businessId
+          )}"]`
+        );
+
+
+      wrapper
+        ?.querySelector(
+          ".directory-listing"
+        )
+        ?.classList.add(
+          "is-map-active"
+        );
+
+
+      markers.forEach(
+        (marker, key) => {
+
+          const element =
+            marker.getElement();
+
+
+          element
+            ?.querySelector(
+              ".directory-map-marker"
+            )
+            ?.classList.toggle(
+              "is-active",
+              key ===
+                businessId
+            );
+
+        }
+      );
+
+    }
+
+
+
+    function updateMap(
+      items
+    ) {
+
+      if (!map) {
+        return;
+      }
+
+
+      markers.forEach(
+        (marker) => {
+
+          marker.remove();
+
+        }
+      );
+
+
+      markers.clear();
+
+
+      const mappable =
+        items.filter(
+          (business) =>
+            Number.isFinite(
+              Number(
+                business.lat
+              )
+            ) &&
+            Number.isFinite(
+              Number(
+                business.lng
+              )
+            )
+        );
+
+
+      if (
+        !mappable.length
+      ) {
+
+        map.setView(
+          [
+            52.2405,
+            -0.9027
+          ],
+          13
+        );
+
+
+        return;
+
+      }
+
+
+      const bounds = [];
+
+
+      mappable.forEach(
+        (
+          business,
+          index
+        ) => {
+
+          const lat =
+            Number(
+              business.lat
+            );
+
+
+          const lng =
+            Number(
+              business.lng
+            );
+
+
+          const marker =
+            L.marker(
+              [
+                lat,
+                lng
+              ],
+              {
+                icon:
+                  markerIcon(
+                    index + 1
+                  )
+              }
+            )
+              .addTo(
+                map
+              );
+
+
+const listingId =
+  business._id ||
+  business.id ||
+  business.slug;
+
+
+          marker.bindPopup(`
+
+            <div>
+
+              <div
+                class="directory-map-popup-title"
+              >
+
+                ${escapeHTML(
+                  business.name
+                )}
+
+              </div>
+
+
+              <p
+                class="directory-map-popup-meta"
+              >
+
+                ${escapeHTML(
+                  business.category
+                )}
+
+                ·
+
+                ${escapeHTML(
+                  business.area
+                )}
+
+                <br>
+
+                ${escapeHTML(
+                  Number(
+                    business.rating
+                  ).toFixed(1)
+                )}
+                ★
+
+                ·
+
+                ${escapeHTML(
+                  business.reviews
+                )}
+                reviews
+
+              </p>
+
+
+              <a
+                class="directory-map-popup-link btn-solid theme-primary btn-sm"
+                href="listing.html?id=${encodeURIComponent(
+                  listingId
+                )}"
+              >
+                View business
+              </a>
+
+            </div>
+
+          `);
+
+
+          marker.on(
+            "click",
+            () => {
+
+              highlightBusiness(
+                business.id
+              );
+
+            }
+          );
+
+
+          markers.set(
+            business.id,
+            marker
+          );
+
+
+          bounds.push(
+            [
+              lat,
+              lng
+            ]
+          );
+
+        }
+      );
+
+
+      if (
+        bounds.length ===
+        1
+      ) {
+
+        map.setView(
+          bounds[0],
+          15
+        );
+
+      }
+      else {
+
+        map.fitBounds(
+          bounds,
+          {
+            padding:
+              [
+                30,
+                30
+              ],
+
+            maxZoom:
+              14
+          }
+        );
+
+      }
+
+    }
+
+
+
+    /* =======================================================
+       RENDER
+    ======================================================= */
+
+    function render() {
+
+      const visible =
+        sorted(
+          businesses.filter(
+            matches
+          )
+        );
+
+
+      if (
+        visible.length
+      ) {
+
+        grid.innerHTML =
+          visible
+            .map(
+              createCard
+            )
+            .join("");
+
+      }
+      else {
+
+        grid.innerHTML = `
+
+          <div class="col-12">
+
+            <div class="directory-empty">
+
+              <h3 class="h5 mb-2">
+                No businesses found
+              </h3>
+
+              <p class="fg-3 mb-4">
+                Try a different search term,
+                area, category or filter.
+              </p>
+
+
+              <button
+                type="button"
+                class="btn-outline theme-secondary"
+                id="resetFromEmpty"
+              >
+                Clear filters
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+
+      if (resultCount) {
+
+        resultCount.textContent =
+          visible.length;
+
+      }
+
+
+      if (paginationSummary) {
+
+        paginationSummary.textContent =
+          visible.length
+            ? `Showing 1–${visible.length} of ${visible.length} businesses`
+            : "Showing 0 businesses";
+
+      }
+
+
+      updateControls();
+
+
+      syncURL();
+
+
+      updateMap(
+        visible
+      );
+
+
+      document
+        .querySelectorAll(
+          "[data-business-id]"
+        )
+        .forEach(
+          (wrapper) => {
+
+            wrapper.addEventListener(
+              "mouseenter",
+              () => {
+
+                highlightBusiness(
+                  wrapper.dataset.businessId
+                );
+
+              }
+            );
+
+
+            wrapper.addEventListener(
+              "focusin",
+              () => {
+
+                highlightBusiness(
+                  wrapper.dataset.businessId
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+      document
+        .getElementById(
+          "resetFromEmpty"
+        )
+        ?.addEventListener(
+          "click",
+          clearFilters
+        );
+
+    }
+
+
+
+    /* =======================================================
+       CLEAR FILTERS
+    ======================================================= */
+
+    function clearFilters() {
+
+      state.search =
+        "";
+
+      state.area =
+        "all";
+
+      state.categories =
+        [
+          "all"
+        ];
+
+      state.minRating =
+        0;
+
+      state.sort =
+        "recommended";
+
+
+      featureKeys.forEach(
+        (key) => {
+
+          state[key] =
+            false;
+
+
+          if (
+            featureChecks[
+              key
+            ]
+          ) {
+
+            featureChecks[
+              key
+            ].checked =
+              false;
+
+          }
+
+        }
+      );
+
+
+      document
+        .querySelectorAll(
+          "[data-filter-category], [data-filter-area]"
+        )
+        .forEach(
+          (input) => {
+
+            input.checked =
+              false;
+
+          }
+        );
+
+
+      render();
+
+    }
+
+
+
+    /* =======================================================
+       SEARCH
+    ======================================================= */
+
+    document
+      .getElementById(
+        "directorySearchForm"
+      )
+      ?.addEventListener(
+        "submit",
+        (event) => {
+
+          event.preventDefault();
+
+
+          state.search =
+            searchInput
+              ?.value
+              .trim() ||
+            "";
+
+
+          render();
+
+        }
+      );
+
+
+    if (searchInput) {
+
+      searchInput.addEventListener(
+        "input",
+        () => {
+
+          state.search =
+            searchInput.value;
+
+
+          render();
+
+        }
+      );
+
+    }
+
+
+
+    /* =======================================================
+       RATING
+    ======================================================= */
+
+    if (ratingRange) {
+
+      ratingRange.addEventListener(
+        "input",
+        () => {
+
+          state.minRating =
+            Number(
+              ratingRange.value
+            );
+
+
+          render();
+
+        }
+      );
+
+    }
+
+
+
+    /* =======================================================
+       CLEAR
+    ======================================================= */
+
+    document
+      .getElementById(
+        "clearFiltersButton"
+      )
+      ?.addEventListener(
+        "click",
+        clearFilters
+      );
+
+
+
+    /* =======================================================
+       FIT MAP
+    ======================================================= */
+
+    document
+      .getElementById(
+        "fitMapButton"
+      )
+      ?.addEventListener(
+        "click",
+        () => {
+
+          updateMap(
+            sorted(
+              businesses.filter(
+                matches
+              )
+            )
+          );
+
+        }
+      );
+
+
+
+    /* =======================================================
+       CATEGORY CHECKBOXES
+    ======================================================= */
+
+    document
+      .querySelectorAll(
+        "[data-filter-category]"
+      )
+      .forEach(
+        (input) => {
+
+          input.addEventListener(
+            "change",
+            () => {
+
+              const categories =
+                Array.from(
+                  document.querySelectorAll(
+                    "[data-filter-category]:checked"
+                  )
+                )
+                  .map(
+                    (
+                      checkbox
+                    ) =>
+                      checkbox.dataset
+                        .filterCategory
+                  );
+
+
+              state.categories =
+                categories.length
+                  ? categories
+                  : [
+                      "all"
+                    ];
+
+
+              render();
+
+            }
+          );
+
+        }
+      );
+
+
+
+    /* =======================================================
+       AREA CHECKBOXES
+    ======================================================= */
+
+    document
+      .querySelectorAll(
+        "[data-filter-area]"
+      )
+      .forEach(
+        (input) => {
+
+          input.addEventListener(
+            "change",
+            () => {
+
+              const areas =
+                Array.from(
+                  document.querySelectorAll(
+                    "[data-filter-area]:checked"
+                  )
+                )
+                  .map(
+                    (
+                      checkbox
+                    ) =>
+                      checkbox.dataset
+                        .filterArea
+                  );
+
+
+              state.area =
+                areas[0] ||
+                "all";
+
+
+              document
+                .querySelectorAll(
+                  "[data-filter-area]"
+                )
+                .forEach(
+                  (
+                    checkbox
+                  ) => {
+
+                    if (
+                      checkbox !==
+                        input &&
+                      checkbox.checked
+                    ) {
+
+                      checkbox.checked =
+                        false;
+
+                    }
+
+                  }
+                );
+
+
+              render();
+
+            }
+          );
+
+        }
+      );
+
+
+
+    /* =======================================================
+       FEATURE FILTERS
+    ======================================================= */
+
+    featureKeys.forEach(
+      (key) => {
+
+        featureChecks[
+          key
+        ]?.addEventListener(
+          "change",
+          () => {
+
+            state[key] =
+              featureChecks[
+                key
+              ].checked;
+
+
+            render();
+
+          }
+        );
+
+      }
+    );
+
+
+
+    /* =======================================================
+       CATEGORY TABS
+    ======================================================= */
+
+    document
+      .querySelectorAll(
+        "[data-category-tab]"
+      )
+      .forEach(
+        (tab) => {
+
+          tab.addEventListener(
+            "click",
+            (event) => {
+
+              event.preventDefault();
+
+
+              const category =
+                tab.dataset
+                  .categoryTab;
+
+
+              state.categories =
+                category === "all"
+                  ? [
+                      "all"
+                    ]
+                  : [
+                      category
+                    ];
+
+
+              render();
+
+
+              document
+                .getElementById(
+                  "results"
+                )
+                ?.scrollIntoView(
+                  {
+                    behavior:
+                      "smooth"
+                  }
+                );
+
+            }
+          );
+
+        }
+      );
+
+
+
+    /* =======================================================
+       SORT
+    ======================================================= */
+
+    document
+      .querySelectorAll(
+        "[data-sort]"
+      )
+      .forEach(
+        (item) => {
+
+          item.addEventListener(
+            "click",
+            () => {
+
+              state.sort =
+                item.dataset.sort ||
+                "recommended";
+
+
+              render();
+
+            }
+          );
+
+        }
+      );
+
+
+
+    /* =======================================================
+       HERO AREA / CATEGORY DROPDOWNS
+    ======================================================= */
+
+    document
+      .querySelectorAll(
+        ".menu .menu-item[data-bs-value]"
+      )
+      .forEach(
+        (item) => {
+
+          item.addEventListener(
+            "click",
+            () => {
+
+              const value =
+                item.dataset.bsValue;
+
+
+              const previousControl =
+                item.closest(
+                  ".menu"
+                )
+                ?.previousElementSibling;
+
+
+              if (
+                previousControl?.id ===
+                "directoryArea"
+              ) {
+
+                state.area =
+                  value === "all"
+                    ? "all"
+                    : value;
+
+
+                render();
+
+              }
+
+
+              if (
+                previousControl?.id ===
+                "directoryCategory"
+              ) {
+
+                if (
+                  value === "all"
+                ) {
+
+                  state.categories =
+                    [
+                      "all"
+                    ];
+
+                }
+                else {
+
+                  const selected =
+                    new Set(
+                      selectedCategories()
+                    );
+
+
+                  if (
+                    selected.has(
+                      value
+                    )
+                  ) {
+
+                    selected.delete(
+                      value
+                    );
+
+                  }
+                  else {
+
+                    selected.add(
+                      value
+                    );
+
+                  }
+
+
+                  state.categories =
+                    selected.size
+                      ? Array.from(
+                          selected
+                        )
+                      : [
+                          "all"
+                        ];
+
+                }
+
+
+                render();
+
+              }
+
+            }
+          );
+
+        }
+      );
+
+
+
+    /* =======================================================
+       YEAR
+    ======================================================= */
+
+    document
+      .querySelectorAll(
+        "[data-year]"
+      )
+      .forEach(
+        (element) => {
+
+          element.textContent =
+            new Date()
+              .getFullYear();
+
+        }
+      );
+
+
+
+    /* =======================================================
+       INITIALISE MAP
+    ======================================================= */
+
+    initialiseMap();
+
+
+
+    /* =======================================================
+       INITIAL RENDER
+    ======================================================= */
+
+    render();
+
+  }
+);
+
+</script>
+
+
+
+<!-- =========================================================
+     SHARED SITE HEADER + MAIN JS
+========================================================= -->
+
+<!-- Production API configuration -->
+<script src="assets/js/config.js"></script>
+
+
+<script>
+document.addEventListener(
+  "nin:header-loaded",
+  function () {
+
+    import("./assets/js/main.js")
+      .catch(
+        function (error) {
+
+          console.error(
+            "Could not load main.js:",
+            error
+          );
+
+        }
+      );
+
+  },
+  {
+    once: true
+  }
+);
+</script>
+
+
+<script
+  src="assets/js/site-header.js"
+></script>
+
+
+</body>
+
+</html>
+

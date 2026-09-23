@@ -1,0 +1,3266 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Business profile in the Nigerians in Northampton directory."
+  >
+
+  <title>
+    Business Listing | Nigerians in Northampton
+  </title>
+
+
+  <!-- =======================================================
+       STYLES
+  ======================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="assets/vendor/bootstrap6/css/bootstrap.min.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/base.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/header.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+  >
+
+
+  <!-- =======================================================
+       CONFIG
+  ======================================================== -->
+
+  <script src="assets/js/config.js"></script>
+
+
+  <style>
+
+    /* =========================================================
+       LISTING PAGE
+    ========================================================= */
+
+    .listing-hero {
+      background: var(--bs-body-bg);
+      border-bottom: 1px solid var(--bs-border-color);
+    }
+
+    .listing-breadcrumbs {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 7px;
+      color: var(--bs-secondary-color);
+      font-size: 13px;
+    }
+
+    .listing-breadcrumbs a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .listing-breadcrumbs a:hover {
+      color: var(--bs-primary);
+    }
+
+
+    /* =========================================================
+       COVER
+    ========================================================= */
+
+    .listing-cover {
+      position: relative;
+      min-height: 340px;
+      overflow: hidden;
+      border-radius: 18px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(20, 32, 54, .96),
+          rgba(44, 92, 120, .78)
+        ),
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(255, 255, 255, .18),
+          transparent 40%
+        );
+      box-shadow:
+        0 12px 35px rgba(0, 0, 0, .12);
+    }
+
+    .listing-cover-grid {
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      height: 100%;
+      min-height: 340px;
+      gap: 8px;
+      padding: 8px;
+    }
+
+    .listing-cover-main,
+    .listing-cover-side > div {
+      position: relative;
+      overflow: hidden;
+      border-radius: 13px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .listing-cover-main {
+      background:
+        linear-gradient(
+          135deg,
+          #24364c,
+          #40667b
+        );
+    }
+
+    .listing-cover-side {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .listing-cover-side > div:first-child {
+      background:
+        linear-gradient(
+          135deg,
+          #40566c,
+          #6c8799
+        );
+    }
+
+    .listing-cover-side > div:last-child {
+      background:
+        linear-gradient(
+          135deg,
+          #31475d,
+          #55768c
+        );
+    }
+
+    .listing-cover-label {
+      position: absolute;
+      left: 22px;
+      bottom: 20px;
+      max-width: 80%;
+      color: #fff;
+      z-index: 3;
+    }
+
+    .listing-cover-label .eyebrow {
+      display: inline-flex;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .16);
+      backdrop-filter: blur(8px);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .listing-cover-label h1 {
+      margin: 9px 0 0;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.05;
+    }
+
+
+    /* =========================================================
+       COVER IMAGE OVERLAY
+    ========================================================= */
+
+    .listing-cover-main.has-image::after,
+    .listing-cover-side > div.has-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0, 0, 0, .06),
+          rgba(0, 0, 0, .36)
+        );
+      pointer-events: none;
+    }
+
+
+    /* =========================================================
+       CONTENT
+    ========================================================= */
+
+    .listing-main-column {
+      min-width: 0;
+    }
+
+    .listing-card {
+      border: 1px solid var(--bs-border-color);
+      border-radius: 16px;
+      background: var(--bs-body-bg);
+      overflow: hidden;
+    }
+
+    .listing-card + .listing-card {
+      margin-top: 18px;
+    }
+
+    .listing-card-body {
+      padding: 22px;
+    }
+
+    .listing-profile-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .listing-title-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .listing-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+    }
+
+    .listing-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .listing-action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 42px;
+      border-radius: 11px;
+      padding: 9px 14px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .listing-info-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .listing-info-item {
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--bs-tertiary-bg);
+    }
+
+    .listing-info-item small {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--bs-secondary-color);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-weight: 700;
+    }
+
+    .listing-info-item a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .listing-info-item a:hover {
+      color: var(--bs-primary);
+    }
+
+
+    /* =========================================================
+       SERVICES
+    ========================================================= */
+
+    .listing-service-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .listing-service-list li {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: var(--bs-tertiary-bg);
+      font-size: 13px;
+    }
+
+
+    /* =========================================================
+       HOURS
+    ========================================================= */
+
+    .listing-hours {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .listing-hours td {
+      padding: 9px 0;
+      border-bottom:
+        1px solid var(--bs-border-color);
+      font-size: 14px;
+    }
+
+    .listing-hours tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .listing-hours td:last-child {
+      text-align: right;
+      color: var(--bs-secondary-color);
+    }
+
+
+    /* =========================================================
+       MAP
+    ========================================================= */
+
+    .listing-map-wrap {
+      position: relative;
+      width: 100%;
+      height: 390px;
+      overflow: hidden;
+      border-radius: 14px;
+      isolation: isolate;
+    }
+
+    #listingMap {
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      min-height: 0;
+      background: var(--bs-tertiary-bg);
+    }
+
+    #listingMap.leaflet-container {
+      width: 100%;
+      height: 100%;
+      font-family: inherit;
+    }
+
+    .listing-location-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .listing-location-placeholder {
+      color: var(--bs-secondary-color);
+      font-size: 13px;
+    }
+
+
+    /* =========================================================
+       SIMILAR BUSINESSES
+    ========================================================= */
+
+    .similar-business-card {
+      display: block;
+      height: 100%;
+      padding: 16px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 14px;
+      color: inherit;
+      text-decoration: none;
+      transition:
+        transform .15s ease,
+        box-shadow .15s ease;
+    }
+
+    .similar-business-card:hover {
+      color: inherit;
+      transform: translateY(-2px);
+      box-shadow:
+        0 10px 28px rgba(0, 0, 0, .08);
+    }
+
+    .similar-business-thumb {
+      height: 130px;
+      margin-bottom: 13px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+
+    /* =========================================================
+       SIDEBAR
+    ========================================================= */
+
+    .listing-sidebar-sticky {
+      position: sticky;
+      top: 22px;
+    }
+
+    .listing-contact-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .listing-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 11px 0;
+      border-bottom:
+        1px solid var(--bs-border-color);
+    }
+
+    .listing-contact-item:last-child {
+      border-bottom: 0;
+    }
+
+    .listing-contact-item > div:first-child {
+      flex: 0 0 20px;
+      width: 20px;
+      text-align: center;
+      color: var(--bs-secondary-color);
+    }
+
+    .listing-contact-item a {
+      color: inherit;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+
+    .listing-contact-item a:hover {
+      color: var(--bs-primary);
+    }
+
+
+    /* =========================================================
+       STATUS
+    ========================================================= */
+
+    .listing-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .listing-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3aa76d;
+    }
+
+    .listing-status-dot.closed {
+      background: var(--bs-secondary-color);
+    }
+
+
+    /* =========================================================
+       ERROR / LOADING
+    ========================================================= */
+
+    .listing-error {
+      max-width: 720px;
+      margin: 80px auto;
+      padding: 32px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .listing-loading {
+      max-width: 720px;
+      margin: 80px auto;
+      padding: 32px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+
+    /* =========================================================
+       MAP MARKER
+    ========================================================= */
+
+    .listing-map-marker-wrap {
+      background: transparent;
+      border: 0;
+    }
+
+    .listing-map-marker {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      background: #dc2626 !important;
+      border: 3px solid #ffffff;
+      box-shadow:
+        0 5px 14px rgba(0, 0, 0, .28);
+    }
+
+    .listing-map-marker span {
+      transform: rotate(45deg);
+      color: #fff;
+      font-weight: 800;
+      font-size: 11px;
+    }
+
+    .listing-map-popup-title {
+      margin-bottom: 5px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .listing-map-popup-meta {
+      margin-bottom: 0;
+      color: var(--bs-secondary-color);
+      font-size: 12px;
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 991.98px) {
+
+      .listing-sidebar-sticky {
+        position: static;
+      }
+
+      .listing-cover,
+      .listing-cover-grid {
+        min-height: 280px;
+      }
+
+      .listing-map-wrap {
+        height: 330px;
+      }
+
+    }
+
+
+    @media (max-width: 767.98px) {
+
+      .listing-cover-grid {
+        display: block;
+        padding: 0;
+      }
+
+      .listing-cover-main {
+        min-height: 310px;
+        border-radius: 18px;
+      }
+
+      .listing-cover-side {
+        display: none;
+      }
+
+      .listing-profile-head,
+      .listing-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .listing-info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .listing-action-btn {
+        width: 100%;
+      }
+
+      .listing-card-body {
+        padding: 18px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =======================================================
+       SKIP LINK
+  ======================================================== -->
+
+  <a
+    class="skip-link"
+    href="#listingContent"
+  >
+    Skip to content
+  </a>
+
+
+  <!-- =======================================================
+       SHARED HEADER
+  ======================================================== -->
+
+  <div id="siteHeader"></div>
+
+
+  <!-- =======================================================
+       MAIN
+  ======================================================== -->
+
+  <main id="listingContent">
+
+    <div id="listingPage">
+
+      <section class="container py-5">
+
+        <div class="listing-loading">
+
+          <p class="fg-3 mb-0">
+            Loading business listing...
+          </p>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer class="site-footer mt-5">
+
+    <div class="container py-5">
+
+      <div class="row g-4">
+
+
+        <div class="col-12 lg:col-4">
+
+          <a
+            href="index.html"
+            class="brand d-inline-flex align-items-center gap-2 text-decoration-none"
+          >
+
+            <span class="brand-mark">
+              N
+            </span>
+
+            <span>
+
+              <strong class="d-block lh-1">
+                Nigerians in Northampton
+              </strong>
+
+              <span class="fs-xs fg-3">
+                Community Directory
+              </span>
+
+            </span>
+
+          </a>
+
+
+          <p class="fg-3 mt-3 mb-0">
+            Connecting Nigerians, businesses and useful local information across Northampton.
+          </p>
+
+        </div>
+
+
+        <div class="col-6 sm:col-3 lg:col-2">
+
+          <strong class="d-block mb-3">
+            Directory
+          </strong>
+
+          <div class="d-grid gap-2 fs-sm">
+
+            <a href="businesses.html">
+              Businesses
+            </a>
+
+            <a href="index.html#categories">
+              Categories
+            </a>
+
+            <a href="list-your-business.html">
+              List Your Business
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-6 sm:col-3 lg:col-2">
+
+          <strong class="d-block mb-3">
+            Community
+          </strong>
+
+          <div class="d-grid gap-2 fs-sm">
+
+            <a href="index.html#news">
+              News &amp; Events
+            </a>
+
+            <a href="index.html#guides">
+              Guides
+            </a>
+
+            <a href="index.html#about">
+              About Us
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-12 lg:col-4">
+
+          <strong class="d-block mb-3">
+            Need help?
+          </strong>
+
+          <p class="fg-3 fs-sm mb-3">
+            Use the directory to discover businesses and services,
+            or get in touch with the community team.
+          </p>
+
+          <a
+            class="btn btn-outline-primary btn-sm"
+            href="index.html#contact"
+          >
+            Contact the community
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="
+          border-top
+          mt-4
+          pt-4
+          fs-xs
+          fg-3
+          d-flex
+          justify-content-between
+          gap-3
+          flex-wrap
+        "
+      >
+
+        <span>
+
+          ©
+
+          <span id="footerYear"></span>
+
+          Nigerians in Northampton
+
+        </span>
+
+
+        <span>
+          Built for the Northampton Nigerian community
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       LIBRARIES
+  ======================================================== -->
+
+  <script src="assets/vendor/bootstrap6/js/bootstrap.bundle.min.js"></script>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    crossorigin=""
+  ></script>
+
+
+  <!-- =======================================================
+       STATIC BUSINESS DATA FALLBACK
+  ======================================================== -->
+
+  <script src="assets/js/business-data.js"></script>
+
+
+  <!-- =======================================================
+       LISTING JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      async () => {
+
+        /* =====================================================
+           BASIC REFERENCES
+        ====================================================== */
+
+        const listingRoot =
+          document.getElementById(
+            "listingPage"
+          );
+
+
+        const year =
+          document.getElementById(
+            "footerYear"
+          );
+
+
+        const businessData =
+          window.NINBusinessData || {};
+
+
+        if (year) {
+
+          year.textContent =
+            new Date().getFullYear();
+
+        }
+
+
+        if (!listingRoot) {
+          return;
+        }
+
+
+        /* =====================================================
+           API CONFIG
+        ====================================================== */
+
+        const apiBase = (
+          window.NIN_API_BASE_URL ||
+          "https://nigerians-in-northampton-backend.onrender.com/api"
+        ).replace(
+          /\/$/,
+          ""
+        );
+
+
+        const apiOrigin =
+          new URL(
+            apiBase,
+            window.location.href
+          ).origin;
+
+
+        console.log(
+          "Listing API base:",
+          apiBase
+        );
+
+
+        /* =====================================================
+           HELPERS
+        ====================================================== */
+
+        function escapeHTML(value) {
+
+          return String(
+            value ?? ""
+          )
+            .replaceAll(
+              "&",
+              "&amp;"
+            )
+            .replaceAll(
+              "<",
+              "&lt;"
+            )
+            .replaceAll(
+              ">",
+              "&gt;"
+            )
+            .replaceAll(
+              '"',
+              "&quot;"
+            )
+            .replaceAll(
+              "'",
+              "&#039;"
+            );
+
+        }
+
+
+        function imageURL(value) {
+
+          if (!value) {
+            return "";
+          }
+
+
+          let image =
+            value;
+
+
+          if (
+            typeof image ===
+            "object"
+          ) {
+
+            image =
+              image.url ||
+              image.src ||
+              image.path ||
+              image.filename ||
+              "";
+
+          }
+
+
+          const raw =
+            String(
+              image || ""
+            ).trim();
+
+
+          if (!raw) {
+            return "";
+          }
+
+
+          if (
+            /^https?:\/\//i.test(
+              raw
+            )
+          ) {
+
+            return raw;
+
+          }
+
+
+          if (
+            raw.startsWith(
+              "/"
+            )
+          ) {
+
+            return (
+              apiOrigin +
+              raw
+            );
+
+          }
+
+
+          if (
+            raw.startsWith(
+              "uploads/"
+            )
+          ) {
+
+            return (
+              apiOrigin +
+              "/" +
+              raw
+            );
+
+          }
+
+
+          if (
+            raw.startsWith(
+              "uploads\\"
+            )
+          ) {
+
+            return (
+              apiOrigin +
+              "/" +
+              raw.replaceAll(
+                "\\",
+                "/"
+              )
+            );
+
+          }
+
+
+          return (
+            apiOrigin +
+            "/uploads/businesses/" +
+            raw
+          );
+
+        }
+
+
+        function coverImageFor(
+          business
+        ) {
+
+          return (
+            imageURL(
+              business.coverImage
+            ) ||
+            imageURL(
+              business.image
+            ) ||
+            ""
+          );
+
+        }
+
+
+        function galleryImagesFor(
+          business
+        ) {
+
+          if (
+            !Array.isArray(
+              business.galleryImages
+            )
+          ) {
+
+            return [];
+
+          }
+
+
+          return business.galleryImages
+            .map(
+              imageURL
+            )
+            .filter(
+              Boolean
+            );
+
+        }
+
+
+        /* =====================================================
+           NORMALISE BUSINESS
+        ====================================================== */
+
+        function normaliseBusiness(
+          raw
+        ) {
+
+          raw =
+            raw || {};
+
+
+          /*
+            MongoDB _id is preferred for
+            real businesses.
+
+            Static business-data.js uses id.
+          */
+
+          const id =
+            raw._id ||
+            raw.id ||
+            raw.slug ||
+            "";
+
+
+          const coverImage =
+            coverImageFor(
+              raw
+            );
+
+
+          const galleryImages =
+            galleryImagesFor(
+              raw
+            );
+
+
+          const services =
+            Array.isArray(
+              raw.services
+            )
+              ? raw.services
+              : [];
+
+
+          const categoryKey =
+            raw.categoryKey ||
+            raw.category ||
+            "other";
+
+
+          const areaKey =
+            raw.areaKey ||
+            raw.area ||
+            "northampton";
+
+
+          const rating =
+            Number(
+              raw.rating ??
+              0
+            );
+
+
+          const reviews =
+            Number(
+              raw.reviewCount ??
+              raw.reviews ??
+              0
+            );
+
+
+          return {
+
+            ...raw,
+
+            id:
+              String(
+                id
+              ),
+
+            slug:
+              String(
+                raw.slug ||
+                raw._id ||
+                raw.id ||
+                ""
+              ),
+
+            name:
+              raw.businessName ||
+              raw.name ||
+              "Business",
+
+            categoryKey,
+
+            category:
+              raw.categoryLabel ||
+              raw.category ||
+              categoryKey,
+
+            areaKey,
+
+            area:
+              raw.areaLabel ||
+              raw.area ||
+              areaKey,
+
+            rating,
+
+            reviews,
+
+            featured:
+              Boolean(
+                raw.featured
+              ),
+
+            verified:
+              Boolean(
+                raw.verified
+              ),
+
+            phone:
+              raw.phone ||
+              "",
+
+            whatsappNumber:
+              raw.whatsappNumber ||
+              raw.phone ||
+              "",
+
+            whatsapp:
+              Boolean(
+                raw.hasWhatsApp ??
+                raw.whatsapp
+              ),
+
+            website:
+              raw.website ||
+              "",
+
+            email:
+              raw.email ||
+              "",
+
+            online:
+              Boolean(
+                raw.hasOnline ??
+                raw.online
+              ),
+
+            booking:
+              Boolean(
+                raw.hasBooking ??
+                raw.booking
+              ),
+
+            address:
+              raw.address ||
+              "",
+
+            lat:
+              Number(
+                raw.lat ??
+                52.2405
+              ),
+
+            lng:
+              Number(
+                raw.lng ??
+                -0.9027
+              ),
+
+            description:
+              raw.description ||
+              "",
+
+            services,
+
+            hours:
+              raw.hours &&
+              typeof raw.hours ===
+                "object"
+                ? raw.hours
+                : {},
+
+            image:
+              coverImage,
+
+            coverImage,
+
+            galleryImages,
+
+            createdAt:
+              raw.createdAt ||
+              "",
+
+            open:
+              raw.open !== false,
+
+            statusText:
+              raw.statusText ||
+              "Business listing",
+
+            secondaryStatus:
+              Array.isArray(
+                raw.secondaryStatus
+              )
+                ? raw.secondaryStatus
+                : []
+
+          };
+
+        }
+
+
+        /* =====================================================
+           READ URL
+        ====================================================== */
+
+        const params =
+          new URLSearchParams(
+            window.location.search
+          );
+
+
+        const requestedValue =
+          (
+            params.get("id") ||
+            params.get("slug") ||
+            ""
+          ).trim();
+
+
+        const requestedLower =
+          requestedValue.toLowerCase();
+
+
+        console.log(
+          "Requested listing identifier:",
+          requestedValue
+        );
+
+
+        /* =====================================================
+           NO ID
+        ====================================================== */
+
+        if (!requestedValue) {
+
+          listingRoot.innerHTML = `
+
+            <section class="container py-5">
+
+              <div class="listing-error">
+
+                <div class="badge bg-2 fg-2 mb-3">
+                  Business not found
+                </div>
+
+
+                <h1 class="h3">
+                  We couldn't find this listing
+                </h1>
+
+
+                <p class="fg-3 mb-4">
+                  No business identifier was provided in the link.
+                </p>
+
+
+                <a
+                  href="businesses.html"
+                  class="btn btn-primary"
+                >
+                  Back to business directory
+                </a>
+
+              </div>
+
+            </section>
+
+          `;
+
+          return;
+
+        }
+
+
+        /* =====================================================
+           BUSINESS
+        ====================================================== */
+
+        let business =
+          null;
+
+
+        /* =====================================================
+           1. DIRECT MONGODB/API LOOKUP
+        ====================================================== */
+
+        try {
+
+          const lookupURL =
+            `${apiBase}/businesses/${encodeURIComponent(
+              requestedValue
+            )}`;
+
+
+          console.log(
+            "Trying direct business lookup:",
+            lookupURL
+          );
+
+
+          const response =
+            await fetch(
+              lookupURL,
+              {
+                method: "GET",
+                cache: "no-store"
+              }
+            );
+
+
+          let payload =
+            {};
+
+
+          try {
+
+            payload =
+              await response.json();
+
+          }
+          catch {
+
+            payload =
+              {};
+
+          }
+
+
+          console.log(
+            "Direct lookup response:",
+            response.status,
+            payload
+          );
+
+
+          if (
+            response.ok &&
+            payload?.success === true &&
+            payload?.business
+          ) {
+
+            business =
+              normaliseBusiness(
+                payload.business
+              );
+
+
+            console.log(
+              "Business found from MongoDB/API:",
+              business
+            );
+
+          }
+
+        }
+        catch (error) {
+
+          console.warn(
+            "Direct API lookup failed:",
+            error
+          );
+
+        }
+
+
+        /* =====================================================
+           2. LOAD FULL API DIRECTORY
+              Used for fallback + similar businesses
+        ====================================================== */
+
+        let availableBusinesses =
+          [];
+
+
+        try {
+
+          const response =
+            await fetch(
+              `${apiBase}/businesses?limit=100`,
+              {
+                method: "GET",
+                cache: "no-store"
+              }
+            );
+
+
+          if (response.ok) {
+
+            const payload =
+              await response.json();
+
+
+            if (
+              payload?.success === true &&
+              Array.isArray(
+                payload.businesses
+              )
+            ) {
+
+              availableBusinesses =
+                payload.businesses.map(
+                  normaliseBusiness
+                );
+
+
+              console.log(
+                "API directory loaded:",
+                availableBusinesses.length
+              );
+
+            }
+
+          }
+
+        }
+        catch (error) {
+
+          console.warn(
+            "Could not load public API directory:",
+            error
+          );
+
+        }
+
+
+        /* =====================================================
+           3. MATCH AGAINST API DIRECTORY
+        ====================================================== */
+
+        if (!business) {
+
+          business =
+            availableBusinesses.find(
+              (item) => {
+
+                return (
+
+                  String(
+                    item._id ||
+                    ""
+                  ).toLowerCase() ===
+                    requestedLower
+
+                  ||
+
+                  String(
+                    item.id ||
+                    ""
+                  ).toLowerCase() ===
+                    requestedLower
+
+                  ||
+
+                  String(
+                    item.slug ||
+                    ""
+                  ).toLowerCase() ===
+                    requestedLower
+
+                );
+
+              }
+            ) || null;
+
+
+          if (business) {
+
+            console.log(
+              "Business found from API directory fallback:",
+              business
+            );
+
+          }
+
+        }
+
+
+        /* =====================================================
+           4. STATIC BUSINESS DATA FALLBACK
+        ====================================================== */
+
+        if (!business) {
+
+          const staticBusinesses =
+            Array.isArray(
+              businessData.businesses
+            )
+              ? businessData.businesses.map(
+                  normaliseBusiness
+                )
+              : [];
+
+
+          console.log(
+            "Static businesses available:",
+            staticBusinesses.length
+          );
+
+
+          business =
+            staticBusinesses.find(
+              (item) => {
+
+                return (
+
+                  String(
+                    item.id ||
+                    ""
+                  ).toLowerCase() ===
+                    requestedLower
+
+                  ||
+
+                  String(
+                    item.slug ||
+                    ""
+                  ).toLowerCase() ===
+                    requestedLower
+
+                  ||
+
+                  String(
+                    item._id ||
+                    ""
+                  ).toLowerCase() ===
+                    requestedLower
+
+                );
+
+              }
+            ) || null;
+
+
+          if (business) {
+
+            console.log(
+              "Business found from business-data.js:",
+              business
+            );
+
+
+            /*
+              Also make static businesses available
+              to the similar-business section.
+            */
+
+            availableBusinesses =
+              staticBusinesses;
+
+          }
+
+        }
+
+
+        /* =====================================================
+           BUSINESS NOT FOUND
+        ====================================================== */
+
+        if (!business) {
+
+          console.error(
+            "Business could not be found.",
+            {
+              requestedValue,
+              apiBusinesses:
+                availableBusinesses.length,
+              staticBusinesses:
+                Array.isArray(
+                  businessData.businesses
+                )
+                  ? businessData.businesses.length
+                  : 0
+            }
+          );
+
+
+          listingRoot.innerHTML = `
+
+            <section class="container py-5">
+
+              <div class="listing-error">
+
+                <div class="badge bg-2 fg-2 mb-3">
+                  Business not found
+                </div>
+
+
+                <h1 class="h3">
+                  We couldn't find this listing
+                </h1>
+
+
+                <p class="fg-3 mb-4">
+                  The business may have been removed,
+                  renamed, or the link may be incomplete.
+                </p>
+
+
+                <a
+                  href="businesses.html"
+                  class="btn btn-primary"
+                >
+                  Back to business directory
+                </a>
+
+              </div>
+
+            </section>
+
+          `;
+
+          return;
+
+        }
+
+
+        /* =====================================================
+           ENSURE CURRENT BUSINESS EXISTS
+           IN RELATED-BUSINESS DATA
+        ====================================================== */
+
+        const currentBusinessExists =
+          availableBusinesses.some(
+            (item) => {
+
+              return (
+
+                (
+                  item._id &&
+                  business._id &&
+                  String(
+                    item._id
+                  ) ===
+                  String(
+                    business._id
+                  )
+                )
+
+                ||
+
+                (
+                  String(
+                    item.id || ""
+                  ) ===
+                  String(
+                    business.id || ""
+                  )
+                )
+
+                ||
+
+                (
+                  String(
+                    item.slug || ""
+                  ) ===
+                  String(
+                    business.slug || ""
+                  )
+                )
+
+              );
+
+            }
+          );
+
+
+        if (
+          !currentBusinessExists
+        ) {
+
+          availableBusinesses.unshift(
+            business
+          );
+
+        }
+
+
+        /* =====================================================
+           IMAGES
+        ====================================================== */
+
+        const coverURL =
+          business.coverImage ||
+          business.image ||
+          "";
+
+
+        const gallery =
+          Array.isArray(
+            business.galleryImages
+          )
+            ? business.galleryImages.filter(
+                Boolean
+              )
+            : [];
+
+
+        const sideImage1 =
+          gallery[0] ||
+          coverURL;
+
+
+        const sideImage2 =
+          gallery[1] ||
+          coverURL;
+
+
+        /* =====================================================
+           SIMILAR BUSINESSES
+        ====================================================== */
+
+        const relatedBusinesses =
+          availableBusinesses
+            .filter(
+              (item) => {
+
+                const sameBusiness =
+
+                  (
+                    item._id &&
+                    business._id &&
+                    String(
+                      item._id
+                    ) ===
+                    String(
+                      business._id
+                    )
+                  )
+
+                  ||
+
+                  (
+                    String(
+                      item.id || ""
+                    ) ===
+                    String(
+                      business.id || ""
+                    )
+                  )
+
+                  ||
+
+                  (
+                    String(
+                      item.slug || ""
+                    ) ===
+                    String(
+                      business.slug || ""
+                    )
+                  );
+
+
+                return (
+
+                  !sameBusiness &&
+
+                  item.categoryKey ===
+                    business.categoryKey
+
+                );
+
+              }
+            )
+            .slice(
+              0,
+              2
+            );
+
+
+        /* =====================================================
+           CONTACT LINKS
+        ====================================================== */
+
+        const phoneHref =
+          business.phone
+            ? `tel:${business.phone.replace(
+                /[^\d+]/g,
+                ""
+              )}`
+            : "#";
+
+
+        const whatsappNumber =
+          business.whatsappNumber ||
+          business.phone ||
+          "";
+
+
+        const whatsappHref =
+          business.whatsapp &&
+          whatsappNumber
+            ? `https://wa.me/${whatsappNumber.replace(
+                /\D/g,
+                ""
+              )}`
+            : "#";
+
+
+        /* =====================================================
+           HOURS
+        ====================================================== */
+
+        const hoursHTML =
+          Object.entries(
+            business.hours || {}
+          )
+            .map(
+              ([day, hours]) => `
+
+                <tr>
+
+                  <td>
+                    ${escapeHTML(
+                      day
+                    )}
+                  </td>
+
+                  <td>
+                    ${escapeHTML(
+                      hours
+                    )}
+                  </td>
+
+                </tr>
+
+              `
+            )
+            .join("");
+
+
+        /* =====================================================
+           SERVICES
+        ====================================================== */
+
+        const servicesHTML =
+          business.services.length
+
+            ? business.services
+                .map(
+                  (service) =>
+                    `<li>${escapeHTML(
+                      service
+                    )}</li>`
+                )
+                .join("")
+
+            : `
+
+                <li>
+                  No services listed.
+                </li>
+
+              `;
+
+
+        /* =====================================================
+           SIMILAR BUSINESS HTML
+        ====================================================== */
+
+        const relatedHTML =
+          relatedBusinesses
+            .map(
+              (item) => {
+
+                const relatedImage =
+                  item.coverImage ||
+                  item.image ||
+                  "";
+
+
+                const relatedId =
+                  item._id ||
+                  item.id ||
+                  item.slug;
+
+
+                return `
+
+                  <div class="col-12 sm:col-6">
+
+                    <a
+                      href="listing.html?id=${encodeURIComponent(
+                        relatedId
+                      )}"
+                      class="similar-business-card"
+                    >
+
+                      <div
+                        class="
+                          similar-business-thumb
+                          ${relatedImage ? "" : "bg-2"}
+                        "
+                        style="
+                          background-image:
+                            linear-gradient(
+                              180deg,
+                              rgba(0,0,0,.04),
+                              rgba(0,0,0,.18)
+                            )
+                            ${
+                              relatedImage
+                                ? `, url('${escapeHTML(
+                                    relatedImage
+                                  )}')`
+                                : ""
+                            };
+                          background-size: cover;
+                          background-position: center;
+                        "
+                      ></div>
+
+
+                      <div
+                        class="
+                          d-flex
+                          align-items-center
+                          justify-content-between
+                          gap-2
+                          mb-1
+                        "
+                      >
+
+                        <span class="fs-xs fg-3">
+                          ${escapeHTML(
+                            item.category
+                          )}
+                        </span>
+
+
+                        <span
+                          class="
+                            listing-rating
+                            fs-xs
+                          "
+                        >
+                          ★
+                          ${escapeHTML(
+                            Number(
+                              item.rating
+                            ).toFixed(1)
+                          )}
+                        </span>
+
+                      </div>
+
+
+                      <strong class="d-block">
+                        ${escapeHTML(
+                          item.name
+                        )}
+                      </strong>
+
+
+                      <span
+                        class="
+                          d-block
+                          fs-sm
+                          fg-3
+                          mt-1
+                        "
+                      >
+                        ${escapeHTML(
+                          item.area
+                        )}
+                      </span>
+
+                    </a>
+
+                  </div>
+
+                `;
+
+              }
+            )
+            .join("");
+
+
+        /* =====================================================
+           RENDER LISTING
+        ====================================================== */
+
+        listingRoot.innerHTML = `
+
+          <section class="listing-hero">
+
+            <div class="container py-4">
+
+
+              <div class="listing-breadcrumbs mb-4">
+
+                <a href="index.html">
+                  Home
+                </a>
+
+
+                <span>
+                  /
+                </span>
+
+
+                <a href="businesses.html">
+                  Businesses
+                </a>
+
+
+                <span>
+                  /
+                </span>
+
+
+                <span>
+                  ${escapeHTML(
+                    business.name
+                  )}
+                </span>
+
+              </div>
+
+
+              <div class="listing-cover">
+
+                <div class="listing-cover-grid">
+
+
+                  <!-- MAIN COVER -->
+
+                  <div
+                    class="
+                      listing-cover-main
+                      ${coverURL ? "has-image" : ""}
+                    "
+                    style="
+                      background-image:
+                        linear-gradient(
+                          180deg,
+                          rgba(0,0,0,.10),
+                          rgba(0,0,0,.38)
+                        )
+                        ${
+                          coverURL
+                            ? `, url('${escapeHTML(
+                                coverURL
+                              )}')`
+                            : ""
+                        };
+                      background-size: cover;
+                      background-position: center;
+                      background-repeat: no-repeat;
+                    "
+                  >
+
+                    <div class="listing-cover-label">
+
+                      <span class="eyebrow">
+
+                        ${escapeHTML(
+                          business.category
+                        )}
+
+                        •
+
+                        ${escapeHTML(
+                          business.area
+                        )}
+
+                      </span>
+
+
+                      <h1>
+                        ${escapeHTML(
+                          business.name
+                        )}
+                      </h1>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- SIDE IMAGES -->
+
+                  <div class="listing-cover-side">
+
+                    <div
+                      class="${sideImage1 ? "has-image" : ""}"
+                      style="
+                        background-image:
+                          linear-gradient(
+                            180deg,
+                            rgba(0,0,0,.08),
+                            rgba(0,0,0,.28)
+                          )
+                          ${
+                            sideImage1
+                              ? `, url('${escapeHTML(
+                                  sideImage1
+                                )}')`
+                              : ""
+                          };
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                      "
+                    ></div>
+
+
+                    <div
+                      class="${sideImage2 ? "has-image" : ""}"
+                      style="
+                        background-image:
+                          linear-gradient(
+                            180deg,
+                            rgba(0,0,0,.08),
+                            rgba(0,0,0,.30)
+                          )
+                          ${
+                            sideImage2
+                              ? `, url('${escapeHTML(
+                                  sideImage2
+                                )}')`
+                              : ""
+                          };
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                      "
+                    ></div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <section
+            class="
+              container
+              py-4
+              py-lg-5
+            "
+          >
+
+            <div class="row g-4">
+
+
+              <!-- =================================================
+                   MAIN COLUMN
+              ================================================== -->
+
+              <div
+                class="
+                  lg:col-8
+                  listing-main-column
+                "
+              >
+
+
+                <!-- PROFILE -->
+
+                <article class="listing-card">
+
+                  <div class="listing-card-body">
+
+                    <div class="listing-profile-head">
+
+                      <div>
+
+                        <div class="listing-title-row">
+
+                          <h2 class="h3 mb-0">
+                            ${escapeHTML(
+                              business.name
+                            )}
+                          </h2>
+
+
+                          <span class="badge bg-2 fg-2">
+                            Community listing
+                          </span>
+
+                        </div>
+
+
+                        <div
+                          class="
+                            d-flex
+                            align-items-center
+                            flex-wrap
+                            gap-3
+                            mt-2
+                          "
+                        >
+
+                          <span>
+                            ${escapeHTML(
+                              business.category
+                            )}
+                          </span>
+
+
+                          <span class="listing-rating">
+
+                            ★
+
+                            ${escapeHTML(
+                              Number(
+                                business.rating
+                              ).toFixed(1)
+                            )}
+
+                            <span
+                              class="
+                                fg-3
+                                fw-normal
+                              "
+                            >
+                              (
+                              ${escapeHTML(
+                                business.reviews
+                              )}
+                              reviews
+                              )
+                            </span>
+
+                          </span>
+
+
+                          <span class="listing-status">
+
+                            <span
+                              class="
+                                listing-status-dot
+                                ${
+                                  business.open
+                                    ? ""
+                                    : "closed"
+                                }
+                              "
+                            ></span>
+
+
+                            ${
+                              business.open
+                                ? "Open now"
+                                : "Currently closed"
+                            }
+
+                          </span>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="listing-actions mt-4">
+
+
+                      ${
+                        business.phone
+
+                          ? `
+
+                              <a
+                                class="
+                                  listing-action-btn
+                                  btn
+                                  btn-primary
+                                "
+                                href="${escapeHTML(
+                                  phoneHref
+                                )}"
+                              >
+                                Call
+                              </a>
+
+                            `
+
+                          : ""
+                      }
+
+
+                      ${
+                        business.whatsapp &&
+                        whatsappNumber
+
+                          ? `
+
+                              <a
+                                class="
+                                  listing-action-btn
+                                  btn
+                                  btn-outline-primary
+                                "
+                                href="${escapeHTML(
+                                  whatsappHref
+                                )}"
+                                target="_blank"
+                                rel="noopener"
+                              >
+                                WhatsApp
+                              </a>
+
+                            `
+
+                          : ""
+                      }
+
+
+                      ${
+                        business.website
+
+                          ? `
+
+                              <a
+                                class="
+                                  listing-action-btn
+                                  btn
+                                  btn-outline-secondary
+                                "
+                                href="${escapeHTML(
+                                  business.website
+                                )}"
+                                target="_blank"
+                                rel="noopener"
+                              >
+                                Website
+                              </a>
+
+                            `
+
+                          : ""
+                      }
+
+
+                      <button
+                        class="
+                          listing-action-btn
+                          btn
+                          btn-outline-secondary
+                        "
+                        type="button"
+                        id="shareListingButton"
+                      >
+                        Share
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                </article>
+
+
+                <!-- ABOUT -->
+
+                <article class="listing-card">
+
+                  <div class="listing-card-body">
+
+                    <h2 class="h5 mb-3">
+                      About this business
+                    </h2>
+
+
+                    <p class="mb-0 fg-2 lh-lg">
+
+                      ${escapeHTML(
+                        business.description ||
+                        "No description provided."
+                      )}
+
+                    </p>
+
+                  </div>
+
+                </article>
+
+
+                <!-- SERVICES -->
+
+                <article class="listing-card">
+
+                  <div class="listing-card-body">
+
+                    <h2 class="h5 mb-3">
+                      Services
+                    </h2>
+
+
+                    <ul class="listing-service-list">
+
+                      ${servicesHTML}
+
+                    </ul>
+
+                  </div>
+
+                </article>
+
+
+                <!-- LOCATION -->
+
+                <article class="listing-card">
+
+                  <div class="listing-card-body">
+
+                    <h2 class="h5 mb-3">
+                      Location
+                    </h2>
+
+
+                    <div class="listing-map-wrap">
+
+                      <div
+                        id="listingMap"
+                        aria-label="Map showing ${escapeHTML(
+                          business.name
+                        )}"
+                      ></div>
+
+                    </div>
+
+
+                    <a
+                      class="listing-location-link"
+                      href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                        `${business.lat},${business.lng}`
+                      )}"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Get directions ↗
+                    </a>
+
+
+                    <div
+                      class="
+                        listing-location-placeholder
+                        mt-1
+                      "
+                    >
+                      ${escapeHTML(
+                        business.address
+                      )}
+                    </div>
+
+                  </div>
+
+                </article>
+
+
+                <!-- OPENING HOURS -->
+
+                <article class="listing-card">
+
+                  <div class="listing-card-body">
+
+                    <h2 class="h5 mb-3">
+                      Opening hours
+                    </h2>
+
+
+                    ${
+                      hoursHTML
+
+                        ? `
+
+                            <table class="listing-hours">
+
+                              <tbody>
+
+                                ${hoursHTML}
+
+                              </tbody>
+
+                            </table>
+
+                          `
+
+                        : `
+
+                            <p class="fg-3 mb-0">
+                              No opening hours provided.
+                            </p>
+
+                          `
+                    }
+
+                  </div>
+
+                </article>
+
+
+                <!-- SIMILAR BUSINESSES -->
+
+                ${
+                  relatedBusinesses.length
+
+                    ? `
+
+                        <article class="listing-card">
+
+                          <div class="listing-card-body">
+
+                            <div
+                              class="
+                                d-flex
+                                justify-content-between
+                                align-items-end
+                                gap-3
+                                mb-3
+                              "
+                            >
+
+                              <div>
+
+                                <h2 class="h5 mb-1">
+                                  Similar businesses
+                                </h2>
+
+                                <p
+                                  class="
+                                    fg-3
+                                    fs-sm
+                                    mb-0
+                                  "
+                                >
+                                  More businesses you may want to explore.
+                                </p>
+
+                              </div>
+
+
+                              <a
+                                href="businesses.html?category=${encodeURIComponent(
+                                  business.categoryKey
+                                )}"
+                                class="btn-text btn-sm"
+                              >
+                                View all
+                              </a>
+
+                            </div>
+
+
+                            <div class="row g-3">
+
+                              ${relatedHTML}
+
+                            </div>
+
+                          </div>
+
+                        </article>
+
+                      `
+
+                    : ""
+                }
+
+              </div>
+
+
+              <!-- =================================================
+                   SIDEBAR
+              ================================================== -->
+
+              <aside class="lg:col-4">
+
+                <div class="listing-sidebar-sticky">
+
+
+                  <!-- CONTACT -->
+
+                  <div
+                    class="
+                      listing-card
+                      listing-side-card
+                    "
+                  >
+
+                    <div class="listing-card-body">
+
+                      <h2 class="h5 mb-2">
+                        Contact &amp; details
+                      </h2>
+
+
+                      <div
+                        class="
+                          listing-contact-list
+                          mt-3
+                        "
+                      >
+
+
+                        <div
+                          class="
+                            listing-contact-item
+                          "
+                        >
+
+                          <div>
+                            ⌖
+                          </div>
+
+
+                          <div>
+
+                            <small
+                              class="
+                                fg-3
+                                d-block
+                              "
+                            >
+                              Area
+                            </small>
+
+
+                            <span>
+                              ${escapeHTML(
+                                business.area
+                              )}
+                            </span>
+
+                          </div>
+
+                        </div>
+
+
+                        ${
+                          business.phone
+
+                            ? `
+
+                                <div
+                                  class="
+                                    listing-contact-item
+                                  "
+                                >
+
+                                  <div>
+                                    ☎
+                                  </div>
+
+
+                                  <div>
+
+                                    <small
+                                      class="
+                                        fg-3
+                                        d-block
+                                      "
+                                    >
+                                      Phone
+                                    </small>
+
+
+                                    <a
+                                      href="${escapeHTML(
+                                        phoneHref
+                                      )}"
+                                    >
+                                      ${escapeHTML(
+                                        business.phone
+                                      )}
+                                    </a>
+
+                                  </div>
+
+                                </div>
+
+                              `
+
+                            : ""
+                        }
+
+
+                        ${
+                          business.email
+
+                            ? `
+
+                                <div
+                                  class="
+                                    listing-contact-item
+                                  "
+                                >
+
+                                  <div>
+                                    ✉
+                                  </div>
+
+
+                                  <div>
+
+                                    <small
+                                      class="
+                                        fg-3
+                                        d-block
+                                      "
+                                    >
+                                      Email
+                                    </small>
+
+
+                                    <a
+                                      href="mailto:${escapeHTML(
+                                        business.email
+                                      )}"
+                                    >
+                                      ${escapeHTML(
+                                        business.email
+                                      )}
+                                    </a>
+
+                                  </div>
+
+                                </div>
+
+                              `
+
+                            : ""
+                        }
+
+
+                        ${
+                          business.website
+
+                            ? `
+
+                                <div
+                                  class="
+                                    listing-contact-item
+                                  "
+                                >
+
+                                  <div>
+                                    ↗
+                                  </div>
+
+
+                                  <div>
+
+                                    <small
+                                      class="
+                                        fg-3
+                                        d-block
+                                      "
+                                    >
+                                      Website
+                                    </small>
+
+
+                                    <a
+                                      href="${escapeHTML(
+                                        business.website
+                                      )}"
+                                      target="_blank"
+                                      rel="noopener"
+                                    >
+                                      Visit website
+                                    </a>
+
+                                  </div>
+
+                                </div>
+
+                              `
+
+                            : ""
+                        }
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- LIST / UPDATE -->
+
+                  <div
+                    class="
+                      listing-card
+                      listing-side-card
+                      mt-3
+                    "
+                  >
+
+                    <div class="listing-card-body">
+
+                      <h2 class="h6 mb-2">
+                        Own this business?
+                      </h2>
+
+
+                      <p
+                        class="
+                          fg-3
+                          fs-sm
+                          mb-3
+                        "
+                      >
+                        Business owners will be able to claim,
+                        update and manage their listing from the platform.
+                      </p>
+
+
+                      <a
+                        href="list-your-business.html"
+                        class="
+                          btn
+                          btn-outline-primary
+                          btn-sm
+                          w-100
+                        "
+                      >
+                        List or update a business
+                      </a>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </aside>
+
+            </div>
+
+          </section>
+
+        `;
+
+
+        /* =====================================================
+           SHARE
+        ====================================================== */
+
+        const shareButton =
+          document.getElementById(
+            "shareListingButton"
+          );
+
+
+        if (shareButton) {
+
+          shareButton.addEventListener(
+            "click",
+            async () => {
+
+              const shareData = {
+
+                title:
+                  business.name,
+
+                text:
+                  `${business.name} — Nigerians in Northampton`,
+
+                url:
+                  window.location.href
+
+              };
+
+
+              try {
+
+                if (
+                  navigator.share
+                ) {
+
+                  await navigator.share(
+                    shareData
+                  );
+
+                  return;
+
+                }
+
+
+                if (
+                  navigator.clipboard &&
+                  navigator.clipboard.writeText
+                ) {
+
+                  await navigator.clipboard.writeText(
+                    window.location.href
+                  );
+
+
+                  shareButton.textContent =
+                    "Link copied";
+
+
+                  window.setTimeout(
+                    () => {
+
+                      shareButton.textContent =
+                        "Share";
+
+                    },
+                    1800
+                  );
+
+                }
+
+              }
+              catch {
+
+                // User cancelled sharing or sharing is unavailable.
+
+              }
+
+            }
+          );
+
+        }
+
+
+        /* =====================================================
+           MAP
+        ====================================================== */
+
+        if (
+          window.L &&
+          Number.isFinite(
+            business.lat
+          ) &&
+          Number.isFinite(
+            business.lng
+          )
+        ) {
+
+          const map =
+            L.map(
+              "listingMap",
+              {
+                scrollWheelZoom:
+                  false,
+
+                zoomControl:
+                  true
+              }
+            )
+              .setView(
+                [
+                  business.lat,
+                  business.lng
+                ],
+                15
+              );
+
+
+          L.tileLayer(
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+              maxZoom:
+                19,
+
+              attribution:
+                "&copy; OpenStreetMap contributors"
+            }
+          )
+            .addTo(
+              map
+            );
+
+
+          const icon =
+            L.divIcon(
+              {
+
+                className:
+                  "listing-map-marker-wrap",
+
+                html:
+                  `
+
+                    <div class="listing-map-marker">
+
+                      <span>
+                        1
+                      </span>
+
+                    </div>
+
+                  `,
+
+                iconSize:
+                  [
+                    34,
+                    34
+                  ],
+
+                iconAnchor:
+                  [
+                    17,
+                    34
+                  ],
+
+                popupAnchor:
+                  [
+                    0,
+                    -34
+                  ]
+
+              }
+            );
+
+
+          L.marker(
+            [
+              business.lat,
+              business.lng
+            ],
+            {
+              icon
+            }
+          )
+            .addTo(
+              map
+            )
+            .bindPopup(
+              `
+
+                <div
+                  class="
+                    listing-map-popup-title
+                  "
+                >
+                  ${escapeHTML(
+                    business.name
+                  )}
+                </div>
+
+
+                <p
+                  class="
+                    listing-map-popup-meta
+                  "
+                >
+                  ${escapeHTML(
+                    business.address
+                  )}
+                </p>
+
+              `
+            )
+            .openPopup();
+
+
+          window.setTimeout(
+            () => {
+
+              map.invalidateSize();
+
+            },
+            150
+          );
+
+
+          if (
+            "ResizeObserver" in
+            window
+          ) {
+
+            const observer =
+              new ResizeObserver(
+                () => {
+
+                  map.invalidateSize();
+
+                }
+              );
+
+
+            const mapElement =
+              document.getElementById(
+                "listingMap"
+              );
+
+
+            if (mapElement) {
+
+              observer.observe(
+                mapElement
+              );
+
+            }
+
+          }
+
+        }
+
+      }
+
+    );
+
+  </script>
+
+
+  <!-- =======================================================
+       LOAD SHARED HEADER
+  ======================================================== -->
+
+  <script src="assets/js/site-header.js"></script>
+
+
+  <!-- =======================================================
+       LOAD MAIN.JS AFTER SHARED HEADER
+  ======================================================== -->
+
+  <script>
+
+    document.addEventListener(
+      "nin:header-loaded",
+      function () {
+
+        import(
+          "./assets/js/main.js"
+        )
+          .catch(
+            function (error) {
+
+              console.error(
+                "Could not load main.js:",
+                error
+              );
+
+            }
+          );
+
+      },
+      {
+        once: true
+      }
+    );
+
+  </script>
+
+
+</body>
+
+</html>
