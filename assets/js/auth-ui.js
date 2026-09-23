@@ -215,6 +215,11 @@ if (account) {
 
   const mobileEmail =
     document.getElementById("mobileAccountEmail");
+  
+  const mobileAvatar =
+  document.getElementById(
+    "mobileAccountAvatar"
+  );
 
   if (mobileName) {
     mobileName.textContent = name;
@@ -223,6 +228,13 @@ if (account) {
   if (mobileEmail) {
     mobileEmail.textContent = email;
   }
+
+  if (mobileAvatar) {
+
+  mobileAvatar.textContent =
+    getInitials(name);
+
+}
 
   const mobileProfileLink =
     document.getElementById("mobileProfileLink");

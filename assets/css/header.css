@@ -859,3 +859,268 @@
 .site-header #mobileAccountLoggedIn {
   display: none;
 }
+
+/* =========================================================
+   MOBILE ACCOUNT AREA — FINAL LAYOUT
+   ========================================================= */
+
+.site-header #navDrawer .mobile-account-area {
+  width: 100%;
+  min-width: 0;
+}
+
+.site-header #navDrawer #mobileAccountLoggedIn {
+  display: none;
+}
+
+.site-header #navDrawer #mobileAccountLoggedIn.is-auth-visible {
+  display: block;
+}
+
+
+/* ---------------------------------------------------------
+   ACCOUNT IDENTITY CARD
+--------------------------------------------------------- */
+
+.site-header #navDrawer .mobile-account-card {
+  width: 100%;
+  min-width: 0;
+
+  padding: 0.9rem;
+
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.85rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--bs-primary) 4%,
+      var(--bs-body-bg)
+    );
+}
+
+.site-header #navDrawer .mobile-account-identity {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+
+  gap: 0.75rem;
+}
+
+
+/* ---------------------------------------------------------
+   ACCOUNT AVATAR
+--------------------------------------------------------- */
+
+.site-header #navDrawer .mobile-account-avatar {
+  flex: 0 0 42px;
+
+  width: 42px;
+  height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(
+      var(--bs-primary-rgb),
+      0.12
+    );
+
+  color: var(--bs-primary);
+
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+
+/* ---------------------------------------------------------
+   NAME + EMAIL
+--------------------------------------------------------- */
+
+.site-header #navDrawer .mobile-account-details {
+  flex: 1 1 auto;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.18rem;
+}
+
+.site-header #navDrawer #mobileAccountName {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  min-width: 0;
+
+  margin: 0;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  line-height: 1.3;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.site-header #navDrawer #mobileAccountEmail {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  min-width: 0;
+
+  margin: 0;
+
+  color: var(--bs-secondary-color);
+
+  font-size: 0.73rem;
+
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+
+/* ---------------------------------------------------------
+   ACCOUNT ACTIONS
+--------------------------------------------------------- */
+
+.site-header #navDrawer .mobile-account-actions {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 0.6rem;
+
+  margin-top: 0.7rem;
+}
+
+
+/* ---------------------------------------------------------
+   BUTTONS
+--------------------------------------------------------- */
+
+.site-header #navDrawer .mobile-account-actions
+.mobile-account-action {
+  width: 100% !important;
+
+  min-height: 44px;
+
+  display: inline-flex !important;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.4rem;
+
+  margin: 0 !important;
+
+  padding: 0.65rem 0.7rem;
+
+  border-radius: 0.7rem;
+
+  font-size: 0.78rem;
+  font-weight: 650;
+
+  line-height: 1.2;
+
+  text-align: center;
+
+  white-space: normal;
+}
+
+
+/* Main action gets full width */
+
+.site-header #navDrawer
+.mobile-action-full {
+  grid-column: 1 / -1;
+}
+
+
+/* Icons */
+
+.site-header #navDrawer
+.mobile-action-icon {
+  flex: 0 0 auto;
+
+  font-size: 0.85rem;
+}
+
+
+/* Sign out */
+
+.site-header #navDrawer
+.mobile-signout {
+  color: var(--bs-danger);
+}
+
+.site-header #navDrawer
+.mobile-signout:hover {
+  color: var(--bs-danger);
+}
+
+
+/* Advertise */
+
+.site-header #navDrawer
+.mobile-advertise-action {
+  margin-top: 0.75rem !important;
+}
+
+
+/* ---------------------------------------------------------
+   SMALL PHONES
+--------------------------------------------------------- */
+
+@media (max-width: 575.98px) {
+
+  .site-header #navDrawer .mobile-account-card {
+    padding: 0.8rem;
+  }
+
+  .site-header #navDrawer .mobile-account-avatar {
+    flex-basis: 40px;
+
+    width: 40px;
+    height: 40px;
+  }
+
+  .site-header #navDrawer #mobileAccountName {
+    font-size: 0.86rem;
+  }
+
+  .site-header #navDrawer #mobileAccountEmail {
+    font-size: 0.7rem;
+  }
+
+  .site-header #navDrawer .mobile-account-actions {
+    gap: 0.5rem;
+  }
+
+  .site-header #navDrawer .mobile-account-actions
+  .mobile-account-action {
+    min-height: 43px;
+
+    padding:
+      0.6rem 0.5rem;
+
+    font-size: 0.75rem;
+  }
+
+}
