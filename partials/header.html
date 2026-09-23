@@ -100,7 +100,9 @@
               r="3.25"
             />
 
-            <path d="M8 1v1.5M8 13.5V15M15 8h-1.5M2.5 8H1m11-4-1 1M5 11l-1 1m0-8 1 1m6 6 1 1"/>
+            <path
+              d="M8 1v1.5M8 13.5V15M15 8h-1.5M2.5 8H1m11-4-1 1M5 11l-1 1m0-8 1 1m6 6 1 1"
+            />
 
           </svg>
 
@@ -114,7 +116,9 @@
             aria-hidden="true"
           >
 
-            <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"/>
+            <path
+              d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"
+            />
 
           </svg>
 
@@ -343,8 +347,7 @@
           <span
             class="navbar-toggler-icon"
             aria-hidden="true"
-          >
-          </span>
+          ></span>
 
         </button>
 
@@ -363,6 +366,7 @@
 
         <ul class="nav navbar-nav">
 
+
           <!-- HOME -->
 
           <li class="nav-item">
@@ -376,6 +380,7 @@
             </a>
 
           </li>
+
 
 
           <!-- BUSINESSES -->
@@ -404,11 +409,14 @@
                 aria-hidden="true"
               >
 
-                <path d="m3 6 5 5 5-5"/>
+                <path
+                  d="m3 6 5 5 5-5"
+                />
 
               </svg>
 
             </button>
+
 
 
             <div class="menu">
@@ -502,6 +510,7 @@
           </li>
 
 
+
           <!-- COMMUNITY -->
 
           <li class="nav-item">
@@ -515,6 +524,7 @@
             </a>
 
           </li>
+
 
 
           <!-- EVENTS -->
@@ -532,6 +542,7 @@
           </li>
 
 
+
           <!-- GUIDES -->
 
           <li class="nav-item">
@@ -545,6 +556,7 @@
             </a>
 
           </li>
+
 
 
           <!-- ABOUT -->
@@ -572,31 +584,32 @@
       ====================================================== -->
 
       <dialog
-  class="drawer drawer-end"
-  tabindex="-1"
-  id="navDrawer"
-  aria-labelledby="navDrawerLabel"
->
+        class="drawer drawer-end"
+        tabindex="-1"
+        id="navDrawer"
+        aria-labelledby="navDrawerLabel"
+      >
 
         <!-- DRAWER HEADER -->
 
         <div class="drawer-header">
 
-  <h5
-    class="drawer-title"
-    id="navDrawerLabel"
-  >
-    Menu
-  </h5>
+          <h5
+            class="drawer-title"
+            id="navDrawerLabel"
+          >
+            Menu
+          </h5>
 
-  <button
-    type="button"
-    class="btn-close"
-    data-bs-dismiss="drawer"
-    aria-label="Close navigation"
-  ></button>
 
-</div>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="drawer"
+            aria-label="Close navigation"
+          ></button>
+
+        </div>
 
 
 
@@ -610,41 +623,41 @@
                Appears ABOVE HOME
           ================================================== -->
 
-<div
-  class="mobile-user-identity"
-  id="mobileLoggedInIdentity"
->
+          <div
+            class="mobile-user-identity"
+            id="mobileLoggedInIdentity"
+          >
 
-  <div class="mobile-user-avatar">
+            <div class="mobile-user-avatar">
 
-    <span
-      id="mobileAccountAvatar"
-      aria-hidden="true"
-    >
-      U
-    </span>
+              <span
+                id="mobileAccountAvatar"
+                aria-hidden="true"
+              >
+                U
+              </span>
 
-  </div>
-
-
-  <div class="mobile-user-details">
-
-    <strong
-      id="mobileAccountName"
-    >
-      Member
-    </strong>
+            </div>
 
 
-    <span
-      id="mobileAccountEmail"
-    >
-      member@example.com
-    </span>
+            <div class="mobile-user-details">
 
-  </div>
+              <strong
+                id="mobileAccountName"
+              >
+                Member
+              </strong>
 
-</div>
+
+              <span
+                id="mobileAccountEmail"
+              >
+                member@example.com
+              </span>
+
+            </div>
+
+          </div>
 
 
 
@@ -675,7 +688,7 @@
 
             <!-- =================================================
                  BUSINESSES
-                 ORIGINAL DROPDOWN FUNCTIONALITY
+                 ORIGINAL CUSTOM MENU FUNCTIONALITY
             ================================================== -->
 
             <li
@@ -887,91 +900,97 @@
 
 
           <!-- =================================================
-     MOBILE ACCOUNT / ACTIONS
-================================================== -->
+               MOBILE ACCOUNT / ACTIONS
+          ================================================== -->
 
-<div class="mobile-only-actions">
-
-  <!-- ===============================================
-       LOGGED OUT
-  ================================================ -->
-
-  <div
-    class="mobile-account-area"
-    id="mobileAccountLoggedOut"
-  >
-
-    <a
-      class="mobile-standard-action mobile-standard-outline"
-      href="login.html?mode=login&next=index.html"
-    >
-      Sign in
-    </a>
+          <div class="mobile-only-actions">
 
 
-    <a
-      class="mobile-standard-action mobile-standard-primary"
-      href="login.html?mode=signup&next=index.html"
-    >
-      Create account
-    </a>
+            <!-- ===============================================
+                 LOGGED OUT
+            ================================================ -->
 
-  </div>
+            <div
+              class="mobile-account-area"
+              id="mobileAccountLoggedOut"
+            >
 
-
-  <!-- ===============================================
-       LOGGED IN
-  ================================================ -->
-
-  <div
-    class="mobile-account-area"
-    id="mobileAccountLoggedIn"
-  >
-
-    <!-- LIST YOUR BUSINESS -->
-
-<a
-  class="mobile-standard-action mobile-business-action"
-  href="list-your-business.html"
->
-  List Your Business
-</a>
+              <a
+                class="mobile-standard-action mobile-standard-outline"
+                href="login.html?mode=login&next=index.html"
+              >
+                Sign in
+              </a>
 
 
-    <!-- ADVERTISE WITH US -->
+              <a
+                class="mobile-standard-action mobile-standard-primary"
+                href="login.html?mode=signup&next=index.html"
+              >
+                Create account
+              </a>
 
-    <a
-      class="mobile-standard-action mobile-advertise-action btn-outline theme-secondary"
-      href="index.html#advertise"
-    >
-      Advertise With Us
-    </a>
-
-
-    <!-- PROFILE -->
-
-    <a
-      class="mobile-standard-action mobile-profile-action btn-outline theme-secondary"
-      href="#"
-      id="mobileProfileLink"
-    >
-      Profile
-    </a>
+            </div>
 
 
-    <!-- SIGN OUT -->
 
-    <button
-  type="button"
-  class="mobile-standard-action mobile-signout-action"
-  id="mobileSignOut"
->
-  Sign out
-</button>
+            <!-- ===============================================
+                 LOGGED IN
+            ================================================ -->
 
-  </div>
+            <div
+              class="mobile-account-area"
+              id="mobileAccountLoggedIn"
+            >
 
-</div>
+
+              <!-- LIST YOUR BUSINESS -->
+
+              <a
+                class="nin-mobile-action nin-mobile-business"
+                href="list-your-business.html"
+              >
+                List Your Business
+              </a>
+
+
+
+              <!-- ADVERTISE WITH US -->
+
+              <a
+                class="nin-mobile-action nin-mobile-outline"
+                href="index.html#advertise"
+              >
+                Advertise With Us
+              </a>
+
+
+
+              <!-- PROFILE -->
+
+              <a
+                class="nin-mobile-action nin-mobile-outline"
+                href="#"
+                id="mobileProfileLink"
+              >
+                Profile
+              </a>
+
+
+
+              <!-- SIGN OUT -->
+
+              <button
+                type="button"
+                class="nin-mobile-action nin-mobile-signout"
+                id="mobileSignOut"
+              >
+                Sign out
+              </button>
+
+            </div>
+
+          </div>
 
         </div>
 
