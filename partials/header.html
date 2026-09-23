@@ -791,7 +791,7 @@
     id="mobileAccountLoggedIn"
   >
 
-    <!-- ACCOUNT IDENTITY -->
+    <!-- USER IDENTITY -->
 
     <div class="mobile-account-card">
 
@@ -807,15 +807,11 @@
 
         <div class="mobile-account-details">
 
-          <strong
-            id="mobileAccountName"
-          >
+          <strong id="mobileAccountName">
             Member
           </strong>
 
-          <span
-            id="mobileAccountEmail"
-          >
+          <span id="mobileAccountEmail">
             member@example.com
           </span>
 
@@ -826,57 +822,53 @@
     </div>
 
 
-    <!-- ACCOUNT ACTIONS -->
+    <!-- ACCOUNT MENU -->
 
-    <div class="mobile-account-actions">
+    <div class="mobile-account-menu">
 
       <a
-        class="mobile-account-action btn-outline theme-secondary"
+        class="mobile-account-row"
         href="#"
         id="mobileProfileLink"
       >
-        <span
-          class="mobile-action-icon"
-          aria-hidden="true"
-        >
-          ◉
+
+        <span class="mobile-account-row-label">
+          Profile
         </span>
 
-        Profile
+        <span
+          class="mobile-account-row-arrow"
+          aria-hidden="true"
+        >
+          ›
+        </span>
+
       </a>
 
 
       <button
         type="button"
-        class="mobile-account-action btn-outline theme-secondary mobile-signout"
+        class="mobile-account-row mobile-account-signout"
         id="mobileSignOut"
       >
-        <span
-          class="mobile-action-icon"
-          aria-hidden="true"
-        >
-          ↪
+
+        <span class="mobile-account-row-label">
+          Sign out
         </span>
 
-        Sign out
       </button>
 
-
-      <a
-        class="mobile-account-action btn-solid theme-primary mobile-action-full"
-        href="list-your-business.html"
-      >
-        <span
-          class="mobile-action-icon"
-          aria-hidden="true"
-        >
-          ＋
-        </span>
-
-        List Your Business
-      </a>
-
     </div>
+
+
+    <!-- LIST YOUR BUSINESS -->
+
+    <a
+      class="mobile-account-action btn-solid theme-primary mobile-full-width-action"
+      href="list-your-business.html"
+    >
+      List Your Business
+    </a>
 
   </div>
 
@@ -884,7 +876,7 @@
   <!-- ADVERTISE -->
 
   <a
-    class="mobile-account-action btn-outline theme-secondary mobile-advertise-action"
+    class="mobile-account-action btn-outline theme-secondary mobile-full-width-action mobile-advertise-action"
     href="index.html#advertise"
   >
     Advertise With Us
