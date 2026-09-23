@@ -10,15 +10,23 @@
 
 .site-header {
   position: sticky;
+
   top: 0;
+
   z-index: 5000;
 
-  background: rgba(255, 255, 255, 0.96);
+  background:
+    rgba(255, 255, 255, 0.96);
 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter:
+    blur(12px);
 
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  -webkit-backdrop-filter:
+    blur(12px);
+
+  border-bottom:
+    1px solid
+    rgba(0, 0, 0, 0.07);
 
   overflow: visible;
 }
@@ -33,8 +41,11 @@
 
   min-height: 0;
 
-  padding-top: 0.85rem;
-  padding-bottom: 0.7rem;
+  padding-top:
+    0.85rem;
+
+  padding-bottom:
+    0.7rem;
 
   overflow: visible;
 
@@ -68,9 +79,11 @@
 
   white-space: nowrap;
 
-  letter-spacing: -0.018em;
+  letter-spacing:
+    -0.018em;
 
-  font-size: 1rem;
+  font-size:
+    1rem;
 }
 
 
@@ -83,7 +96,8 @@
 
   align-items: center;
 
-  gap: 0.55rem;
+  gap:
+    0.55rem;
 
   margin-left: auto;
 
@@ -94,22 +108,27 @@
 .site-header .header-search-btn,
 .site-header .header-theme-btn {
   width: 40px;
+
   height: 40px;
 
   flex: 0 0 auto;
 
-  border-radius: 0.7rem;
+  border-radius:
+    0.7rem;
 }
 
 
 .site-header .header-cta {
   min-height: 40px;
 
-  border-radius: 0.7rem;
+  border-radius:
+    0.7rem;
 
-  font-size: 0.88rem;
+  font-size:
+    0.88rem;
 
-  font-weight: 600;
+  font-weight:
+    600;
 
   white-space: nowrap;
 }
@@ -117,7 +136,8 @@
 
 .site-header .header-cta.btn-solid {
   box-shadow:
-    0 3px 10px rgba(0, 0, 0, 0.06);
+    0 3px 10px
+    rgba(0, 0, 0, 0.06);
 }
 
 
@@ -134,7 +154,8 @@
 
   margin: 0;
 
-  padding: 0.7rem 0 0;
+  padding:
+    0.7rem 0 0;
 
   position: relative;
 
@@ -161,7 +182,8 @@
 
   padding: 0;
 
-  gap: 0.15rem;
+  gap:
+    0.15rem;
 
   list-style: none;
 
@@ -187,43 +209,51 @@
 
   justify-content: center;
 
-  gap: 0.35rem;
+  gap:
+    0.35rem;
 
   min-height: 38px;
 
-  padding: 0.48rem 0.9rem;
+  padding:
+    0.48rem 0.9rem;
 
   border: 0;
 
-  border-radius: 0.6rem;
+  border-radius:
+    0.6rem;
 
-  font-size: 0.88rem;
+  font-size:
+    0.88rem;
 
-  font-weight: 500;
+  font-weight:
+    500;
 
   white-space: nowrap;
 
   text-decoration: none;
 
-  transition:
-    background-color 0.18s ease,
-    color 0.18s ease;
-
   position: relative;
 
   z-index: 2;
+
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
 }
 
 
 .desktop-nav-row .nav-link:hover {
-  background: rgba(0, 0, 0, 0.045);
+  background:
+    rgba(0, 0, 0, 0.045);
 }
 
 
 .desktop-nav-row .nav-link.active {
-  color: var(--bs-primary);
+  color:
+    var(--bs-primary);
 
-  font-weight: 600;
+  font-weight:
+    600;
 
   background:
     rgba(
@@ -261,7 +291,7 @@
 
 
 /* =========================================================
-   ACCOUNT — DESKTOP
+   DESKTOP ACCOUNT
 ========================================================= */
 
 .site-header .header-account {
@@ -295,9 +325,11 @@
 
   gap: 9px;
 
-  padding: 4px 9px 4px 5px;
+  padding:
+    4px 9px 4px 5px;
 
-  border: 1px solid
+  border:
+    1px solid
     rgba(
       15,
       23,
@@ -305,11 +337,14 @@
       0.10
     );
 
-  border-radius: 0.75rem;
+  border-radius:
+    0.75rem;
 
-  background: #ffffff;
+  background:
+    #ffffff;
 
-  color: #212529;
+  color:
+    #212529;
 
   cursor: pointer;
 
@@ -321,7 +356,8 @@
 
 
 .site-header .account-button:hover {
-  background: #f8f9fa;
+  background:
+    #f8f9fa;
 
   border-color:
     rgba(
@@ -337,6 +373,7 @@
 
 .site-header .account-avatar {
   width: 31px;
+
   height: 31px;
 
   flex: 0 0 31px;
@@ -355,13 +392,17 @@
       0.12
     );
 
-  color: var(--bs-primary);
+  color:
+    var(--bs-primary);
 
-  font-size: 0.73rem;
+  font-size:
+    0.73rem;
 
-  font-weight: 800;
+  font-weight:
+    800;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
 
 
@@ -378,9 +419,11 @@
 
   white-space: nowrap;
 
-  font-size: 0.83rem;
+  font-size:
+    0.83rem;
 
-  font-weight: 650;
+  font-weight:
+    650;
 }
 
 
@@ -390,6 +433,7 @@
 
 .site-header .account-chevron {
   width: 12px;
+
   height: 12px;
 
   transition:
@@ -397,20 +441,23 @@
 }
 
 
-.site-header .account-button[aria-expanded="true"]
+.site-header
+.account-button[aria-expanded="true"]
 .account-chevron {
-  transform: rotate(180deg);
+  transform:
+    rotate(180deg);
 }
 
 
 /* =========================================================
-   ACCOUNT DROPDOWN
+   DESKTOP ACCOUNT DROPDOWN
 ========================================================= */
 
 .site-header .account-dropdown {
   position: absolute;
 
-  top: calc(100% + 9px);
+  top:
+    calc(100% + 9px);
 
   right: 0;
 
@@ -420,13 +467,18 @@
 
   padding: 8px;
 
-  border: 1px solid #dee2e6;
+  border:
+    1px solid
+    #dee2e6;
 
-  border-radius: 14px;
+  border-radius:
+    14px;
 
-  background: #ffffff;
+  background:
+    #ffffff;
 
-  color: #212529;
+  color:
+    #212529;
 
   box-shadow:
     0 18px 45px
@@ -443,7 +495,8 @@
 }
 
 
-.site-header #headerAccount.show
+.site-header
+#headerAccount.show
 .account-dropdown {
   display: block;
 }
@@ -453,64 +506,84 @@
    ACCOUNT DROPDOWN HEADER
 --------------------------------------------------------- */
 
-.site-header .account-dropdown-head {
+.site-header
+.account-dropdown-head {
   padding: 12px;
 
-  border-bottom: 1px solid #e9ecef;
+  border-bottom:
+    1px solid
+    #e9ecef;
 
   margin-bottom: 6px;
 }
 
 
-.site-header .account-dropdown-name {
+.site-header
+.account-dropdown-name {
   display: block;
 
-  font-size: 0.88rem;
+  font-size:
+    0.88rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  color: #212529;
+  color:
+    #212529;
 }
 
 
-.site-header .account-dropdown-email {
+.site-header
+.account-dropdown-email {
   display: block;
 
   margin-top: 3px;
 
-  color: #6c757d;
+  color:
+    #6c757d;
 
-  font-size: 0.74rem;
+  font-size:
+    0.74rem;
 
-  overflow-wrap: anywhere;
+  overflow-wrap:
+    anywhere;
 }
 
 
-.site-header .account-dropdown-role {
+.site-header
+.account-dropdown-role {
   display: inline-flex;
 
   margin-top: 8px;
 
-  padding: 4px 7px;
+  padding:
+    4px 7px;
 
-  border-radius: 999px;
+  border-radius:
+    999px;
 
-  background: #f1f3f5;
+  background:
+    #f1f3f5;
 
-  color: #6c757d;
+  color:
+    #6c757d;
 
-  font-size: 0.67rem;
+  font-size:
+    0.67rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 }
 
 
 /* ---------------------------------------------------------
-   ACCOUNT LINKS / BUTTONS
+   ACCOUNT DROPDOWN LINKS / BUTTONS
 --------------------------------------------------------- */
 
-.site-header .account-dropdown-link,
-.site-header .account-dropdown-button {
+.site-header
+.account-dropdown-link,
+.site-header
+.account-dropdown-button {
   width: 100%;
 
   min-height: 40px;
@@ -521,45 +594,61 @@
 
   gap: 9px;
 
-  padding: 9px 11px;
+  padding:
+    9px 11px;
 
   border: 0;
 
-  border-radius: 9px;
+  border-radius:
+    9px;
 
-  background: #ffffff;
+  background:
+    #ffffff;
 
-  color: #212529;
+  color:
+    #212529;
 
-  text-align: left;
+  text-align:
+    left;
 
-  text-decoration: none;
+  text-decoration:
+    none;
 
-  font-size: 0.8rem;
+  font-size:
+    0.8rem;
 
-  font-weight: 600;
+  font-weight:
+    600;
 
   cursor: pointer;
 }
 
 
-.site-header .account-dropdown-link:hover,
-.site-header .account-dropdown-button:hover {
-  background: #f8f9fa;
+.site-header
+.account-dropdown-link:hover,
+.site-header
+.account-dropdown-button:hover {
+  background:
+    #f8f9fa;
 }
 
 
-.site-header .account-dropdown-button.signout {
-  color: #dc3545;
+.site-header
+.account-dropdown-button.signout {
+  color:
+    #dc3545;
 }
 
 
-.site-header .account-dropdown-divider {
+.site-header
+.account-dropdown-divider {
   height: 1px;
 
-  margin: 7px 4px;
+  margin:
+    7px 4px;
 
-  background: #e9ecef;
+  background:
+    #e9ecef;
 }
 
 
@@ -574,7 +663,7 @@
 
 /* =========================================================
    MOBILE USER IDENTITY
-   Name + email + initials above Home
+   Appears ABOVE Home when logged in
 ========================================================= */
 
 .site-header #navDrawer
@@ -588,11 +677,14 @@
 
   align-items: center;
 
-  gap: 0.75rem;
+  gap:
+    0.75rem;
 
-  margin: 0 0 1rem;
+  margin:
+    0 0 1rem;
 
-  padding: 0 0 1rem;
+  padding:
+    0 0 1rem;
 
   border-bottom:
     1px solid
@@ -602,30 +694,38 @@
 
 .site-header #navDrawer
 .mobile-user-identity.is-visible {
+
   display: flex;
 }
 
 
 /* ---------------------------------------------------------
-   MOBILE USER AVATAR
+   USER AVATAR
 --------------------------------------------------------- */
 
 .site-header #navDrawer
 .mobile-user-avatar {
 
-  flex: 0 0 42px;
+  flex:
+    0 0 42px;
 
-  width: 42px;
+  width:
+    42px;
 
-  height: 42px;
+  height:
+    42px;
 
-  display: flex;
+  display:
+    flex;
 
-  align-items: center;
+  align-items:
+    center;
 
-  justify-content: center;
+  justify-content:
+    center;
 
-  border-radius: 50%;
+  border-radius:
+    50%;
 
   background:
     rgba(
@@ -636,81 +736,111 @@
   color:
     var(--bs-primary);
 
-  font-size: 0.82rem;
+  font-size:
+    0.82rem;
 
-  font-weight: 800;
+  font-weight:
+    800;
 
-  line-height: 1;
+  line-height:
+    1;
+
+  overflow:
+    hidden;
 }
 
 
 /* ---------------------------------------------------------
-   MOBILE USER DETAILS
+   USER NAME + EMAIL
 --------------------------------------------------------- */
 
 .site-header #navDrawer
 .mobile-user-details {
 
-  flex: 1 1 auto;
+  flex:
+    1 1 auto;
 
-  min-width: 0;
+  min-width:
+    0;
 
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  gap: 0.15rem;
+  gap:
+    0.15rem;
 }
 
 
 .site-header #navDrawer
 #mobileAccountName {
 
-  display: block;
+  display:
+    block;
 
-  width: 100%;
+  width:
+    100%;
 
-  min-width: 0;
+  min-width:
+    0;
 
-  margin: 0;
+  margin:
+    0;
 
-  font-size: 0.9rem;
+  font-size:
+    0.9rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  line-height: 1.3;
+  line-height:
+    1.3;
 
-  overflow: hidden;
+  overflow:
+    hidden;
 
-  text-overflow: ellipsis;
+  text-overflow:
+    ellipsis;
 
-  white-space: nowrap;
+  white-space:
+    nowrap;
 }
 
 
 .site-header #navDrawer
 #mobileAccountEmail {
 
-  display: block;
+  display:
+    block;
 
-  width: 100%;
+  width:
+    100%;
 
-  max-width: 100%;
+  max-width:
+    100%;
 
-  min-width: 0;
+  min-width:
+    0;
 
-  margin: 0;
+  margin:
+    0;
 
   color:
     var(--bs-secondary-color);
 
-  font-size: 0.72rem;
+  font-size:
+    0.72rem;
 
-  line-height: 1.4;
+  line-height:
+    1.4;
 
-  overflow-wrap: anywhere;
+  overflow-wrap:
+    anywhere;
 
-  word-break: break-word;
+  word-break:
+    break-word;
 }
 
 
@@ -720,30 +850,37 @@
 
 @media (max-width: 991.98px) {
 
+
   /* -------------------------------------------------------
-     Desktop navigation disappears
+     Hide desktop navigation
   ------------------------------------------------------- */
 
   .desktop-nav-row {
-    display: none !important;
+
+    display:
+      none !important;
   }
 
 
   /* -------------------------------------------------------
-     Header sizing
+     Mobile navbar
   ------------------------------------------------------- */
 
   .site-header .navbar {
-    padding-top: 0.7rem;
 
-    padding-bottom: 0.7rem;
+    padding-top:
+      0.7rem;
+
+    padding-bottom:
+      0.7rem;
   }
 
 
   .site-header
   .navbar > .container {
 
-    flex-wrap: nowrap;
+    flex-wrap:
+      nowrap;
   }
 
 
@@ -753,52 +890,67 @@
 
   .site-header .header-actions {
 
-    gap: 0.4rem;
+    gap:
+      0.4rem;
   }
 
 
-  /* Hide desktop-only actions */
+  /* Hide desktop-only header actions */
 
-  .site-header .header-desktop-action {
+  .site-header
+  .header-desktop-action {
 
-    display: none !important;
-  }
-
-
-  /* -------------------------------------------------------
-     Mobile menu button
-  ------------------------------------------------------- */
-
-  .site-header .mobile-menu-toggle {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 40px;
-
-    height: 40px;
-
-    flex: 0 0 40px;
-
-    border-radius: 0.7rem;
+    display:
+      none !important;
   }
 
 
   /* -------------------------------------------------------
-     Mobile account/action area
+     Mobile hamburger
   ------------------------------------------------------- */
 
-  .site-header #navDrawer
+  .site-header
+  .mobile-menu-toggle {
+
+    display:
+      inline-flex;
+
+    align-items:
+      center;
+
+    justify-content:
+      center;
+
+    width:
+      40px;
+
+    height:
+      40px;
+
+    flex:
+      0 0 40px;
+
+    border-radius:
+      0.7rem;
+  }
+
+
+  /* -------------------------------------------------------
+     Mobile account/action section
+  ------------------------------------------------------- */
+
+  .site-header
+  #navDrawer
   .mobile-only-actions {
 
-    width: 100%;
+    width:
+      100%;
 
-    margin-top: 1.25rem;
+    margin-top:
+      1.25rem;
 
-    padding-top: 1.25rem;
+    padding-top:
+      1.25rem;
 
     border-top:
       1px solid
@@ -806,69 +958,97 @@
   }
 
 
-  /* Both states are controlled by auth-ui.js.
-     Their default state is hidden. */
+  /* -------------------------------------------------------
+     Account state containers
+  ------------------------------------------------------- */
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-account-area {
 
-    width: 100%;
+    width:
+      100%;
 
-    min-width: 0;
+    min-width:
+      0;
 
-    display: none;
+    display:
+      none;
   }
 
 
-  /* -------------------------------------------------------
-     STANDARD MOBILE BUTTON
+  /* =======================================================
+     FINAL MOBILE ACTION BUTTON
      
-     All four logged-in actions use exactly
-     the same dimensions.
-  ------------------------------------------------------- */
+     Every logged-in action uses these exact dimensions.
+  ======================================================= */
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-standard-action {
 
-    width: 100% !important;
+    width:
+      100% !important;
 
-    min-width: 100% !important;
+    min-width:
+      100% !important;
 
-    height: 46px !important;
+    height:
+      46px !important;
 
-    min-height: 46px !important;
+    min-height:
+      46px !important;
 
-    max-height: 46px !important;
+    max-height:
+      46px !important;
 
-    box-sizing: border-box;
+    box-sizing:
+      border-box !important;
 
-    display: flex !important;
+    display:
+      flex !important;
 
-    align-items: center;
+    align-items:
+      center !important;
 
-    justify-content: center;
+    justify-content:
+      center !important;
 
-    margin: 0 0 0.7rem !important;
+    margin:
+      0 0 0.7rem 0 !important;
 
-    padding: 0 1rem !important;
+    padding:
+      0 1rem !important;
 
-    border-radius: 0.7rem;
+    border-radius:
+      0.7rem !important;
 
-    font-size: 0.8rem;
+    font-size:
+      0.8rem !important;
 
-    font-weight: 650;
+    font-weight:
+      650 !important;
 
-    line-height: 1;
+    line-height:
+      1 !important;
 
-    text-align: center;
+    text-align:
+      center !important;
 
-    text-decoration: none;
+    text-decoration:
+      none !important;
 
-    white-space: nowrap;
+    white-space:
+      nowrap !important;
 
-    box-shadow: none;
+    box-sizing:
+      border-box !important;
 
-    cursor: pointer;
+    cursor:
+      pointer !important;
+
+    box-shadow:
+      none !important;
 
     transition:
       background-color 0.15s ease,
@@ -878,12 +1058,14 @@
   }
 
 
-  /* -------------------------------------------------------
+  /* =======================================================
      LIST YOUR BUSINESS
-     Keep site's existing primary bluish-green theme
-  ------------------------------------------------------- */
+     
+     Uses the site's existing primary bluish-green.
+  ======================================================= */
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-business-action {
 
     background:
@@ -893,24 +1075,35 @@
       1px solid
       var(--bs-primary) !important;
 
-    color: #ffffff !important;
+    color:
+      #ffffff !important;
   }
 
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-business-action:hover {
 
-    color: #ffffff !important;
+    background:
+      var(--bs-primary) !important;
 
-    opacity: 0.92;
+    border-color:
+      var(--bs-primary) !important;
+
+    color:
+      #ffffff !important;
+
+    opacity:
+      0.92;
   }
 
 
-  /* -------------------------------------------------------
+  /* =======================================================
      ADVERTISE WITH US
-  ------------------------------------------------------- */
+  ======================================================= */
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-advertise-action {
 
     background:
@@ -925,7 +1118,8 @@
   }
 
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-advertise-action:hover {
 
     background:
@@ -942,11 +1136,12 @@
   }
 
 
-  /* -------------------------------------------------------
+  /* =======================================================
      PROFILE
-  ------------------------------------------------------- */
+  ======================================================= */
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-profile-action {
 
     background:
@@ -961,7 +1156,8 @@
   }
 
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-profile-action:hover {
 
     background:
@@ -978,17 +1174,20 @@
   }
 
 
-  /* -------------------------------------------------------
+  /* =======================================================
      SIGN OUT
-     Soft light red
-  ------------------------------------------------------- */
+     Same dimensions, soft light red.
+  ======================================================= */
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-signout-action {
 
-    appearance: none;
+    appearance:
+      none !important;
 
-    -webkit-appearance: none;
+    -webkit-appearance:
+      none !important;
 
     background:
       rgba(
@@ -1006,13 +1205,16 @@
     color:
       var(--bs-danger) !important;
 
-    font: inherit;
+    font:
+      inherit !important;
 
-    cursor: pointer;
+    cursor:
+      pointer !important;
   }
 
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-signout-action:hover {
 
     background:
@@ -1032,13 +1234,15 @@
   }
 
 
-  /* Remove spacing from final action */
+  /* Remove bottom spacing from last action */
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-account-area
   .mobile-standard-action:last-child {
 
-    margin-bottom: 0 !important;
+    margin-bottom:
+      0 !important;
   }
 
 }
@@ -1050,56 +1254,84 @@
 
 @media (max-width: 575.98px) {
 
-  .site-header #navDrawer
+
+  /* -------------------------------------------------------
+     Identity
+  ------------------------------------------------------- */
+
+  .site-header
+  #navDrawer
   .mobile-user-identity {
 
-    gap: 0.65rem;
+    gap:
+      0.65rem;
 
-    padding-bottom: 0.9rem;
+    padding-bottom:
+      0.9rem;
 
-    margin-bottom: 0.9rem;
+    margin-bottom:
+      0.9rem;
   }
 
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-user-avatar {
 
-    flex-basis: 40px;
+    flex-basis:
+      40px;
 
-    width: 40px;
+    width:
+      40px;
 
-    height: 40px;
+    height:
+      40px;
 
-    font-size: 0.78rem;
+    font-size:
+      0.78rem;
   }
 
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   #mobileAccountName {
 
-    font-size: 0.85rem;
+    font-size:
+      0.85rem;
   }
 
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   #mobileAccountEmail {
 
-    font-size: 0.68rem;
+    font-size:
+      0.68rem;
   }
 
 
-  .site-header #navDrawer
+  /* -------------------------------------------------------
+     All four buttons remain identical
+  ------------------------------------------------------- */
+
+  .site-header
+  #navDrawer
   .mobile-standard-action {
 
-    height: 44px !important;
+    height:
+      44px !important;
 
-    min-height: 44px !important;
+    min-height:
+      44px !important;
 
-    max-height: 44px !important;
+    max-height:
+      44px !important;
 
-    padding: 0 0.85rem !important;
+    padding:
+      0 0.85rem !important;
 
-    font-size: 0.76rem;
+    font-size:
+      0.76rem !important;
   }
 
 }
@@ -1107,21 +1339,25 @@
 
 /* =========================================================
    LAPTOP / DESKTOP
-   Hide mobile hamburger
+   Mobile hamburger hidden.
 ========================================================= */
 
 @media (min-width: 992px) {
 
-  .site-header .mobile-menu-toggle {
+  .site-header
+  .mobile-menu-toggle {
 
-    display: none !important;
+    display:
+      none !important;
   }
 
 
-  .site-header #navDrawer
+  .site-header
+  #navDrawer
   .mobile-only-actions {
 
-    display: none !important;
+    display:
+      none !important;
   }
 
 }
@@ -1132,27 +1368,37 @@
 ========================================================= */
 
 .site-header #headerSignIn {
-  display: inline-flex;
+
+  display:
+    inline-flex;
 }
 
 
 .site-header #headerAccount {
-  display: none;
 
-  align-items: center;
+  position:
+    relative;
 
-  position: relative;
+  display:
+    none;
+
+  align-items:
+    center;
 }
 
 
 /*
-   auth-ui.js applies the actual logged-in/logged-out
-   display state with inline styles.
+   auth-ui.js controls the actual
+   logged-in / logged-out state.
 */
 
-.site-header #mobileAccountLoggedOut,
-.site-header #mobileAccountLoggedIn {
-  display: none;
+.site-header
+#mobileAccountLoggedOut,
+.site-header
+#mobileAccountLoggedIn {
+
+  display:
+    none;
 }
 
 
@@ -1160,7 +1406,8 @@
    DARK MODE — HEADER
 ========================================================= */
 
-[data-bs-theme="dark"] .site-header {
+[data-bs-theme="dark"]
+.site-header {
 
   background:
     rgba(
@@ -1202,9 +1449,11 @@
 .site-header
 .account-button {
 
-  background: #212529;
+  background:
+    #212529;
 
-  color: #f8f9fa;
+  color:
+    #f8f9fa;
 
   border-color:
     rgba(
@@ -1220,7 +1469,8 @@
 .site-header
 .account-button:hover {
 
-  background: #343a40;
+  background:
+    #343a40;
 }
 
 
@@ -1228,11 +1478,14 @@
 .site-header
 .account-dropdown {
 
-  background: #212529;
+  background:
+    #212529;
 
-  color: #f8f9fa;
+  color:
+    #f8f9fa;
 
-  border-color: #343a40;
+  border-color:
+    #343a40;
 
   box-shadow:
     0 18px 45px
@@ -1249,7 +1502,8 @@
 .site-header
 .account-dropdown-head {
 
-  border-bottom-color: #343a40;
+  border-bottom-color:
+    #343a40;
 }
 
 
@@ -1257,7 +1511,8 @@
 .site-header
 .account-dropdown-name {
 
-  color: #f8f9fa;
+  color:
+    #f8f9fa;
 }
 
 
@@ -1265,7 +1520,8 @@
 .site-header
 .account-dropdown-email {
 
-  color: #adb5bd;
+  color:
+    #adb5bd;
 }
 
 
@@ -1273,9 +1529,11 @@
 .site-header
 .account-dropdown-role {
 
-  background: #343a40;
+  background:
+    #343a40;
 
-  color: #adb5bd;
+  color:
+    #adb5bd;
 }
 
 
@@ -1286,9 +1544,11 @@
 .site-header
 .account-dropdown-button {
 
-  background: #212529;
+  background:
+    #212529;
 
-  color: #f8f9fa;
+  color:
+    #f8f9fa;
 }
 
 
@@ -1299,7 +1559,8 @@
 .site-header
 .account-dropdown-button:hover {
 
-  background: #343a40;
+  background:
+    #343a40;
 }
 
 
@@ -1307,7 +1568,8 @@
 .site-header
 .account-dropdown-divider {
 
-  background: #343a40;
+  background:
+    #343a40;
 }
 
 
@@ -1372,5 +1634,6 @@
     2px solid
     var(--bs-primary);
 
-  outline-offset: 2px;
+  outline-offset:
+    2px;
 }

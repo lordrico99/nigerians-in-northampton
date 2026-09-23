@@ -572,26 +572,31 @@
       ====================================================== -->
 
       <dialog
-        class="drawer drawer-end"
-        id="navDrawer"
-      >
+  class="drawer drawer-end"
+  tabindex="-1"
+  id="navDrawer"
+  aria-labelledby="navDrawerLabel"
+>
 
         <!-- DRAWER HEADER -->
 
         <div class="drawer-header">
 
-          <strong>
-            Menu
-          </strong>
+  <h5
+    class="drawer-title"
+    id="navDrawerLabel"
+  >
+    Menu
+  </h5>
 
-          <button
-  type="button"
-  class="btn-close"
-  data-bs-dismiss="drawer"
-  aria-label="Close navigation"
-></button>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="drawer"
+    aria-label="Close navigation"
+  ></button>
 
-        </div>
+</div>
 
 
 
@@ -604,10 +609,6 @@
                LOGGED-IN USER IDENTITY
                Appears ABOVE HOME
           ================================================== -->
-
-          <!-- =================================================
-     LOGGED-IN USER IDENTITY
-================================================== -->
 
 <div
   class="mobile-user-identity"
