@@ -46,10 +46,13 @@
   position: relative;
 
   display: flex;
+
   flex-wrap: wrap;
+
   align-items: center;
 
   column-gap: 1rem;
+
   row-gap: 0;
 
   overflow: visible;
@@ -72,7 +75,7 @@
 
 
 /* =========================================================
-   TOP-RIGHT ACTIONS
+   HEADER ACTIONS
 ========================================================= */
 
 .site-header .header-actions {
@@ -88,16 +91,7 @@
 }
 
 
-.site-header .header-search-btn {
-  width: 40px;
-  height: 40px;
-
-  flex: 0 0 auto;
-
-  border-radius: 0.7rem;
-}
-
-
+.site-header .header-search-btn,
 .site-header .header-theme-btn {
   width: 40px;
   height: 40px;
@@ -150,10 +144,6 @@
 }
 
 
-/* ---------------------------------------------------------
-   DESKTOP NAVIGATION LIST
---------------------------------------------------------- */
-
 .desktop-nav-row .navbar-nav {
   display: flex;
 
@@ -179,10 +169,6 @@
 }
 
 
-/* ---------------------------------------------------------
-   DESKTOP NAV ITEM
---------------------------------------------------------- */
-
 .desktop-nav-row .nav-item {
   position: relative;
 
@@ -193,10 +179,6 @@
   overflow: visible;
 }
 
-
-/* ---------------------------------------------------------
-   DESKTOP NAV LINK
---------------------------------------------------------- */
 
 .desktop-nav-row .nav-link {
   display: inline-flex;
@@ -244,13 +226,16 @@
   font-weight: 600;
 
   background:
-    rgba(var(--bs-primary-rgb), 0.07);
+    rgba(
+      var(--bs-primary-rgb),
+      0.07
+    );
 }
 
 
-/* ---------------------------------------------------------
-   DESKTOP BUSINESSES ITEM
---------------------------------------------------------- */
+/* =========================================================
+   DESKTOP BUSINESSES MENU
+========================================================= */
 
 .desktop-nav-row .nav-item:has(> .menu) {
   position: relative;
@@ -261,92 +246,22 @@
 }
 
 
-/* ---------------------------------------------------------
-   DESKTOP BUSINESSES DROPDOWN
-
-   The normal Locale .menu styling remains responsible
-   for the actual visual dropdown. We only ensure it can
-   escape the header and sit above the hero.
---------------------------------------------------------- */
-
 .desktop-nav-row .nav-item > .menu {
   z-index: 10000;
 }
 
 
 /* =========================================================
-   MOBILE DRAWER
+   SHARED MENU SAFETY
 ========================================================= */
 
-/*
-   The mobile drawer is intentionally NOT styled as a
-   desktop navigation.
-
-   Locale's original drawer styles handle its mobile
-   appearance and behaviour.
-*/
-
-@media (max-width: 991.98px) {
-
-  .desktop-nav-row {
-    display: none !important;
-  }
-
-
-  .site-header .navbar {
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
-  }
-
-
-  .site-header .navbar > .container {
-    flex-wrap: nowrap;
-  }
-
-
-  .site-header .header-actions {
-    gap: 0.4rem;
-  }
-
-
-  .site-header .header-desktop-action {
-    display: none !important;
-  }
-
-
-  .site-header .mobile-menu-toggle {
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 40px;
-    height: 40px;
-
-    flex: 0 0 40px;
-
-    border-radius: 0.7rem;
-  }
-
-
-  .site-header .mobile-only-actions {
-    display: block;
-  }
-
+.site-header .menu {
+  z-index: 10000;
 }
 
 
 /* =========================================================
-   MOBILE DRAWER SAFETY
-========================================================= */
-
-.site-header #navDrawer {
-  overflow: visible;
-}
-
-
-/* =========================================================
-   ACCOUNT
+   ACCOUNT — DESKTOP
 ========================================================= */
 
 .site-header .header-account {
@@ -355,11 +270,13 @@
   display: none;
 
   flex: 0 0 auto;
+
+  align-items: center;
 }
 
 
 .site-header .header-account.is-visible {
-  display: block;
+  display: flex;
 }
 
 
@@ -367,20 +284,26 @@
    ACCOUNT BUTTON
 --------------------------------------------------------- */
 
-.account-button {
+.site-header .account-button {
   min-height: 40px;
 
   display: inline-flex;
 
   align-items: center;
 
+  justify-content: center;
+
   gap: 9px;
 
   padding: 4px 9px 4px 5px;
 
-  border:
-    1px solid
-    rgba(15, 23, 42, 0.10);
+  border: 1px solid
+    rgba(
+      15,
+      23,
+      42,
+      0.10
+    );
 
   border-radius: 0.75rem;
 
@@ -397,11 +320,14 @@
 }
 
 
-.account-button:hover {
+.site-header .account-button:hover {
   background: #f8f9fa;
 
   border-color:
-    rgba(var(--bs-primary-rgb), 0.22);
+    rgba(
+      var(--bs-primary-rgb),
+      0.22
+    );
 }
 
 
@@ -409,7 +335,7 @@
    ACCOUNT AVATAR
 --------------------------------------------------------- */
 
-.account-avatar {
+.site-header .account-avatar {
   width: 31px;
   height: 31px;
 
@@ -418,12 +344,16 @@
   display: inline-flex;
 
   align-items: center;
+
   justify-content: center;
 
   border-radius: 50%;
 
   background:
-    rgba(var(--bs-primary-rgb), 0.12);
+    rgba(
+      var(--bs-primary-rgb),
+      0.12
+    );
 
   color: var(--bs-primary);
 
@@ -439,7 +369,7 @@
    ACCOUNT NAME
 --------------------------------------------------------- */
 
-.account-button-name {
+.site-header .account-button-name {
   max-width: 110px;
 
   overflow: hidden;
@@ -458,7 +388,7 @@
    ACCOUNT CHEVRON
 --------------------------------------------------------- */
 
-.account-chevron {
+.site-header .account-chevron {
   width: 12px;
   height: 12px;
 
@@ -467,7 +397,7 @@
 }
 
 
-.account-button[aria-expanded="true"]
+.site-header .account-button[aria-expanded="true"]
 .account-chevron {
   transform: rotate(180deg);
 }
@@ -477,7 +407,7 @@
    ACCOUNT DROPDOWN
 ========================================================= */
 
-.account-dropdown {
+.site-header .account-dropdown {
   position: absolute;
 
   top: calc(100% + 9px);
@@ -490,9 +420,7 @@
 
   padding: 8px;
 
-  border:
-    1px solid
-    #dee2e6;
+  border: 1px solid #dee2e6;
 
   border-radius: 14px;
 
@@ -502,7 +430,12 @@
 
   box-shadow:
     0 18px 45px
-    rgba(15, 23, 42, 0.18);
+    rgba(
+      15,
+      23,
+      42,
+      0.18
+    );
 
   display: none;
 
@@ -510,7 +443,8 @@
 }
 
 
-.account-dropdown.is-open {
+.site-header #headerAccount.show
+.account-dropdown {
   display: block;
 }
 
@@ -519,18 +453,16 @@
    ACCOUNT DROPDOWN HEADER
 --------------------------------------------------------- */
 
-.account-dropdown-head {
+.site-header .account-dropdown-head {
   padding: 12px;
 
-  border-bottom:
-    1px solid
-    #e9ecef;
+  border-bottom: 1px solid #e9ecef;
 
   margin-bottom: 6px;
 }
 
 
-.account-dropdown-name {
+.site-header .account-dropdown-name {
   display: block;
 
   font-size: 0.88rem;
@@ -541,7 +473,7 @@
 }
 
 
-.account-dropdown-email {
+.site-header .account-dropdown-email {
   display: block;
 
   margin-top: 3px;
@@ -554,7 +486,7 @@
 }
 
 
-.account-dropdown-role {
+.site-header .account-dropdown-role {
   display: inline-flex;
 
   margin-top: 8px;
@@ -577,8 +509,8 @@
    ACCOUNT LINKS / BUTTONS
 --------------------------------------------------------- */
 
-.account-dropdown-link,
-.account-dropdown-button {
+.site-header .account-dropdown-link,
+.site-header .account-dropdown-button {
   width: 100%;
 
   min-height: 40px;
@@ -611,18 +543,18 @@
 }
 
 
-.account-dropdown-link:hover,
-.account-dropdown-button:hover {
+.site-header .account-dropdown-link:hover,
+.site-header .account-dropdown-button:hover {
   background: #f8f9fa;
 }
 
 
-.account-dropdown-button.signout {
+.site-header .account-dropdown-button.signout {
   color: #dc3545;
 }
 
 
-.account-dropdown-divider {
+.site-header .account-dropdown-divider {
   height: 1px;
 
   margin: 7px 4px;
@@ -632,132 +564,670 @@
 
 
 /* =========================================================
-   MOBILE ACCOUNT
+   MOBILE DRAWER
 ========================================================= */
 
-.mobile-account-area {
-  display: none;
+.site-header #navDrawer {
+  overflow: visible;
 }
 
 
+/* =========================================================
+   MOBILE USER IDENTITY
+   Name + email + initials above Home
+========================================================= */
+
+.site-header #navDrawer
+.mobile-user-identity {
+
+  width: 100%;
+
+  min-width: 0;
+
+  display: none;
+
+  align-items: center;
+
+  gap: 0.75rem;
+
+  margin: 0 0 1rem;
+
+  padding: 0 0 1rem;
+
+  border-bottom:
+    1px solid
+    var(--bs-border-color);
+}
+
+
+.site-header #navDrawer
+.mobile-user-identity.is-visible {
+  display: flex;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE USER AVATAR
+--------------------------------------------------------- */
+
+.site-header #navDrawer
+.mobile-user-avatar {
+
+  flex: 0 0 42px;
+
+  width: 42px;
+
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(
+      var(--bs-primary-rgb),
+      0.12
+    );
+
+  color:
+    var(--bs-primary);
+
+  font-size: 0.82rem;
+
+  font-weight: 800;
+
+  line-height: 1;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE USER DETAILS
+--------------------------------------------------------- */
+
+.site-header #navDrawer
+.mobile-user-details {
+
+  flex: 1 1 auto;
+
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.15rem;
+}
+
+
+.site-header #navDrawer
+#mobileAccountName {
+
+  display: block;
+
+  width: 100%;
+
+  min-width: 0;
+
+  margin: 0;
+
+  font-size: 0.9rem;
+
+  font-weight: 700;
+
+  line-height: 1.3;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+.site-header #navDrawer
+#mobileAccountEmail {
+
+  display: block;
+
+  width: 100%;
+
+  max-width: 100%;
+
+  min-width: 0;
+
+  margin: 0;
+
+  color:
+    var(--bs-secondary-color);
+
+  font-size: 0.72rem;
+
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   MOBILE NAVIGATION
+========================================================= */
+
 @media (max-width: 991.98px) {
 
+  /* -------------------------------------------------------
+     Desktop navigation disappears
+  ------------------------------------------------------- */
+
+  .desktop-nav-row {
+    display: none !important;
+  }
+
+
+  /* -------------------------------------------------------
+     Header sizing
+  ------------------------------------------------------- */
+
+  .site-header .navbar {
+    padding-top: 0.7rem;
+
+    padding-bottom: 0.7rem;
+  }
+
+
+  .site-header
+  .navbar > .container {
+
+    flex-wrap: nowrap;
+  }
+
+
+  /* -------------------------------------------------------
+     Header actions
+  ------------------------------------------------------- */
+
+  .site-header .header-actions {
+
+    gap: 0.4rem;
+  }
+
+
+  /* Hide desktop-only actions */
+
+  .site-header .header-desktop-action {
+
+    display: none !important;
+  }
+
+
+  /* -------------------------------------------------------
+     Mobile menu button
+  ------------------------------------------------------- */
+
+  .site-header .mobile-menu-toggle {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 40px;
+
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    border-radius: 0.7rem;
+  }
+
+
+  /* -------------------------------------------------------
+     Mobile account/action area
+  ------------------------------------------------------- */
+
+  .site-header #navDrawer
+  .mobile-only-actions {
+
+    width: 100%;
+
+    margin-top: 1.25rem;
+
+    padding-top: 1.25rem;
+
+    border-top:
+      1px solid
+      var(--bs-border-color);
+  }
+
+
+  /* Both states are controlled by auth-ui.js.
+     Their default state is hidden. */
+
+  .site-header #navDrawer
   .mobile-account-area {
+
+    width: 100%;
+
+    min-width: 0;
+
     display: none;
   }
 
 
-  .mobile-account-area.is-visible {
-    display: block;
-  }
+  /* -------------------------------------------------------
+     STANDARD MOBILE BUTTON
+     
+     All four logged-in actions use exactly
+     the same dimensions.
+  ------------------------------------------------------- */
 
+  .site-header #navDrawer
+  .mobile-standard-action {
 
-  .mobile-account-card {
-    padding: 12px 13px;
+    width: 100% !important;
 
-    margin-bottom: 10px;
+    min-width: 100% !important;
 
-    border-radius: 11px;
+    height: 46px !important;
 
-    background: var(--bs-tertiary-bg);
-  }
+    min-height: 46px !important;
 
+    max-height: 46px !important;
 
-  .mobile-account-card strong {
-    display: block;
+    box-sizing: border-box;
 
-    font-size: 0.83rem;
-  }
-
-
-  .mobile-account-card span {
-    display: block;
-
-    margin-top: 2px;
-
-    color: var(--bs-secondary-color);
-
-    font-size: 0.72rem;
-
-    overflow-wrap: anywhere;
-  }
-
-
-  .mobile-account-action {
-    width: 100%;
-
-    min-height: 42px;
-
-    display: flex;
+    display: flex !important;
 
     align-items: center;
 
-    justify-content: flex-start;
+    justify-content: center;
 
-    padding: 10px 12px;
+    margin: 0 0 0.7rem !important;
 
-    margin-bottom: 7px;
+    padding: 0 1rem !important;
 
-    border-radius: 10px;
+    border-radius: 0.7rem;
+
+    font-size: 0.8rem;
+
+    font-weight: 650;
+
+    line-height: 1;
+
+    text-align: center;
 
     text-decoration: none;
 
-    font-size: 0.83rem;
+    white-space: nowrap;
 
-    font-weight: 600;
+    box-shadow: none;
+
+    cursor: pointer;
+
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease,
+      opacity 0.15s ease;
   }
 
 
-  .mobile-account-action:last-child {
-    margin-bottom: 0;
+  /* -------------------------------------------------------
+     LIST YOUR BUSINESS
+     Keep site's existing primary bluish-green theme
+  ------------------------------------------------------- */
+
+  .site-header #navDrawer
+  .mobile-business-action {
+
+    background:
+      var(--bs-primary) !important;
+
+    border:
+      1px solid
+      var(--bs-primary) !important;
+
+    color: #ffffff !important;
+  }
+
+
+  .site-header #navDrawer
+  .mobile-business-action:hover {
+
+    color: #ffffff !important;
+
+    opacity: 0.92;
+  }
+
+
+  /* -------------------------------------------------------
+     ADVERTISE WITH US
+  ------------------------------------------------------- */
+
+  .site-header #navDrawer
+  .mobile-advertise-action {
+
+    background:
+      var(--bs-body-bg) !important;
+
+    border:
+      1px solid
+      var(--bs-border-color) !important;
+
+    color:
+      var(--bs-body-color) !important;
+  }
+
+
+  .site-header #navDrawer
+  .mobile-advertise-action:hover {
+
+    background:
+      rgba(
+        var(--bs-primary-rgb),
+        0.05
+      ) !important;
+
+    border-color:
+      var(--bs-primary) !important;
+
+    color:
+      var(--bs-primary) !important;
+  }
+
+
+  /* -------------------------------------------------------
+     PROFILE
+  ------------------------------------------------------- */
+
+  .site-header #navDrawer
+  .mobile-profile-action {
+
+    background:
+      var(--bs-body-bg) !important;
+
+    border:
+      1px solid
+      var(--bs-border-color) !important;
+
+    color:
+      var(--bs-body-color) !important;
+  }
+
+
+  .site-header #navDrawer
+  .mobile-profile-action:hover {
+
+    background:
+      rgba(
+        var(--bs-primary-rgb),
+        0.05
+      ) !important;
+
+    border-color:
+      var(--bs-primary) !important;
+
+    color:
+      var(--bs-primary) !important;
+  }
+
+
+  /* -------------------------------------------------------
+     SIGN OUT
+     Soft light red
+  ------------------------------------------------------- */
+
+  .site-header #navDrawer
+  .mobile-signout-action {
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    background:
+      rgba(
+        var(--bs-danger-rgb),
+        0.08
+      ) !important;
+
+    border:
+      1px solid
+      rgba(
+        var(--bs-danger-rgb),
+        0.22
+      ) !important;
+
+    color:
+      var(--bs-danger) !important;
+
+    font: inherit;
+
+    cursor: pointer;
+  }
+
+
+  .site-header #navDrawer
+  .mobile-signout-action:hover {
+
+    background:
+      rgba(
+        var(--bs-danger-rgb),
+        0.13
+      ) !important;
+
+    border-color:
+      rgba(
+        var(--bs-danger-rgb),
+        0.32
+      ) !important;
+
+    color:
+      var(--bs-danger) !important;
+  }
+
+
+  /* Remove spacing from final action */
+
+  .site-header #navDrawer
+  .mobile-account-area
+  .mobile-standard-action:last-child {
+
+    margin-bottom: 0 !important;
   }
 
 }
 
 
 /* =========================================================
-   DARK MODE - HEADER
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 575.98px) {
+
+  .site-header #navDrawer
+  .mobile-user-identity {
+
+    gap: 0.65rem;
+
+    padding-bottom: 0.9rem;
+
+    margin-bottom: 0.9rem;
+  }
+
+
+  .site-header #navDrawer
+  .mobile-user-avatar {
+
+    flex-basis: 40px;
+
+    width: 40px;
+
+    height: 40px;
+
+    font-size: 0.78rem;
+  }
+
+
+  .site-header #navDrawer
+  #mobileAccountName {
+
+    font-size: 0.85rem;
+  }
+
+
+  .site-header #navDrawer
+  #mobileAccountEmail {
+
+    font-size: 0.68rem;
+  }
+
+
+  .site-header #navDrawer
+  .mobile-standard-action {
+
+    height: 44px !important;
+
+    min-height: 44px !important;
+
+    max-height: 44px !important;
+
+    padding: 0 0.85rem !important;
+
+    font-size: 0.76rem;
+  }
+
+}
+
+
+/* =========================================================
+   LAPTOP / DESKTOP
+   Hide mobile hamburger
+========================================================= */
+
+@media (min-width: 992px) {
+
+  .site-header .mobile-menu-toggle {
+
+    display: none !important;
+  }
+
+
+  .site-header #navDrawer
+  .mobile-only-actions {
+
+    display: none !important;
+  }
+
+}
+
+
+/* =========================================================
+   AUTH STATE DEFAULTS
+========================================================= */
+
+.site-header #headerSignIn {
+  display: inline-flex;
+}
+
+
+.site-header #headerAccount {
+  display: none;
+
+  align-items: center;
+
+  position: relative;
+}
+
+
+/*
+   auth-ui.js applies the actual logged-in/logged-out
+   display state with inline styles.
+*/
+
+.site-header #mobileAccountLoggedOut,
+.site-header #mobileAccountLoggedIn {
+  display: none;
+}
+
+
+/* =========================================================
+   DARK MODE — HEADER
 ========================================================= */
 
 [data-bs-theme="dark"] .site-header {
+
   background:
-    rgba(15, 23, 42, 0.95);
+    rgba(
+      15,
+      23,
+      42,
+      0.95
+    );
 
   border-bottom-color:
-    rgba(255, 255, 255, 0.08);
+    rgba(
+      255,
+      255,
+      255,
+      0.08
+    );
 }
 
 
 [data-bs-theme="dark"]
 .desktop-nav-row
 .nav-link:hover {
+
   background:
-    rgba(255, 255, 255, 0.06);
+    rgba(
+      255,
+      255,
+      255,
+      0.06
+    );
 }
 
 
 /* =========================================================
-   DARK MODE - ACCOUNT
+   DARK MODE — DESKTOP ACCOUNT
 ========================================================= */
 
-[data-bs-theme="dark"] .account-button {
+[data-bs-theme="dark"]
+.site-header
+.account-button {
+
   background: #212529;
 
   color: #f8f9fa;
 
   border-color:
-    rgba(255, 255, 255, 0.10);
+    rgba(
+      255,
+      255,
+      255,
+      0.10
+    );
 }
 
 
 [data-bs-theme="dark"]
+.site-header
 .account-button:hover {
+
   background: #343a40;
 }
 
 
 [data-bs-theme="dark"]
+.site-header
 .account-dropdown {
+
   background: #212529;
 
   color: #f8f9fa;
@@ -766,30 +1236,43 @@
 
   box-shadow:
     0 18px 45px
-    rgba(0, 0, 0, 0.35);
+    rgba(
+      0,
+      0,
+      0,
+      0.35
+    );
 }
 
 
 [data-bs-theme="dark"]
+.site-header
 .account-dropdown-head {
+
   border-bottom-color: #343a40;
 }
 
 
 [data-bs-theme="dark"]
+.site-header
 .account-dropdown-name {
+
   color: #f8f9fa;
 }
 
 
 [data-bs-theme="dark"]
+.site-header
 .account-dropdown-email {
+
   color: #adb5bd;
 }
 
 
 [data-bs-theme="dark"]
+.site-header
 .account-dropdown-role {
+
   background: #343a40;
 
   color: #adb5bd;
@@ -797,9 +1280,12 @@
 
 
 [data-bs-theme="dark"]
+.site-header
 .account-dropdown-link,
 [data-bs-theme="dark"]
+.site-header
 .account-dropdown-button {
+
   background: #212529;
 
   color: #f8f9fa;
@@ -807,1299 +1293,84 @@
 
 
 [data-bs-theme="dark"]
+.site-header
 .account-dropdown-link:hover,
 [data-bs-theme="dark"]
+.site-header
 .account-dropdown-button:hover {
+
   background: #343a40;
 }
 
 
 [data-bs-theme="dark"]
+.site-header
 .account-dropdown-divider {
+
   background: #343a40;
 }
 
+
 /* =========================================================
-   AUTH STATE VISIBILITY
+   DARK MODE — MOBILE ACCOUNT
 ========================================================= */
 
-.site-header #headerSignIn {
-  display: inline-flex;
-}
-
-.site-header #headerAccount {
-  position: relative;
-  display: none;
-  align-items: center;
-}
-
-
-.site-header .account-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.site-header .account-dropdown {
-  display: none;
-}
-
-.site-header #headerAccount.show .account-dropdown {
-  display: block;
-}
-
-
-/* Mobile account sections */
-
-.site-header #mobileAccountLoggedOut {
-  display: flex;
-  flex-direction: column;
-}
-
-.site-header #mobileAccountLoggedIn {
-  display: none;
-}
-
-/* =========================================================
-   MOBILE ACCOUNT AREA — FINAL LAYOUT
-   ========================================================= */
-
-.site-header #navDrawer .mobile-account-area {
-  width: 100%;
-  min-width: 0;
-}
-
-.site-header #navDrawer #mobileAccountLoggedIn {
-  display: none;
-}
-
-.site-header #navDrawer #mobileAccountLoggedIn.is-auth-visible {
-  display: block;
-}
-
-
-/* ---------------------------------------------------------
-   ACCOUNT IDENTITY CARD
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-account-card {
-  width: 100%;
-  min-width: 0;
-
-  padding: 0.9rem;
-
-  border: 1px solid var(--bs-border-color);
-  border-radius: 0.85rem;
+[data-bs-theme="dark"]
+.site-header
+#navDrawer
+.mobile-advertise-action,
+[data-bs-theme="dark"]
+.site-header
+#navDrawer
+.mobile-profile-action {
 
   background:
-    color-mix(
-      in srgb,
-      var(--bs-primary) 4%,
-      var(--bs-body-bg)
-    );
-}
+    var(--bs-body-bg) !important;
 
-.site-header #navDrawer .mobile-account-identity {
-  display: flex;
-  align-items: center;
+  border-color:
+    var(--bs-border-color) !important;
 
-  min-width: 0;
-
-  gap: 0.75rem;
+  color:
+    var(--bs-body-color) !important;
 }
 
 
-/* ---------------------------------------------------------
-   ACCOUNT AVATAR
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-account-avatar {
-  flex: 0 0 42px;
-
-  width: 42px;
-  height: 42px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background:
-    rgba(
-      var(--bs-primary-rgb),
-      0.12
-    );
-
-  color: var(--bs-primary);
-
-  font-size: 0.8rem;
-  font-weight: 800;
-}
-
-
-/* ---------------------------------------------------------
-   NAME + EMAIL
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-account-details {
-  flex: 1 1 auto;
-
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 0.18rem;
-}
-
-.site-header #navDrawer #mobileAccountName {
-  display: block;
-
-  width: 100%;
-  max-width: 100%;
-
-  min-width: 0;
-
-  margin: 0;
-
-  font-size: 0.9rem;
-  font-weight: 700;
-
-  line-height: 1.3;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.site-header #navDrawer #mobileAccountEmail {
-  display: block;
-
-  width: 100%;
-  max-width: 100%;
-
-  min-width: 0;
-
-  margin: 0;
-
-  color: var(--bs-secondary-color);
-
-  font-size: 0.73rem;
-
-  line-height: 1.4;
-
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-
-/* ---------------------------------------------------------
-   ACCOUNT ACTIONS
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-account-actions {
-  width: 100%;
-
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 0.6rem;
-
-  margin-top: 0.7rem;
-}
-
-
-/* ---------------------------------------------------------
-   BUTTONS
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-account-actions
-.mobile-account-action {
-  width: 100% !important;
-
-  min-height: 44px;
-
-  display: inline-flex !important;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: 0.4rem;
-
-  margin: 0 !important;
-
-  padding: 0.65rem 0.7rem;
-
-  border-radius: 0.7rem;
-
-  font-size: 0.78rem;
-  font-weight: 650;
-
-  line-height: 1.2;
-
-  text-align: center;
-
-  white-space: normal;
-}
-
-
-/* Main action gets full width */
-
-.site-header #navDrawer
-.mobile-action-full {
-  grid-column: 1 / -1;
-}
-
-
-/* Icons */
-
-.site-header #navDrawer
-.mobile-action-icon {
-  flex: 0 0 auto;
-
-  font-size: 0.85rem;
-}
-
-
-/* Sign out */
-
-.site-header #navDrawer
-.mobile-signout {
-  color: var(--bs-danger);
-}
-
-.site-header #navDrawer
-.mobile-signout:hover {
-  color: var(--bs-danger);
-}
-
-
-/* Advertise */
-
-.site-header #navDrawer
-.mobile-advertise-action {
-  margin-top: 0.75rem !important;
-}
-
-
-/* ---------------------------------------------------------
-   SMALL PHONES
---------------------------------------------------------- */
-
-@media (max-width: 575.98px) {
-
-  .site-header #navDrawer .mobile-account-card {
-    padding: 0.8rem;
-  }
-
-  .site-header #navDrawer .mobile-account-avatar {
-    flex-basis: 40px;
-
-    width: 40px;
-    height: 40px;
-  }
-
-  .site-header #navDrawer #mobileAccountName {
-    font-size: 0.86rem;
-  }
-
-  .site-header #navDrawer #mobileAccountEmail {
-    font-size: 0.7rem;
-  }
-
-  .site-header #navDrawer .mobile-account-actions {
-    gap: 0.5rem;
-  }
-
-  .site-header #navDrawer .mobile-account-actions
-  .mobile-account-action {
-    min-height: 43px;
-
-    padding:
-      0.6rem 0.5rem;
-
-    font-size: 0.75rem;
-  }
-
-}
-
-/* =========================================================
-   MOBILE ACCOUNT — STANDARD ACCOUNT MENU
-   ========================================================= */
-
-.site-header #navDrawer .mobile-account-area {
-  width: 100%;
-  min-width: 0;
-}
-
-.site-header #navDrawer #mobileAccountLoggedIn {
-  display: none;
-}
-
-.site-header #navDrawer #mobileAccountLoggedIn.is-auth-visible {
-  display: block;
-}
-
-
-/* ---------------------------------------------------------
-   USER IDENTITY
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-account-card {
-  width: 100%;
-  min-width: 0;
-
-  padding: 0 0 0.9rem;
-
-  border: 0;
-  background: transparent;
-}
-
-.site-header #navDrawer .mobile-account-identity {
-  display: flex;
-  align-items: center;
-
-  width: 100%;
-  min-width: 0;
-
-  gap: 0.75rem;
-}
-
-
-/* ---------------------------------------------------------
-   AVATAR
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-account-avatar {
-  flex: 0 0 42px;
-
-  width: 42px;
-  height: 42px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: rgba(
-    var(--bs-primary-rgb),
-    0.12
-  );
-
-  color: var(--bs-primary);
-
-  font-size: 0.82rem;
-  font-weight: 800;
-
-  line-height: 1;
-
-  overflow: hidden;
-}
-
-
-/* ---------------------------------------------------------
-   NAME + EMAIL
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-account-details {
-  flex: 1 1 auto;
-
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 0.15rem;
-}
-
-.site-header #navDrawer #mobileAccountName {
-  display: block;
-
-  width: 100%;
-  min-width: 0;
-
-  margin: 0;
-
-  font-size: 0.9rem;
-  font-weight: 700;
-
-  line-height: 1.3;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.site-header #navDrawer #mobileAccountEmail {
-  display: block;
-
-  width: 100%;
-  max-width: 100%;
-
-  min-width: 0;
-
-  margin: 0;
-
-  color: var(--bs-secondary-color);
-
-  font-size: 0.72rem;
-
-  line-height: 1.4;
-
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-
-/* ---------------------------------------------------------
-   ACCOUNT MENU
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-account-menu {
-  width: 100%;
-
-  margin-bottom: 0.75rem;
-
-  border: 1px solid var(--bs-border-color);
-
-  border-radius: 0.75rem;
-
-  overflow: hidden;
-
-  background: var(--bs-body-bg);
-}
-
-
-/* ---------------------------------------------------------
-   PROFILE / SIGN OUT ROWS
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-account-row {
-  width: 100%;
-  min-width: 0;
-
-  min-height: 48px;
-
-  display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 0.75rem;
-
-  margin: 0 !important;
-  padding: 0.75rem 0.9rem;
-
-  border: 0;
-
-  background: transparent;
-
-  color: var(--bs-body-color);
-
-  font-size: 0.82rem;
-  font-weight: 600;
-
-  line-height: 1.2;
-
-  text-align: left;
-
-  text-decoration: none;
-
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease;
-}
-
-
-/* Divider between rows */
-
-.site-header #navDrawer
-.mobile-account-row + .mobile-account-row {
-  border-top: 1px solid var(--bs-border-color);
-}
-
-
-/* Hover / tap */
-
-.site-header #navDrawer
-.mobile-account-row:hover {
-  background: rgba(
-    var(--bs-primary-rgb),
-    0.05
-  );
-
-  color: var(--bs-primary);
-
-  text-decoration: none;
-}
-
-
-/* Label */
-
-.site-header #navDrawer
-.mobile-account-row-label {
-  flex: 1 1 auto;
-}
-
-
-/* Profile arrow */
-
-.site-header #navDrawer
-.mobile-account-row-arrow {
-  flex: 0 0 auto;
-
-  font-size: 1.2rem;
-  font-weight: 400;
-
-  line-height: 1;
-
-  opacity: 0.55;
-}
-
-
-/* Sign out */
-
-.site-header #navDrawer
-.mobile-account-signout {
-  color: var(--bs-danger);
-
-  cursor: pointer;
-}
-
-.site-header #navDrawer
-.mobile-account-signout:hover {
-  color: var(--bs-danger);
-
-  background: rgba(
-    var(--bs-danger-rgb),
-    0.05
-  );
-}
-
-
-/* ---------------------------------------------------------
-   FULL-WIDTH BUSINESS ACTIONS
---------------------------------------------------------- */
-
-.site-header #navDrawer
-.mobile-full-width-action {
-  width: 100% !important;
-
-  min-height: 46px;
-
-  display: flex !important;
-
-  align-items: center;
-  justify-content: center;
-
-  margin: 0 0 0.7rem !important;
-  padding: 0.7rem 1rem;
-
-  border-radius: 0.7rem;
-
-  font-size: 0.8rem;
-  font-weight: 650;
-
-  line-height: 1.2;
-
-  text-align: center;
-
-  white-space: normal;
-}
-
-
-/* Advertise remains separated below List Your Business */
-
-.site-header #navDrawer
-.mobile-advertise-action {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-
-
-/* ---------------------------------------------------------
-   SMALL PHONES
---------------------------------------------------------- */
-
-@media (max-width: 575.98px) {
-
-  .site-header #navDrawer .mobile-account-avatar {
-    flex-basis: 40px;
-
-    width: 40px;
-    height: 40px;
-  }
-
-  .site-header #navDrawer #mobileAccountName {
-    font-size: 0.86rem;
-  }
-
-  .site-header #navDrawer #mobileAccountEmail {
-    font-size: 0.69rem;
-  }
-
-  .site-header #navDrawer .mobile-account-row {
-    min-height: 47px;
-
-    padding: 0.7rem 0.8rem;
-
-    font-size: 0.78rem;
-  }
-
-  .site-header #navDrawer
-  .mobile-full-width-action {
-    min-height: 44px;
-
-    font-size: 0.76rem;
-  }
-
-}
-
-/* =========================================================
-   DESKTOP / LAPTOP — NO MOBILE MENU BUTTON
-   ========================================================= */
-
-@media (min-width: 992px) {
-
-  .site-header .mobile-menu-toggle {
-    display: none !important;
-  }
-
-}
-
-/* =========================================================
-   MOBILE ACCOUNT AREA — FINAL STRUCTURE
-   ========================================================= */
-
-
-/* ---------------------------------------------------------
-   DESKTOP / LAPTOP
-   Hide hamburger from 992px upward
---------------------------------------------------------- */
-
-@media (min-width: 992px) {
-
-  .site-header .mobile-menu-toggle {
-    display: none !important;
-  }
-
-}
-
-
-/* ---------------------------------------------------------
-   MOBILE USER IDENTITY
-   Sits ABOVE HOME
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-user-identity {
-
-  width: 100%;
-  min-width: 0;
-
-  display: none;
-
-  align-items: center;
-
-  gap: 0.75rem;
-
-  padding: 0 0 1rem;
-
-  margin: 0 0 1rem;
-
-  border-bottom: 1px solid var(--bs-border-color);
-
-}
-
-
-/* Show when user is logged in */
-
-.site-header #navDrawer .mobile-user-identity.is-visible {
-
-  display: flex;
-
-}
-
-
-/* ---------------------------------------------------------
-   USER AVATAR
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-user-avatar {
-
-  flex: 0 0 42px;
-
-  width: 42px;
-  height: 42px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background:
-    rgba(
-      var(--bs-primary-rgb),
-      0.12
-    );
-
-  color: var(--bs-primary);
-
-  font-size: 0.82rem;
-
-  font-weight: 800;
-
-  line-height: 1;
-
-}
-
-
-/* ---------------------------------------------------------
-   USER NAME + EMAIL
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-user-details {
-
-  flex: 1 1 auto;
-
-  min-width: 0;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 0.18rem;
-
-}
-
-
-.site-header #navDrawer #mobileAccountName {
-
-  display: block;
-
-  width: 100%;
-
-  min-width: 0;
-
-  margin: 0;
-
-  font-size: 0.9rem;
-
-  font-weight: 700;
-
-  line-height: 1.3;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
-
-  white-space: nowrap;
-
-}
-
-
-.site-header #navDrawer #mobileAccountEmail {
-
-  display: block;
-
-  width: 100%;
-
-  max-width: 100%;
-
-  min-width: 0;
-
-  margin: 0;
-
-  color: var(--bs-secondary-color);
-
-  font-size: 0.72rem;
-
-  line-height: 1.4;
-
-  overflow-wrap: anywhere;
-
-  word-break: break-word;
-
-}
-
-
-/* ---------------------------------------------------------
-   MOBILE ACCOUNT AREA
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-only-actions {
-
-  width: 100%;
-
-  margin-top: 1.25rem;
-
-  padding-top: 1.25rem;
-
-  border-top: 1px solid var(--bs-border-color);
-
-}
-
-
-.site-header #navDrawer .mobile-account-area {
-
-  width: 100%;
-
-  min-width: 0;
-
-}
-
-
-/* Logged in hidden by default */
-
-.site-header #navDrawer #mobileAccountLoggedIn {
-
-  display: none;
-
-}
-
-
-/* ---------------------------------------------------------
-   ALL FOUR ACTIONS
-   SAME DIMENSIONS
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-final-action {
-
-  width: 100% !important;
-
-  min-height: 46px;
-
-  box-sizing: border-box;
-
-  display: flex !important;
-
-  align-items: center;
-
-  justify-content: center;
-
-  margin: 0 0 0.7rem !important;
-
-  padding: 0.7rem 1rem;
-
-  border-radius: 0.7rem;
-
-  font-size: 0.8rem;
-
-  font-weight: 650;
-
-  line-height: 1.2;
-
-  text-align: center;
-
-  text-decoration: none;
-
-  white-space: normal;
-
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease,
-    transform 0.15s ease;
-
-}
-
-
-/* ---------------------------------------------------------
-   LIST YOUR BUSINESS
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-action-primary {
-
-  border: 1px solid var(--bs-primary);
-
-  background: var(--bs-primary);
-
-  color: #fff;
-
-}
-
-
-.site-header #navDrawer .mobile-action-primary:hover {
-
-  color: #fff;
-
-  opacity: 0.92;
-
-}
-
-
-/* ---------------------------------------------------------
-   ADVERTISE WITH US
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-action-outline {
-
-  border: 1px solid var(--bs-border-color);
-
-  background: var(--bs-body-bg);
-
-  color: var(--bs-body-color);
-
-}
-
-
-.site-header #navDrawer .mobile-action-outline:hover {
-
-  background:
-    rgba(
-      var(--bs-primary-rgb),
-      0.05
-    );
-
-  color: var(--bs-primary);
-
-  border-color: var(--bs-primary);
-
-}
-
-
-/* ---------------------------------------------------------
-   PROFILE
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-action-profile {
-
-  border: 1px solid var(--bs-border-color);
-
-  background:
-    rgba(
-      var(--bs-secondary-rgb),
-      0.05
-    );
-
-  color: var(--bs-body-color);
-
-}
-
-
-.site-header #navDrawer .mobile-action-profile:hover {
-
-  background:
-    rgba(
-      var(--bs-primary-rgb),
-      0.05
-    );
-
-  border-color: var(--bs-primary);
-
-  color: var(--bs-primary);
-
-}
-
-
-/* ---------------------------------------------------------
-   SIGN OUT
-   SOFT LIGHT RED
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-action-signout {
-
-  border: 1px solid
-    rgba(
-      var(--bs-danger-rgb),
-      0.20
-    );
+[data-bs-theme="dark"]
+.site-header
+#navDrawer
+.mobile-signout-action {
 
   background:
     rgba(
       var(--bs-danger-rgb),
-      0.07
-    );
-
-  color: var(--bs-danger);
-
-  cursor: pointer;
-
-}
-
-
-.site-header #navDrawer .mobile-action-signout:hover {
+      0.10
+    ) !important;
 
   border-color:
     rgba(
       var(--bs-danger-rgb),
-      0.35
-    );
+      0.24
+    ) !important;
 
-  background:
-    rgba(
-      var(--bs-danger-rgb),
-      0.12
-    );
-
-  color: var(--bs-danger);
-
+  color:
+    var(--bs-danger) !important;
 }
 
-
-/* Remove bottom spacing from final button */
-
-.site-header #navDrawer
-.mobile-final-action:last-child {
-
-  margin-bottom: 0 !important;
-
-}
-
-
-/* ---------------------------------------------------------
-   LOGGED OUT BUTTONS
---------------------------------------------------------- */
-
-.site-header #navDrawer #mobileAccountLoggedOut {
-
-  display: flex;
-
-  flex-direction: column;
-
-  width: 100%;
-
-}
-
-
-.site-header #navDrawer
-#mobileAccountLoggedOut .mobile-final-action {
-
-  margin-bottom: 0.7rem !important;
-
-}
-
-
-/* ---------------------------------------------------------
-   SMALL PHONES
---------------------------------------------------------- */
-
-@media (max-width: 575.98px) {
-
-  .site-header #navDrawer .mobile-user-identity {
-
-    gap: 0.65rem;
-
-    padding-bottom: 0.9rem;
-
-    margin-bottom: 0.9rem;
-
-  }
-
-
-  .site-header #navDrawer .mobile-user-avatar {
-
-    flex-basis: 40px;
-
-    width: 40px;
-
-    height: 40px;
-
-    font-size: 0.78rem;
-
-  }
-
-
-  .site-header #navDrawer #mobileAccountName {
-
-    font-size: 0.85rem;
-
-  }
-
-
-  .site-header #navDrawer #mobileAccountEmail {
-
-    font-size: 0.68rem;
-
-  }
-
-
-  .site-header #navDrawer .mobile-final-action {
-
-    min-height: 44px;
-
-    padding:
-      0.65rem 0.85rem;
-
-    font-size: 0.76rem;
-
-  }
-
-}
 
 /* =========================================================
-   MOBILE ACCOUNT ACTIONS — FINAL BUTTON STYLE
-   ========================================================= */
-
-
-/* ---------------------------------------------------------
-   ALL ACTIONS
-   Same width, height and proportions
---------------------------------------------------------- */
-
-.site-header #navDrawer .mobile-final-action {
-
-  width: 100% !important;
-
-  min-width: 0;
-
-  min-height: 46px;
-
-  box-sizing: border-box;
-
-  display: flex !important;
-
-  align-items: center;
-
-  justify-content: center;
-
-  margin: 0 0 0.7rem !important;
-
-  padding: 0.7rem 1rem;
-
-  border-radius: 0.7rem;
-
-  font-size: 0.8rem;
-
-  font-weight: 650;
-
-  line-height: 1.2;
-
-  text-align: center;
-
-  text-decoration: none;
-
-  white-space: normal;
-
-  cursor: pointer;
-
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
-
-}
-
-
-/* ---------------------------------------------------------
-   LIST YOUR BUSINESS
-   KEEP EXISTING BLUISH-GREEN THEME
---------------------------------------------------------- */
-
-.site-header #navDrawer
-.mobile-final-action.btn-solid.theme-primary {
-
-  width: 100% !important;
-
-}
-
-
-/* ---------------------------------------------------------
-   ADVERTISE WITH US
-   KEEP EXISTING APPEARANCE
---------------------------------------------------------- */
-
-.site-header #navDrawer
-.mobile-final-action.btn-outline.theme-secondary {
-
-  width: 100% !important;
-
-}
-
-
-/* ---------------------------------------------------------
-   PROFILE
-   Same dimensions as the other buttons
---------------------------------------------------------- */
-
-.site-header #navDrawer
-.mobile-final-action#mobileProfileLink {
-
-  width: 100% !important;
-
-}
-
-
-/* ---------------------------------------------------------
-   SIGN OUT
-   LIGHT RED BUTTON
---------------------------------------------------------- */
-
-.site-header #navDrawer
-.mobile-action-signout {
-
-  width: 100% !important;
-
-  border: 1px solid
-    rgba(
-      var(--bs-danger-rgb),
-      0.22
-    );
-
-  background:
-    rgba(
-      var(--bs-danger-rgb),
-      0.08
-    );
-
-  color: var(--bs-danger);
-
-  font: inherit;
-
-}
-
-
-.site-header #navDrawer
-.mobile-action-signout:hover {
-
-  border-color:
-    rgba(
-      var(--bs-danger-rgb),
-      0.32
-    );
-
-  background:
-    rgba(
-      var(--bs-danger-rgb),
-      0.13
-    );
-
-  color: var(--bs-danger);
-
-}
-
-
-/* ---------------------------------------------------------
-   REMOVE EXTRA SPACE AFTER FINAL BUTTON
---------------------------------------------------------- */
-
-.site-header #navDrawer
-.mobile-account-area
-.mobile-final-action:last-child {
-
-  margin-bottom: 0 !important;
-
-}
-
-
-/* ---------------------------------------------------------
-   SMALL PHONES
---------------------------------------------------------- */
-
-@media (max-width: 575.98px) {
-
-  .site-header #navDrawer
-  .mobile-final-action {
-
-    min-height: 44px;
-
-    padding:
-      0.65rem 0.85rem;
-
-    font-size: 0.76rem;
-
-  }
-
+   ACCESSIBILITY
+========================================================= */
+
+.site-header
+.mobile-standard-action:focus-visible,
+.site-header
+.mobile-menu-toggle:focus-visible,
+.site-header
+.account-button:focus-visible {
+
+  outline:
+    2px solid
+    var(--bs-primary);
+
+  outline-offset: 2px;
 }

@@ -585,12 +585,11 @@
           </strong>
 
           <button
-            type="button"
-            class="btn-close"
-            aria-label="Close menu"
-            data-bs-dismiss="dialog"
-          >
-          </button>
+  type="button"
+  class="btn-close"
+  data-bs-dismiss="drawer"
+  aria-label="Close navigation"
+></button>
 
         </div>
 
@@ -606,41 +605,45 @@
                Appears ABOVE HOME
           ================================================== -->
 
-          <div
-            class="mobile-user-identity"
-            id="mobileLoggedInIdentity"
-          >
+          <!-- =================================================
+     LOGGED-IN USER IDENTITY
+================================================== -->
 
-            <div class="mobile-user-avatar">
+<div
+  class="mobile-user-identity"
+  id="mobileLoggedInIdentity"
+>
 
-              <span
-                id="mobileAccountAvatar"
-                aria-hidden="true"
-              >
-                U
-              </span>
+  <div class="mobile-user-avatar">
 
-            </div>
+    <span
+      id="mobileAccountAvatar"
+      aria-hidden="true"
+    >
+      U
+    </span>
 
-
-            <div class="mobile-user-details">
-
-              <strong
-                id="mobileAccountName"
-              >
-                Member
-              </strong>
+  </div>
 
 
-              <span
-                id="mobileAccountEmail"
-              >
-                member@example.com
-              </span>
+  <div class="mobile-user-details">
 
-            </div>
+    <strong
+      id="mobileAccountName"
+    >
+      Member
+    </strong>
 
-          </div>
+
+    <span
+      id="mobileAccountEmail"
+    >
+      member@example.com
+    </span>
+
+  </div>
+
+</div>
 
 
 
@@ -883,97 +886,91 @@
 
 
           <!-- =================================================
-               MOBILE ACCOUNT / ACTIONS
-          ================================================== -->
+     MOBILE ACCOUNT / ACTIONS
+================================================== -->
 
-          <div class="mobile-only-actions">
+<div class="mobile-only-actions">
 
+  <!-- ===============================================
+       LOGGED OUT
+  ================================================ -->
 
-            <!-- ===============================================
-                 LOGGED OUT
-            ================================================ -->
+  <div
+    class="mobile-account-area"
+    id="mobileAccountLoggedOut"
+  >
 
-            <div
-              class="mobile-account-area"
-              id="mobileAccountLoggedOut"
-            >
-
-              <a
-                class="mobile-final-action mobile-action-outline"
-                href="login.html?mode=login&next=index.html"
-              >
-                Sign in
-              </a>
-
-
-              <a
-                class="mobile-final-action mobile-action-primary"
-                href="login.html?mode=signup&next=index.html"
-              >
-                Create account
-              </a>
-
-            </div>
+    <a
+      class="mobile-standard-action mobile-standard-outline"
+      href="login.html?mode=login&next=index.html"
+    >
+      Sign in
+    </a>
 
 
+    <a
+      class="mobile-standard-action mobile-standard-primary"
+      href="login.html?mode=signup&next=index.html"
+    >
+      Create account
+    </a>
 
-            <!-- ===============================================
-                 LOGGED IN
-            ================================================ -->
-
-            <div
-              class="mobile-account-area"
-              id="mobileAccountLoggedIn"
-            >
-
-
-              <!-- LIST YOUR BUSINESS -->
-
-              <a
-                class="mobile-final-action btn-solid theme-primary mobile-action-primary"
-                href="list-your-business.html"
-              >
-                List Your Business
-              </a>
+  </div>
 
 
+  <!-- ===============================================
+       LOGGED IN
+  ================================================ -->
 
-              <!-- ADVERTISE WITH US -->
+  <div
+    class="mobile-account-area"
+    id="mobileAccountLoggedIn"
+  >
 
-              <a
-                class="mobile-final-action btn-outline theme-secondary mobile-action-outline"
-                href="index.html#advertise"
-              >
-                Advertise With Us
-              </a>
+    <!-- LIST YOUR BUSINESS -->
 
-
-
-              <!-- PROFILE -->
-
-              <a
-                class="mobile-final-action btn-outline theme-secondary mobile-action-profile"
-                href="#"
-                id="mobileProfileLink"
-              >
-                Profile
-              </a>
+    <a
+      class="mobile-standard-action mobile-business-action btn-solid theme-primary"
+      href="list-your-business.html"
+    >
+      List Your Business
+    </a>
 
 
+    <!-- ADVERTISE WITH US -->
 
-              <!-- SIGN OUT -->
+    <a
+      class="mobile-standard-action mobile-advertise-action btn-outline theme-secondary"
+      href="index.html#advertise"
+    >
+      Advertise With Us
+    </a>
 
-              <button
-                type="button"
-                class="mobile-final-action mobile-action-signout"
-                id="mobileSignOut"
-              >
-                Sign out
-              </button>
 
-            </div>
+    <!-- PROFILE -->
 
-          </div>
+    <a
+      class="mobile-standard-action mobile-profile-action btn-outline theme-secondary"
+      href="#"
+      id="mobileProfileLink"
+    >
+      Profile
+    </a>
+
+
+    <!-- SIGN OUT -->
+
+    <button
+      type="button"
+      class="mobile-standard-action mobile-signout-action"
+      id="mobileSignOut"
+    >
+      Sign out
+    </button>
+
+  </div>
+
+</div>
 
         </div>
 

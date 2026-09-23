@@ -1,12 +1,20 @@
 (function () {
+
   "use strict";
+
+
+  /* =========================================================
+     API
+  ========================================================= */
 
   const API_BASE_URL = (
     window.NIN_API_BASE_URL ||
     `${window.location.protocol}//${window.location.hostname}:5000/api`
   ).replace(/\/$/, "");
 
-  const CACHE_KEY = "nin_auth_user_cache";
+
+  const CACHE_KEY =
+    "nin_auth_user_cache";
 
 
   /* =========================================================
@@ -14,29 +22,49 @@
   ========================================================= */
 
   function getCachedUser() {
+
     try {
+
       return JSON.parse(
-        localStorage.getItem(CACHE_KEY) || "null"
+        localStorage.getItem(
+          CACHE_KEY
+        ) || "null"
       );
+
     } catch {
+
       return null;
+
     }
+
   }
 
 
   function cacheUser(user) {
+
     try {
+
       if (user) {
+
         localStorage.setItem(
           CACHE_KEY,
           JSON.stringify(user)
         );
+
       } else {
-        localStorage.removeItem(CACHE_KEY);
+
+        localStorage.removeItem(
+          CACHE_KEY
+        );
+
       }
+
     } catch {
+
       // Ignore localStorage errors.
+
     }
+
   }
 
 
@@ -45,11 +73,13 @@
   ========================================================= */
 
   function getCurrentPageTarget() {
+
     return (
       `${window.location.pathname.split("/").pop() || "index.html"}` +
       `${window.location.search || ""}` +
       `${window.location.hash || ""}`
     );
+
   }
 
 
@@ -58,93 +88,146 @@
   ========================================================= */
 
   function closeAccountDropdown() {
+
     const account =
-      document.getElementById("headerAccount");
+      document.getElementById(
+        "headerAccount"
+      );
 
     const button =
-      document.getElementById("accountButton");
+      document.getElementById(
+        "accountButton"
+      );
 
     const dropdown =
-      document.getElementById("accountDropdown");
+      document.getElementById(
+        "accountDropdown"
+      );
+
 
     if (account) {
-      account.classList.remove("show");
+
+      account.classList.remove(
+        "show"
+      );
+
     }
 
+
     if (button) {
+
       button.setAttribute(
         "aria-expanded",
         "false"
       );
+
     }
 
+
     if (dropdown) {
-      dropdown.classList.remove("show");
+
+      dropdown.classList.remove(
+        "show"
+      );
+
     }
+
   }
 
 
   function openAccountDropdown() {
+
     const account =
-      document.getElementById("headerAccount");
+      document.getElementById(
+        "headerAccount"
+      );
 
     const button =
-      document.getElementById("accountButton");
+      document.getElementById(
+        "accountButton"
+      );
 
     const dropdown =
-      document.getElementById("accountDropdown");
+      document.getElementById(
+        "accountDropdown"
+      );
+
 
     if (account) {
-      account.classList.add("show");
+
+      account.classList.add(
+        "show"
+      );
+
     }
 
+
     if (button) {
+
       button.setAttribute(
         "aria-expanded",
         "true"
       );
+
     }
 
+
     if (dropdown) {
-      dropdown.classList.add("show");
+
+      dropdown.classList.add(
+        "show"
+      );
+
     }
+
   }
 
 
   /* =========================================================
-     LOGGED OUT STATE
+     LOGGED OUT
   ========================================================= */
 
   function showLoggedOut() {
+
 
     /* -------------------------------------------------------
        DESKTOP
     ------------------------------------------------------- */
 
     const signIn =
-      document.getElementById("headerSignIn");
+      document.getElementById(
+        "headerSignIn"
+      );
 
     const account =
-      document.getElementById("headerAccount");
+      document.getElementById(
+        "headerAccount"
+      );
 
 
     if (signIn) {
+
       signIn.style.setProperty(
         "display",
         "inline-flex",
         "important"
       );
+
     }
 
 
     if (account) {
+
       account.style.setProperty(
         "display",
         "none",
         "important"
       );
 
-      account.classList.remove("show");
+      account.classList.remove(
+        "show"
+      );
+
     }
 
 
@@ -171,34 +254,40 @@
       );
 
 
-    /* Show Sign In / Create Account */
+    /* Show logged-out actions */
 
     if (mobileLoggedOut) {
+
       mobileLoggedOut.style.setProperty(
         "display",
         "flex",
         "important"
       );
+
     }
 
 
     /* Hide logged-in actions */
 
     if (mobileLoggedIn) {
+
       mobileLoggedIn.style.setProperty(
         "display",
         "none",
         "important"
       );
+
     }
 
 
     /* Hide logged-in identity */
 
     if (mobileIdentity) {
+
       mobileIdentity.classList.remove(
         "is-visible"
       );
+
     }
 
 
@@ -209,43 +298,55 @@
     cacheUser(null);
 
     window.NINCurrentUser = null;
+
   }
 
 
   /* =========================================================
-     LOGGED IN STATE
+     LOGGED IN
   ========================================================= */
 
   function showLoggedIn(user) {
+
 
     /* -------------------------------------------------------
        DESKTOP
     ------------------------------------------------------- */
 
     const signIn =
-      document.getElementById("headerSignIn");
+      document.getElementById(
+        "headerSignIn"
+      );
 
     const account =
-      document.getElementById("headerAccount");
+      document.getElementById(
+        "headerAccount"
+      );
 
 
     if (signIn) {
+
       signIn.style.setProperty(
         "display",
         "none",
         "important"
       );
+
     }
 
 
     if (account) {
+
       account.style.setProperty(
         "display",
         "flex",
         "important"
       );
 
-      account.classList.remove("show");
+      account.classList.remove(
+        "show"
+      );
+
     }
 
 
@@ -294,37 +395,47 @@
 
 
     if (accountButtonName) {
+
       accountButtonName.textContent =
         name;
+
     }
 
 
     if (accountAvatar) {
+
       accountAvatar.textContent =
         getInitials(name);
+
     }
 
 
     if (dropdownName) {
+
       dropdownName.textContent =
         name;
+
     }
 
 
     if (dropdownEmail) {
+
       dropdownEmail.textContent =
         email;
+
     }
 
 
     if (dropdownRole) {
+
       dropdownRole.textContent =
         role;
+
     }
 
 
     /* -------------------------------------------------------
-       MOBILE LOGGED-IN ACTIONS
+       MOBILE ACCOUNT ACTIONS
     ------------------------------------------------------- */
 
     const mobileLoggedOut =
@@ -339,11 +450,13 @@
 
 
     if (mobileLoggedOut) {
+
       mobileLoggedOut.style.setProperty(
         "display",
         "none",
         "important"
       );
+
     }
 
 
@@ -351,13 +464,8 @@
 
       /*
        * IMPORTANT:
-       * This is intentionally "block", not "flex".
-       * The buttons must stack vertically:
-       *
-       * List Your Business
-       * Advertise With Us
-       * Profile
-       * Sign out
+       * Use block so all mobile actions
+       * remain stacked vertically.
        */
 
       mobileLoggedIn.style.setProperty(
@@ -365,6 +473,7 @@
         "block",
         "important"
       );
+
     }
 
 
@@ -397,33 +506,41 @@
     /* Show identity above Home */
 
     if (mobileIdentity) {
+
       mobileIdentity.classList.add(
         "is-visible"
       );
+
     }
 
 
     /* Name */
 
     if (mobileName) {
+
       mobileName.textContent =
         name;
+
     }
 
 
     /* Email */
 
     if (mobileEmail) {
+
       mobileEmail.textContent =
         email;
+
     }
 
 
     /* Initials */
 
     if (mobileAvatar) {
+
       mobileAvatar.textContent =
         getInitials(name);
+
     }
 
 
@@ -438,7 +555,9 @@
 
 
     if (mobileProfileLink) {
+
       mobileProfileLink.href = "#";
+
     }
 
 
@@ -449,6 +568,7 @@
     cacheUser(user);
 
     window.NINCurrentUser = user;
+
   }
 
 
@@ -466,20 +586,25 @@
 
 
     if (!parts.length) {
+
       return "A";
+
     }
 
 
     if (parts.length === 1) {
+
       return parts[0]
         .slice(0, 2)
         .toUpperCase();
+
     }
 
 
     return (
       `${parts[0][0]}${parts[parts.length - 1][0]}`
     ).toUpperCase();
+
   }
 
 
@@ -510,7 +635,9 @@
       !accountDropdown ||
       !account
     ) {
+
       return;
+
     }
 
 
@@ -518,7 +645,9 @@
       accountButton.dataset.authUiReady ===
       "true"
     ) {
+
       return;
+
     }
 
 
@@ -526,13 +655,16 @@
       "true";
 
 
-    /* Toggle dropdown */
+    /* -------------------------------------------------------
+       TOGGLE
+    ------------------------------------------------------- */
 
     accountButton.addEventListener(
       "click",
       function (event) {
 
         event.preventDefault();
+
         event.stopPropagation();
 
 
@@ -543,48 +675,74 @@
 
 
         if (isOpen) {
+
           closeAccountDropdown();
+
         } else {
+
           openAccountDropdown();
+
         }
+
       }
     );
 
 
-    /* Prevent dropdown click from bubbling */
+    /* -------------------------------------------------------
+       KEEP DROPDOWN CLICK FROM BUBBLING
+    ------------------------------------------------------- */
 
     accountDropdown.addEventListener(
       "click",
       function (event) {
+
         event.stopPropagation();
+
       }
     );
 
 
-    /* Close when clicking elsewhere */
+    /* -------------------------------------------------------
+       CLOSE OUTSIDE
+    ------------------------------------------------------- */
 
     document.addEventListener(
       "click",
       function (event) {
 
-        if (!account.contains(event.target)) {
+        if (
+          !account.contains(
+            event.target
+          )
+        ) {
+
           closeAccountDropdown();
+
         }
+
       }
     );
 
 
-    /* Close with Escape */
+    /* -------------------------------------------------------
+       ESCAPE
+    ------------------------------------------------------- */
 
     document.addEventListener(
       "keydown",
       function (event) {
 
-        if (event.key === "Escape") {
+        if (
+          event.key === "Escape"
+        ) {
+
           closeAccountDropdown();
+
         }
+
       }
     );
+
   }
 
 
@@ -612,11 +770,14 @@
       .filter(Boolean)
       .forEach(function (link) {
 
+
         if (
           link.dataset.authProfileReady ===
           "true"
         ) {
+
           return;
+
         }
 
 
@@ -632,7 +793,9 @@
 
           }
         );
+
       });
+
   }
 
 
@@ -650,7 +813,8 @@
           method: "POST",
           credentials: "include",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type":
+              "application/json"
           }
         }
       );
@@ -661,14 +825,17 @@
         "Logout request failed:",
         error
       );
+
     }
 
 
     cacheUser(null);
 
-    window.NINCurrentUser = null;
+    window.NINCurrentUser =
+      null;
 
     window.location.reload();
+
   }
 
 
@@ -696,11 +863,14 @@
       .filter(Boolean)
       .forEach(function (button) {
 
+
         if (
           button.dataset.authLogoutReady ===
           "true"
         ) {
+
           return;
+
         }
 
 
@@ -718,7 +888,9 @@
 
           }
         );
+
       });
+
   }
 
 
@@ -739,6 +911,7 @@
       )
       .forEach(function (link) {
 
+
         const url =
           new URL(
             link.href,
@@ -754,7 +927,9 @@
 
         link.href =
           url.href;
+
       });
+
   }
 
 
@@ -782,6 +957,7 @@
         showLoggedOut();
 
         return;
+
       }
 
 
@@ -797,6 +973,7 @@
         showLoggedOut();
 
         return;
+
       }
 
 
@@ -830,8 +1007,11 @@
       } else {
 
         showLoggedOut();
+
       }
+
     }
+
   }
 
 
@@ -867,6 +1047,7 @@
     } else {
 
       showLoggedOut();
+
     }
 
 
@@ -875,19 +1056,21 @@
     ------------------------------------------------------- */
 
     await checkCurrentUser();
+
   }
 
 
   /* =========================================================
      START
-  =========================================================
-
-     auth-ui.js is loaded dynamically by
-     site-header.js.
-
-     Therefore DOMContentLoaded may already
-     have happened.
   ========================================================= */
+
+  /*
+   * auth-ui.js is loaded dynamically
+   * by site-header.js.
+   *
+   * DOMContentLoaded may therefore
+   * already have happened.
+   */
 
   if (
     document.readyState ===
@@ -902,6 +1085,7 @@
   } else {
 
     initAuthUI();
+
   }
 
 })();
