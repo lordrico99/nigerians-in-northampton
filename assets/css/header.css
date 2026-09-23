@@ -1983,3 +1983,307 @@
   outline-offset:
     2px;
 }
+
+/* =========================================================
+   FINAL MOBILE ACCOUNT ACTION OVERRIDE
+   This block intentionally comes last so it overrides
+   Bootstrap / Locale button styles.
+========================================================= */
+
+@media (max-width: 991.98px) {
+
+  /* -------------------------------------------------------
+     COMMON STYLE — ALL FOUR ACTIONS
+  ------------------------------------------------------- */
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > .mobile-standard-action {
+
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+
+    height: 46px !important;
+    min-height: 46px !important;
+    max-height: 46px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    box-sizing: border-box !important;
+
+    margin: 0 0 0.7rem 0 !important;
+    padding: 0 1rem !important;
+
+    border-radius: 0.7rem !important;
+
+    font-family: inherit !important;
+    font-size: 0.8rem !important;
+    font-weight: 650 !important;
+    line-height: 1 !important;
+
+    text-align: center !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+
+    box-shadow: none !important;
+    text-shadow: none !important;
+
+    outline: none !important;
+
+    opacity: 1 !important;
+    transform: none !important;
+
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease !important;
+  }
+
+
+  /* =======================================================
+     LIST YOUR BUSINESS
+     Filled bluish-green
+  ======================================================= */
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > a.mobile-business-action {
+
+    background:
+      #0f766e !important;
+
+    background-image:
+      none !important;
+
+    border:
+      1px solid #0f766e !important;
+
+    color:
+      #ffffff !important;
+  }
+
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > a.mobile-business-action:hover {
+
+    background:
+      #0d6b63 !important;
+
+    border-color:
+      #0d6b63 !important;
+
+    color:
+      #ffffff !important;
+  }
+
+
+  /* =======================================================
+     ADVERTISE WITH US
+     Normal thin outline
+  ======================================================= */
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > a.mobile-advertise-action {
+
+    background:
+      var(--bs-body-bg) !important;
+
+    background-image:
+      none !important;
+
+    border:
+      1px solid var(--bs-border-color) !important;
+
+    color:
+      var(--bs-body-color) !important;
+  }
+
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > a.mobile-advertise-action:hover {
+
+    background:
+      rgba(var(--bs-primary-rgb), 0.05) !important;
+
+    border:
+      1px solid var(--bs-primary) !important;
+
+    color:
+      var(--bs-primary) !important;
+  }
+
+
+  /* =======================================================
+     PROFILE
+     Same outline as Advertise With Us
+  ======================================================= */
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > a.mobile-profile-action {
+
+    background:
+      var(--bs-body-bg) !important;
+
+    background-image:
+      none !important;
+
+    border:
+      1px solid var(--bs-border-color) !important;
+
+    color:
+      var(--bs-body-color) !important;
+  }
+
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > a.mobile-profile-action:hover {
+
+    background:
+      rgba(var(--bs-primary-rgb), 0.05) !important;
+
+    border:
+      1px solid var(--bs-primary) !important;
+
+    color:
+      var(--bs-primary) !important;
+  }
+
+
+  /* =======================================================
+     SIGN OUT
+     Soft / light red
+  ======================================================= */
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > button.mobile-signout-action {
+
+    appearance:
+      none !important;
+
+    -webkit-appearance:
+      none !important;
+
+    background:
+      rgba(220, 53, 69, 0.08) !important;
+
+    background-image:
+      none !important;
+
+    border:
+      1px solid rgba(220, 53, 69, 0.22) !important;
+
+    color:
+      #dc3545 !important;
+
+    outline:
+      none !important;
+  }
+
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > button.mobile-signout-action:hover {
+
+    background:
+      rgba(220, 53, 69, 0.13) !important;
+
+    border:
+      1px solid rgba(220, 53, 69, 0.30) !important;
+
+    color:
+      #dc3545 !important;
+  }
+
+
+  /* -------------------------------------------------------
+     Keyboard focus only
+     Prevents the normal browser focus ring from making
+     the button border look thicker when clicked.
+  ------------------------------------------------------- */
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > .mobile-standard-action:focus-visible {
+
+    outline:
+      2px solid var(--bs-primary) !important;
+
+    outline-offset:
+      2px !important;
+  }
+
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > button.mobile-signout-action:focus-visible {
+
+    outline:
+      2px solid #dc3545 !important;
+
+    outline-offset:
+      2px !important;
+  }
+
+
+  /* -------------------------------------------------------
+     Last action
+  ------------------------------------------------------- */
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > .mobile-standard-action:last-child {
+
+    margin-bottom:
+      0 !important;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 575.98px) {
+
+  .site-header
+  #navDrawer
+  #mobileAccountLoggedIn
+  > .mobile-standard-action {
+
+    height:
+      44px !important;
+
+    min-height:
+      44px !important;
+
+    max-height:
+      44px !important;
+
+    font-size:
+      0.76rem !important;
+  }
+
+}
