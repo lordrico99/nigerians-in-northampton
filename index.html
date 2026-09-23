@@ -35,20 +35,29 @@ content="Nigerians in Northampton — discover Nigerian-owned businesses, commun
   >
 
   <link
-    rel="stylesheet"
-    href="assets/css/style.css"
-  >
+  rel="stylesheet"
+  href="assets/css/style.css"
+>
 
-  <!-- =========================================================
-       SHARED SITE HEADER CSS
-  ========================================================== -->
+<!-- Leaflet -->
 
-  <link
-    rel="stylesheet"
-    href="assets/css/header.css"
-  >
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  crossorigin=""
+>
 
-  <!-- Leaflet -->
+<style>
+  /* existing homepage styles */
+</style>
+
+<!-- Shared site header CSS
+     Must load after the inline homepage/header overrides. -->
+
+<link
+  rel="stylesheet"
+  href="assets/css/header.css"
+>
 
   <link
     rel="stylesheet"
@@ -316,6 +325,11 @@ content="Nigerians in Northampton — discover Nigerian-owned businesses, commun
     }
 
   </style>
+
+  <link
+  rel="stylesheet"
+  href="assets/css/header.css"
+>
 
 </head>
 
@@ -4221,29 +4235,6 @@ document.addEventListener(
 
 <script src="assets/js/config.js"></script>
 
-<script>
-document.addEventListener(
-  "nin:header-loaded",
-  function () {
-
-    import("./assets/js/main.js")
-      .catch(
-        function (error) {
-
-          console.error(
-            "Could not load main.js:",
-            error
-          );
-
-        }
-      );
-
-  },
-  {
-    once: true
-  }
-);
-</script>
 
 <script
   src="assets/js/site-header.js"
