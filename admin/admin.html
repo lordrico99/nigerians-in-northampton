@@ -1565,6 +1565,224 @@
       display: none;
     }
 
+
+    /* =========================================================
+       MEMBER REQUEST QUEUES
+       ========================================================= */
+    .request-section {
+      margin-top: 22px;
+    }
+
+    .queue-counts {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .queue-count {
+      display: inline-flex;
+      align-items: center;
+      min-height: 27px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #f3f6fa;
+      border: 1px solid #e4e9ef;
+      color: #6f7b8d;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .queue-count.pending {
+      background: var(--admin-warning-soft);
+      border-color: #f0dfb7;
+      color: #8b5200;
+    }
+
+    .queue-count.action {
+      background: var(--admin-purple-soft);
+      border-color: #ded2f6;
+      color: #6442a7;
+    }
+
+    .request-table {
+      width: 100%;
+      min-width: 940px;
+      margin: 0;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .request-table th {
+      padding: 13px 18px;
+      text-align: left;
+      border-bottom: 1px solid var(--admin-border);
+      background: #fbfcfe;
+      color: #7c8798;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
+
+    .request-table td {
+      padding: 15px 18px;
+      border-bottom: 1px solid #eef1f5;
+      vertical-align: middle;
+      background: #fff;
+    }
+
+    .request-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .request-table tbody tr:hover td {
+      background: #fbfcfe;
+    }
+
+    .request-summary {
+      min-width: 240px;
+    }
+
+    .request-summary strong {
+      display: block;
+      color: #172235;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .request-summary span {
+      display: block;
+      margin-top: 4px;
+      color: #8a94a6;
+      font-size: 10px;
+    }
+
+    .request-owner {
+      font-size: 11px;
+      color: #465266;
+      font-weight: 700;
+    }
+
+    .request-owner span {
+      display: block;
+      margin-top: 3px;
+      color: #8a94a6;
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .request-action-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .request-view-button {
+      min-height: 34px;
+      padding: 7px 10px;
+      border: 1px solid #c6d8ef;
+      border-radius: 9px;
+      background: #eff5fd;
+      color: var(--admin-primary);
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .request-view-button:hover {
+      background: #e7f0fb;
+    }
+
+    .request-dialog-note {
+      padding: 11px 12px;
+      border: 1px solid #e0e6ee;
+      border-radius: 10px;
+      background: #f8fafc;
+      color: #536075;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .change-comparison {
+      display: grid;
+      gap: 10px;
+    }
+
+    .change-row {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #edf0f4;
+    }
+
+    .change-row:last-child {
+      border-bottom: 0;
+    }
+
+    .change-field {
+      color: #7a8698;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .change-values {
+      display: grid;
+      gap: 8px;
+    }
+
+    .change-value {
+      padding: 8px 10px;
+      border-radius: 9px;
+      font-size: 11px;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    .change-value.current {
+      background: #f4f6f9;
+      border: 1px solid #e7ebf0;
+      color: #4d586a;
+    }
+
+    .change-value.proposed {
+      background: #eef6ff;
+      border: 1px solid #d4e5f7;
+      color: #214f82;
+    }
+
+    .change-value-label {
+      display: block;
+      margin-bottom: 3px;
+      color: #8a94a6;
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .change-value.proposed .change-value-label {
+      color: #5a83b0;
+    }
+
+    @media (max-width: 767.98px) {
+      .queue-counts {
+        justify-content: flex-start;
+      }
+
+      .change-row {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+    }
+
     @media (max-width: 1199px) {
       .admin-login-page {
         grid-template-columns: minmax(0, 1fr) minmax(390px, .8fr);
@@ -1876,6 +2094,20 @@
               </svg>
               Submissions
             </a>
+            <a href="#changeRequestsSection" class="sidebar-nav-link">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"></path>
+                <path d="M8 8h8M8 12h6M8 16h7"></path>
+              </svg>
+              Change requests
+            </a>
+            <a href="#removalRequestsSection" class="sidebar-nav-link">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M5 7h14M9 7V4h6v3M8 10v7M12 10v7M16 10v7"></path>
+                <path d="M6 7l1 13h10l1-13"></path>
+              </svg>
+              Removal requests
+            </a>
           </nav>
 
           <div class="sidebar-label">Quick access</div>
@@ -2098,11 +2330,195 @@
                   </table>
                 </div>
               </section>
+
+              <section id="changeRequestsSection" class="workspace-card request-section" aria-labelledby="changeRequestsTitle">
+                <div class="workspace-head">
+                  <div class="workspace-title">
+                    <h2 id="changeRequestsTitle">Business change requests</h2>
+                    <p>Review edits requested by owners of published businesses before they become public.</p>
+                  </div>
+                  <div class="queue-counts">
+                    <span class="queue-count pending" id="changePendingCount">0 pending</span>
+                    <span class="result-count" id="changeRequestResultCount">0 requests</span>
+                  </div>
+                </div>
+
+                <div class="toolbar">
+                  <div class="toolbar-field search-field">
+                    <input
+                      type="search"
+                      id="changeRequestSearch"
+                      class="toolbar-input"
+                      placeholder="Search business or member..."
+                      aria-label="Search business change requests"
+                    >
+                  </div>
+
+                  <div class="toolbar-field">
+                    <select id="changeRequestStatusFilter" class="toolbar-select" aria-label="Filter change requests by status">
+                      <option value="all">All statuses</option>
+                      <option value="pending">Pending</option>
+                      <option value="approved">Approved</option>
+                      <option value="changes_requested">Changes requested</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
+                  </div>
+
+                  <div class="toolbar-field">
+                    <select id="changeRequestSort" class="toolbar-select" aria-label="Sort change requests">
+                      <option value="newest">Newest first</option>
+                      <option value="oldest">Oldest first</option>
+                      <option value="business">Business name</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="table-scroll">
+                  <table class="request-table">
+                    <thead>
+                      <tr>
+                        <th>Business</th>
+                        <th>Member</th>
+                        <th>Submitted</th>
+                        <th>Status</th>
+                        <th style="text-align:right;">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="changeRequestTableBody">
+                      <tr>
+                        <td colspan="5">
+                          <div class="admin-loading">
+                            <div class="spinner-border" role="status" aria-hidden="true"></div>
+                            <p class="table-secondary" style="margin-top:12px;">Loading change requests...</p>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section id="removalRequestsSection" class="workspace-card request-section" aria-labelledby="removalRequestsTitle">
+                <div class="workspace-head">
+                  <div class="workspace-title">
+                    <h2 id="removalRequestsTitle">Business removal requests</h2>
+                    <p>Review owner requests to remove already-published businesses from the directory.</p>
+                  </div>
+                  <div class="queue-counts">
+                    <span class="queue-count pending" id="removalPendingCount">0 pending</span>
+                    <span class="result-count" id="removalRequestResultCount">0 requests</span>
+                  </div>
+                </div>
+
+                <div class="toolbar">
+                  <div class="toolbar-field search-field">
+                    <input
+                      type="search"
+                      id="removalRequestSearch"
+                      class="toolbar-input"
+                      placeholder="Search business or member..."
+                      aria-label="Search business removal requests"
+                    >
+                  </div>
+
+                  <div class="toolbar-field">
+                    <select id="removalRequestStatusFilter" class="toolbar-select" aria-label="Filter removal requests by status">
+                      <option value="all">All statuses</option>
+                      <option value="pending">Pending</option>
+                      <option value="approved">Approved</option>
+                      <option value="changes_requested">Changes requested</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
+                  </div>
+
+                  <div class="toolbar-field">
+                    <select id="removalRequestSort" class="toolbar-select" aria-label="Sort removal requests">
+                      <option value="newest">Newest first</option>
+                      <option value="oldest">Oldest first</option>
+                      <option value="business">Business name</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="table-scroll">
+                  <table class="request-table">
+                    <thead>
+                      <tr>
+                        <th>Business</th>
+                        <th>Member</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th style="text-align:right;">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="removalRequestTableBody">
+                      <tr>
+                        <td colspan="5">
+                          <div class="admin-loading">
+                            <div class="spinner-border" role="status" aria-hidden="true"></div>
+                            <p class="table-secondary" style="margin-top:12px;">Loading removal requests...</p>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
             </div>
           </main>
         </div>
       </div>
     </section>
+
+
+    <!-- =======================================================
+         MEMBER REQUEST DIALOG
+         ======================================================= -->
+    <dialog id="requestDialog" class="review-dialog" aria-labelledby="requestDialogTitle">
+      <div class="review-shell">
+        <div class="review-header">
+          <div class="review-heading">
+            <span class="review-heading-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H18a2 2 0 0 1 2 2v13a3 3 0 0 1-3 3H6.5A2.5 2.5 0 0 1 4 18.5v-13Z"></path>
+                <path d="M8 8h8M8 12h6M8 16h7"></path>
+              </svg>
+            </span>
+            <div class="review-heading-copy">
+              <p class="eyebrow" id="requestDialogEyebrow">Member request</p>
+              <h2 id="requestDialogTitle">Business request</h2>
+              <div class="review-heading-meta" id="requestDialogReference">—</div>
+            </div>
+          </div>
+
+          <div class="review-header-right">
+            <div id="requestDialogStatus" class="review-status"></div>
+            <button type="button" class="review-close" id="closeRequestDialogButton" aria-label="Close request review">×</button>
+          </div>
+        </div>
+
+        <div class="review-content" id="requestDialogBody">
+          <div class="admin-loading">
+            <div class="spinner-border" role="status" aria-hidden="true"></div>
+            <p class="table-secondary" style="margin-top:12px;">Loading request...</p>
+          </div>
+        </div>
+
+        <div class="review-footer">
+          <div class="review-footer-meta">
+            <strong id="requestDialogFooterTitle">Request review</strong>
+            <span id="requestDialogFooterDate">Review the member request before taking action.</span>
+          </div>
+
+          <div class="review-actions" id="requestDialogActions">
+            <button type="button" class="review-action reject" id="requestRejectButton">Reject</button>
+            <button type="button" class="review-action changes" id="requestChangesButton">Request changes</button>
+            <button type="button" class="review-action approve" id="requestApproveButton">Approve</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
 
     <!-- =======================================================
          REVIEW DIALOG
@@ -2204,12 +2620,43 @@
       const reviewChangesButton = document.getElementById("reviewChangesButton");
       const reviewRejectButton = document.getElementById("reviewRejectButton");
 
+      const changeRequestTableBody = document.getElementById("changeRequestTableBody");
+      const changeRequestSearch = document.getElementById("changeRequestSearch");
+      const changeRequestStatusFilter = document.getElementById("changeRequestStatusFilter");
+      const changeRequestSort = document.getElementById("changeRequestSort");
+      const changeRequestResultCount = document.getElementById("changeRequestResultCount");
+      const changePendingCount = document.getElementById("changePendingCount");
+
+      const removalRequestTableBody = document.getElementById("removalRequestTableBody");
+      const removalRequestSearch = document.getElementById("removalRequestSearch");
+      const removalRequestStatusFilter = document.getElementById("removalRequestStatusFilter");
+      const removalRequestSort = document.getElementById("removalRequestSort");
+      const removalRequestResultCount = document.getElementById("removalRequestResultCount");
+      const removalPendingCount = document.getElementById("removalPendingCount");
+
+      const requestDialog = document.getElementById("requestDialog");
+      const requestDialogEyebrow = document.getElementById("requestDialogEyebrow");
+      const requestDialogTitle = document.getElementById("requestDialogTitle");
+      const requestDialogReference = document.getElementById("requestDialogReference");
+      const requestDialogStatus = document.getElementById("requestDialogStatus");
+      const requestDialogBody = document.getElementById("requestDialogBody");
+      const requestDialogFooterTitle = document.getElementById("requestDialogFooterTitle");
+      const requestDialogFooterDate = document.getElementById("requestDialogFooterDate");
+      const closeRequestDialogButton = document.getElementById("closeRequestDialogButton");
+      const requestApproveButton = document.getElementById("requestApproveButton");
+      const requestChangesButton = document.getElementById("requestChangesButton");
+      const requestRejectButton = document.getElementById("requestRejectButton");
+
       const mobileSidebarToggle = document.getElementById("mobileSidebarToggle");
       const adminSidebar = document.getElementById("adminSidebar");
       const sidebarOverlay = document.getElementById("sidebarOverlay");
 
       let submissions = [];
+      let changeRequests = [];
+      let removalRequests = [];
       let currentSubmission = null;
+      let currentRequest = null;
+      let currentRequestType = null;
       let dashboardMessageTimer = null;
 
       /* =======================================================
@@ -3196,6 +3643,753 @@
       });
 
       /* =======================================================
+         MEMBER REQUEST QUEUES
+         ======================================================= */
+      function getRequestId(request) {
+        return String(request?._id || request?.id || "");
+      }
+
+      function getPopulatedName(value, fallback = "—") {
+        if (!value) return fallback;
+        if (typeof value === "string") return value;
+        return String(value.name || value.businessName || value.email || fallback);
+      }
+
+      function getBusinessFromRequest(request) {
+        return request?.businessId && typeof request.businessId === "object"
+          ? request.businessId
+          : {};
+      }
+
+      function getUserFromRequest(request) {
+        return request?.userId && typeof request.userId === "object"
+          ? request.userId
+          : {};
+      }
+
+      function requestStatusLabel(status) {
+        return String(status || "pending").replaceAll("_", " ");
+      }
+
+      function filteredRequests(items, searchInput, statusFilterInput, sortInput) {
+        const query = String(searchInput?.value || "").trim().toLowerCase();
+        const status = statusFilterInput?.value || "all";
+        const sort = sortInput?.value || "newest";
+
+        const filtered = items.filter((request) => {
+          if (status !== "all" && request.status !== status) {
+            return false;
+          }
+
+          if (!query) {
+            return true;
+          }
+
+          const business = getBusinessFromRequest(request);
+          const user = getUserFromRequest(request);
+          const searchable = [
+            business.businessName,
+            business.slug,
+            business.submissionReference,
+            user.name,
+            user.email,
+            request.reason,
+            request.reviewNote,
+          ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+
+          return searchable.includes(query);
+        });
+
+        filtered.sort((a, b) => {
+          if (sort === "business") {
+            return String(getBusinessFromRequest(a).businessName || "").localeCompare(
+              String(getBusinessFromRequest(b).businessName || "")
+            );
+          }
+
+          const aDate = new Date(a.createdAt || 0).getTime();
+          const bDate = new Date(b.createdAt || 0).getTime();
+
+          return sort === "oldest" ? aDate - bDate : bDate - aDate;
+        });
+
+        return filtered;
+      }
+
+      function renderChangeRequests() {
+        const items = filteredRequests(
+          changeRequests,
+          changeRequestSearch,
+          changeRequestStatusFilter,
+          changeRequestSort
+        );
+
+        changeRequestResultCount.textContent =
+          `${items.length} ${items.length === 1 ? "request" : "requests"}`;
+
+        const pendingCount = changeRequests.filter(
+          (request) => request.status === "pending"
+        ).length;
+
+        changePendingCount.textContent =
+          `${pendingCount} pending`;
+
+        if (!items.length) {
+          changeRequestTableBody.innerHTML = `
+            <tr>
+              <td colspan="5">
+                <div class="admin-empty">
+                  <div class="empty-icon">
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                      <path d="M5 4h14v16H5z"></path>
+                      <path d="M8 8h8M8 12h6M8 16h7"></path>
+                    </svg>
+                  </div>
+                  <h3 class="empty-title">No change requests found</h3>
+                  <p class="empty-text">No member business edits match the current filters.</p>
+                </div>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        changeRequestTableBody.innerHTML = items.map((request) => {
+          const business = getBusinessFromRequest(request);
+          const user = getUserFromRequest(request);
+          const requestId = getRequestId(request);
+
+          return `
+            <tr>
+              <td>
+                <div class="request-summary">
+                  <strong>${escapeHTML(business.businessName || "Unnamed business")}</strong>
+                  <span>${escapeHTML(business.submissionReference || business.slug || "Published business")}</span>
+                </div>
+              </td>
+              <td>
+                <div class="request-owner">
+                  ${escapeHTML(user.name || "Member")}
+                  <span>${escapeHTML(user.email || "No email")}</span>
+                </div>
+              </td>
+              <td>
+                <div class="table-main">${escapeHTML(formatShortDate(request.createdAt))}</div>
+                <div class="table-secondary">${escapeHTML(formatDate(request.createdAt))}</div>
+              </td>
+              <td>${statusHTML(request.status || "pending")}</td>
+              <td>
+                <div class="request-action-row">
+                  <button type="button" class="request-view-button" data-change-request-id="${escapeHTML(requestId)}">Review</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+
+        changeRequestTableBody
+          .querySelectorAll("[data-change-request-id]")
+          .forEach((button) => {
+            button.addEventListener("click", () => {
+              openMemberRequest("change", button.dataset.changeRequestId);
+            });
+          });
+      }
+
+      function renderRemovalRequests() {
+        const items = filteredRequests(
+          removalRequests,
+          removalRequestSearch,
+          removalRequestStatusFilter,
+          removalRequestSort
+        );
+
+        removalRequestResultCount.textContent =
+          `${items.length} ${items.length === 1 ? "request" : "requests"}`;
+
+        const pendingCount = removalRequests.filter(
+          (request) => request.status === "pending"
+        ).length;
+
+        removalPendingCount.textContent =
+          `${pendingCount} pending`;
+
+        if (!items.length) {
+          removalRequestTableBody.innerHTML = `
+            <tr>
+              <td colspan="5">
+                <div class="admin-empty">
+                  <div class="empty-icon">
+                    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                      <path d="M5 7h14M9 7V4h6v3M8 10v7M12 10v7M16 10v7"></path>
+                      <path d="M6 7l1 13h10l1-13"></path>
+                    </svg>
+                  </div>
+                  <h3 class="empty-title">No removal requests found</h3>
+                  <p class="empty-text">No member removal requests match the current filters.</p>
+                </div>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        removalRequestTableBody.innerHTML = items.map((request) => {
+          const business = getBusinessFromRequest(request);
+          const user = getUserFromRequest(request);
+          const requestId = getRequestId(request);
+          const reason = String(request.reason || "No reason provided").trim();
+
+          return `
+            <tr>
+              <td>
+                <div class="request-summary">
+                  <strong>${escapeHTML(business.businessName || "Unnamed business")}</strong>
+                  <span>${escapeHTML(business.submissionReference || business.slug || "Published business")}</span>
+                </div>
+              </td>
+              <td>
+                <div class="request-owner">
+                  ${escapeHTML(user.name || "Member")}
+                  <span>${escapeHTML(user.email || "No email")}</span>
+                </div>
+              </td>
+              <td>
+                <div class="table-main" style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${escapeHTML(reason)}">
+                  ${escapeHTML(reason)}
+                </div>
+                <div class="table-secondary">${escapeHTML(formatShortDate(request.createdAt))}</div>
+              </td>
+              <td>${statusHTML(request.status || "pending")}</td>
+              <td>
+                <div class="request-action-row">
+                  <button type="button" class="request-view-button" data-removal-request-id="${escapeHTML(requestId)}">Review</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+
+        removalRequestTableBody
+          .querySelectorAll("[data-removal-request-id]")
+          .forEach((button) => {
+            button.addEventListener("click", () => {
+              openMemberRequest("removal", button.dataset.removalRequestId);
+            });
+          });
+      }
+
+      async function loadChangeRequests() {
+        const response = await adminFetch(
+          `${API_BASE_URL}/business-change-requests`,
+          { method: "GET" }
+        );
+
+        const payload = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          throw new Error(
+            payload?.message ||
+            `Could not load change requests (${response.status}).`
+          );
+        }
+
+        changeRequests = Array.isArray(payload?.changeRequests)
+          ? payload.changeRequests
+          : [];
+
+        renderChangeRequests();
+      }
+
+      async function loadRemovalRequests() {
+        const response = await adminFetch(
+          `${API_BASE_URL}/business-removal-requests`,
+          { method: "GET" }
+        );
+
+        const payload = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          throw new Error(
+            payload?.message ||
+            `Could not load removal requests (${response.status}).`
+          );
+        }
+
+        removalRequests = Array.isArray(payload?.removalRequests)
+          ? payload.removalRequests
+          : [];
+
+        renderRemovalRequests();
+      }
+
+      function formatRequestValue(value) {
+        if (value === null || value === undefined || value === "") {
+          return "—";
+        }
+
+        if (Array.isArray(value)) {
+          return value.length
+            ? value.map((item) => String(item)).join(", ")
+            : "—";
+        }
+
+        if (typeof value === "object") {
+          if (value.url || value.filename) {
+            return value.url || value.filename || "Image";
+          }
+
+          return JSON.stringify(value);
+        }
+
+        return String(value);
+      }
+
+      function changeComparisonHTML(business, proposedData) {
+        const fields = [
+          ["Business name", "businessName"],
+          ["Category", "categoryKey"],
+          ["Area", "areaKey"],
+          ["Description", "description"],
+          ["Services", "services"],
+          ["Phone", "phone"],
+          ["WhatsApp", "whatsappNumber"],
+          ["Email", "email"],
+          ["Website", "website"],
+          ["WhatsApp enabled", "hasWhatsApp"],
+          ["Online services", "hasOnline"],
+          ["Bookings", "hasBooking"],
+          ["Address", "address"],
+          ["Postcode", "postcode"],
+          ["Town", "town"],
+          ["Latitude", "lat"],
+          ["Longitude", "lng"],
+          ["Opening hours", "hours"],
+          ["Owner name", "ownerName"],
+          ["Owner phone", "ownerPhone"],
+          ["Owner email", "ownerEmail"],
+          ["Owner note", "ownerNote"],
+        ];
+
+        return fields.map(([label, field]) => {
+          const current = formatRequestValue(business?.[field]);
+          const proposed = formatRequestValue(proposedData?.[field]);
+          const changed = current !== proposed;
+
+          if (!changed) {
+            return `
+              <div class="change-row">
+                <div class="change-field">${escapeHTML(label)}</div>
+                <div class="change-values">
+                  <div class="change-value current">${escapeHTML(current)}</div>
+                </div>
+              </div>
+            `;
+          }
+
+          return `
+            <div class="change-row">
+              <div class="change-field">${escapeHTML(label)}</div>
+              <div class="change-values">
+                <div class="change-value current">
+                  <span class="change-value-label">Current</span>
+                  ${escapeHTML(current)}
+                </div>
+                <div class="change-value proposed">
+                  <span class="change-value-label">Proposed</span>
+                  ${escapeHTML(proposed)}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      async function openMemberRequest(type, id) {
+        if (!id) return;
+
+        currentRequestType = type;
+        currentRequest = null;
+
+        requestDialogEyebrow.textContent =
+          type === "change" ? "Business change request" : "Business removal request";
+
+        requestDialogTitle.textContent = "Loading request…";
+        requestDialogReference.textContent = id;
+        requestDialogStatus.innerHTML = statusHTML("pending");
+        requestDialogFooterTitle.textContent = "Loading request";
+        requestDialogFooterDate.textContent = "Fetching the complete member request…";
+
+        requestApproveButton.disabled = true;
+        requestChangesButton.disabled = true;
+        requestRejectButton.disabled = true;
+
+        requestDialogBody.innerHTML = `
+          <div class="admin-loading">
+            <div class="spinner-border" role="status" aria-hidden="true"></div>
+            <p class="table-secondary" style="margin-top:12px;">Loading request details...</p>
+          </div>
+        `;
+
+        requestDialog.showModal();
+
+        try {
+          const endpoint = type === "change"
+            ? `${API_BASE_URL}/business-change-requests/${encodeURIComponent(id)}`
+            : `${API_BASE_URL}/business-removal-requests/${encodeURIComponent(id)}`;
+
+          const response = await adminFetch(endpoint, { method: "GET" });
+          const payload = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            throw new Error(
+              payload?.message ||
+              `Could not load request (${response.status}).`
+            );
+          }
+
+          currentRequest = type === "change"
+            ? payload?.changeRequest
+            : payload?.removalRequest;
+
+          renderMemberRequest(currentRequest, type);
+        } catch (error) {
+          requestDialogBody.innerHTML = `
+            <div class="admin-empty">
+              <div class="empty-icon" style="background:#fff0ee;color:#b42318;">!</div>
+              <h3 class="empty-title">Could not load this request</h3>
+              <p class="empty-text">${escapeHTML(error.message || "An unexpected error occurred.")}</p>
+            </div>
+          `;
+        }
+      }
+
+      function renderMemberRequest(request, type) {
+        if (!request) {
+          throw new Error("Request data was not returned by the API.");
+        }
+
+        const business = getBusinessFromRequest(request);
+        const user = getUserFromRequest(request);
+        const pending = request.status === "pending";
+
+        requestDialogTitle.textContent =
+          business.businessName ||
+          (type === "change" ? "Business change request" : "Business removal request");
+
+        requestDialogReference.textContent = String(request._id || "");
+        requestDialogStatus.innerHTML = statusHTML(request.status || "pending");
+        requestDialogFooterDate.textContent = request.createdAt
+          ? `Submitted ${formatDate(request.createdAt)}`
+          : "Request date unavailable";
+
+        requestApproveButton.disabled = !pending;
+        requestRejectButton.disabled = !pending;
+        requestChangesButton.disabled = !pending || type !== "change";
+        requestApproveButton.textContent =
+          type === "change" ? "Approve & publish" : "Approve removal";
+
+        requestDialogFooterTitle.textContent = pending
+          ? "Administrator decision required"
+          : `This request is ${requestStatusLabel(request.status)}.`;
+
+        const ownerHTML = `
+          <div class="review-grid">
+            <div class="review-item">
+              <span class="review-label">Member</span>
+              <div class="review-value"><strong>${escapeHTML(user.name || "—")}</strong></div>
+            </div>
+            <div class="review-item">
+              <span class="review-label">Email</span>
+              <div class="review-value">${escapeHTML(user.email || "—")}</div>
+            </div>
+            <div class="review-item">
+              <span class="review-label">Business</span>
+              <div class="review-value">${escapeHTML(business.businessName || "—")}</div>
+            </div>
+            <div class="review-item">
+              <span class="review-label">Submission reference</span>
+              <div class="review-value">${escapeHTML(business.submissionReference || "—")}</div>
+            </div>
+          </div>
+        `;
+
+        if (type === "change") {
+          const proposedData = request.proposedData || {};
+          const changedFields = [
+            "businessName", "categoryKey", "areaKey", "description",
+            "services", "phone", "whatsappNumber", "email", "website",
+            "hasWhatsApp", "hasOnline", "hasBooking", "address", "postcode",
+            "town", "lat", "lng", "hours", "ownerName", "ownerPhone",
+            "ownerEmail", "ownerNote"
+          ];
+
+          const changedCount = changedFields.filter((field) =>
+            formatRequestValue(business?.[field]) !== formatRequestValue(proposedData?.[field])
+          ).length;
+
+          requestDialogBody.innerHTML = `
+            <div class="review-layout">
+              <div class="review-column">
+                <section class="review-card">
+                  <div class="review-card-head">
+                    <h3>Member</h3>
+                  </div>
+                  <div class="review-card-body">
+                    ${ownerHTML}
+                  </div>
+                </section>
+
+                <section class="review-card">
+                  <div class="review-card-head">
+                    <h3>Request details</h3>
+                  </div>
+                  <div class="review-card-body">
+                    <div class="request-dialog-note">
+                      This member has requested changes to a published business. The public listing remains unchanged until the request is approved.
+                    </div>
+                    <div class="review-grid" style="margin-top:16px;">
+                      <div class="review-item">
+                        <span class="review-label">Fields changed</span>
+                        <div class="review-value"><strong>${changedCount}</strong></div>
+                      </div>
+                      <div class="review-item">
+                        <span class="review-label">Requested</span>
+                        <div class="review-value">${escapeHTML(formatDate(request.createdAt))}</div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+              <div class="review-column">
+                <section class="review-card">
+                  <div class="review-card-head">
+                    <h3>Current vs proposed</h3>
+                  </div>
+                  <div class="review-card-body">
+                    <div class="change-comparison">
+                      ${changeComparisonHTML(business, proposedData)}
+                    </div>
+                  </div>
+                </section>
+
+                <section class="review-card">
+                  <div class="review-card-head">
+                    <h3>Administrator note</h3>
+                  </div>
+                  <div class="review-card-body">
+                    <label for="requestReviewNoteInput" class="review-label">Review note</label>
+                    <textarea id="requestReviewNoteInput" class="review-note-field" placeholder="Add a note for the member or your review record…">${escapeHTML(request.reviewNote || "")}</textarea>
+                    <div class="review-note-help">The note is stored with the change request.</div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          `;
+        } else {
+          const reason = String(request.reason || "No reason was provided.").trim();
+
+          requestDialogBody.innerHTML = `
+            <div class="review-layout">
+              <div class="review-column">
+                <section class="review-card">
+                  <div class="review-card-head">
+                    <h3>Member</h3>
+                  </div>
+                  <div class="review-card-body">
+                    ${ownerHTML}
+                  </div>
+                </section>
+
+                <section class="review-card">
+                  <div class="review-card-head">
+                    <h3>Removal reason</h3>
+                  </div>
+                  <div class="review-card-body">
+                    <div class="review-description">${escapeHTML(reason)}</div>
+                  </div>
+                </section>
+              </div>
+
+              <div class="review-column">
+                <section class="review-card">
+                  <div class="review-card-head">
+                    <h3>Published business</h3>
+                  </div>
+                  <div class="review-card-body">
+                    <div class="review-grid">
+                      <div class="review-item full">
+                        <span class="review-label">Business name</span>
+                        <div class="review-value"><strong>${escapeHTML(business.businessName || "—")}</strong></div>
+                      </div>
+                      <div class="review-item">
+                        <span class="review-label">Slug</span>
+                        <div class="review-value">${escapeHTML(business.slug || "—")}</div>
+                      </div>
+                      <div class="review-item">
+                        <span class="review-label">Submission reference</span>
+                        <div class="review-value">${escapeHTML(business.submissionReference || "—")}</div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="review-card">
+                  <div class="review-card-head">
+                    <h3>Administrator note</h3>
+                  </div>
+                  <div class="review-card-body">
+                    <label for="requestReviewNoteInput" class="review-label">Review note</label>
+                    <textarea id="requestReviewNoteInput" class="review-note-field" placeholder="Add a note about this removal decision…">${escapeHTML(request.reviewNote || "")}</textarea>
+                    <div class="review-note-help">The note is stored with the removal request.</div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      async function updateMemberRequestStatus(nextStatus) {
+        if (!currentRequest || !currentRequestType) return;
+        if (currentRequest.status !== "pending") return;
+
+        const noteInput = document.getElementById("requestReviewNoteInput");
+        const reviewNote = noteInput?.value.trim() || "";
+
+        const button =
+          nextStatus === "approved"
+            ? requestApproveButton
+            : nextStatus === "rejected"
+              ? requestRejectButton
+              : requestChangesButton;
+
+        const originalText = button.textContent;
+        button.disabled = true;
+        button.textContent = "Saving…";
+
+        try {
+          const endpoint = currentRequestType === "change"
+            ? `${API_BASE_URL}/business-change-requests/${encodeURIComponent(currentRequest._id)}/status`
+            : `${API_BASE_URL}/business-removal-requests/${encodeURIComponent(currentRequest._id)}/status`;
+
+          const response = await adminFetch(endpoint, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              status: nextStatus,
+              reviewNote
+            })
+          });
+
+          const payload = await response.json().catch(() => ({}));
+
+          if (!response.ok) {
+            throw new Error(
+              payload?.message ||
+              `Could not update request (${response.status}).`
+            );
+          }
+
+          const collection = currentRequestType === "change"
+            ? changeRequests
+            : removalRequests;
+
+          const index = collection.findIndex(
+            (item) => String(item._id) === String(currentRequest._id)
+          );
+
+          if (index !== -1) {
+            collection[index] = {
+              ...collection[index],
+              status: nextStatus,
+              reviewNote
+            };
+
+            currentRequest = {
+              ...currentRequest,
+              status: nextStatus,
+              reviewNote
+            };
+          }
+
+          renderChangeRequests();
+          renderRemovalRequests();
+
+          if (currentRequestType === "change") {
+            await loadSubmissions();
+            showDashboardMessage(
+              nextStatus === "approved"
+                ? "Business changes approved and published."
+                : nextStatus === "rejected"
+                  ? "Business change request rejected."
+                  : "Changes requested from the member."
+            );
+          } else {
+            await loadSubmissions();
+            showDashboardMessage(
+              nextStatus === "approved"
+                ? "Business removed from the public directory."
+                : "Business removal request rejected."
+            );
+          }
+
+          renderMemberRequest(currentRequest, currentRequestType);
+        } catch (error) {
+          showDashboardMessage(
+            error.message || "Could not update the member request.",
+            true
+          );
+          button.disabled = false;
+          button.textContent = originalText;
+        }
+      }
+
+      changeRequestSearch.addEventListener("input", renderChangeRequests);
+      changeRequestStatusFilter.addEventListener("change", renderChangeRequests);
+      changeRequestSort.addEventListener("change", renderChangeRequests);
+
+      removalRequestSearch.addEventListener("input", renderRemovalRequests);
+      removalRequestStatusFilter.addEventListener("change", renderRemovalRequests);
+      removalRequestSort.addEventListener("change", renderRemovalRequests);
+
+      requestApproveButton.addEventListener("click", () => {
+        updateMemberRequestStatus("approved");
+      });
+
+      requestChangesButton.addEventListener("click", () => {
+        updateMemberRequestStatus("changes_requested");
+      });
+
+      requestRejectButton.addEventListener("click", () => {
+        updateMemberRequestStatus("rejected");
+      });
+
+      closeRequestDialogButton.addEventListener("click", () => {
+        requestDialog.close();
+      });
+
+      requestDialog.addEventListener("click", (event) => {
+        const rect = requestDialog.getBoundingClientRect();
+
+        const inside =
+          event.clientX >= rect.left &&
+          event.clientX <= rect.right &&
+          event.clientY >= rect.top &&
+          event.clientY <= rect.bottom;
+
+        if (!inside) {
+          requestDialog.close();
+        }
+      });
+
+      /* =======================================================
          REVIEW DIALOG
          ======================================================= */
       closeReviewButton.addEventListener("click", function () {
@@ -3226,8 +4420,12 @@
         refreshButton.innerHTML = "Refreshing…";
 
         try {
-          await loadSubmissions();
-          showDashboardMessage("Submission list refreshed.");
+          await Promise.all([
+            loadSubmissions(),
+            loadChangeRequests(),
+            loadRemovalRequests()
+          ]);
+          showDashboardMessage("Dashboard queues refreshed.");
         } catch (error) {
           showDashboardMessage(
             error.message || "Could not refresh submissions.",
@@ -3273,7 +4471,11 @@
         try {
           await verifyAdminSession();
           showDashboard();
-          await loadSubmissions();
+          await Promise.all([
+            loadSubmissions(),
+            loadChangeRequests(),
+            loadRemovalRequests()
+          ]);
         } catch (error) {
           console.error("Admin dashboard startup failed:", error);
 

@@ -2167,46 +2167,44 @@ document.addEventListener(
        IMAGE URL NORMALISER
     ======================================================= */
 
-    function imageURL(value) {
+function imageURL(value) {
 
-      const raw =
-        String(value || "").trim();
+  if (!value) {
+    return "";
+  }
 
+  if (typeof value === "object") {
+    value =
+      value.url ||
+      value.src ||
+      value.path ||
+      value.filename ||
+      "";
+  }
 
-      if (!raw) {
-        return "";
-      }
+  const raw =
+    String(value).trim();
 
+  if (!raw) {
+    return "";
+  }
 
-      if (
-        /^https?:\/\//i.test(raw)
-      ) {
+  if (/^https?:\/\//i.test(raw)) {
+    return raw;
+  }
 
-        return raw;
+  if (raw.startsWith("/")) {
+    return API_ORIGIN + raw;
+  }
 
-      }
+  if (raw.startsWith("uploads/")) {
+    return API_ORIGIN + "/" + raw;
+  }
 
-
-      if (
-        raw.startsWith("/")
-      ) {
-
-        return (
-          API_ORIGIN +
-          raw
-        );
-
-      }
-
-
-      return (
-        API_ORIGIN +
-        "/" +
-        raw.replace(/^\/+/, "")
-      );
-
-    }
-
+  return API_ORIGIN +
+    "/uploads/businesses/" +
+    raw;
+}
 
 
     /* =======================================================
@@ -2429,11 +2427,11 @@ const id =
 
 
       const image =
-        imageURL(
-          raw.coverImage?.url ||
-          raw.image ||
-          ""
-        );
+  imageURL(
+    raw.coverImage ||
+    raw.image ||
+    ""
+  );
 
 
       const galleryImages =
@@ -2442,12 +2440,9 @@ const id =
         )
           ? raw.galleryImages
               .map(
-                (item) =>
-                  imageURL(
-                    item?.url ||
-                    ""
-                  )
-              )
+  (item) =>
+    imageURL(item)
+)
               .filter(Boolean)
           : [];
 
