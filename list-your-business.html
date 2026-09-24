@@ -860,224 +860,385 @@
 
   <header class="site-header">
 
-    <nav
-      class="navbar"
-      aria-label="Main navigation"
-    >
+  <nav
+    class="navbar"
+    aria-label="Main navigation"
+  >
 
-      <div class="container">
+    <div class="container">
+
+
+      <a
+        class="navbar-brand d-flex align-items-center gap-2 fw-semibold"
+        href="index.html"
+      >
+
+        <span
+          class="brand-mark"
+          aria-hidden="true"
+        >
+          N
+        </span>
+
+        Nigerians in Northampton
+
+      </a>
+
+
+
+      <div class="header-actions">
+
 
         <a
-          class="navbar-brand d-flex align-items-center gap-2 fw-semibold"
-          href="index.html"
+          class="btn-icon header-search-btn"
+          href="businesses.html"
+          aria-label="Search businesses"
+          title="Search businesses"
         >
 
-          <span
-            class="brand-mark"
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
             aria-hidden="true"
           >
-            N
-          </span>
 
-          Nigerians in Northampton
+            <circle
+              cx="7"
+              cy="7"
+              r="4.5"
+            />
+
+            <path
+              d="m10.5 10.5 4 4"
+            />
+
+          </svg>
 
         </a>
 
 
-        <div class="header-actions">
+        <button
+          class="btn-icon header-theme-btn"
+          type="button"
+          id="themeToggle"
+          aria-label="Toggle color mode"
+        >
 
-          <a
-            class="btn-icon header-search-btn"
-            href="businesses.html"
-            aria-label="Search businesses"
-            title="Search businesses"
+          <svg
+            class="theme-icon-light"
+            width="18"
+            height="18"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            aria-hidden="true"
           >
 
-            <svg
-              width="17"
-              height="17"
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"
-              aria-hidden="true"
-            >
-              <circle cx="7" cy="7" r="4.5"></circle>
-              <path d="m10.5 10.5 4 4"></path>
-            </svg>
+            <circle
+              cx="8"
+              cy="8"
+              r="3.25"
+            />
 
-          </a>
+            <path d="M8 1v1.5M8 13.5V15M15 8h-1.5M2.5 8H1m11-4-1 1M5 11l-1 1m0-8 1 1m6 6 1 1"/>
 
+          </svg>
+
+
+          <svg
+            class="theme-icon-dark"
+            width="18"
+            height="18"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+
+            <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"/>
+
+          </svg>
+
+        </button>
+
+
+        <a
+          class="btn-outline theme-secondary header-cta header-desktop-action"
+          href="index.html#advertise"
+        >
+          Advertise With Us
+        </a>
+
+
+        <a
+          class="btn-solid theme-primary header-cta header-desktop-action"
+          href="list-your-business.html"
+        >
+          List Your Business
+        </a>
+
+
+        <button
+          class="btn-icon mobile-menu-toggle navbar-toggler"
+          type="button"
+          data-bs-toggle="drawer"
+          data-bs-target="#navDrawer"
+          aria-controls="navDrawer"
+          aria-label="Open navigation"
+        >
+
+          <span
+            class="navbar-toggler-icon"
+            aria-hidden="true"
+          >
+          </span>
+
+        </button>
+
+      </div>
+
+
+
+      <dialog
+        class="drawer drawer-end"
+        tabindex="-1"
+        id="navDrawer"
+        aria-labelledby="navDrawerLabel"
+      >
+
+        <div class="drawer-header">
+
+          <h5
+            class="drawer-title"
+            id="navDrawerLabel"
+          >
+            Menu
+          </h5>
 
           <button
-            class="btn-icon header-theme-btn"
             type="button"
-            id="themeToggle"
-            aria-label="Toggle color mode"
+            class="btn-close"
+            data-bs-dismiss="drawer"
+            aria-label="Close navigation"
           >
-
-            <svg
-              class="theme-icon-light"
-              width="18"
-              height="18"
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              aria-hidden="true"
-            >
-              <circle cx="8" cy="8" r="3.25"></circle>
-              <path d="M8 1v1.5M8 13.5V15M15 8h-1.5M2.5 8H1m11-4-1 1M5 11l-1 1m0-8 1 1m6 6 1 1"></path>
-            </svg>
-
-            <svg
-              class="theme-icon-dark"
-              width="18"
-              height="18"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"></path>
-            </svg>
-
-          </button>
-
-
-          <a
-            class="btn-outline theme-secondary header-cta header-desktop-action"
-            href="index.html#advertise"
-          >
-            Advertise With Us
-          </a>
-
-
-          <a
-            class="btn-solid theme-primary header-cta header-desktop-action"
-            href="list-your-business.html"
-            aria-current="page"
-          >
-            List Your Business
-          </a>
-
-
-          <button
-            class="btn-icon mobile-menu-toggle navbar-toggler"
-            type="button"
-            data-bs-toggle="drawer"
-            data-bs-target="#navDrawer"
-            aria-controls="navDrawer"
-            aria-label="Open navigation"
-          >
-
-            <span
-              class="navbar-toggler-icon"
-              aria-hidden="true"
-            ></span>
-
           </button>
 
         </div>
 
 
-        <dialog
-          class="drawer drawer-end"
-          tabindex="-1"
-          id="navDrawer"
-          aria-labelledby="navDrawerLabel"
-        >
+        <div class="drawer-body">
 
-          <div class="drawer-header">
+          <ul class="nav navbar-nav">
 
-            <h5
-              class="drawer-title"
-              id="navDrawerLabel"
+
+            <li class="nav-item">
+
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="index.html"
+              >
+                Home
+              </a>
+
+            </li>
+
+
+            <li class="nav-item">
+
+              <button
+                class="nav-link"
+                type="button"
+                data-bs-toggle="menu"
+                aria-expanded="false"
+              >
+
+                Businesses
+
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+
+                  <path d="m3 6 5 5 5-5"/>
+
+                </svg>
+
+              </button>
+
+
+              <div class="menu">
+
+                <a
+                  class="menu-item"
+                  href="businesses.html"
+                >
+                  Browse all businesses
+                </a>
+
+                <hr class="menu-divider">
+
+
+                <a
+                  class="menu-item"
+                  href="businesses.html?category=food"
+                >
+                  Restaurants &amp; Food
+                </a>
+
+                <a
+                  class="menu-item"
+                  href="businesses.html?category=beauty"
+                >
+                  Hair &amp; Beauty
+                </a>
+
+                <a
+                  class="menu-item"
+                  href="businesses.html?category=shopping"
+                >
+                  Shopping
+                </a>
+
+                <a
+                  class="menu-item"
+                  href="businesses.html?category=property"
+                >
+                  Property &amp; Home
+                </a>
+
+                <a
+                  class="menu-item"
+                  href="businesses.html?category=professional"
+                >
+                  Professional Services
+                </a>
+
+                <a
+                  class="menu-item"
+                  href="businesses.html?category=transport"
+                >
+                  Transport
+                </a>
+
+                <a
+                  class="menu-item"
+                  href="businesses.html?category=health"
+                >
+                  Health &amp; Wellness
+                </a>
+
+                <a
+                  class="menu-item"
+                  href="businesses.html?category=events"
+                >
+                  Events &amp; Entertainment
+                </a>
+
+                <hr class="menu-divider">
+
+                <a
+                  class="menu-item"
+                  href="businesses.html"
+                >
+                  View all categories
+                </a>
+
+              </div>
+
+            </li>
+
+
+            <li class="nav-item">
+
+              <a
+                class="nav-link"
+                href="index.html#news"
+              >
+                Community
+              </a>
+
+            </li>
+
+
+            <li class="nav-item">
+
+              <a
+                class="nav-link"
+                href="index.html#events"
+              >
+                Events
+              </a>
+
+            </li>
+
+
+            <li class="nav-item">
+
+              <a
+                class="nav-link"
+                href="index.html#guides"
+              >
+                Guides
+              </a>
+
+            </li>
+
+
+            <li class="nav-item">
+
+              <a
+                class="nav-link"
+                href="index.html#about"
+              >
+                About
+              </a>
+
+            </li>
+
+          </ul>
+
+
+          <div class="mobile-only-actions mt-4 pt-4 border-top">
+
+            <a
+              class="btn-solid theme-primary w-100 mb-2"
+              href="list-your-business.html"
             >
-              Menu
-            </h5>
+              List Your Business
+            </a>
 
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="drawer"
-              aria-label="Close navigation"
-            ></button>
-
-          </div>
-
-
-          <div class="drawer-body">
-
-            <ul class="nav navbar-nav">
-
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                  Home
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="businesses.html">
-                  Businesses
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="index.html#news">
-                  Community
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="index.html#events">
-                  Events
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="index.html#guides">
-                  Guides
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="index.html#about">
-                  About
-                </a>
-              </li>
-
-            </ul>
-
-
-            <div class="mobile-only-actions mt-4 pt-4 border-top">
-
-              <a
-                class="btn-solid theme-primary w-100 mb-2"
-                href="list-your-business.html"
-              >
-                List Your Business
-              </a>
-
-              <a
-                class="btn-outline theme-secondary w-100"
-                href="index.html#advertise"
-              >
-                Advertise With Us
-              </a>
-
-            </div>
+            <a
+              class="btn-outline theme-secondary w-100"
+              href="index.html#advertise"
+            >
+              Advertise With Us
+            </a>
 
           </div>
 
-        </dialog>
+        </div>
 
-      </div>
+      </dialog>
 
-    </nav>
+    </div>
 
-  </header>
+  </nav>
+
+</header>
 
 
   <!-- =======================================================
@@ -4391,7 +4552,6 @@
     })();
 
   </script>
-
   <script type="module" src="assets/js/main.js"></script>
 
 </body>

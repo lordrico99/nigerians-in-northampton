@@ -943,7 +943,7 @@
 
     <img
       class="hero-bg"
-      src="img/hero-optimized-2.jpg"
+      src="img/hero.jpg"
       alt=""
       width="1800"
       height="900"
@@ -3399,8 +3399,13 @@
               liveBusinesses.length
             ) {
 
-              businesses =
-                liveBusinesses;
+              /* Keep the original local placeholder businesses.
+                 Add approved businesses returned by the API
+                 instead of replacing the local data. */
+              businesses = [
+                ...businesses,
+                ...liveBusinesses
+              ];
 
             }
 
@@ -3429,6 +3434,23 @@
                   business.id
                 )
             );
+
+
+        /* Remove duplicate IDs while preserving the local
+           placeholder when the same ID appears twice. */
+        const seenBusinessIds = new Set();
+
+        businesses =
+          businesses.filter(
+            (business) => {
+              if (seenBusinessIds.has(business.id)) {
+                return false;
+              }
+
+              seenBusinessIds.add(business.id);
+              return true;
+            }
+          );
 
 
         if (
