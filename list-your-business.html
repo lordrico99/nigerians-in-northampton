@@ -2174,40 +2174,50 @@
             value.path ||
             value.filename ||
             value.location ||
+            value.file ||
             "";
         }
 
-        const raw = String(value || "").trim();
+        const raw = String(value || "")
+          .trim()
+          .replace(/\\/g, "/");
+
         if (!raw) return "";
 
         if (/^data:image\//i.test(raw)) {
           return raw;
         }
 
+        const apiBase = String(API_BASE_URL || "")
+          .replace(/\/api\/?$/, "")
+          .replace(/\/$/, "");
+
+        const isPrivateOrLocalHost = (hostname) => {
+          const host = String(hostname || "").toLowerCase();
+
+          return (
+            /^(localhost|127(?:\.\d{1,3}){3}|0\.0\.0\.0|::1)$/i.test(host) ||
+            /^10(?:\.\d{1,3}){3}$/.test(host) ||
+            /^192\.168(?:\.\d{1,3}){2}$/.test(host) ||
+            /^172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2}$/.test(host)
+          );
+        };
+
         if (/^https?:\/\//i.test(raw)) {
           try {
             const absolute = new URL(raw);
 
             /*
-              Old locally-created listings can contain localhost image URLs.
-              A phone cannot reach the laptop's localhost, so resolve those
-              paths against the production API host instead.
+              Some older listings were saved with a laptop/local-network
+              image host. Those addresses work on the submitting computer
+              but cannot be reached by a phone. Re-anchor uploaded images
+              to the live API host while preserving the stored path.
             */
-            if (
-              /^(localhost|127(?:\.\d{1,3}){3}|0\.0\.0\.0)$/i.test(
-                absolute.hostname
-              )
-            ) {
-              const apiBase = String(API_BASE_URL || "")
-                .replace(/\/api\/?$/, "")
-                .replace(/\/$/, "");
-
-              if (apiBase) {
-                return new URL(
-                  absolute.pathname + absolute.search + absolute.hash,
-                  `${apiBase}/`
-                ).href;
-              }
+            if (apiBase && isPrivateOrLocalHost(absolute.hostname)) {
+              return new URL(
+                absolute.pathname + absolute.search + absolute.hash,
+                `${apiBase}/`
+              ).href;
             }
 
             return absolute.href;
@@ -2220,10 +2230,6 @@
           return `${window.location.protocol}${raw}`;
         }
 
-        const apiBase = String(API_BASE_URL || "")
-          .replace(/\/api\/?$/, "")
-          .replace(/\/$/, "");
-
         if (!apiBase) return "";
 
         try {
@@ -2231,8 +2237,8 @@
             return new URL(raw, `${apiBase}/`).href;
           }
 
-          if (raw.startsWith("uploads/")) {
-            return new URL(`/${raw}`, `${apiBase}/`).href;
+          if (/^uploads\//i.test(raw)) {
+            return new URL(`/${raw.replace(/^\/+/, "")}`, `${apiBase}/`).href;
           }
 
           return new URL(
@@ -2241,6 +2247,62 @@
           ).href;
         } catch (error) {
           console.warn("Could not resolve member business image URL.", error);
+          return "";
+        }
+      }
+
+      function memberImageFallbackURL(value) {
+        if (!value) return "";
+
+        const apiBase = String(API_BASE_URL || "")
+          .replace(/\/api\/?$/, "")
+          .replace(/\/$/, "");
+
+        if (!apiBase) return "";
+
+        let raw = value;
+
+        if (typeof raw === "object") {
+          raw =
+            raw.path ||
+            raw.filename ||
+            raw.file ||
+            raw.url ||
+            raw.src ||
+            raw.location ||
+            "";
+        }
+
+        raw = String(raw || "")
+          .trim()
+          .replace(/\\/g, "/");
+
+        if (!raw) return "";
+
+        try {
+          if (/^https?:\/\//i.test(raw)) {
+            const absolute = new URL(raw);
+            if (absolute.pathname) {
+              return new URL(
+                absolute.pathname + absolute.search + absolute.hash,
+                `${apiBase}/`
+              ).href;
+            }
+          }
+
+          if (/^uploads\//i.test(raw)) {
+            return new URL(`/${raw.replace(/^\/+/, "")}`, `${apiBase}/`).href;
+          }
+
+          if (raw.startsWith("/")) {
+            return new URL(raw, `${apiBase}/`).href;
+          }
+
+          return new URL(
+            `/uploads/businesses/${raw.replace(/^\/+/, "")}`,
+            `${apiBase}/`
+          ).href;
+        } catch (error) {
           return "";
         }
       }
@@ -2553,9 +2615,25 @@
             ? normaliseServices(item.services).slice(0, 6)
             : [];
           const publicBusiness = item?.publishedBusiness || item;
-          const cover = memberImageURL(
-            publicBusiness?.coverImage || item?.coverImage
-          );
+          const coverSource =
+            publicBusiness?.coverImage ||
+            publicBusiness?.cover ||
+            publicBusiness?.image ||
+            publicBusiness?.coverImageUrl ||
+            publicBusiness?.imageUrl ||
+            publicBusiness?.images?.coverImage ||
+            publicBusiness?.images?.cover ||
+            item?.coverImage ||
+            item?.cover ||
+            item?.image ||
+            item?.coverImageUrl ||
+            item?.imageUrl ||
+            item?.images?.coverImage ||
+            item?.images?.cover ||
+            (Array.isArray(publicBusiness?.images) ? publicBusiness.images[0] : "") ||
+            (Array.isArray(item?.images) ? item.images[0] : "");
+          const cover = memberImageURL(coverSource);
+          const coverFallback = memberImageFallbackURL(coverSource);
           const phone = String(publicBusiness?.phone || item?.phone || "").trim();
           const email = String(publicBusiness?.email || item?.email || "").trim();
           const updated = memberDateLabel(item);
@@ -2567,7 +2645,7 @@
             >
               <div class="member-business-media">
                 ${cover
-                  ? `<img src="${escapeForAttribute(cover)}" alt="${escapeForAttribute(name)}" loading="eager" decoding="async" fetchpriority="high" onerror="this.hidden=true;this.nextElementSibling.hidden=false;">`
+                  ? `<img src="${escapeForAttribute(cover)}" alt="${escapeForAttribute(name)}" loading="eager" decoding="async" fetchpriority="high" referrerpolicy="no-referrer" data-fallback="${escapeForAttribute(coverFallback)}" onerror="if (this.dataset.fallback && !this.dataset.fallbackUsed && this.src !== this.dataset.fallback) { this.dataset.fallbackUsed = '1'; this.src = this.dataset.fallback; } else { this.hidden = true; this.nextElementSibling.hidden = false; }">`
                   : ""}
 
                 <div
@@ -2657,6 +2735,7 @@
       }
 
       function showNewListingForm() {
+        restoreMemberFormControls();
         formMode = "new";
         editingListing = null;
 
@@ -2722,6 +2801,7 @@
       }
 
       function openSubmissionEditor(item) {
+        restoreMemberFormControls();
         editingListing = item;
         formMode = "resubmit";
         submissionComplete?.classList.remove("is-visible");
@@ -2736,6 +2816,7 @@
       }
 
       function openApprovedEditor(item) {
+        restoreMemberFormControls();
         editingListing = item;
         formMode = "change_request";
         submissionComplete?.classList.remove("is-visible");
@@ -2817,6 +2898,124 @@
         form?.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
+      function resetSubmittedFormState() {
+        form?.reset();
+
+        state.services = [];
+        state.coverFile = null;
+        state.galleryFiles = [];
+        state.coverImageData = "";
+        state.galleryImageData = [];
+        state.lat = 52.2400;
+        state.lng = -0.8990;
+        state.locationSelected = false;
+
+        if (coverPreview) coverPreview.innerHTML = "";
+        if (galleryPreview) galleryPreview.innerHTML = "";
+        if (coverImage) coverImage.value = "";
+        if (galleryImages) galleryImages.value = "";
+
+        const town = document.getElementById("businessTown");
+        if (town) town.value = "Northampton";
+
+        renderHoursGrid();
+        renderServices();
+
+        if (map && ownerMarker) {
+          ownerMarker.setLatLng([state.lat, state.lng]);
+          map.setView([state.lat, state.lng], 13);
+        }
+
+        const coordinatesOutput = document.getElementById("coordinatesOutput");
+        if (coordinatesOutput) {
+          coordinatesOutput.textContent = "Approximate Northampton location shown";
+        }
+
+        updatePreview();
+      }
+
+      function restoreMemberFormControls() {
+        form?.querySelectorAll("input, select, textarea, button").forEach((control) => {
+          control.disabled = false;
+        });
+
+        form?.removeAttribute("aria-disabled");
+        form?.classList.remove("member-form-locked");
+        form?.removeAttribute("hidden");
+
+        const agreementLabel = ownerAgreement?.closest("label");
+        if (agreementLabel) agreementLabel.hidden = false;
+
+        if (saveDraftButton) {
+          saveDraftButton.hidden = false;
+          saveDraftButton.disabled = false;
+        }
+
+        const submitButton = form?.querySelector('button[type="submit"]');
+        if (submitButton) {
+          submitButton.hidden = false;
+          submitButton.disabled = false;
+          submitButton.textContent = "Submit Business Listing";
+        }
+
+        if (memberFormCancelButton) {
+          memberFormCancelButton.hidden = false;
+        }
+
+        const actionRow = saveDraftButton?.parentElement;
+        if (actionRow) actionRow.hidden = false;
+
+        if (submissionProgress) {
+          submissionProgress.hidden = false;
+          submissionProgress.classList.remove("is-visible");
+        }
+      }
+
+      function lockSubmittedForm() {
+        formMode = "blocked";
+        editingListing = null;
+
+        resetSubmittedFormState();
+
+        form?.querySelectorAll("input, select, textarea, button").forEach((control) => {
+          control.disabled = true;
+        });
+
+        form?.setAttribute("aria-disabled", "true");
+        form?.classList.add("member-form-locked", "member-form-hidden");
+        form?.setAttribute("hidden", "");
+
+        const agreementLabel = ownerAgreement?.closest("label");
+        if (agreementLabel) agreementLabel.hidden = true;
+
+        if (saveDraftButton) {
+          saveDraftButton.disabled = true;
+          saveDraftButton.hidden = true;
+        }
+
+        const submitButton = form?.querySelector('button[type="submit"]');
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.hidden = true;
+          submitButton.textContent = "Submit Business Listing";
+        }
+
+        if (memberFormCancelButton) {
+          memberFormCancelButton.disabled = true;
+          memberFormCancelButton.hidden = true;
+        }
+
+        const actionRow = saveDraftButton?.parentElement;
+        if (actionRow) actionRow.hidden = true;
+
+        if (submissionProgress) {
+          submissionProgress.classList.remove("is-visible");
+          submissionProgress.hidden = true;
+        }
+
+        clearStatus();
+      }
+
       function bindMemberActions() {
         document.querySelectorAll("[data-member-list-new]").forEach((button) => {
           button.addEventListener("click", () => {
@@ -2896,6 +3095,7 @@
       }
 
       function resetFormForNewListing() {
+        restoreMemberFormControls();
         editingListing = null;
         formMode = "new";
         form?.reset();
@@ -4344,7 +4544,43 @@
                 "Your business listing has been sent to the directory server and recorded as pending review. The directory team can review it before it is published.";
             }
 
-            form.classList.add("member-form-hidden");
+            /*
+              Switch the UI to its completed state before doing any secondary
+              account refresh. This makes the confirmation the immediate next
+              screen and prevents the user from editing/submitting again.
+            */
+            const completedMode = formMode;
+
+            if (completedMode !== "change_request") {
+              const serverSubmission = result?.submission && typeof result.submission === "object"
+                ? result.submission
+                : {};
+
+              const completedListing = {
+                ...submission,
+                ...serverSubmission,
+                reference,
+                status: "pending"
+              };
+
+              memberListings = [
+                completedListing,
+                ...memberListings.filter(
+                  (item) => memberItemReference(item) !== reference
+                )
+              ];
+
+              renderMemberListings();
+            }
+
+            if (submissionReference) {
+              submissionReference.textContent = reference;
+            }
+
+            if (submissionStorageNote) {
+              submissionStorageNote.textContent =
+                "Your business listing has been sent to the directory server and recorded as pending review. The directory team can review it before it is published.";
+            }
 
             if (submissionComplete) {
               submissionComplete.classList.add(
@@ -4355,26 +4591,35 @@
               const copy = submissionComplete.querySelector("p.fg-2");
               const note = submissionComplete.querySelector("#submissionStorageNote");
 
-              if (formMode === "change_request") {
+              if (completedMode === "change_request") {
                 if (heading) heading.textContent = "Your change request has been submitted";
                 if (copy) copy.textContent = "Your changes have been sent to the directory team. Your current public listing remains unchanged until the changes are approved.";
                 if (note) note.textContent = "Your change request is now awaiting administrator review.";
-              } else if (formMode === "resubmit") {
+              } else if (completedMode === "resubmit") {
                 if (heading) heading.textContent = "Your updated listing has been resubmitted";
                 if (copy) copy.textContent = "Your updated information has been sent back to the directory team and is being reviewed.";
                 if (note) note.textContent = "Your listing remains under review until the updated submission is approved.";
               }
             }
 
-            await loadMemberAccount();
+            lockSubmittedForm();
 
-            window.scrollTo({
-              top: submissionComplete
-                ? submissionComplete.getBoundingClientRect().top +
-                  window.scrollY -
-                  140
-                : 0,
-              behavior: "smooth"
+            /* Scroll now — do not wait for the account refresh. */
+            if (submissionComplete) {
+              requestAnimationFrame(() => {
+                submissionComplete.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start"
+                });
+              });
+            }
+
+            /* Refresh the authoritative account state quietly after the UI has moved. */
+            loadMemberAccount().catch((refreshError) => {
+              console.warn(
+                "Submission succeeded, but the member listing refresh failed.",
+                refreshError
+              );
             });
           } catch (error) {
             console.error(
@@ -4399,20 +4644,32 @@
               );
             }
 
-            saveDraftButton.disabled =
-              false;
+            const submissionSucceeded =
+              submissionComplete?.classList.contains("is-visible");
 
-            if (
-              submitButton &&
-              !submissionComplete?.classList.contains(
-                "is-visible"
-              )
-            ) {
-              submitButton.disabled =
-                false;
+            if (!submissionSucceeded) {
+              saveDraftButton.disabled = false;
 
-              submitButton.textContent =
-                originalButtonText;
+              if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.hidden = false;
+                submitButton.textContent = originalButtonText;
+              }
+            } else {
+              /* Keep the completed state locked even after the request cleanup. */
+              saveDraftButton.disabled = true;
+              saveDraftButton.hidden = true;
+
+              if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.hidden = true;
+                submitButton.textContent = "Submit Business Listing";
+              }
+
+              if (submissionProgress) {
+                submissionProgress.hidden = true;
+                submissionProgress.classList.remove("is-visible");
+              }
             }
           }
         }
