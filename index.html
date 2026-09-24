@@ -55,6 +55,52 @@
   <style>
 
     /* =========================================================
+       GLOBAL HORIZONTAL SCROLL FIX
+       Prevents the PAGE from scrolling horizontally while
+       preserving horizontal scrolling inside the carousels.
+    ========================================================= */
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      overflow-x: hidden !important;
+    }
+
+    body {
+      overflow-y: auto;
+    }
+
+    #main {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow-x: hidden;
+    }
+
+    #main > .section {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .container,
+    .row,
+    [class*="col-"] {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    img,
+    svg,
+    video,
+    canvas {
+      max-width: 100%;
+    }
+
+
+    /* =========================================================
        HOMEPAGE COMPACT LAYOUT
     ========================================================= */
 
@@ -277,6 +323,26 @@
       box-sizing: border-box;
     }
 
+    /* ---------------------------------------------------------
+   HAIR & BEAUTY IMAGE CROP
+--------------------------------------------------------- */
+
+.home-carousel-slide:nth-child(2) .marketplace-image {
+  object-position: center center;
+}
+
+.home-carousel-slide:nth-child(1) .marketplace-image {
+  object-position: center center;
+}
+
+@media (max-width: 767.98px) {
+
+  .home-carousel-slide:nth-child(2) .marketplace-image {
+    object-position: center 35%;
+  }
+
+}
+
 
     /* ---------------------------------------------------------
        FEATURED STORY CARD
@@ -317,7 +383,6 @@
 
     .home-story-image {
       position: absolute;
-
       inset: 0;
 
       z-index: -3;
@@ -326,7 +391,18 @@
       height: 100%;
 
       object-fit: cover;
+
+      object-position: center 40%;
     }
+
+    .home-carousel-slide:nth-child(1) .home-story-image {
+      object-position: center 32%;
+    }
+
+    .home-carousel-slide:nth-child(2) .home-story-image {
+      object-position: center 48%;
+    }
+
 
     .home-story-content {
       min-height: 335px;
@@ -569,14 +645,13 @@
         var(--bs-border-color);
     }
 
-    .marketplace-image {
-      width: 100%;
-      height: 100%;
-
-      min-height: 320px;
-
-      object-fit: cover;
-    }
+.marketplace-image {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  object-position: center;
+}
 
     .marketplace-content {
       display: flex;
@@ -1064,7 +1139,7 @@
           >
 
             <path
-              d="M0.46967 5.46967C0.76256 5.23744 1.23744 5.23744 1.53033 5.53033L5 9L8.46967 5.53033C8.76256 5.23744 9.23744 5.23744 9.53033 5.53033C9.82322 5.82322 9.82322 6.2981 9.53033 6.59099L5.53033 10.591C5.23744 10.8839 4.76256 10.8839 4.46967 10.591L0.46967 6.59099C0.176777 6.2981 0.176777 5.82322 0.23744 5.53033Z"
+              d="M0.46967 5.46967C0.76256 5.23744 1.23744 5.23744 1.53033 5.53033L5 9L8.46967 5.53033C8.76256 5.23744 9.23756 5.23756 9.53033 5.53033C9.82322 5.82322 9.82322 6.2981 9.53033 6.59099L5.53033 10.591C5.23744 10.8839 4.76256 10.8839 4.46967 10.591L0.46967 6.59099C0.176777 6.2981 0.176777 5.82322 0.23744 5.53033Z"
               fill="currentcolor"
             />
 
@@ -1486,7 +1561,7 @@
 
                 <img
                   class="home-story-image"
-                  src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=85"
+                  src="https://images.unsplash.com/photo-1644042191329-759b854f880a?auto=format&fit=crop&w=1600&h=450&q=85&crop=faces"
                   alt="People spending time together in a community setting"
                   loading="lazy"
                 >
@@ -1524,8 +1599,8 @@
 
                 <img
                   class="home-story-image"
-                  src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=85"
-                  alt="Business team collaborating around a table"
+                  src="https://images.pexels.com/photos/30689114/pexels-photo-30689114.jpeg?auto=format&fit=crop&w=1600&q=85"
+                  alt="African business professionals collaborating with a laptop"
                   loading="lazy"
                 >
 
@@ -1911,10 +1986,12 @@
         <div class="guide-grid">
 
 
+          <!-- HOUSING -->
+
           <a
             class="guide-tile"
             href="#guides"
-            style="--guide-image:url('https://images.unsplash.com/photo-1560185127-6a8c8f2e0f9c?auto=format&fit=crop&w=900&q=80')"
+            style="--guide-image:url('https://images.pexels.com/photos/5727801/pexels-photo-5727801.jpeg?auto=format&fit=crop&w=900&q=80')"
           >
             <span class="guide-tile-name">
               Housing
@@ -1922,16 +1999,20 @@
           </a>
 
 
+          <!-- HEALTHCARE -->
+
           <a
             class="guide-tile"
             href="#guides"
-            style="--guide-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80')"
+            style="--guide-image:url('https://images.pexels.com/photos/7578811/pexels-photo-7578811.jpeg?auto=format&fit=crop&w=900&q=80')"
           >
             <span class="guide-tile-name">
               Healthcare
             </span>
           </a>
 
+
+          <!-- TRANSPORT -->
 
           <a
             class="guide-tile"
@@ -1944,10 +2025,12 @@
           </a>
 
 
+          <!-- EMPLOYMENT -->
+
           <a
             class="guide-tile"
             href="#guides"
-            style="--guide-image:url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=80')"
+            style="--guide-image:url('https://images.pexels.com/photos/30678212/pexels-photo-30678212.jpeg?auto=format&fit=crop&w=900&q=80')"
           >
             <span class="guide-tile-name">
               Employment
@@ -1955,10 +2038,12 @@
           </a>
 
 
+          <!-- EDUCATION -->
+
           <a
             class="guide-tile"
             href="#guides"
-            style="--guide-image:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=80')"
+            style="--guide-image:url('https://images.pexels.com/photos/4560083/pexels-photo-4560083.jpeg?auto=format&fit=crop&w=900&q=80')"
           >
             <span class="guide-tile-name">
               Education
@@ -1966,10 +2051,12 @@
           </a>
 
 
+          <!-- COMMUNITY -->
+
           <a
             class="guide-tile"
             href="#guides"
-            style="--guide-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80')"
+            style="--guide-image:url('https://images.pexels.com/photos/32617902/pexels-photo-32617902.jpeg?auto=format&fit=crop&w=900&q=80')"
           >
             <span class="guide-tile-name">
               Community
@@ -2046,12 +2133,12 @@
 
               <div class="marketplace-card">
 
-                <img
-                  class="marketplace-image"
-                  src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200&q=85"
-                  alt="Food being prepared for an event"
-                  loading="lazy"
-                >
+<img
+  class="marketplace-image"
+  src="https://images.pexels.com/photos/13915043/pexels-photo-13915043.jpeg?auto=format&fit=crop&w=1400&q=85"
+  alt="Nigerian jollof rice with grilled chicken"
+  loading="lazy"
+>
 
                 <div class="marketplace-content">
 
@@ -2092,12 +2179,12 @@
 
               <div class="marketplace-card">
 
-                <img
-                  class="marketplace-image"
-                  src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=85"
-                  alt="Hair and beauty styling service"
-                  loading="lazy"
-                >
+<img
+  class="marketplace-image"
+  src="https://images.pexels.com/photos/36441633/pexels-photo-36441633.jpeg?auto=format&fit=crop&w=1400&h=950&q=85"
+  alt="African woman having her hair braided in a salon"
+  loading="lazy"
+>
 
                 <div class="marketplace-content">
 

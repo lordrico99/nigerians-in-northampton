@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="en" data-bs-theme="light">
 
 <head>
@@ -39,7 +38,6 @@
     href="assets/css/style.css"
   >
 
-
   <!-- =======================================================
        API CONFIG
        MUST LOAD BEFORE LOGIN JAVASCRIPT
@@ -47,11 +45,9 @@
 
   <script src="assets/js/config.js"></script>
 
-
   <style>
 
     :root {
-
       --auth-brand:
         var(--bs-primary, #0f766e);
 
@@ -69,13 +65,17 @@
 
       --auth-shadow:
         0 24px 80px rgba(15, 23, 42, .12);
-
     }
 
 
+    /* =====================================================
+       PAGE
+    ====================================================== */
+
     body.auth-page {
 
-      min-height: 100vh;
+      min-height:
+        100vh;
 
       background:
         radial-gradient(
@@ -83,13 +83,11 @@
           rgba(15, 118, 110, .08),
           transparent 30%
         ),
-
         radial-gradient(
           circle at 90% 90%,
           rgba(15, 23, 42, .055),
           transparent 28%
         ),
-
         var(--bs-body-bg);
 
     }
@@ -101,9 +99,11 @@
 
     .auth-header {
 
-      position: relative;
+      position:
+        relative;
 
-      z-index: 10;
+      z-index:
+        10;
 
       border-bottom:
         1px solid
@@ -301,7 +301,6 @@
           rgba(15, 23, 42, .93),
           rgba(15, 118, 110, .82)
         ),
-
         url(
           "img/Northampton_Market_Square.jpg"
         )
@@ -332,7 +331,6 @@
           rgba(255,255,255,.13),
           transparent 30%
         ),
-
         radial-gradient(
           circle at 15% 80%,
           rgba(255,255,255,.08),
@@ -1385,8 +1383,7 @@
        DARK MODE
     ====================================================== */
 
-    [data-bs-theme="dark"]
-    .auth-header {
+    [data-bs-theme="dark"] .auth-header {
 
       background:
         color-mix(
@@ -1398,17 +1395,14 @@
     }
 
 
-    [data-bs-theme="dark"]
-    .auth-visual {
+    [data-bs-theme="dark"] .auth-visual {
 
       background:
-
         linear-gradient(
           145deg,
           rgba(2, 6, 23, .94),
           rgba(15, 118, 110, .72)
         ),
-
         url(
           "img/Northampton_Market_Square.jpg"
         )
@@ -1546,13 +1540,11 @@
             N
           </span>
 
-
           <span>
 
             <strong class="d-block">
               Nigerians in Northampton
             </strong>
-
 
             <span class="fs-xs fg-3">
               Community &amp; Business Directory
@@ -1575,6 +1567,7 @@
     </div>
 
   </header>
+
 
 
   <!-- =======================================================
@@ -1625,7 +1618,6 @@
                 ✓
               </span>
 
-
               <div>
 
                 <strong>
@@ -1651,7 +1643,6 @@
                 ☆
               </span>
 
-
               <div>
 
                 <strong>
@@ -1676,7 +1667,6 @@
               >
                 ↗
               </span>
-
 
               <div>
 
@@ -1705,7 +1695,6 @@
             Free community account
           </span>
 
-
           <span>
             Northampton, UK
           </span>
@@ -1713,6 +1702,7 @@
         </div>
 
       </section>
+
 
 
       <!-- ===================================================
@@ -1733,14 +1723,12 @@
               Member access
             </p>
 
-
             <h2
               class="auth-panel-title"
               id="authPanelTitle"
             >
               Welcome back
             </h2>
-
 
             <p
               class="auth-panel-subtitle"
@@ -1752,7 +1740,10 @@
           </div>
 
 
-          <!-- MODE -->
+
+          <!-- =================================================
+               MODE
+          ================================================== -->
 
           <div
             class="auth-mode-switch"
@@ -1784,7 +1775,10 @@
           </div>
 
 
-          <!-- MESSAGE -->
+
+          <!-- =================================================
+               MESSAGE
+          ================================================== -->
 
           <div
             id="authMessage"
@@ -1792,6 +1786,7 @@
             role="alert"
             aria-live="polite"
           ></div>
+
 
 
           <!-- =================================================
@@ -1828,6 +1823,7 @@
               >
 
             </div>
+
 
 
             <div class="auth-field">
@@ -1869,6 +1865,7 @@
             </div>
 
 
+
             <div class="auth-row">
 
               <label class="auth-checkbox">
@@ -1894,6 +1891,7 @@
             </div>
 
 
+
             <button
               type="submit"
               class="auth-primary"
@@ -1903,9 +1901,11 @@
             </button>
 
 
+
             <div class="auth-divider">
               or
             </div>
+
 
 
             <p class="auth-note">
@@ -1922,6 +1922,7 @@
             </p>
 
           </form>
+
 
 
           <!-- =================================================
@@ -1960,6 +1961,7 @@
             </div>
 
 
+
             <div class="auth-field">
 
               <label
@@ -1985,6 +1987,7 @@
               >
 
             </div>
+
 
 
             <div class="auth-field">
@@ -2025,6 +2028,7 @@
               </div>
 
 
+
               <div
                 class="password-strength"
                 id="passwordStrength"
@@ -2046,7 +2050,6 @@
                     Password strength
                   </span>
 
-
                   <span id="strengthCount">
                     0 / 4
                   </span>
@@ -2063,16 +2066,13 @@
                     ○ At least 8 characters
                   </span>
 
-
                   <span id="checkLower">
                     ○ Lowercase letter
                   </span>
 
-
                   <span id="checkUpper">
                     ○ Uppercase letter
                   </span>
-
 
                   <span id="checkNumber">
                     ○ Number or symbol
@@ -2083,6 +2083,7 @@
               </div>
 
             </div>
+
 
 
             <div class="auth-field">
@@ -2111,9 +2112,11 @@
             </div>
 
 
+
             <p class="auth-confirm-note">
               Use a password you do not reuse on other important accounts.
             </p>
+
 
 
             <label
@@ -2158,6 +2161,7 @@
             </label>
 
 
+
             <button
               type="submit"
               class="auth-primary"
@@ -2167,9 +2171,11 @@
             </button>
 
 
+
             <div class="auth-divider">
               already a member?
             </div>
+
 
 
             <p class="auth-note">
@@ -2186,7 +2192,10 @@
           </form>
 
 
-          <!-- SECURITY -->
+
+          <!-- =================================================
+               SECURITY
+          ================================================== -->
 
           <div
             class="auth-security"
@@ -2196,7 +2205,6 @@
             <span aria-hidden="true">
               🔒
             </span>
-
 
             <span>
               Your password is never displayed in this page's HTML.
@@ -2212,6 +2220,7 @@
     </div>
 
   </main>
+
 
 
   <!-- =======================================================
@@ -2247,12 +2256,14 @@
         );
 
 
+
         /* ===================================================
            STORAGE
         ==================================================== */
 
         const STORAGE_KEY =
           "nin_auth_user_cache";
+
 
 
         /* ===================================================
@@ -2278,11 +2289,17 @@
 
 
           if (
+
             !requested ||
+
             requested.startsWith("//") ||
+
             requested.startsWith("http://") ||
+
             requested.startsWith("https://") ||
+
             requested.startsWith("javascript:")
+
           ) {
 
             return "index.html";
@@ -2297,6 +2314,7 @@
 
         const nextPath =
           getSafeNextPath();
+
 
 
         /* ===================================================
@@ -2387,6 +2405,7 @@
           );
 
 
+
         /* ===================================================
            MESSAGE
         ==================================================== */
@@ -2406,6 +2425,7 @@
               : "auth-message";
 
         }
+
 
 
         /* ===================================================
@@ -2463,9 +2483,7 @@
 
           subtitle.textContent =
             signup
-
               ? "Join the community and manage your business presence from one account."
-
               : "Sign in to manage your account and business listings.";
 
 
@@ -2504,6 +2522,7 @@
         }
 
 
+
         modeButtons.forEach(
           (button) => {
 
@@ -2520,6 +2539,7 @@
 
           }
         );
+
 
 
         switchLinks.forEach(
@@ -2541,6 +2561,7 @@
 
           }
         );
+
 
 
         /* ===================================================
@@ -2598,6 +2619,7 @@
 
             }
           );
+
 
 
         /* ===================================================
@@ -2762,6 +2784,7 @@
         }
 
 
+
         signupPassword.addEventListener(
           "input",
           () => {
@@ -2772,6 +2795,7 @@
 
           }
         );
+
 
 
         /* ===================================================
@@ -2792,6 +2816,7 @@
               await fetch(
                 `${API_BASE_URL}${path}`,
                 {
+
                   ...options,
 
                   credentials:
@@ -2813,6 +2838,7 @@
               );
 
           }
+
           catch (error) {
 
             console.error(
@@ -2828,6 +2854,7 @@
           }
 
 
+
           let payload =
             {};
 
@@ -2838,6 +2865,7 @@
               await response.json();
 
           }
+
           catch {
 
             payload =
@@ -2846,12 +2874,16 @@
           }
 
 
+
           if (!response.ok) {
 
             const requestError =
               new Error(
+
                 payload?.message ||
+
                 `Request failed (${response.status}).`
+
               );
 
 
@@ -2873,6 +2905,7 @@
         }
 
 
+
         /* ===================================================
            CACHE
         ==================================================== */
@@ -2891,6 +2924,7 @@
               );
 
             }
+
             else {
 
               localStorage.removeItem(
@@ -2900,6 +2934,7 @@
             }
 
           }
+
           catch {
 
             // Local storage may be unavailable.
@@ -2907,6 +2942,7 @@
           }
 
         }
+
 
 
         /* ===================================================
@@ -2919,6 +2955,7 @@
             await fetch(
               `${API_BASE_URL}/auth/me`,
               {
+
                 method:
                   "GET",
 
@@ -2927,6 +2964,7 @@
 
                 cache:
                   "no-store"
+
               }
             );
 
@@ -2941,6 +2979,7 @@
               await response.json();
 
           }
+
           catch {
 
             payload =
@@ -2950,15 +2989,22 @@
 
 
           if (
+
             !response.ok ||
+
             payload?.success !== true ||
+
             !payload?.user
+
           ) {
 
             const error =
               new Error(
+
                 payload?.message ||
+
                 "The login session could not be verified."
+
               );
 
 
@@ -2980,6 +3026,7 @@
         }
 
 
+
         /* ===================================================
            COMPLETE LOGIN
         ==================================================== */
@@ -2989,11 +3036,11 @@
         ) {
 
           /*
-            Do not redirect immediately after login.
+            The login endpoint creates the session cookie.
 
-            First verify /auth/me using the same
-            browser session. This confirms that
-            the nin_session cookie is available.
+            We verify that session first using /auth/me.
+            The verified user object contains the current
+            role from MongoDB.
           */
 
           try {
@@ -3002,10 +3049,14 @@
               await verifySession();
 
 
-            setCachedUser(
+            const user =
               verified?.user ||
               payload?.user ||
-              null
+              null;
+
+
+            setCachedUser(
+              user
             );
 
 
@@ -3018,8 +3069,39 @@
             window.setTimeout(
               () => {
 
+                /*
+                  ADMIN:
+                  Always send administrators to the
+                  protected admin dashboard.
+                */
+
+                if (
+                  user?.role === "admin"
+                ) {
+
+                  window.location.replace(
+                    "admin/admin.html"
+                  );
+
+                  return;
+
+                }
+
+
+                /*
+                  NORMAL USER:
+                  Continue to requested page,
+                  or home page by default.
+                */
+
+                const destination =
+                  nextPath === "admin/admin.html"
+                    ? "index.html"
+                    : nextPath;
+
+
                 window.location.replace(
-                  nextPath
+                  destination
                 );
 
               },
@@ -3027,6 +3109,7 @@
             );
 
           }
+
           catch (error) {
 
             console.error(
@@ -3035,7 +3118,9 @@
             );
 
 
-            setCachedUser(null);
+            setCachedUser(
+              null
+            );
 
 
             showMessage(
@@ -3049,6 +3134,7 @@
           }
 
         }
+
 
 
         /* ===================================================
@@ -3091,6 +3177,7 @@
                 .checked;
 
 
+
             if (
               !email ||
               !password
@@ -3105,6 +3192,13 @@
 
             }
 
+
+
+            /*
+              FIXED EMAIL REGEX
+              The previous version contained
+              a malformed **\.** pattern.
+            */
 
             if (
               !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
@@ -3122,6 +3216,7 @@
             }
 
 
+
             loginButton.disabled =
               true;
 
@@ -3136,17 +3231,23 @@
                 await apiRequest(
                   "/auth/login",
                   {
+
                     method:
                       "POST",
 
                     body:
                       JSON.stringify(
                         {
+
                           email,
+
                           password,
+
                           remember
+
                         }
                       )
+
                   }
                 );
 
@@ -3156,6 +3257,7 @@
               );
 
             }
+
             catch (error) {
 
               /*
@@ -3177,6 +3279,7 @@
               }
 
             }
+
             finally {
 
               loginButton.disabled =
@@ -3190,6 +3293,7 @@
 
           }
         );
+
 
 
         /* ===================================================
@@ -3245,6 +3349,7 @@
                 .checked;
 
 
+
             if (
               name.length < 2
             ) {
@@ -3258,6 +3363,11 @@
 
             }
 
+
+
+            /*
+              FIXED EMAIL REGEX
+            */
 
             if (
               !email ||
@@ -3276,6 +3386,7 @@
             }
 
 
+
             if (
               password.length < 8
             ) {
@@ -3288,6 +3399,7 @@
               return;
 
             }
+
 
 
             if (
@@ -3305,6 +3417,7 @@
             }
 
 
+
             if (!terms) {
 
               showMessage(
@@ -3315,6 +3428,7 @@
               return;
 
             }
+
 
 
             signupButton.disabled =
@@ -3331,17 +3445,23 @@
                 await apiRequest(
                   "/auth/register",
                   {
+
                     method:
                       "POST",
 
                     body:
                       JSON.stringify(
                         {
+
                           name,
+
                           email,
+
                           password
+
                         }
                       )
+
                   }
                 );
 
@@ -3351,6 +3471,7 @@
               );
 
             }
+
             catch (error) {
 
               /*
@@ -3372,6 +3493,7 @@
               }
 
             }
+
             finally {
 
               signupButton.disabled =
@@ -3385,6 +3507,7 @@
 
           }
         );
+
 
 
         /* ===================================================
@@ -3411,6 +3534,7 @@
           );
 
 
+
         /* ===================================================
            INITIAL MODE
         ==================================================== */
@@ -3431,6 +3555,7 @@
           );
 
         }
+
 
 
         /* ===================================================
@@ -3455,6 +3580,7 @@
   </script>
 
 
+
   <!-- =======================================================
        BOOTSTRAP
   ======================================================== -->
@@ -3462,6 +3588,7 @@
   <script
     src="assets/vendor/bootstrap6/js/bootstrap.bundle.min.js"
   ></script>
+
 
 
   <!-- =======================================================
