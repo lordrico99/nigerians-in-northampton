@@ -28,6 +28,112 @@
   <!-- This page requires an authenticated member session -->
   <script src="assets/js/auth-guard.js"></script>
 
+  <script>
+    /*
+      Keep this page's colour mode in sync with the homepage.
+      Several legacy builds of the site used different storage keys,
+      so we read/write the common keys together.
+    */
+    (function () {
+      const THEME_KEYS = [
+        "nin_theme",
+        "nin-theme",
+        "themePreference",
+        "theme",
+        "color-theme",
+        "colorMode",
+        "themeMode"
+      ];
+
+      function normaliseTheme(value) {
+        return String(value || "").toLowerCase() === "dark"
+          ? "dark"
+          : String(value || "").toLowerCase() === "light"
+            ? "light"
+            : "";
+      }
+
+      function readStoredTheme() {
+        try {
+          for (const key of THEME_KEYS) {
+            const value = normaliseTheme(localStorage.getItem(key));
+            if (value) return value;
+          }
+        } catch (error) {
+          console.warn("Could not read saved theme preference.", error);
+        }
+
+        if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+
+        return "light";
+      }
+
+      function storeTheme(theme) {
+        try {
+          THEME_KEYS.forEach((key) => {
+            localStorage.setItem(key, theme);
+          });
+        } catch (error) {
+          console.warn("Could not save theme preference.", error);
+        }
+      }
+
+      function applyTheme(theme) {
+        const nextTheme = theme === "dark" ? "dark" : "light";
+        document.documentElement.setAttribute("data-bs-theme", nextTheme);
+
+        const button = document.getElementById("themeToggle");
+        if (button) {
+          const goingDark = nextTheme === "light";
+          button.setAttribute(
+            "aria-label",
+            goingDark ? "Switch to dark mode" : "Switch to light mode"
+          );
+          button.setAttribute(
+            "title",
+            goingDark ? "Switch to dark mode" : "Switch to light mode"
+          );
+        }
+      }
+
+      function toggleTheme() {
+        const current =
+          document.documentElement.getAttribute("data-bs-theme") || "light";
+        const next = current === "dark" ? "light" : "dark";
+        applyTheme(next);
+        storeTheme(next);
+      }
+
+      applyTheme(readStoredTheme());
+      window.NINApplyTheme = applyTheme;
+
+      /*
+        Capture the button click before main.js can register its own
+        theme handler. This prevents a double-toggle on this page.
+      */
+      document.addEventListener(
+        "click",
+        function (event) {
+          const button = event.target.closest?.("#themeToggle");
+          if (!button) return;
+
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          toggleTheme();
+        },
+        true
+      );
+
+      window.addEventListener("storage", function (event) {
+        if (!THEME_KEYS.includes(event.key)) return;
+        const theme = normaliseTheme(event.newValue);
+        if (theme) applyTheme(theme);
+      });
+    })();
+  </script>
+
   <style>
 
     /* =========================================================
@@ -297,8 +403,422 @@
 
 
     /* =========================================================
+       ACCOUNT BAR + GLOBAL OVERFLOW
+    ========================================================= */
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .owner-page,
+    .owner-page main,
+    .owner-page .section,
+    .owner-page .container,
+    .owner-page .row {
+      max-width: 100%;
+    }
+
+    .site-header-account {
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.82);
+    }
+
+    .site-header-account-inner {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px 14px;
+      flex-wrap: wrap;
+      padding-top: 7px;
+      padding-bottom: 7px;
+    }
+
+    .site-account-profile {
+      min-width: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .site-account-avatar {
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(var(--bs-primary-rgb), .11);
+      color: var(--bs-primary);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+
+    .site-account-copy {
+      min-width: 0;
+      display: grid;
+      line-height: 1.15;
+    }
+
+    .site-account-name {
+      max-width: 250px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .site-account-email {
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--bs-secondary-color);
+      font-size: 11px;
+    }
+
+    .site-account-state {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--bs-secondary-color);
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .site-account-state::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #198754;
+      box-shadow: 0 0 0 3px rgba(25,135,84,.10);
+    }
+
+    .site-account-signout {
+      min-height: 32px;
+      padding: .35rem .65rem;
+      border-radius: .55rem;
+      font-size: .76rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .site-header-auth-loading,
+    .site-header-auth-hidden {
+      display: none !important;
+    }
+
+    [data-bs-theme="dark"] .site-header-account {
+      background: rgba(15,23,42,.78);
+      border-bottom-color: rgba(255,255,255,.07);
+    }
+
+    [data-bs-theme="dark"] .site-account-avatar {
+      background: rgba(var(--bs-primary-rgb), .16);
+    }
+
+    @media (max-width: 575.98px) {
+      .site-header-account-inner {
+        justify-content: space-between;
+      }
+
+      .site-account-copy {
+        max-width: min(58vw, 250px);
+      }
+
+      .site-account-name,
+      .site-account-email {
+        max-width: 100%;
+      }
+
+      .site-account-state {
+        display: none;
+      }
+    }
+
+    /* =========================================================
+       MEMBER LISTING CARDS
+    ========================================================= */
+
+    .member-listing-panel {
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 22px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 18px;
+      background: var(--bs-body-bg);
+      box-shadow: 0 10px 30px rgba(15,23,42,.05);
+      overflow: hidden;
+    }
+
+    .member-listing-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--bs-border-color);
+    }
+
+    .member-listing-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -.015em;
+    }
+
+    .member-listing-subtitle {
+      margin: 4px 0 0;
+      color: var(--bs-secondary-color);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .member-listing-body {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .member-loading-state,
+    .member-empty-state,
+    .member-error-state {
+      display: grid;
+      gap: 5px;
+      padding: 18px;
+      border-radius: 13px;
+      background: var(--bs-tertiary-bg);
+      color: var(--bs-secondary-color);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .member-loading-state strong,
+    .member-empty-state strong,
+    .member-error-state strong {
+      color: var(--bs-body-color);
+      font-weight: 800;
+    }
+
+    .member-business-card {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: 185px minmax(0, 1fr);
+      border: 1px solid var(--bs-border-color);
+      border-radius: 15px;
+      background: var(--bs-body-bg);
+      overflow: hidden;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .member-business-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(15,23,42,.07);
+    }
+
+    .member-business-media {
+      min-width: 0;
+      min-height: 205px;
+      background:
+        linear-gradient(135deg, rgba(var(--bs-primary-rgb), .16), rgba(var(--bs-secondary-rgb), .08)),
+        var(--bs-tertiary-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .member-business-media img {
+      width: 100%;
+      height: 100%;
+      min-height: 205px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .member-business-media-fallback {
+      width: 100%;
+      height: 100%;
+      min-height: 205px;
+      display: flex;
+      align-items: flex-end;
+      padding: 15px;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.58)),
+        linear-gradient(135deg, #24364c, #40667b);
+    }
+
+    .member-business-media-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      opacity: .92;
+    }
+
+    .member-business-content {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 18px;
+    }
+
+    .member-business-top {
+      min-width: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .member-business-copy {
+      min-width: 0;
+    }
+
+    .member-business-name {
+      margin: 0;
+      font-size: 1.02rem;
+      font-weight: 800;
+      letter-spacing: -.015em;
+      overflow-wrap: anywhere;
+    }
+
+    .member-business-meta {
+      margin-top: 5px;
+      color: var(--bs-secondary-color);
+      font-size: 11px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .member-business-message {
+      margin-top: 14px;
+      color: var(--bs-body-color);
+      font-size: 13px;
+      line-height: 1.62;
+    }
+
+    .member-business-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .member-business-service {
+      max-width: 100%;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: var(--bs-tertiary-bg);
+      color: var(--bs-secondary-color);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .member-business-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin-top: 13px;
+      padding-top: 12px;
+      border-top: 1px solid var(--bs-border-color);
+      color: var(--bs-secondary-color);
+      font-size: 11px;
+    }
+
+    .member-business-contact span {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .member-business-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: auto;
+      padding-top: 16px;
+    }
+
+    .member-listing-footer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 2px 2px 0;
+    }
+
+    .member-listing-count {
+      color: var(--bs-secondary-color);
+      font-size: 11px;
+    }
+
+    .member-status-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      min-height: 26px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .member-status-pending {
+      background: rgba(255,193,7,.14);
+      color: #946200;
+    }
+
+    .member-status-approved {
+      background: rgba(25,135,84,.12);
+      color: #146c43;
+    }
+
+    .member-status-changes {
+      background: rgba(13,110,253,.11);
+      color: #0a58ca;
+    }
+
+    .member-status-rejected {
+      background: rgba(220,53,69,.11);
+      color: #b02a37;
+    }
+
+    [data-bs-theme="dark"] .member-status-pending { color: #ffd66b; }
+    [data-bs-theme="dark"] .member-status-approved { color: #75d3a7; }
+    [data-bs-theme="dark"] .member-status-changes { color: #8ab8ff; }
+    [data-bs-theme="dark"] .member-status-rejected { color: #ff8f9a; }
+
+    @media (max-width: 767.98px) {
+      .member-business-card {
+        grid-template-columns: 1fr;
+      }
+
+      .member-business-media,
+      .member-business-media img,
+      .member-business-media-fallback {
+        min-height: 170px;
+      }
+
+      .member-listing-head {
+        align-items: flex-start;
+      }
+    }
+
+    /* =========================================================
        FORM LAYOUT
     ========================================================= */
+
 
     .owner-form-layout {
       align-items: flex-start;
@@ -860,6 +1380,38 @@
 
   <header class="site-header">
 
+    <div class="site-header-account">
+      <div class="container site-header-account-inner">
+
+        <div
+          class="site-account-profile site-header-auth-hidden"
+          id="siteAccountProfile"
+          aria-label="Signed-in account"
+        >
+          <span class="site-account-avatar" id="siteAccountInitials">N</span>
+
+          <span class="site-account-copy">
+            <strong class="site-account-name" id="siteAccountName">Member</strong>
+            <span class="site-account-email" id="siteAccountEmail">—</span>
+          </span>
+        </div>
+
+        <span
+          class="site-account-state site-header-auth-hidden"
+          id="siteAccountState"
+        >Signed in</span>
+
+        <button
+          class="btn-outline theme-secondary site-account-signout site-header-auth-hidden"
+          type="button"
+          id="siteAccountSignOut"
+        >
+          Sign out
+        </button>
+
+      </div>
+    </div>
+
   <nav
     class="navbar"
     aria-label="Main navigation"
@@ -1214,6 +1766,24 @@
 
           <div class="mobile-only-actions mt-4 pt-4 border-top">
 
+            <div class="site-account-mobile mb-3">
+              <div class="site-account-profile">
+                <span class="site-account-avatar" id="siteAccountInitialsMobile">N</span>
+                <span class="site-account-copy">
+                  <strong class="site-account-name" id="siteAccountNameMobile">Member</strong>
+                  <span class="site-account-email" id="siteAccountEmailMobile">—</span>
+                </span>
+              </div>
+
+              <button
+                class="btn-outline theme-secondary w-100 mt-3"
+                type="button"
+                id="siteAccountSignOutMobile"
+              >
+                Sign out
+              </button>
+            </div>
+
             <a
               class="btn-solid theme-primary w-100 mb-2"
               href="list-your-business.html"
@@ -1431,7 +2001,7 @@
                 class="btn-outline theme-secondary member-form-cancel"
                 id="memberFormCancelButton"
               >
-                Cancel
+                Clear all fields
               </button>
             </div>
 
@@ -2443,6 +3013,85 @@
          MEMBER ACCOUNT / LISTING WORKFLOW
       ======================================================== */
 
+      function memberImageURL(value) {
+        if (!value) return "";
+
+        if (typeof value === "object") {
+          value =
+            value.url ||
+            value.src ||
+            value.path ||
+            value.filename ||
+            "";
+        }
+
+        const raw = String(value || "").trim();
+        if (!raw) return "";
+
+        if (/^https?:\/\//i.test(raw)) return raw;
+        if (raw.startsWith("/")) return API_BASE_URL.replace(/\/api$/, "") + raw;
+        if (raw.startsWith("uploads/")) {
+          return API_BASE_URL.replace(/\/api$/, "") + "/" + raw;
+        }
+
+        return API_BASE_URL.replace(/\/api$/, "") + "/uploads/businesses/" + raw;
+      }
+
+      function memberDateLabel(item) {
+        const raw = item?.updatedAt || item?.createdAt || "";
+        if (!raw) return "";
+
+        const date = new Date(raw);
+        if (Number.isNaN(date.getTime())) return "";
+
+        return new Intl.DateTimeFormat(undefined, {
+          day: "numeric",
+          month: "short",
+          year: "numeric"
+        }).format(date);
+      }
+
+      function memberInitials(name) {
+        const parts = String(name || "Member")
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
+
+        if (!parts.length) return "M";
+        if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+        return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
+      }
+
+      function updateSiteAccountHeader(user) {
+        const authenticated = Boolean(user?.email);
+        const name = String(user?.name || "Member").trim();
+        const email = String(user?.email || "").trim();
+        const initials = memberInitials(name);
+
+        const show = (selector, visible) => {
+          document.querySelectorAll(selector).forEach((el) => {
+            el.classList.toggle("site-header-auth-hidden", !visible);
+          });
+        };
+
+        const setText = (id, value) => {
+          const element = document.getElementById(id);
+          if (element) element.textContent = value;
+        };
+
+        show("#siteAccountProfile, #siteAccountState, #siteAccountSignOut", authenticated);
+
+        setText("siteAccountInitials", initials);
+        setText("siteAccountName", name);
+        setText("siteAccountEmail", email || "Signed-in member");
+        setText("siteAccountInitialsMobile", initials);
+        setText("siteAccountNameMobile", name);
+        setText("siteAccountEmailMobile", email || "Signed-in member");
+      }
+
+      updateSiteAccountHeader(null);
+
+
       let currentUser = null;
       let memberListings = [];
       let editingListing = null;
@@ -2669,17 +3318,34 @@
       function renderMemberListings() {
         if (!memberListingBody) return;
 
-        const displayItems = Array.isArray(memberListings) ? memberListings : [];
+        const displayItems = Array.isArray(memberListings)
+          ? memberListings
+          : [];
+
         const blocking = hasBlockingSubmission();
+        const hasActionRequired = displayItems.some((item) =>
+          memberItemStatus(item) === "changes_requested"
+        );
 
         if (memberAccountBadge) {
-          memberAccountBadge.className = `member-status-badge ${blocking ? "member-status-pending" : "member-status-approved"}`;
-          memberAccountBadge.textContent = blocking ? "Action in progress" : "Account active";
+          if (blocking && hasActionRequired) {
+            memberAccountBadge.className =
+              "member-status-badge member-status-changes";
+            memberAccountBadge.textContent = "Action required";
+          } else if (blocking) {
+            memberAccountBadge.className =
+              "member-status-badge member-status-pending";
+            memberAccountBadge.textContent = "Under review";
+          } else {
+            memberAccountBadge.className =
+              "member-status-badge member-status-approved";
+            memberAccountBadge.textContent = "Account active";
+          }
         }
 
         if (memberListingSubtitle) {
           memberListingSubtitle.textContent = displayItems.length
-            ? "Your listing status is stored on the directory server and will remain visible when you return."
+            ? `${displayItems.length} business ${displayItems.length === 1 ? "listing" : "listings"} linked to your account.`
             : "You do not have a business listing yet.";
         }
 
@@ -2689,46 +3355,129 @@
               <strong>You haven't submitted a business listing yet.</strong>
               <span>Create your first listing below. It will be reviewed by the directory team before publication.</span>
             </div>
-            <div class="member-business-actions">
-              <button type="button" class="btn-solid theme-primary btn-sm" data-member-list-new="true">List your business</button>
+
+            <div class="member-listing-footer-actions">
+              <span class="member-listing-count">Your account is ready for its first listing.</span>
+              <button
+                type="button"
+                class="btn-solid theme-primary btn-sm"
+                data-member-list-new="true"
+              >
+                List your business
+              </button>
             </div>
           `;
+
           showNewListingForm();
+          bindMemberActions();
           return;
         }
 
-        memberListingBody.innerHTML = displayItems.map((item) => {
+        const cards = displayItems.map((item) => {
           const status = memberItemStatus(item);
           const name = memberItemName(item);
           const meta = `${memberItemCategory(item)} · ${memberItemArea(item)}`;
           const reference = memberItemReference(item);
           const message = memberDefaultMessage(status, item);
+          const services = Array.isArray(item?.services)
+            ? normaliseServices(item.services).slice(0, 6)
+            : [];
+          const publicBusiness = item?.publishedBusiness || item;
+          const cover = memberImageURL(
+            publicBusiness?.coverImage || item?.coverImage
+          );
+          const phone = String(publicBusiness?.phone || item?.phone || "").trim();
+          const email = String(publicBusiness?.email || item?.email || "").trim();
+          const updated = memberDateLabel(item);
 
           return `
-            <article class="member-business-card" data-member-card="${escapeForAttribute(memberItemId(item))}">
-              <div class="member-business-top">
-                <div class="member-business-copy">
-                  <h3 class="member-business-name">${escapeHTML(name)}</h3>
-                  <div class="member-business-meta">${escapeHTML(meta)}${reference ? ` · Reference: ${escapeHTML(reference)}` : ""}</div>
+            <article
+              class="member-business-card"
+              data-member-card="${escapeForAttribute(memberItemId(item))}"
+            >
+              <div class="member-business-media">
+                ${cover
+                  ? `<img src="${escapeForAttribute(cover)}" alt="${escapeForAttribute(name)}" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false;">`
+                  : ""}
+
+                <div
+                  class="member-business-media-fallback"
+                  ${cover ? 'hidden' : ''}
+                >
+                  <span class="member-business-media-label">
+                    ${escapeHTML(memberItemCategory(item))}
+                  </span>
                 </div>
-                <span class="member-status-badge ${memberStatusClass(status)}">${escapeHTML(memberStatusLabel(status))}</span>
               </div>
 
-              <div class="member-business-message">${escapeHTML(message)}</div>
+              <div class="member-business-content">
+                <div class="member-business-top">
+                  <div class="member-business-copy">
+                    <h3 class="member-business-name">${escapeHTML(name)}</h3>
+                    <div class="member-business-meta">
+                      ${escapeHTML(meta)}
+                      ${reference ? ` · Reference: ${escapeHTML(reference)}` : ""}
+                      ${updated ? ` · Updated ${escapeHTML(updated)}` : ""}
+                    </div>
+                  </div>
 
-              <div class="member-business-actions">
-                ${memberListingActions(item, status)}
+                  <span class="member-status-badge ${memberStatusClass(status)}">
+                    ${escapeHTML(memberStatusLabel(status))}
+                  </span>
+                </div>
+
+                <div class="member-business-message">
+                  ${escapeHTML(message)}
+                </div>
+
+                ${services.length
+                  ? `<div class="member-business-services">
+                      ${services.map((service) => `
+                        <span class="member-business-service">
+                          ${escapeHTML(service)}
+                        </span>
+                      `).join("")}
+                    </div>`
+                  : ""}
+
+                ${(phone || email) && status === "approved"
+                  ? `<div class="member-business-contact">
+                      ${phone ? `<span>☎ ${escapeHTML(phone)}</span>` : ""}
+                      ${email ? `<span>✉ ${escapeHTML(email)}</span>` : ""}
+                    </div>`
+                  : ""}
+
+                <div class="member-business-actions">
+                  ${memberListingActions(item, status)}
+                </div>
               </div>
             </article>
           `;
         }).join("");
 
-        if (blocking) {
-          hideNewListingForm();
-        } else {
-          hideNewListingForm();
-        }
+        memberListingBody.innerHTML = `
+          ${cards}
 
+          <div class="member-listing-footer-actions">
+            <span class="member-listing-count">
+              ${blocking
+                ? "Your current listing must complete its review before another listing can be submitted."
+                : "You can add another business from this account."}
+            </span>
+
+            ${!blocking
+              ? `<button
+                   type="button"
+                   class="btn-solid theme-primary btn-sm"
+                   data-member-list-new="true"
+                 >
+                   List another business
+                 </button>`
+              : ""}
+          </div>
+        `;
+
+        hideNewListingForm();
         bindMemberActions();
       }
 
@@ -2741,6 +3490,8 @@
         formMode = "new";
         editingListing = null;
 
+        submissionComplete?.classList.remove("is-visible");
+        clearStatus();
         form?.classList.remove("member-form-hidden");
         if (memberFormTitle) memberFormTitle.textContent = "Create a business listing";
         if (memberFormSubtitle) memberFormSubtitle.textContent = "Your submission will be reviewed before publication.";
@@ -2803,6 +3554,8 @@
       function openSubmissionEditor(item) {
         editingListing = item;
         formMode = "resubmit";
+        submissionComplete?.classList.remove("is-visible");
+        clearStatus();
         populateFormFromListing(item);
         form?.classList.remove("member-form-hidden");
         if (memberFormTitle) memberFormTitle.textContent = "Update your submission";
@@ -2815,6 +3568,8 @@
       function openApprovedEditor(item) {
         editingListing = item;
         formMode = "change_request";
+        submissionComplete?.classList.remove("is-visible");
+        clearStatus();
         populateFormFromListing(item);
         form?.classList.remove("member-form-hidden");
         if (memberFormTitle) memberFormTitle.textContent = "Request changes to your listing";
@@ -2824,11 +3579,72 @@
         form?.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
-      function cancelMemberForm() {
+      function clearAllFormFields() {
+        const confirmed = window.confirm(
+          "Clear all fields and remove the saved draft? Any information currently entered in this form will be lost."
+        );
+
+        if (!confirmed) return;
+
         editingListing = null;
-        formMode = "blocked";
-        form?.classList.add("member-form-hidden");
-        window.scrollTo({ top: memberListingPanel ? memberListingPanel.getBoundingClientRect().top + window.scrollY - 110 : 0, behavior: "smooth" });
+        formMode = "new";
+        submissionComplete?.classList.remove("is-visible");
+        clearStatus();
+
+        form?.reset();
+
+        state.services = [];
+        state.coverFile = null;
+        state.galleryFiles = [];
+        state.coverImageData = "";
+        state.galleryImageData = [];
+        state.lat = 52.2400;
+        state.lng = -0.8990;
+        state.locationSelected = false;
+
+        if (coverPreview) coverPreview.innerHTML = "";
+        if (galleryPreview) galleryPreview.innerHTML = "";
+        if (coverImage) coverImage.value = "";
+        if (galleryImages) galleryImages.value = "";
+
+        const town = document.getElementById("businessTown");
+        if (town) town.value = "Northampton";
+
+        try {
+          localStorage.removeItem("nin_business_listing_draft");
+        } catch (error) {
+          console.warn("Could not remove saved draft.", error);
+        }
+
+        renderHoursGrid();
+        renderServices();
+
+        if (map && ownerMarker) {
+          ownerMarker.setLatLng([state.lat, state.lng]);
+          map.setView([state.lat, state.lng], 13);
+        }
+
+        const coordinatesOutput = document.getElementById("coordinatesOutput");
+        if (coordinatesOutput) {
+          coordinatesOutput.textContent = "Approximate Northampton location shown";
+        }
+
+        if (memberFormTitle) {
+          memberFormTitle.textContent = "Create a business listing";
+        }
+
+        if (memberFormSubtitle) {
+          memberFormSubtitle.textContent = "Your form has been cleared. Fill it in again when you are ready.";
+        }
+
+        if (memberFormRule) {
+          memberFormRule.innerHTML =
+            "<strong>Review workflow:</strong> Your information is submitted to the directory team first. You can return to this page at any time to check its status.";
+        }
+
+        updatePreview();
+        form?.classList.remove("member-form-hidden");
+        form?.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
       function bindMemberActions() {
@@ -2942,7 +3758,7 @@
         updatePreview();
       }
 
-      memberFormCancelButton?.addEventListener("click", cancelMemberForm);
+      memberFormCancelButton?.addEventListener("click", clearAllFormFields);
 
       loadMemberAccount().catch((error) => {
         console.error("Could not load member account data.", error);
@@ -4552,6 +5368,86 @@
     })();
 
   </script>
+
+  <script>
+    /* =========================================================
+       AUTHENTICATED HEADER ACCOUNT
+    ========================================================== */
+
+    (function () {
+      const apiBase = (
+        window.NIN_API_BASE_URL ||
+        "http://localhost:5000/api"
+      ).replace(/\/$/, "");
+
+      async function loadHeaderAccount() {
+        try {
+          const response = await fetch(`${apiBase}/auth/me`, {
+            credentials: "include",
+            cache: "no-store"
+          });
+
+          if (!response.ok) {
+            updateSiteAccountHeader(null);
+            return;
+          }
+
+          const payload = await response.json().catch(() => ({}));
+          const user = payload?.user || payload?.data || null;
+
+          if (user) {
+            updateSiteAccountHeader(user);
+          } else {
+            updateSiteAccountHeader(null);
+          }
+        } catch (error) {
+          console.warn("Could not load signed-in account details.", error);
+          updateSiteAccountHeader(null);
+        }
+      }
+
+      async function signOut() {
+        const buttons = [
+          document.getElementById("siteAccountSignOut"),
+          document.getElementById("siteAccountSignOutMobile")
+        ].filter(Boolean);
+
+        buttons.forEach((button) => {
+          button.disabled = true;
+          button.textContent = "Signing out…";
+        });
+
+        try {
+          await fetch(`${apiBase}/auth/logout`, {
+            method: "POST",
+            credentials: "include",
+            cache: "no-store"
+          });
+        } catch (error) {
+          console.warn("Sign-out request failed.", error);
+        } finally {
+          try {
+            localStorage.removeItem("nin_auth_user_cache");
+          } catch {}
+
+          window.location.replace("login.html?mode=login");
+        }
+      }
+
+      document.addEventListener("click", function (event) {
+        const desktopButton = event.target.closest("#siteAccountSignOut");
+        const mobileButton = event.target.closest("#siteAccountSignOutMobile");
+
+        if (!desktopButton && !mobileButton) return;
+
+        event.preventDefault();
+        signOut();
+      });
+
+      document.addEventListener("DOMContentLoaded", loadHeaderAccount, { once: true });
+    })();
+  </script>
+
   <script type="module" src="assets/js/main.js"></script>
 
 </body>
