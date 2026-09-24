@@ -2732,133 +2732,191 @@ slug:
 
 
     /* =======================================================
-       LOAD BUSINESSES
-    ======================================================= */
+   LOAD BUSINESSES
+======================================================= */
 
-    let businesses = [];
+/*
+   Start with the six businesses from business-data.js.
+
+   Then add approved businesses returned by MongoDB.
+
+   This means:
+   - placeholder/demo businesses stay visible
+   - approved real businesses are added automatically
+   - MongoDB does not replace the static businesses
+*/
+
+let businesses = [];
 
 
-    try {
+/* =======================================================
+   LOAD STATIC / PLACEHOLDER BUSINESSES
+======================================================= */
 
-      const response =
-        await fetch(
-          `${API_BASE_URL}/businesses?limit=100`
+if (
+  Array.isArray(
+    data.businesses
+  )
+) {
+
+  businesses =
+    data.businesses.map(
+      normaliseBusiness
+    );
+
+}
+
+
+/* =======================================================
+   LOAD APPROVED BUSINESSES FROM MONGODB
+======================================================= */
+
+try {
+
+  const response =
+    await fetch(
+      `${API_BASE_URL}/businesses?limit=100`
+    );
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      `Directory API returned ${response.status}`
+    );
+
+  }
+
+
+  const payload =
+    await response.json();
+
+
+  if (
+    !payload ||
+    payload.success !== true ||
+    !Array.isArray(
+      payload.businesses
+    )
+  ) {
+
+    throw new Error(
+      "The directory API returned an invalid response."
+    );
+
+  }
+
+
+  const approvedBusinesses =
+    payload.businesses.map(
+      normaliseBusiness
+    );
+
+
+  /* =====================================================
+     MERGE STATIC + MONGODB BUSINESSES
+  ===================================================== */
+
+  const mergedBusinesses =
+    new Map();
+
+
+  /*
+     Add the static businesses first.
+  */
+
+  businesses.forEach(
+    (business) => {
+
+      const id =
+        String(
+          business.id ||
+          business.slug ||
+          ""
         );
 
 
-      if (!response.ok) {
-
-        throw new Error(
-          `Directory API returned ${response.status}`
-        );
-
-      }
-
-
-      const payload =
-        await response.json();
-
-
-      if (
-        !payload ||
-        payload.success !== true ||
-        !Array.isArray(
-          payload.businesses
-        )
-      ) {
-
-        throw new Error(
-          "The directory API returned an invalid response."
-        );
-
-      }
-
-
-      businesses =
-        payload.businesses.map(
-          normaliseBusiness
-        );
-
-
-      console.log(
-        "Directory API loaded:",
-        businesses
-      );
-
-    }
-    catch (error) {
-
-      console.error(
-        "Could not load businesses from API:",
-        error
-      );
-
-
-      if (
-        Array.isArray(
-          data.businesses
-        )
-      ) {
-
-        businesses =
-          data.businesses.map(
-            normaliseBusiness
-          );
-
-        console.warn(
-          "Using static business-data.js fallback."
-        );
-
-      }
-      else {
-
-        grid.innerHTML = `
-
-          <div class="col-12">
-
-            <div class="directory-error">
-
-              <h3 class="h5 mb-2">
-                Business directory unavailable
-              </h3>
-
-              <p class="fg-3 mb-4">
-                The business directory could not connect to the server.
-                Please make sure the backend is running and try again.
-              </p>
-
-              <button
-                type="button"
-                class="btn-solid theme-primary"
-                onclick="window.location.reload()"
-              >
-                Try again
-              </button>
-
-            </div>
-
-          </div>
-
-        `;
-
-
-        if (resultCount) {
-          resultCount.textContent =
-            "0";
-        }
-
-
-        if (paginationSummary) {
-          paginationSummary.textContent =
-            "Directory unavailable";
-        }
-
-
+      if (!id) {
         return;
-
       }
 
+
+      mergedBusinesses.set(
+        id,
+        business
+      );
+
     }
+  );
+
+
+  /*
+     Add approved MongoDB businesses.
+
+     A real MongoDB business with the same ID
+     will replace the matching placeholder.
+  */
+
+  approvedBusinesses.forEach(
+    (business) => {
+
+      const id =
+        String(
+          business.id ||
+          business.slug ||
+          business._id ||
+          ""
+        );
+
+
+      if (!id) {
+        return;
+      }
+
+
+      mergedBusinesses.set(
+        id,
+        business
+      );
+
+    }
+  );
+
+
+  businesses =
+    Array.from(
+      mergedBusinesses.values()
+    );
+
+
+  console.log(
+    "Directory businesses loaded:",
+    businesses
+  );
+
+}
+catch (error) {
+
+  /*
+     The static businesses remain available even
+     when the API cannot be reached.
+  */
+
+  console.warn(
+    "Could not load approved businesses from API. Using static business-data.js businesses.",
+    error
+  );
+
+}
+
+
+/* =======================================================
+   FINAL BUSINESS COUNT
+======================================================= */
+
+console.log(
+  `Total directory businesses: ${businesses.length}`
+);
 
 
 
