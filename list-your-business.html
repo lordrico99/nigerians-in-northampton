@@ -15,8 +15,6 @@
   <link rel="stylesheet" href="assets/vendor/bootstrap6/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/style.css">
-
-  <!-- Shared site header -->
   <link rel="stylesheet" href="assets/css/header.css">
 
   <link
@@ -105,18 +103,15 @@
     }
 
 
-    /* Shared header layout is provided by assets/css/header.css. */
-
     /* =========================================================
-       GLOBAL HORIZONTAL SCROLL FIX
+       GLOBAL OVERFLOW
     ========================================================= */
 
     html,
     body {
       width: 100%;
       max-width: 100%;
-      margin: 0;
-      overflow-x: hidden !important;
+      overflow-x: hidden;
     }
 
     .owner-page,
@@ -124,15 +119,281 @@
     .owner-page .section,
     .owner-page .container,
     .owner-page .row {
-      min-width: 0;
       max-width: 100%;
     }
 
-    img,
-    svg,
-    video,
-    canvas {
+
+    /* =========================================================
+       MEMBER LISTING CARDS
+    ========================================================= */
+
+    .member-listing-panel {
+      width: 100%;
       max-width: 100%;
+      margin-bottom: 22px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 18px;
+      background: var(--bs-body-bg);
+      box-shadow: 0 10px 30px rgba(15,23,42,.05);
+      overflow: hidden;
+    }
+
+    .member-listing-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--bs-border-color);
+    }
+
+    .member-listing-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -.015em;
+    }
+
+    .member-listing-subtitle {
+      margin: 4px 0 0;
+      color: var(--bs-secondary-color);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .member-listing-body {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .member-loading-state,
+    .member-empty-state,
+    .member-error-state {
+      display: grid;
+      gap: 5px;
+      padding: 18px;
+      border-radius: 13px;
+      background: var(--bs-tertiary-bg);
+      color: var(--bs-secondary-color);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .member-loading-state strong,
+    .member-empty-state strong,
+    .member-error-state strong {
+      color: var(--bs-body-color);
+      font-weight: 800;
+    }
+
+    .member-business-card {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: 185px minmax(0, 1fr);
+      border: 1px solid var(--bs-border-color);
+      border-radius: 15px;
+      background: var(--bs-body-bg);
+      overflow: hidden;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .member-business-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(15,23,42,.07);
+    }
+
+    .member-business-media {
+      min-width: 0;
+      height: 205px;
+      min-height: 205px;
+      background:
+        linear-gradient(135deg, rgba(var(--bs-primary-rgb), .16), rgba(var(--bs-secondary-rgb), .08)),
+        var(--bs-tertiary-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .member-business-media img {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .member-business-media-fallback {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      display: flex;
+      align-items: flex-end;
+      padding: 15px;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.58)),
+        linear-gradient(135deg, #24364c, #40667b);
+    }
+
+    .member-business-media-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      opacity: .92;
+    }
+
+    .member-business-content {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 18px;
+    }
+
+    .member-business-top {
+      min-width: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .member-business-copy {
+      min-width: 0;
+    }
+
+    .member-business-name {
+      margin: 0;
+      font-size: 1.02rem;
+      font-weight: 800;
+      letter-spacing: -.015em;
+      overflow-wrap: anywhere;
+    }
+
+    .member-business-meta {
+      margin-top: 5px;
+      color: var(--bs-secondary-color);
+      font-size: 11px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .member-business-message {
+      margin-top: 14px;
+      color: var(--bs-body-color);
+      font-size: 13px;
+      line-height: 1.62;
+    }
+
+    .member-business-services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .member-business-service {
+      max-width: 100%;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: var(--bs-tertiary-bg);
+      color: var(--bs-secondary-color);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .member-business-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin-top: 13px;
+      padding-top: 12px;
+      border-top: 1px solid var(--bs-border-color);
+      color: var(--bs-secondary-color);
+      font-size: 11px;
+    }
+
+    .member-business-contact span {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .member-business-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: auto;
+      padding-top: 16px;
+    }
+
+    .member-listing-footer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 2px 2px 0;
+    }
+
+    .member-listing-count {
+      color: var(--bs-secondary-color);
+      font-size: 11px;
+    }
+
+    .member-status-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      min-height: 26px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .member-status-pending {
+      background: rgba(255,193,7,.14);
+      color: #946200;
+    }
+
+    .member-status-approved {
+      background: rgba(25,135,84,.12);
+      color: #146c43;
+    }
+
+    .member-status-changes {
+      background: rgba(13,110,253,.11);
+      color: #0a58ca;
+    }
+
+    .member-status-rejected {
+      background: rgba(220,53,69,.11);
+      color: #b02a37;
+    }
+
+    [data-bs-theme="dark"] .member-status-pending { color: #ffd66b; }
+    [data-bs-theme="dark"] .member-status-approved { color: #75d3a7; }
+    [data-bs-theme="dark"] .member-status-changes { color: #8ab8ff; }
+    [data-bs-theme="dark"] .member-status-rejected { color: #ff8f9a; }
+
+    @media (max-width: 767.98px) {
+      .member-business-card {
+        grid-template-columns: 1fr;
+      }
+
+      .member-business-media,
+      .member-business-media img,
+      .member-business-media-fallback {
+        height: 170px;
+        min-height: 170px;
+      }
+
+      .member-listing-head {
+        align-items: flex-start;
+      }
     }
 
     /* =========================================================
@@ -1912,19 +2173,76 @@
             value.src ||
             value.path ||
             value.filename ||
+            value.location ||
             "";
         }
 
         const raw = String(value || "").trim();
         if (!raw) return "";
 
-        if (/^https?:\/\//i.test(raw)) return raw;
-        if (raw.startsWith("/")) return API_BASE_URL.replace(/\/api$/, "") + raw;
-        if (raw.startsWith("uploads/")) {
-          return API_BASE_URL.replace(/\/api$/, "") + "/" + raw;
+        if (/^data:image\//i.test(raw)) {
+          return raw;
         }
 
-        return API_BASE_URL.replace(/\/api$/, "") + "/uploads/businesses/" + raw;
+        if (/^https?:\/\//i.test(raw)) {
+          try {
+            const absolute = new URL(raw);
+
+            /*
+              Old locally-created listings can contain localhost image URLs.
+              A phone cannot reach the laptop's localhost, so resolve those
+              paths against the production API host instead.
+            */
+            if (
+              /^(localhost|127(?:\.\d{1,3}){3}|0\.0\.0\.0)$/i.test(
+                absolute.hostname
+              )
+            ) {
+              const apiBase = String(API_BASE_URL || "")
+                .replace(/\/api\/?$/, "")
+                .replace(/\/$/, "");
+
+              if (apiBase) {
+                return new URL(
+                  absolute.pathname + absolute.search + absolute.hash,
+                  `${apiBase}/`
+                ).href;
+              }
+            }
+
+            return absolute.href;
+          } catch (error) {
+            return raw;
+          }
+        }
+
+        if (/^\/\//.test(raw)) {
+          return `${window.location.protocol}${raw}`;
+        }
+
+        const apiBase = String(API_BASE_URL || "")
+          .replace(/\/api\/?$/, "")
+          .replace(/\/$/, "");
+
+        if (!apiBase) return "";
+
+        try {
+          if (raw.startsWith("/")) {
+            return new URL(raw, `${apiBase}/`).href;
+          }
+
+          if (raw.startsWith("uploads/")) {
+            return new URL(`/${raw}`, `${apiBase}/`).href;
+          }
+
+          return new URL(
+            `/uploads/businesses/${raw.replace(/^\/+/, "")}`,
+            `${apiBase}/`
+          ).href;
+        } catch (error) {
+          console.warn("Could not resolve member business image URL.", error);
+          return "";
+        }
       }
 
       function memberDateLabel(item) {
@@ -1940,6 +2258,9 @@
           year: "numeric"
         }).format(date);
       }
+
+
+
 
       let currentUser = null;
       let memberListings = [];
@@ -2246,7 +2567,7 @@
             >
               <div class="member-business-media">
                 ${cover
-                  ? `<img src="${escapeForAttribute(cover)}" alt="${escapeForAttribute(name)}" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false;">`
+                  ? `<img src="${escapeForAttribute(cover)}" alt="${escapeForAttribute(name)}" loading="eager" decoding="async" fetchpriority="high" onerror="this.hidden=true;this.nextElementSibling.hidden=false;">`
                   : ""}
 
                 <div
@@ -4121,135 +4442,24 @@
     });
 
 
-    /* =========================================================
-       DESKTOP NAVIGATION FIX
-    ========================================================== */
-
-    (function () {
-
-      const navDrawer =
-        document.getElementById("navDrawer");
-
-      const desktopQuery =
-        window.matchMedia(
-          "(min-width: 992px)"
-        );
-
-      if (!navDrawer) {
-        return;
-      }
-
-      function keepDesktopNavigationOpen() {
-        if (desktopQuery.matches) {
-          navDrawer.setAttribute(
-            "open",
-            ""
-          );
-        }
-      }
-
-      function syncHeaderNavigation() {
-        if (desktopQuery.matches) {
-          keepDesktopNavigationOpen();
-        } else {
-          navDrawer.removeAttribute(
-            "open"
-          );
-        }
-      }
-
-      syncHeaderNavigation();
-
-      document.addEventListener(
-        "click",
-        function (event) {
-          if (!desktopQuery.matches) {
-            return;
-          }
-
-          const navigationLink =
-            event.target.closest(
-              "#navDrawer .nav-link, #navDrawer .menu-item"
-            );
-
-          if (!navigationLink) {
-            return;
-          }
-
-          window.requestAnimationFrame(
-            keepDesktopNavigationOpen
-          );
-
-          window.setTimeout(
-            keepDesktopNavigationOpen,
-            50
-          );
-        },
-        true
-      );
-
-      window.addEventListener(
-        "hashchange",
-        function () {
-          window.requestAnimationFrame(
-            keepDesktopNavigationOpen
-          );
-        }
-      );
-
-      if (
-        typeof desktopQuery.addEventListener ===
-        "function"
-      ) {
-        desktopQuery.addEventListener(
-          "change",
-          syncHeaderNavigation
-        );
-      } else if (
-        typeof desktopQuery.addListener ===
-        "function"
-      ) {
-        desktopQuery.addListener(
-          syncHeaderNavigation
-        );
-      }
-
-    })();
-
   </script>
-
-
-
 
   <script>
     document.addEventListener(
       "nin:header-loaded",
       function () {
-
         import("./assets/js/main.js")
-          .catch(
-            function (error) {
-
-              console.error(
-                "Could not load main.js:",
-                error
-              );
-
-            }
-          );
-
+          .catch(function (error) {
+            console.error("Could not load main.js:", error);
+          });
       },
-      {
-        once: true
-      }
+      { once: true }
     );
   </script>
 
-  <script src="assets/js/config.js"></script>
+  <script src="assets/js/site-header.js"></script>
 
-  <script
-    src="assets/js/site-header.js"
-  ></script>
+
 
 </body>
 </html>
