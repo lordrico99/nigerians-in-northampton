@@ -1,0 +1,1693 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Community News — Nigerians in Northampton</title>
+  <meta name="description" content="Community news, local stories, events, opportunities and updates for Nigerians in Northampton and the wider Northampton community.">
+
+  <link rel="stylesheet" href="assets/vendor/bootstrap6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/header.css">
+
+  <style>
+    :root {
+      --news-primary: #174a8b;
+      --news-primary-dark: #0f3566;
+      --news-primary-soft: #edf4ff;
+      --news-ink: #122033;
+      --news-muted: #68758a;
+      --news-border: #e5eaf1;
+      --news-surface: #ffffff;
+      --news-surface-2: #f6f8fb;
+      --news-shadow: 0 14px 40px rgba(20, 32, 54, .08);
+      --news-shadow-lg: 0 24px 70px rgba(20, 32, 54, .14);
+      --news-radius: 18px;
+    }
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      min-height: 100%;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow-x: hidden;
+    }
+
+    body.news-page {
+      min-height: 100vh !important;
+      display: flex !important;
+      flex-direction: column !important;
+      padding-bottom: 0 !important;
+    }
+
+    body.news-page > #siteHeader,
+    body.news-page > .news-topline,
+    body.news-page > .news-hero-wrap,
+    body.news-page > .news-section,
+    body.news-page > section.container,
+    body.news-page > .site-footer {
+      flex: 0 0 auto;
+    }
+
+    body.news-page > .site-footer {
+      width: 100%;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* Keep the Bootstrap story modal completely out of normal document flow. */
+    body.news-page > .modal {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+    }
+
+    body {
+      background: #fff;
+      color: var(--news-ink);
+    }
+
+    .news-page {
+      background:
+        radial-gradient(circle at 90% 7%, rgba(23, 74, 139, .045), transparent 28%),
+        linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+    }
+
+    .news-page a {
+      text-decoration: none;
+    }
+
+    /* =========================================================
+       PAGE HEADER
+    ========================================================== */
+    .news-topline {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--news-border);
+      background: rgba(255, 255, 255, .94);
+    }
+
+    .news-topline-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .news-topline-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--news-muted);
+    }
+
+    .news-sample-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border: 1px solid #dbe7f7;
+      border-radius: 999px;
+      background: var(--news-primary-soft);
+      color: var(--news-primary);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .news-sample-badge span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--news-primary);
+    }
+
+    /* =========================================================
+       HERO SLIDER
+    ========================================================== */
+    .news-hero-wrap {
+      padding: 34px 0 18px;
+    }
+
+    .news-hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 540px;
+      border-radius: 26px;
+      background: #122033;
+      box-shadow: var(--news-shadow-lg);
+    }
+
+    .news-slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.015);
+      transition: opacity .55s ease, transform .7s ease, visibility .55s ease;
+    }
+
+    .news-slide.is-active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+
+    .news-slide-copy {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 54px;
+      color: #fff;
+      background:
+        linear-gradient(125deg, rgba(10, 31, 59, .98) 0%, rgba(17, 57, 102, .94) 64%, rgba(17, 57, 102, .65) 100%);
+    }
+
+    .news-slide-copy::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -90px;
+      bottom: -100px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .news-slide-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      color: rgba(255,255,255,.76);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .news-slide-kicker::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+    }
+
+    .news-slide h1 {
+      max-width: 680px;
+      margin: 0 0 17px;
+      color: #fff;
+      font-size: clamp(34px, 4.3vw, 60px);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+    }
+
+    .news-slide p {
+      max-width: 650px;
+      margin: 0 0 26px;
+      color: rgba(255,255,255,.79);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .news-slide-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 16px;
+      color: rgba(255,255,255,.72);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .news-slide-image {
+      position: relative;
+      min-height: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .news-slide-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(9, 28, 53, .28), rgba(0, 0, 0, .08));
+    }
+
+    .news-slide-1 .news-slide-image {
+      background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1500&q=85');
+    }
+
+    .news-slide-2 .news-slide-image {
+      background-image: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1500&q=85');
+    }
+
+    .news-slide-3 .news-slide-image {
+      background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1500&q=85');
+    }
+
+    .news-slide-controls {
+      position: absolute;
+      left: 54px;
+      bottom: 25px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .news-slider-dot {
+      width: 34px;
+      height: 4px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255,255,255,.28);
+      cursor: pointer;
+      transition: width .2s ease, background-color .2s ease;
+    }
+
+    .news-slider-dot.is-active {
+      width: 54px;
+      background: #fff;
+    }
+
+    .news-slider-arrows {
+      position: absolute;
+      right: 26px;
+      bottom: 24px;
+      z-index: 5;
+      display: flex;
+      gap: 8px;
+    }
+
+    .news-slider-button {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 12px;
+      background: rgba(10, 31, 59, .44);
+      color: #fff;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
+
+    .news-slider-button:hover {
+      background: rgba(10, 31, 59, .68);
+    }
+
+    /* =========================================================
+       SECTION HEADERS
+    ========================================================== */
+    .news-section {
+      padding: 74px 0 0;
+    }
+
+    .news-section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .news-section-kicker {
+      margin: 0 0 8px;
+      color: var(--news-primary);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .news-section-title {
+      margin: 0;
+      font-size: clamp(28px, 3.1vw, 42px);
+      line-height: 1.06;
+      letter-spacing: -.035em;
+    }
+
+    .news-section-subtitle {
+      max-width: 650px;
+      margin: 10px 0 0;
+      color: var(--news-muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .news-text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--news-primary);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .news-text-link:hover {
+      color: var(--news-primary-dark);
+    }
+
+    /* =========================================================
+       TRENDING TOPICS
+    ========================================================== */
+    .news-topics {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+    }
+
+    .news-topic {
+      flex: 0 0 auto;
+      padding: 11px 16px;
+      border: 1px solid var(--news-border);
+      border-radius: 999px;
+      background: #fff;
+      color: #45536a;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 5px 16px rgba(20, 32, 54, .035);
+    }
+
+    .news-topic:hover,
+    .news-topic.is-active {
+      border-color: #c9daef;
+      background: var(--news-primary-soft);
+      color: var(--news-primary);
+    }
+
+    /* =========================================================
+       FEATURED STORY GRID
+    ========================================================== */
+    .news-feature-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, .75fr) minmax(300px, .75fr);
+      gap: 18px;
+    }
+
+    .news-card {
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+      border: 1px solid var(--news-border);
+      border-radius: var(--news-radius);
+      background: var(--news-surface);
+      box-shadow: var(--news-shadow);
+    }
+
+    .news-card-media {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #dbe6f2;
+    }
+
+    .news-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .45s ease;
+    }
+
+    .news-card:hover .news-card-media img {
+      transform: scale(1.04);
+    }
+
+    .news-card-featured .news-card-media {
+      aspect-ratio: 16 / 10;
+    }
+
+    .news-card-body {
+      padding: 21px;
+    }
+
+    .news-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--news-primary-soft);
+      color: var(--news-primary);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .news-card-title {
+      margin: 12px 0 9px;
+      font-size: 21px;
+      line-height: 1.18;
+      letter-spacing: -.025em;
+    }
+
+    .news-card-featured .news-card-title {
+      font-size: clamp(26px, 2.5vw, 34px);
+    }
+
+    .news-card-title a {
+      color: var(--news-ink);
+    }
+
+    .news-card-title a:hover {
+      color: var(--news-primary);
+    }
+
+    .news-card-excerpt {
+      margin: 0 0 16px;
+      color: var(--news-muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .news-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: #8a95a5;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       STORY STRIP / SLIDER
+    ========================================================== */
+    .news-story-strip {
+      position: relative;
+    }
+
+    .news-story-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 4px 3px 18px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+    }
+
+    .news-story-mini {
+      flex: 0 0 min(360px, 82vw);
+      overflow: hidden;
+      scroll-snap-align: start;
+      border: 1px solid var(--news-border);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: var(--news-shadow);
+    }
+
+    .news-story-mini-media {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+
+    .news-story-mini-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .news-story-mini-body {
+      padding: 17px;
+    }
+
+    .news-story-mini-title {
+      margin: 9px 0 8px;
+      font-size: 17px;
+      line-height: 1.25;
+      letter-spacing: -.02em;
+    }
+
+    .news-story-mini-title a {
+      color: var(--news-ink);
+    }
+
+    .news-story-mini-excerpt {
+      margin: 0;
+      color: var(--news-muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .news-strip-controls {
+      display: flex;
+      gap: 8px;
+      flex: 0 0 auto;
+    }
+
+    .news-strip-button {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--news-border);
+      border-radius: 11px;
+      background: #fff;
+      color: #435269;
+      cursor: pointer;
+    }
+
+    .news-strip-button:hover {
+      border-color: #cdd8e7;
+      background: var(--news-surface-2);
+    }
+
+    /* =========================================================
+       TWO-COLUMN NEWSROOM
+    ========================================================== */
+    .newsroom-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .news-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .news-list-card {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 16px;
+      padding: 13px;
+      border: 1px solid var(--news-border);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 7px 24px rgba(20, 32, 54, .045);
+    }
+
+    .news-list-media {
+      min-height: 128px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #dbe6f2;
+    }
+
+    .news-list-media img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .news-list-title {
+      margin: 8px 0;
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: -.02em;
+    }
+
+    .news-list-title a {
+      color: var(--news-ink);
+    }
+
+    .news-list-title a:hover {
+      color: var(--news-primary);
+    }
+
+    .news-list-excerpt {
+      margin: 0 0 9px;
+      color: var(--news-muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .news-sidebar {
+      display: grid;
+      gap: 15px;
+    }
+
+    .news-side-card {
+      padding: 19px;
+      border: 1px solid var(--news-border);
+      border-radius: var(--news-radius);
+      background: #fff;
+      box-shadow: var(--news-shadow);
+    }
+
+    .news-side-title {
+      margin: 0 0 14px;
+      font-size: 16px;
+      letter-spacing: -.02em;
+    }
+
+    .news-most-read {
+      display: grid;
+      gap: 10px;
+    }
+
+    .news-most-read-item {
+      display: grid;
+      grid-template-columns: 30px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--news-border);
+    }
+
+    .news-most-read-item:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .news-most-read-number {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9px;
+      background: var(--news-primary-soft);
+      color: var(--news-primary);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .news-most-read-title {
+      margin: 0;
+      color: #344257;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    /* =========================================================
+       COMMUNITY CALENDAR
+    ========================================================== */
+    .news-calendar {
+      display: grid;
+      gap: 10px;
+    }
+
+    .news-event {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr);
+      gap: 11px;
+      align-items: center;
+      padding: 11px;
+      border: 1px solid var(--news-border);
+      border-radius: 13px;
+      background: var(--news-surface-2);
+    }
+
+    .news-event-date {
+      display: grid;
+      place-items: center;
+      min-height: 55px;
+      border-radius: 11px;
+      background: #fff;
+      border: 1px solid var(--news-border);
+      text-align: center;
+    }
+
+    .news-event-date strong {
+      display: block;
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .news-event-date span {
+      margin-top: 4px;
+      color: var(--news-primary);
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .news-event-title {
+      margin: 0 0 4px;
+      color: var(--news-ink);
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.4;
+    }
+
+    .news-event-meta {
+      margin: 0;
+      color: var(--news-muted);
+      font-size: 10px;
+    }
+
+    /* =========================================================
+       NEWSLETTER / COMMUNITY CTA
+    ========================================================== */
+    .news-newsletter {
+      position: relative;
+      overflow: hidden;
+      margin-top: 74px;
+      padding: 40px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 88% 20%, rgba(255,255,255,.13), transparent 28%),
+        linear-gradient(135deg, #123b70 0%, #174a8b 65%, #1e5ba5 100%);
+      color: #fff;
+      box-shadow: var(--news-shadow-lg);
+    }
+
+    .news-newsletter::before,
+    .news-newsletter::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .news-newsletter::before {
+      width: 310px;
+      height: 310px;
+      right: -100px;
+      top: -180px;
+    }
+
+    .news-newsletter::after {
+      width: 170px;
+      height: 170px;
+      right: 90px;
+      bottom: -100px;
+    }
+
+    .news-newsletter-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, .8fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .news-newsletter h2 {
+      margin: 0 0 10px;
+      color: #fff;
+      font-size: clamp(27px, 3vw, 40px);
+      line-height: 1.05;
+      letter-spacing: -.035em;
+    }
+
+    .news-newsletter p {
+      max-width: 650px;
+      margin: 0;
+      color: rgba(255,255,255,.76);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .news-newsletter-form {
+      display: flex;
+      gap: 9px;
+      padding: 7px;
+      border: 1px solid rgba(255,255,255,.17);
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(8px);
+    }
+
+    .news-newsletter-form input {
+      min-width: 0;
+      flex: 1;
+      border: 0;
+      outline: 0;
+      padding: 11px 12px;
+      border-radius: 9px;
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .news-newsletter-form input::placeholder {
+      color: rgba(255,255,255,.55);
+    }
+
+    .news-newsletter-form button {
+      border: 0;
+      padding: 0 16px;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--news-primary-dark);
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .news-newsletter-note {
+      margin-top: 10px;
+      color: rgba(255,255,255,.57);
+      font-size: 10px;
+    }
+
+    /* =========================================================
+       MODAL
+    ========================================================== */
+    .news-modal .modal-content {
+      border: 0;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .news-modal-image {
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      object-fit: cover;
+      display: block;
+    }
+
+    .news-modal-body {
+      padding: 28px;
+    }
+
+    .news-modal-body h2 {
+      margin: 10px 0 12px;
+      font-size: clamp(26px, 3vw, 38px);
+      letter-spacing: -.035em;
+    }
+
+    .news-modal-body p {
+      margin: 0 0 12px;
+      color: var(--news-muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================== */
+    @media (max-width: 1100px) {
+      .news-feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .news-card-featured {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      .news-hero {
+        min-height: 590px;
+      }
+
+      .news-slide {
+        grid-template-columns: 1fr;
+      }
+
+      .news-slide-image {
+        position: absolute;
+        inset: 0;
+        opacity: .43;
+      }
+
+      .news-slide-copy {
+        min-height: 590px;
+        padding: 42px 34px 84px;
+        background: linear-gradient(125deg, rgba(10, 31, 59, .98), rgba(17, 57, 102, .78));
+      }
+
+      .news-slide-controls {
+        left: 34px;
+        bottom: 24px;
+      }
+
+      .newsroom-grid,
+      .news-newsletter-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .news-hero-wrap {
+        padding-top: 18px;
+      }
+
+      .news-hero,
+      .news-slide-copy {
+        min-height: 620px;
+      }
+
+      .news-slide-copy {
+        padding: 34px 23px 85px;
+      }
+
+      .news-slide h1 {
+        font-size: 38px;
+      }
+
+      .news-slide p {
+        font-size: 14px;
+      }
+
+      .news-slider-controls {
+        left: 23px;
+      }
+
+      .news-slider-arrows {
+        right: 18px;
+        bottom: 18px;
+      }
+
+      .news-slider-button {
+        width: 38px;
+        height: 38px;
+      }
+
+      .news-feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .news-card-featured {
+        grid-column: auto;
+      }
+
+      .news-list-card {
+        grid-template-columns: 1fr;
+      }
+
+      .news-list-media {
+        min-height: 185px;
+      }
+
+      .news-newsletter {
+        padding: 28px 21px;
+        border-radius: 19px;
+      }
+
+      .news-newsletter-form {
+        flex-direction: column;
+      }
+
+      .news-newsletter-form button {
+        min-height: 42px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .news-slide,
+      .news-card-media img,
+      .news-slider-dot {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="news-page">
+
+  <a class="visually-hidden-focusable btn-solid theme-primary m-2" href="#newsroom">Skip to news</a>
+
+  <div id="siteHeader"></div>
+
+  <!-- =========================================================
+       SAMPLE CONTENT NOTICE
+  ========================================================== -->
+  <div class="news-topline">
+    <div class="container">
+      <div class="news-topline-inner">
+        <div class="news-topline-note">
+          <span aria-hidden="true">●</span>
+          Community newsroom • Northampton
+        </div>
+
+        <div class="news-sample-badge" title="The stories on this page are sample content for the website design.">
+          <span aria-hidden="true"></span>
+          Sample / fictional stories
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       HERO SLIDER
+  ========================================================== -->
+  <section class="news-hero-wrap">
+    <div class="container">
+      <div class="news-hero" id="newsHeroSlider" aria-roledescription="carousel" aria-label="Featured community stories">
+
+        <article class="news-slide news-slide-1 is-active" data-slide="0">
+          <div class="news-slide-copy">
+            <div class="news-slide-kicker">Community</div>
+            <h1>A stronger Northampton starts with people who show up for one another.</h1>
+            <p>
+              A fictional community feature exploring how local residents, families, volunteers and business owners are building more connections across Northampton.
+            </p>
+            <div class="news-slide-meta">
+              <span>September 24, 2026</span>
+              <span>•</span>
+              <span>6 min read</span>
+            </div>
+          </div>
+          <div class="news-slide-image" aria-hidden="true"></div>
+        </article>
+
+        <article class="news-slide news-slide-2" data-slide="1">
+          <div class="news-slide-copy">
+            <div class="news-slide-kicker">Business</div>
+            <h1>Local founders are turning community connections into new opportunities.</h1>
+            <p>
+              A fictional look at a proposed monthly business meet-up bringing together entrepreneurs, freelancers, tradespeople and professionals from across the town.
+            </p>
+            <div class="news-slide-meta">
+              <span>September 22, 2026</span>
+              <span>•</span>
+              <span>4 min read</span>
+            </div>
+          </div>
+          <div class="news-slide-image" aria-hidden="true"></div>
+        </article>
+
+        <article class="news-slide news-slide-3" data-slide="2">
+          <div class="news-slide-copy">
+            <div class="news-slide-kicker">Newcomer's Guide</div>
+            <h1>Starting fresh in Northampton? Here are the first local things to know.</h1>
+            <p>
+              A fictional newcomer guide covering everyday essentials, community connections, services and practical steps for settling into life in Northampton.
+            </p>
+            <div class="news-slide-meta">
+              <span>September 19, 2026</span>
+              <span>•</span>
+              <span>5 min read</span>
+            </div>
+          </div>
+          <div class="news-slide-image" aria-hidden="true"></div>
+        </article>
+
+        <div class="news-slide-controls" aria-label="Choose featured story">
+          <button class="news-slider-dot is-active" type="button" data-go-slide="0" aria-label="Show featured story 1"></button>
+          <button class="news-slider-dot" type="button" data-go-slide="1" aria-label="Show featured story 2"></button>
+          <button class="news-slider-dot" type="button" data-go-slide="2" aria-label="Show featured story 3"></button>
+        </div>
+
+        <div class="news-slider-arrows">
+          <button class="news-slider-button" type="button" id="newsPrev" aria-label="Previous featured story">←</button>
+          <button class="news-slider-button" type="button" id="newsNext" aria-label="Next featured story">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       TOPICS
+  ========================================================== -->
+  <section class="news-section pt-4">
+    <div class="container">
+      <div class="news-topics" aria-label="News topics">
+        <a class="news-topic is-active" href="#community">Community</a>
+        <a class="news-topic" href="#business">Business</a>
+        <a class="news-topic" href="#events">Events</a>
+        <a class="news-topic" href="#local-life">Local Life</a>
+        <a class="news-topic" href="#newcomers">Newcomer's Guide</a>
+        <a class="news-topic" href="#opportunities">Opportunities</a>
+        <a class="news-topic" href="#northampton">Northampton</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       EDITOR'S PICKS
+  ========================================================== -->
+  <section class="news-section" id="community">
+    <div class="container">
+      <div class="news-section-head">
+        <div>
+          <p class="news-section-kicker">Editor's picks</p>
+          <h2 class="news-section-title">Stories worth catching up on</h2>
+          <p class="news-section-subtitle">
+            A mix of fictional community stories, local-life features and opportunities designed to give this page a lively newsroom feel.
+          </p>
+        </div>
+        <a class="news-text-link" href="#newsroom">Browse latest stories →</a>
+      </div>
+
+      <div class="news-feature-grid">
+        <article class="news-card news-card-featured">
+          <div class="news-card-media">
+            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1300&q=85" alt="Community members gathering together" loading="lazy">
+          </div>
+          <div class="news-card-body">
+            <span class="news-tag">Community</span>
+            <h3 class="news-card-title">
+              <a href="#" class="news-open-story" data-title="A stronger Northampton starts with people who show up for one another." data-category="Community" data-image="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1300&q=85">
+                A stronger Northampton starts with people who show up for one another.
+              </a>
+            </h3>
+            <p class="news-card-excerpt">
+              Fictional story: a community round-up focused on neighbourly support, volunteering, information sharing and the everyday connections that help people feel at home.
+            </p>
+            <div class="news-card-meta">
+              <span>Sep 24, 2026</span>
+              <span>6 min read</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="news-card" id="business">
+          <div class="news-card-media">
+            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85" alt="People meeting in a modern workspace" loading="lazy">
+          </div>
+          <div class="news-card-body">
+            <span class="news-tag">Business</span>
+            <h3 class="news-card-title">
+              <a href="#" class="news-open-story" data-title="Northampton founders imagine a monthly community business exchange" data-category="Business" data-image="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85">
+                Northampton founders imagine a monthly community business exchange
+              </a>
+            </h3>
+            <p class="news-card-excerpt">
+              A fictional profile of a proposed meet-up where local business owners could swap ideas, contacts and practical advice.
+            </p>
+            <div class="news-card-meta">
+              <span>Sep 22, 2026</span>
+              <span>4 min read</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="news-card" id="newcomers">
+          <div class="news-card-media">
+            <img src="https://images.unsplash.com/photo-1560185008-b033106af5c3?auto=format&fit=crop&w=900&q=85" alt="Modern residential housing" loading="lazy">
+          </div>
+          <div class="news-card-body">
+            <span class="news-tag">Newcomer's Guide</span>
+            <h3 class="news-card-title">
+              <a href="#" class="news-open-story" data-title="Five practical things to sort out after moving to Northampton" data-category="Newcomer's Guide" data-image="https://images.unsplash.com/photo-1560185008-b033106af5c3?auto=format&fit=crop&w=900&q=85">
+                Five practical things to sort out after moving to Northampton
+              </a>
+            </h3>
+            <p class="news-card-excerpt">
+              A fictional checklist covering housing, healthcare, transport, work and finding community connections.
+            </p>
+            <div class="news-card-meta">
+              <span>Sep 19, 2026</span>
+              <span>5 min read</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LATEST STORIES SLIDER
+  ========================================================== -->
+  <section class="news-section" id="local-life">
+    <div class="container">
+      <div class="news-section-head">
+        <div>
+          <p class="news-section-kicker">Around Northampton</p>
+          <h2 class="news-section-title">More from the community</h2>
+        </div>
+        <div class="news-strip-controls">
+          <button class="news-strip-button" type="button" id="storiesPrev" aria-label="Scroll stories left">←</button>
+          <button class="news-strip-button" type="button" id="storiesNext" aria-label="Scroll stories right">→</button>
+        </div>
+      </div>
+
+      <div class="news-story-strip">
+        <div class="news-story-track" id="newsStoryTrack">
+          <article class="news-story-mini">
+            <div class="news-story-mini-media">
+              <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=900&q=85" alt="Food being prepared in a kitchen" loading="lazy">
+            </div>
+            <div class="news-story-mini-body">
+              <span class="news-tag">Food & Culture</span>
+              <h3 class="news-story-mini-title"><a href="#" class="news-open-story" data-title="The fictional Northampton supper club bringing people together around Nigerian food" data-category="Food & Culture" data-image="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=900&q=85">The fictional Northampton supper club bringing people together around Nigerian food</a></h3>
+              <p class="news-story-mini-excerpt">A sample feature about food, conversation and the community stories that happen around the table.</p>
+            </div>
+          </article>
+
+          <article class="news-story-mini" id="opportunities">
+            <div class="news-story-mini-media">
+              <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85" alt="People collaborating at work" loading="lazy">
+            </div>
+            <div class="news-story-mini-body">
+              <span class="news-tag">Opportunities</span>
+              <h3 class="news-story-mini-title"><a href="#" class="news-open-story" data-title="Community skills night planned for job seekers and career changers" data-category="Opportunities" data-image="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85">Community skills night planned for job seekers and career changers</a></h3>
+              <p class="news-story-mini-excerpt">A fictional announcement about CV reviews, mock interviews, networking and peer support.</p>
+            </div>
+          </article>
+
+          <article class="news-story-mini">
+            <div class="news-story-mini-media">
+              <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=85" alt="Students learning together" loading="lazy">
+            </div>
+            <div class="news-story-mini-body">
+              <span class="news-tag">Education</span>
+              <h3 class="news-story-mini-title"><a href="#" class="news-open-story" data-title="A fictional student support circle launches for September arrivals" data-category="Education" data-image="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=85">A fictional student support circle launches for September arrivals</a></h3>
+              <p class="news-story-mini-excerpt">A sample update about study routines, local services, social connections and settling into town.</p>
+            </div>
+          </article>
+
+          <article class="news-story-mini">
+            <div class="news-story-mini-media">
+              <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=85" alt="Public transport in a city" loading="lazy">
+            </div>
+            <div class="news-story-mini-body">
+              <span class="news-tag">Local Life</span>
+              <h3 class="news-story-mini-title"><a href="#" class="news-open-story" data-title="Getting around Northampton: a fictional newcomer transport diary" data-category="Local Life" data-image="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=85">Getting around Northampton: a fictional newcomer transport diary</a></h3>
+              <p class="news-story-mini-excerpt">A sample story built around buses, walking routes, cycling and planning everyday journeys.</p>
+            </div>
+          </article>
+
+          <article class="news-story-mini" id="events">
+            <div class="news-story-mini-media">
+              <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=85" alt="Decorated community event space" loading="lazy">
+            </div>
+            <div class="news-story-mini-body">
+              <span class="news-tag">Events</span>
+              <h3 class="news-story-mini-title"><a href="#" class="news-open-story" data-title="Community weekend preview: markets, music and family activities" data-category="Events" data-image="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=85">Community weekend preview: markets, music and family activities</a></h3>
+              <p class="news-story-mini-excerpt">A fictional event guide designed to show how community announcements can live alongside news.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       NEWSROOM / MOST READ / CALENDAR
+  ========================================================== -->
+  <section class="news-section" id="newsroom">
+    <div class="container">
+      <div class="news-section-head">
+        <div>
+          <p class="news-section-kicker">The newsroom</p>
+          <h2 class="news-section-title">Latest stories & community updates</h2>
+          <p class="news-section-subtitle">Fictional sample articles below demonstrate how a future community newsroom can be structured.</p>
+        </div>
+      </div>
+
+      <div class="newsroom-grid">
+        <div class="news-list">
+          <article class="news-list-card">
+            <div class="news-list-media">
+              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=85" alt="Healthcare setting" loading="lazy">
+            </div>
+            <div>
+              <span class="news-tag">Health & Wellness</span>
+              <h3 class="news-list-title"><a href="#" class="news-open-story" data-title="Fictional community wellbeing week puts everyday health conversations first" data-category="Health & Wellness" data-image="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=85">Fictional community wellbeing week puts everyday health conversations first</a></h3>
+              <p class="news-list-excerpt">A sample article showing how the site could share practical wellbeing information, local signposting and community-led support.</p>
+              <div class="news-card-meta"><span>Sep 17, 2026</span><span>3 min read</span></div>
+            </div>
+          </article>
+
+          <article class="news-list-card">
+            <div class="news-list-media">
+              <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=85" alt="Professionals collaborating" loading="lazy">
+            </div>
+            <div>
+              <span class="news-tag">Work & Careers</span>
+              <h3 class="news-list-title"><a href="#" class="news-open-story" data-title="Fictional career clinic pairs local professionals with job seekers" data-category="Work & Careers" data-image="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=85">Fictional career clinic pairs local professionals with job seekers</a></h3>
+              <p class="news-list-excerpt">A sample update covering mentoring, networking, CV feedback and practical employment conversations.</p>
+              <div class="news-card-meta"><span>Sep 15, 2026</span><span>4 min read</span></div>
+            </div>
+          </article>
+
+          <article class="news-list-card">
+            <div class="news-list-media">
+              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=85" alt="Friends gathered outdoors" loading="lazy">
+            </div>
+            <div>
+              <span class="news-tag">Northampton</span>
+              <h3 class="news-list-title"><a href="#" class="news-open-story" data-title="What makes a local community feel like home?" data-category="Northampton" data-image="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=85">What makes a local community feel like home?</a></h3>
+              <p class="news-list-excerpt">A fictional opinion-style community feature about belonging, local friendships, volunteering and sharing useful information.</p>
+              <div class="news-card-meta"><span>Sep 13, 2026</span><span>5 min read</span></div>
+            </div>
+          </article>
+
+          <article class="news-list-card">
+            <div class="news-list-media">
+              <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=85" alt="Modern office space" loading="lazy">
+            </div>
+            <div>
+              <span class="news-tag">Local Business</span>
+              <h3 class="news-list-title"><a href="#" class="news-open-story" data-title="How a stronger business directory could support local discovery" data-category="Local Business" data-image="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=85">How a stronger business directory could support local discovery</a></h3>
+              <p class="news-list-excerpt">A fictional explainer about discoverability, community recommendations and the role of a local business directory.</p>
+              <div class="news-card-meta"><span>Sep 11, 2026</span><span>4 min read</span></div>
+            </div>
+          </article>
+        </div>
+
+        <aside class="news-sidebar">
+          <div class="news-side-card">
+            <h3 class="news-side-title">Most read this week</h3>
+            <div class="news-most-read">
+              <a class="news-most-read-item" href="#">
+                <span class="news-most-read-number">01</span>
+                <p class="news-most-read-title">Fictional newcomer checklist: your first month in Northampton</p>
+              </a>
+              <a class="news-most-read-item" href="#">
+                <span class="news-most-read-number">02</span>
+                <p class="news-most-read-title">Northampton food, community and the businesses bringing people together</p>
+              </a>
+              <a class="news-most-read-item" href="#">
+                <span class="news-most-read-number">03</span>
+                <p class="news-most-read-title">Five simple ways to meet people when you are new to town</p>
+              </a>
+              <a class="news-most-read-item" href="#">
+                <span class="news-most-read-number">04</span>
+                <p class="news-most-read-title">Local jobs, skills nights and networking opportunities to watch</p>
+              </a>
+            </div>
+          </div>
+
+          <div class="news-side-card">
+            <h3 class="news-side-title">Community calendar</h3>
+            <div class="news-calendar">
+              <div class="news-event">
+                <div class="news-event-date"><strong>26</strong><span>Sep</span></div>
+                <div><p class="news-event-title">Fictional Nigerian food & culture evening</p><p class="news-event-meta">6:30 PM • Northampton</p></div>
+              </div>
+              <div class="news-event">
+                <div class="news-event-date"><strong>03</strong><span>Oct</span></div>
+                <div><p class="news-event-title">Sample business networking morning</p><p class="news-event-meta">10:00 AM • Town Centre</p></div>
+              </div>
+              <div class="news-event">
+                <div class="news-event-date"><strong>10</strong><span>Oct</span></div>
+                <div><p class="news-event-title">Fictional newcomer welcome meet-up</p><p class="news-event-meta">2:00 PM • Northampton</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-side-card">
+            <h3 class="news-side-title">Want your story featured?</h3>
+            <p class="news-section-subtitle" style="margin-top:0;">Businesses, community groups and organisers could eventually submit announcements, opportunities and stories for review.</p>
+            <a href="list-your-business.html" class="btn-solid theme-primary btn-sm mt-3">List Your Business</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       NEWSLETTER CTA
+  ========================================================== -->
+  <section class="container">
+    <div class="news-newsletter">
+      <div class="news-newsletter-grid">
+        <div>
+          <h2>Stay connected to what is happening in Northampton.</h2>
+          <p>
+            In the finished version of the site, this space can power a community newsletter for local news, business updates, events, newcomer information and opportunities.
+          </p>
+        </div>
+
+        <div>
+          <form class="news-newsletter-form" id="newsletterForm">
+            <input type="email" id="newsletterEmail" placeholder="Your email address" aria-label="Email address" required>
+            <button type="submit">Subscribe</button>
+          </form>
+          <p class="news-newsletter-note" id="newsletterMessage">Sample form — no email is actually sent yet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer class="site-footer bg-2 py-6">
+    <div class="container">
+      <div class="row g-5">
+        <div class="lg:col-4">
+          <a class="navbar-brand d-inline-flex align-items-center gap-2 fw-semibold mb-3" href="index.html">
+            <span class="brand-mark" aria-hidden="true">N</span>
+            Nigerians in Northampton
+          </a>
+          <p class="fg-3 fs-sm mb-0">
+            Connecting Nigerians, supporting local businesses and sharing useful information across Northampton.
+          </p>
+        </div>
+
+        <div class="sm:col-6 lg:col-2">
+          <h3 class="fs-sm fw-semibold mb-3">Community</h3>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="index.html#about">About Us</a></li>
+            <li class="mb-2"><a href="news.html">News</a></li>
+            <li class="mb-2"><a href="index.html#events">Events</a></li>
+            <li class="mb-2"><a href="index.html#guides">Newcomer's Guide</a></li>
+          </ul>
+        </div>
+
+        <div class="sm:col-6 lg:col-2">
+          <h3 class="fs-sm fw-semibold mb-3">Businesses</h3>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="businesses.html">Directory</a></li>
+            <li class="mb-2"><a href="businesses.html">Categories</a></li>
+            <li class="mb-2"><a href="list-your-business.html">List Your Business</a></li>
+            <li class="mb-2"><a href="index.html#advertise">Advertise with us</a></li>
+          </ul>
+        </div>
+
+        <div class="sm:col-6 lg:col-2">
+          <h3 class="fs-sm fw-semibold mb-3">Information</h3>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="index.html#about">About</a></li>
+            <li class="mb-2"><a href="#">Contact</a></li>
+            <li class="mb-2"><a href="#">Privacy</a></li>
+            <li class="mb-2"><a href="#">Terms</a></li>
+          </ul>
+        </div>
+
+        <div class="sm:col-6 lg:col-2">
+          <h3 class="fs-sm fw-semibold mb-3">Connect</h3>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#">WhatsApp Community</a></li>
+            <li class="mb-2"><a href="#">Facebook</a></li>
+            <li class="mb-2"><a href="#">Instagram</a></li>
+            <li class="mb-2"><a href="#">Email Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="my-5">
+
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <p class="fg-3 fs-xs mb-0">&copy; <span data-year>2026</span> Nigerians in Northampton. All rights reserved.</p>
+        <p class="fg-3 fs-xs mb-0">Community • Business • Information</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       STORY MODAL
+  ========================================================== -->
+  <div class="modal fade news-modal" id="storyModal" tabindex="-1" aria-labelledby="storyModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <img class="news-modal-image" id="storyModalImage" src="" alt="">
+        <div class="news-modal-body">
+          <span class="news-tag" id="storyModalCategory">Community</span>
+          <h2 id="storyModalTitle">Story</h2>
+          <p id="storyModalCopy"></p>
+          <p>
+            This is sample fictional content created for the Nigerians in Northampton website design. In the production version, this modal can open the full article, author information, publication date, related stories and social sharing controls.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       SCRIPTS
+  ========================================================== -->
+  <script src="assets/vendor/bootstrap6/js/bootstrap.bundle.min.js"></script>
+
+  <script src="assets/js/config.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      'use strict';
+
+      /* -------------------------------------------------------
+         FOOTER YEAR
+      ------------------------------------------------------- */
+      document.querySelectorAll('[data-year]').forEach(function (element) {
+        element.textContent = new Date().getFullYear();
+      });
+
+      /* -------------------------------------------------------
+         FEATURED HERO SLIDER
+      ------------------------------------------------------- */
+      const slides = Array.from(document.querySelectorAll('.news-slide'));
+      const dots = Array.from(document.querySelectorAll('.news-slider-dot'));
+      const previous = document.getElementById('newsPrev');
+      const next = document.getElementById('newsNext');
+      const hero = document.getElementById('newsHeroSlider');
+
+      let current = 0;
+      let heroTimer = null;
+
+      function showSlide(index) {
+        if (!slides.length) return;
+
+        current = (index + slides.length) % slides.length;
+
+        slides.forEach(function (slide, slideIndex) {
+          slide.classList.toggle('is-active', slideIndex === current);
+        });
+
+        dots.forEach(function (dot, dotIndex) {
+          dot.classList.toggle('is-active', dotIndex === current);
+        });
+      }
+
+      function restartHeroTimer() {
+        window.clearInterval(heroTimer);
+        heroTimer = window.setInterval(function () {
+          showSlide(current + 1);
+        }, 6500);
+      }
+
+      previous?.addEventListener('click', function () {
+        showSlide(current - 1);
+        restartHeroTimer();
+      });
+
+      next?.addEventListener('click', function () {
+        showSlide(current + 1);
+        restartHeroTimer();
+      });
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          showSlide(Number(dot.dataset.goSlide) || 0);
+          restartHeroTimer();
+        });
+      });
+
+      hero?.addEventListener('mouseenter', function () {
+        window.clearInterval(heroTimer);
+      });
+
+      hero?.addEventListener('mouseleave', restartHeroTimer);
+
+      hero?.addEventListener('focusin', function () {
+        window.clearInterval(heroTimer);
+      });
+
+      hero?.addEventListener('focusout', function () {
+        restartHeroTimer();
+      });
+
+      showSlide(0);
+      restartHeroTimer();
+
+      /* -------------------------------------------------------
+         STORY HORIZONTAL SLIDER
+      ------------------------------------------------------- */
+      const storyTrack = document.getElementById('newsStoryTrack');
+      const storiesPrev = document.getElementById('storiesPrev');
+      const storiesNext = document.getElementById('storiesNext');
+
+      function scrollStories(direction) {
+        if (!storyTrack) return;
+        const distance = Math.min(Math.max(storyTrack.clientWidth * 0.82, 280), 780);
+        storyTrack.scrollBy({
+          left: direction * distance,
+          behavior: 'smooth'
+        });
+      }
+
+      storiesPrev?.addEventListener('click', function () {
+        scrollStories(-1);
+      });
+
+      storiesNext?.addEventListener('click', function () {
+        scrollStories(1);
+      });
+
+      /* -------------------------------------------------------
+         STORY MODAL
+      ------------------------------------------------------- */
+      const storyModalElement = document.getElementById('storyModal');
+      const storyModal = storyModalElement && window.bootstrap
+        ? new bootstrap.Modal(storyModalElement)
+        : null;
+
+      const storyModalTitle = document.getElementById('storyModalTitle');
+      const storyModalCategory = document.getElementById('storyModalCategory');
+      const storyModalImage = document.getElementById('storyModalImage');
+      const storyModalCopy = document.getElementById('storyModalCopy');
+
+      document.querySelectorAll('.news-open-story').forEach(function (link) {
+        link.addEventListener('click', function (event) {
+          event.preventDefault();
+
+          const title = link.dataset.title || link.textContent.trim() || 'Community story';
+          const category = link.dataset.category || 'Community';
+          const image = link.dataset.image || '';
+
+          if (storyModalTitle) storyModalTitle.textContent = title;
+          if (storyModalCategory) storyModalCategory.textContent = category;
+          if (storyModalImage) {
+            storyModalImage.src = image;
+            storyModalImage.alt = title;
+          }
+          if (storyModalCopy) {
+            storyModalCopy.textContent = 'This fictional article preview is here to demonstrate the reading experience. The production version can replace this sample text with the full story, article body, author details and related community links.';
+          }
+
+          storyModal?.show();
+        });
+      });
+
+      /* -------------------------------------------------------
+         SAMPLE NEWSLETTER FORM
+      ------------------------------------------------------- */
+      const newsletterForm = document.getElementById('newsletterForm');
+      const newsletterEmail = document.getElementById('newsletterEmail');
+      const newsletterMessage = document.getElementById('newsletterMessage');
+
+      newsletterForm?.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const email = newsletterEmail?.value.trim() || '';
+
+        if (!email) {
+          return;
+        }
+
+        if (newsletterMessage) {
+          newsletterMessage.textContent = 'Thanks — the newsletter form is ready for a real email service to be connected.';
+        }
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener('nin:header-loaded', function () {
+      import('./assets/js/main.js').catch(function (error) {
+        console.error('Could not load main.js:', error);
+      });
+    }, { once: true });
+  </script>
+
+  <script src="assets/js/site-header.js"></script>
+
+</body>
+</html>

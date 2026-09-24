@@ -1,0 +1,1544 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Advertise With Us | Nigerians in Northampton</title>
+  <meta name="description" content="Explore advertising opportunities with Nigerians in Northampton, including business, product, service, event and future marketplace carousel promotion.">
+  <link rel="stylesheet" href="assets/vendor/bootstrap6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+
+    /* =========================================================
+       ADVERTISE PAGE
+    ========================================================= */
+    .advertise-page {
+      background: var(--bs-body-bg);
+      color: var(--bs-body-color);
+      overflow-x: hidden;
+    }
+
+    .advertise-page,
+    .advertise-page *,
+    .advertise-page *::before,
+    .advertise-page *::after {
+      box-sizing: border-box;
+    }
+
+    .advertise-page .row > [class*="col-"],
+    .advertise-page .row > [class*=":col-"] {
+      min-width: 0;
+    }
+
+    .advertise-page .section-anchor {
+      scroll-margin-top: 124px;
+    }
+
+    .ad-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 78px 0 66px;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(var(--bs-primary-rgb), .15), transparent 34%),
+        radial-gradient(circle at 5% 85%, rgba(var(--bs-primary-rgb), .07), transparent 30%),
+        linear-gradient(135deg, rgba(var(--bs-primary-rgb), .10), transparent 56%),
+        var(--bs-body-bg);
+      border-bottom: 1px solid var(--bs-border-color);
+    }
+
+    .ad-hero::before,
+    .ad-hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .ad-hero::before {
+      width: 420px;
+      height: 420px;
+      top: -220px;
+      right: -100px;
+      border: 1px solid rgba(var(--bs-primary-rgb), .13);
+    }
+
+    .ad-hero::after {
+      width: 260px;
+      height: 260px;
+      bottom: -150px;
+      left: -90px;
+      background: rgba(var(--bs-primary-rgb), .045);
+    }
+
+    .ad-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .ad-kicker,
+    .ad-section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--bs-primary);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .ad-kicker::before,
+    .ad-section-kicker::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+
+    .ad-hero-copy {
+      max-width: 700px;
+    }
+
+    .ad-hero-copy h1 {
+      max-width: 720px;
+      font-size: clamp(2.55rem, 5vw, 4.6rem);
+      line-height: .98;
+      letter-spacing: -.045em;
+    }
+
+    .ad-hero-copy .lead {
+      max-width: 650px;
+      font-size: clamp(1rem, 1.6vw, 1.16rem);
+      line-height: 1.75;
+      color: var(--bs-secondary-color);
+    }
+
+    .ad-hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 26px;
+    }
+
+    .ad-hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 12px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--bs-body-bg) 88%, transparent);
+      color: var(--bs-secondary-color);
+      font-size: .82rem;
+      font-weight: 600;
+    }
+
+    .ad-hero-pill::before {
+      content: "✓";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: var(--bs-primary);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .ad-showcase-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      margin-inline: auto;
+      padding-bottom: 0;
+    }
+
+    .ad-showcase-card {
+      position: relative;
+      width: 100%;
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid rgba(15, 23, 42, .10);
+      border-radius: 24px;
+      background: rgba(255,255,255,.76);
+      box-shadow: 0 30px 70px rgba(15,23,42,.16);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .ad-showcase-browser {
+      overflow: hidden;
+      border-radius: 18px;
+      background: #f7f8fa;
+      border: 1px solid rgba(15,23,42,.06);
+    }
+
+    .ad-showcase-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 14px;
+      background: #fff;
+      border-bottom: 1px solid #e8eaf0;
+    }
+
+    .ad-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .ad-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ccd1d9;
+    }
+
+    .ad-showcase-brand {
+      font-size: 11px;
+      font-weight: 800;
+      color: #64748b;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .ad-showcase-body {
+      padding: 16px;
+    }
+
+    .ad-showcase-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      margin-bottom: 13px;
+    }
+
+    .ad-showcase-heading strong {
+      font-size: 14px;
+      color: #172033;
+    }
+
+    .ad-showcase-heading span {
+      flex: 0 1 auto;
+      max-width: 100%;
+      font-size: 10px;
+      color: #7b8495;
+      line-height: 1.4;
+      text-align: right;
+    }
+
+    .ad-product-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .ad-product-card {
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 13px;
+      background: #fff;
+      border: 1px solid #e8eaf0;
+      box-shadow: 0 8px 18px rgba(15,23,42,.06);
+    }
+
+    .ad-product-art {
+      aspect-ratio: 1.15 / 1;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px;
+      background:
+        linear-gradient(135deg, rgba(15,23,42,.04), rgba(15,23,42,.13)),
+        linear-gradient(135deg, #f5f0e7, #dce8f5);
+    }
+
+    .ad-product-art.two {
+      background:
+        linear-gradient(135deg, rgba(15,23,42,.04), rgba(15,23,42,.13)),
+        linear-gradient(135deg, #ece5f4, #d7e6dc);
+    }
+
+    .ad-product-art.three {
+      background:
+        linear-gradient(135deg, rgba(15,23,42,.04), rgba(15,23,42,.12)),
+        linear-gradient(135deg, #f4dfd5, #e8ecf4);
+    }
+
+    .ad-sponsor-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 20px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.86);
+      color: #344054;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .ad-product-copy {
+      padding: 10px;
+    }
+
+    .ad-product-copy strong {
+      display: block;
+      margin-bottom: 3px;
+      color: #192233;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .ad-product-copy span {
+      display: block;
+      color: #7b8495;
+      font-size: 9px;
+    }
+
+    .ad-floating-label {
+      position: static;
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      margin: 12px 0 0 auto;
+      padding: 10px 12px;
+      border: 1px solid rgba(15,23,42,.08);
+      border-radius: 13px;
+      background: var(--bs-body-bg);
+      box-shadow: 0 12px 26px rgba(15,23,42,.08);
+    }
+
+    .ad-floating-label span {
+      display: block;
+      color: #7b8495;
+      font-size: 9px;
+      margin-bottom: 2px;
+    }
+
+    .ad-floating-label strong {
+      color: #192233;
+      font-size: 12px;
+    }
+
+    .ad-audience-strip {
+      position: relative;
+      z-index: 1;
+      margin-top: 0;
+      padding: 28px 0 0;
+      background: var(--bs-body-bg);
+    }
+
+    .ad-audience-card {
+      width: 100%;
+      min-width: 0;
+      padding: 18px 22px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 18px;
+      background: var(--bs-body-bg);
+      box-shadow: 0 16px 35px rgba(15,23,42,.06);
+      overflow: hidden;
+    }
+
+    .ad-audience-card > .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .ad-audience-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 58px;
+    }
+
+    .ad-audience-icon,
+    .ad-iconbox {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(var(--bs-primary-rgb), .09);
+      color: var(--bs-primary);
+    }
+
+    .ad-audience-item strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: .88rem;
+    }
+
+    .ad-audience-item span {
+      color: var(--bs-secondary-color);
+      font-size: .76rem;
+    }
+
+    .ad-section {
+      padding: 78px 0;
+    }
+
+    .ad-section.alt {
+      background: var(--bs-tertiary-bg);
+      border-top: 1px solid var(--bs-border-color);
+      border-bottom: 1px solid var(--bs-border-color);
+    }
+
+    .ad-section-heading {
+      max-width: 750px;
+    }
+
+    .ad-section-heading h2 {
+      margin-bottom: 12px;
+      font-size: clamp(2rem, 4vw, 3.15rem);
+      line-height: 1.05;
+      letter-spacing: -.035em;
+    }
+
+    .ad-section-heading p {
+      margin-bottom: 0;
+      max-width: 690px;
+      color: var(--bs-secondary-color);
+      line-height: 1.72;
+    }
+
+    .ad-option-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .ad-option-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 24px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 18px;
+      background: var(--bs-body-bg);
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .ad-option-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(var(--bs-primary-rgb), .35);
+      box-shadow: 0 20px 40px rgba(15,23,42,.08);
+    }
+
+    .ad-option-card.featured {
+      border-color: rgba(var(--bs-primary-rgb), .34);
+      box-shadow: 0 18px 42px rgba(var(--bs-primary-rgb), .10);
+    }
+
+    .ad-option-badge {
+      align-self: flex-start;
+      margin-bottom: 16px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(var(--bs-primary-rgb), .08);
+      color: var(--bs-primary);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .ad-option-card h3 {
+      margin-bottom: 9px;
+      font-size: 1.12rem;
+      letter-spacing: -.015em;
+    }
+
+    .ad-option-card p {
+      flex: 1 1 auto;
+      margin-bottom: 18px;
+      color: var(--bs-secondary-color);
+      font-size: .88rem;
+      line-height: 1.68;
+    }
+
+    .ad-option-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .ad-option-list li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      color: var(--bs-secondary-color);
+      font-size: .76rem;
+      line-height: 1.5;
+    }
+
+    .ad-option-list li::before {
+      content: "✓";
+      color: var(--bs-primary);
+      font-weight: 800;
+    }
+
+    .ad-future-note {
+      margin-top: 14px;
+      padding: 11px 12px;
+      border-radius: 11px;
+      background: var(--bs-tertiary-bg);
+      color: var(--bs-secondary-color);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .ad-promote-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+      gap: 28px;
+      margin-top: 34px;
+    }
+
+    .ad-promote-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .ad-promote-item {
+      display: grid;
+      grid-template-columns: auto minmax(0,1fr);
+      gap: 14px;
+      padding: 17px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 15px;
+      background: var(--bs-body-bg);
+    }
+
+    .ad-promote-item h3 {
+      margin-bottom: 4px;
+      font-size: .96rem;
+    }
+
+    .ad-promote-item p {
+      margin: 0;
+      color: var(--bs-secondary-color);
+      font-size: .78rem;
+      line-height: 1.6;
+    }
+
+    .ad-creative-board {
+      position: relative;
+      overflow: hidden;
+      min-height: 100%;
+      padding: 28px;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(var(--bs-primary-rgb), .11), transparent 45%),
+        var(--bs-body-bg);
+      border: 1px solid var(--bs-border-color);
+    }
+
+    .ad-creative-board::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -100px;
+      bottom: -100px;
+      border-radius: 50%;
+      background: rgba(var(--bs-primary-rgb), .08);
+    }
+
+    .ad-creative-window {
+      position: relative;
+      z-index: 1;
+      padding: 16px;
+      border-radius: 16px;
+      background: #0f172a;
+      color: #fff;
+      box-shadow: 0 20px 40px rgba(15,23,42,.18);
+    }
+
+    .ad-creative-window small {
+      color: rgba(255,255,255,.62);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .ad-creative-window strong {
+      display: block;
+      margin-top: 10px;
+      font-size: clamp(1.15rem, 2.5vw, 1.8rem);
+      line-height: 1.08;
+      letter-spacing: -.025em;
+    }
+
+    .ad-creative-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .ad-creative-mini {
+      min-height: 96px;
+      border-radius: 10px;
+      padding: 9px;
+      display: flex;
+      align-items: end;
+      background: linear-gradient(135deg, #dce8f5, #f4ece4);
+      color: #334155;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .ad-creative-mini:nth-child(2) {
+      background: linear-gradient(135deg, #e8e0f1, #e1f0e3);
+    }
+
+    .ad-creative-mini:nth-child(3) {
+      background: linear-gradient(135deg, #f4dfd6, #e7ebf4);
+    }
+
+    .ad-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .ad-step {
+      padding: 23px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 17px;
+      background: var(--bs-body-bg);
+    }
+
+    .ad-step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      margin-bottom: 16px;
+      border-radius: 10px;
+      background: rgba(var(--bs-primary-rgb), .09);
+      color: var(--bs-primary);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .ad-step h3 {
+      margin-bottom: 6px;
+      font-size: .96rem;
+    }
+
+    .ad-step p {
+      margin: 0;
+      color: var(--bs-secondary-color);
+      font-size: .77rem;
+      line-height: 1.62;
+    }
+
+    .ad-standards {
+      display: grid;
+      grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr);
+      gap: 22px;
+      margin-top: 34px;
+    }
+
+    .ad-standards-card,
+    .ad-contact-card {
+      padding: 25px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 18px;
+      background: var(--bs-body-bg);
+    }
+
+    .ad-standards-card h3,
+    .ad-contact-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+    }
+
+    .ad-standards-card p,
+    .ad-contact-card p {
+      color: var(--bs-secondary-color);
+      font-size: .82rem;
+      line-height: 1.68;
+    }
+
+    .ad-check-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 17px;
+    }
+
+    .ad-check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--bs-secondary-color);
+      font-size: .78rem;
+      line-height: 1.55;
+    }
+
+    .ad-check::before {
+      content: "✓";
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: rgba(var(--bs-primary-rgb), .09);
+      color: var(--bs-primary);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .ad-faq {
+      display: grid;
+      gap: 10px;
+      margin-top: 32px;
+    }
+
+    .ad-faq details {
+      border: 1px solid var(--bs-border-color);
+      border-radius: 14px;
+      background: var(--bs-body-bg);
+      overflow: hidden;
+    }
+
+    .ad-faq summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 17px 18px;
+      font-size: .86rem;
+      font-weight: 700;
+    }
+
+    .ad-faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .ad-faq summary::after {
+      content: "+";
+      float: right;
+      color: var(--bs-secondary-color);
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .ad-faq details[open] summary::after {
+      content: "–";
+    }
+
+    .ad-faq .answer {
+      padding: 0 18px 18px;
+      color: var(--bs-secondary-color);
+      font-size: .78rem;
+      line-height: 1.7;
+    }
+
+    .ad-final {
+      position: relative;
+      overflow: hidden;
+      padding: 78px 0;
+      background:
+        linear-gradient(135deg, rgba(var(--bs-primary-rgb), .13), transparent 62%),
+        var(--bs-tertiary-bg);
+      border-top: 1px solid var(--bs-border-color);
+    }
+
+    .ad-final-card {
+      position: relative;
+      z-index: 1;
+      padding: 36px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 24px;
+      background: var(--bs-body-bg);
+      box-shadow: 0 24px 60px rgba(15,23,42,.08);
+    }
+
+    .ad-final h2 {
+      margin-bottom: 10px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.04;
+      letter-spacing: -.035em;
+    }
+
+    .ad-final p {
+      margin-bottom: 0;
+      max-width: 720px;
+      color: var(--bs-secondary-color);
+      line-height: 1.7;
+    }
+
+    .ad-final-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 23px;
+    }
+
+    @media (max-width: 1199.98px) {
+      .ad-option-grid,
+      .ad-steps {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+      }
+      .ad-floating-label {
+        right: 10px;
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      .ad-hero {
+        padding-top: 58px;
+      }
+      .ad-showcase-wrap {
+        margin-top: 18px;
+        max-width: 720px;
+      }
+      .ad-promote-grid,
+      .ad-standards {
+        grid-template-columns: 1fr;
+      }
+      .ad-audience-strip {
+        margin-top: 0;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .ad-product-row {
+        grid-template-columns: 1fr;
+      }
+
+      .ad-showcase-heading span {
+        text-align: left;
+      }
+
+      .ad-floating-label {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .ad-section,
+      .ad-final {
+        padding: 58px 0;
+      }
+      .ad-option-grid,
+      .ad-steps {
+        grid-template-columns: 1fr;
+      }
+      .ad-audience-card {
+        padding: 14px 16px;
+      }
+      .ad-audience-item {
+        min-height: 0;
+      }
+      .ad-final-card {
+        padding: 25px 20px;
+      }
+      .ad-floating-label {
+        position: static;
+        display: inline-block;
+        margin-top: 12px;
+      }
+    }
+  </style>
+</head>
+<body class="advertise-page">
+
+  <a class="visually-hidden-focusable btn-solid theme-primary m-2" href="#advertising-options">Skip to advertising options</a>
+
+<header class="site-header">
+
+    <nav
+      class="navbar"
+      aria-label="Main navigation"
+    >
+
+      <div class="container">
+
+        <a
+          class="navbar-brand d-flex align-items-center gap-2 fw-semibold"
+          href="index.html"
+        >
+
+          <span
+            class="brand-mark"
+            aria-hidden="true"
+          >
+            N
+          </span>
+
+          Nigerians in Northampton
+
+        </a>
+
+
+        <div class="header-actions">
+
+          <a
+            class="btn-icon header-search-btn"
+            href="businesses.html"
+            aria-label="Search businesses"
+            title="Search businesses"
+          >
+
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <circle cx="7" cy="7" r="4.5"></circle>
+              <path d="m10.5 10.5 4 4"></path>
+            </svg>
+
+          </a>
+
+
+          <button
+            class="btn-icon header-theme-btn"
+            type="button"
+            id="themeToggle"
+            aria-label="Toggle color mode"
+          >
+
+            <svg
+              class="theme-icon-light"
+              width="18"
+              height="18"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <circle cx="8" cy="8" r="3.25"></circle>
+              <path d="M8 1v1.5M8 13.5V15M15 8h-1.5M2.5 8H1m11-4-1 1M5 11l-1 1m0-8 1 1m6 6 1 1"></path>
+            </svg>
+
+            <svg
+              class="theme-icon-dark"
+              width="18"
+              height="18"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"></path>
+            </svg>
+
+          </button>
+
+
+          <a
+            class="btn-outline theme-secondary header-cta header-desktop-action"
+            href="advertise-with-us.html" aria-current="page"
+          >
+            Advertise With Us
+          </a>
+
+
+          <a
+            class="btn-solid theme-primary header-cta header-desktop-action"
+            href="list-your-business.html"
+          >
+            List Your Business
+          </a>
+
+
+          <button
+            class="btn-icon mobile-menu-toggle navbar-toggler"
+            type="button"
+            data-bs-toggle="drawer"
+            data-bs-target="#navDrawer"
+            aria-controls="navDrawer"
+            aria-label="Open navigation"
+          >
+
+            <span
+              class="navbar-toggler-icon"
+              aria-hidden="true"
+            ></span>
+
+          </button>
+
+        </div>
+
+
+        <dialog
+          class="drawer drawer-end"
+          tabindex="-1"
+          id="navDrawer"
+          aria-labelledby="navDrawerLabel"
+        >
+
+          <div class="drawer-header">
+
+            <h5
+              class="drawer-title"
+              id="navDrawerLabel"
+            >
+              Menu
+            </h5>
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="drawer"
+              aria-label="Close navigation"
+            ></button>
+
+          </div>
+
+
+          <div class="drawer-body">
+
+            <ul class="nav navbar-nav">
+
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                  Home
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="businesses.html">
+                  Businesses
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#news">
+                  Community
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#events">
+                  Events
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#guides">
+                  Guides
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#about">
+                  About
+                </a>
+              </li>
+
+            </ul>
+
+
+            <div class="mobile-only-actions mt-4 pt-4 border-top">
+
+              <a
+                class="btn-solid theme-primary w-100 mb-2"
+                href="list-your-business.html"
+              >
+                List Your Business
+              </a>
+
+              <a
+                class="btn-outline theme-secondary w-100"
+                href="advertise-with-us.html" aria-current="page"
+              >
+                Advertise With Us
+              </a>
+
+            </div>
+
+          </div>
+
+        </dialog>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+  <main>
+
+    <section class="ad-hero section-anchor" id="top">
+      <div class="container">
+        <div class="ad-hero-inner">
+          <div class="row g-5 align-items-center">
+            <div class="lg:col-6">
+              <div class="ad-hero-copy">
+                <p class="ad-kicker mb-3">Promote with purpose</p>
+                <h1 class="fw-bold mb-4">Put your business in front of the community.</h1>
+                <p class="lead mb-0">
+                  Advertise your business, products, services, events or special offers through Nigerians in Northampton — a dedicated community platform built around local discovery and connection.
+                </p>
+
+                <div class="ad-hero-pills">
+                  <span class="ad-hero-pill">Business visibility</span>
+                  <span class="ad-hero-pill">Product & service promotion</span>
+                  <span class="ad-hero-pill">Community reach</span>
+                  <span class="ad-hero-pill">Flexible placements</span>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                  <a class="btn-solid theme-primary btn-lg" href="#advertising-options">Explore advertising options</a>
+                  <a class="btn-outline theme-secondary btn-lg" href="#how-it-works">How it works</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-6">
+              <div class="ad-showcase-wrap">
+                <div class="ad-showcase-card">
+                  <div class="ad-showcase-browser">
+                    <div class="ad-showcase-topbar">
+                      <div class="ad-dots"><span></span><span></span><span></span></div>
+                      <span class="ad-showcase-brand">Marketplace</span>
+                    </div>
+                    <div class="ad-showcase-body">
+                      <div class="ad-showcase-heading">
+                        <strong>Featured products & services</strong>
+                        <span>Sponsored placement</span>
+                      </div>
+
+                      <div class="ad-product-row" aria-label="Example marketplace advertising cards">
+                        <article class="ad-product-card">
+                          <div class="ad-product-art"><span class="ad-sponsor-tag">Featured</span></div>
+                          <div class="ad-product-copy"><strong>Naija Kitchen</strong><span>Fresh local catering</span></div>
+                        </article>
+                        <article class="ad-product-card">
+                          <div class="ad-product-art two"><span class="ad-sponsor-tag">Featured</span></div>
+                          <div class="ad-product-copy"><strong>Beauty Studio</strong><span>Hair & beauty services</span></div>
+                        </article>
+                        <article class="ad-product-card">
+                          <div class="ad-product-art three"><span class="ad-sponsor-tag">Featured</span></div>
+                          <div class="ad-product-copy"><strong>Local Services</strong><span>Professional support</span></div>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ad-floating-label">
+                  <span>Future-ready placement</span>
+                  <strong>Marketplace Carousel</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ad-audience-strip">
+      <div class="container">
+        <div class="ad-audience-card">
+          <div class="row g-3 align-items-center">
+            <div class="md:col-4">
+              <div class="ad-audience-item">
+                <span class="ad-audience-icon" aria-hidden="true">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9.5" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </span>
+                <div><strong>Community discovery</strong><span>Reach people actively exploring local information.</span></div>
+              </div>
+            </div>
+            <div class="md:col-4">
+              <div class="ad-audience-item">
+                <span class="ad-audience-icon" aria-hidden="true">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M7 16l3.5-4 2.5 3 2.5-3L19 16"></path><circle cx="8.5" cy="8.5" r="1.25"></circle></svg>
+                </span>
+                <div><strong>Visual promotion</strong><span>Make products, services and offers easier to notice.</span></div>
+              </div>
+            </div>
+            <div class="md:col-4">
+              <div class="ad-audience-item">
+                <span class="ad-audience-icon" aria-hidden="true">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"></path><path d="M4 5h13l-2.5 3L17 11H4"></path></svg>
+                </span>
+                <div><strong>Community presence</strong><span>Build awareness alongside local community activity.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ad-section section-anchor" id="advertising-options">
+      <div class="container">
+        <div class="ad-section-heading">
+          <p class="ad-section-kicker mb-3">Advertising options</p>
+          <h2>Choose the kind of visibility that fits what you want to promote.</h2>
+          <p>
+            The advertising experience is designed to support both business discovery and promotional campaigns. Placements can be structured around the content you want people to see and the part of the website where it makes the most sense.
+          </p>
+        </div>
+
+        <div class="ad-option-grid">
+          <article class="ad-option-card featured">
+            <span class="ad-option-badge">Future marketplace</span>
+            <h3>Marketplace Carousel</h3>
+            <p>
+              A visually prominent placement for individual products, services or offers inside the marketplace experience.
+            </p>
+            <ul class="ad-option-list">
+              <li>Product or service-focused card</li>
+              <li>Image-led presentation</li>
+              <li>Short promotional copy and call-to-action</li>
+              <li>Designed for carousel browsing</li>
+            </ul>
+            <div class="ad-future-note">The marketplace advertising connection will be implemented as the marketplace feature is completed.</div>
+          </article>
+
+          <article class="ad-option-card">
+            <span class="ad-option-badge">Business visibility</span>
+            <h3>Featured Business</h3>
+            <p>
+              Give a local business additional visibility with a polished featured placement tied to its directory presence.
+            </p>
+            <ul class="ad-option-list">
+              <li>Business name and category</li>
+              <li>Featured image or creative</li>
+              <li>Short description</li>
+              <li>Direct path to the business listing</li>
+            </ul>
+          </article>
+
+          <article class="ad-option-card">
+            <span class="ad-option-badge">Campaigns</span>
+            <h3>Event & Offer Promotion</h3>
+            <p>
+              Promote a launch, sale, event, community activity or time-sensitive offer with focused campaign content.
+            </p>
+            <ul class="ad-option-list">
+              <li>Event announcements</li>
+              <li>Special offers and promotions</li>
+              <li>Limited-time campaigns</li>
+              <li>Clear calls to action</li>
+            </ul>
+          </article>
+
+          <article class="ad-option-card">
+            <span class="ad-option-badge">Spotlight</span>
+            <h3>Homepage Promotion</h3>
+            <p>
+              Use a high-visibility homepage placement to introduce a business, service, product or community campaign.
+            </p>
+            <ul class="ad-option-list">
+              <li>High-visibility presentation</li>
+              <li>Concise promotional message</li>
+              <li>Link to your chosen destination</li>
+              <li>Campaign-specific creative</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="ad-section alt">
+      <div class="container">
+        <div class="ad-section-heading">
+          <p class="ad-section-kicker mb-3">What you can promote</p>
+          <h2>From a single product to an entire service.</h2>
+          <p>
+            Advertising does not have to be limited to a traditional business advert. The page structure supports practical, community-focused promotion.
+          </p>
+        </div>
+
+        <div class="ad-promote-grid">
+          <div class="ad-promote-list">
+            <div class="ad-promote-item">
+              <span class="ad-iconbox" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"></path><path d="M8 9h8M8 13h5"></path></svg>
+              </span>
+              <div><h3>Products</h3><p>Food, fashion, beauty products, gifts, home items and other goods available to the community.</p></div>
+            </div>
+
+            <div class="ad-promote-item">
+              <span class="ad-iconbox" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"></path><path d="M7 16V8M12 16V5M17 16v-5"></path></svg>
+              </span>
+              <div><h3>Services</h3><p>Professional, household, creative, technical, beauty, transport and other local services.</p></div>
+            </div>
+
+            <div class="ad-promote-item">
+              <span class="ad-iconbox" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"></rect><path d="M8 2v4M16 2v4M3 9h18"></path></svg>
+              </span>
+              <div><h3>Events</h3><p>Community events, classes, workshops, launches, markets and other activities.</p></div>
+            </div>
+
+            <div class="ad-promote-item">
+              <span class="ad-iconbox" aria-hidden="true">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v8H4v-8"></path><path d="M2 7h20v5H2z"></path><path d="M12 7v13"></path><path d="M12 7H7.5a2.5 2.5 0 1 1 2.5-2.5C10 6 12 7 12 7Zm0 0h4.5a2.5 2.5 0 1 0-2.5-2.5C14 6 12 7 12 7Z"></path></svg>
+              </span>
+              <div><h3>Offers & launches</h3><p>New services, seasonal offers, opening announcements and limited-time campaigns.</p></div>
+            </div>
+          </div>
+
+          <div class="ad-creative-board">
+            <div class="ad-creative-window">
+              <small>Example campaign layout</small>
+              <strong>Your offer deserves a clean, useful presentation.</strong>
+              <div class="ad-creative-mini-grid">
+                <div class="ad-creative-mini">Product</div>
+                <div class="ad-creative-mini">Service</div>
+                <div class="ad-creative-mini">Event</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ad-section section-anchor" id="how-it-works">
+      <div class="container">
+        <div class="ad-section-heading">
+          <p class="ad-section-kicker mb-3">How it works</p>
+          <h2>A simple route from idea to live promotion.</h2>
+          <p>
+            The advertising journey can stay straightforward: tell us what you want promoted, provide the creative, agree the placement and let the content go through review before publishing.
+          </p>
+        </div>
+
+        <div class="ad-steps">
+          <article class="ad-step"><span class="ad-step-number">01</span><h3>Choose a placement</h3><p>Select the type of visibility that best matches your product, service, business or campaign.</p></article>
+          <article class="ad-step"><span class="ad-step-number">02</span><h3>Share your content</h3><p>Provide your images, wording, destination link and the key details people need to act.</p></article>
+          <article class="ad-step"><span class="ad-step-number">03</span><h3>Review & prepare</h3><p>The advertising content can be checked, refined and prepared for the selected space.</p></article>
+          <article class="ad-step"><span class="ad-step-number">04</span><h3>Go live</h3><p>Once approved and scheduled, the promotion is published in the agreed website placement.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="ad-section alt">
+      <div class="container">
+        <div class="ad-section-heading">
+          <p class="ad-section-kicker mb-3">Creative & content</p>
+          <h2>Keep the advert clear, visual and easy to act on.</h2>
+          <p>
+            Strong advertising content should make the offer understandable quickly. Exact creative dimensions can be finalised as each placement is connected to the website.
+          </p>
+        </div>
+
+        <div class="ad-standards">
+          <div class="ad-standards-card">
+            <h3>Good advertising content usually includes</h3>
+            <div class="ad-check-grid">
+              <div class="ad-check">A clear business, product, service or event name.</div>
+              <div class="ad-check">One strong image or a focused set of images.</div>
+              <div class="ad-check">A short value proposition that explains what is being offered.</div>
+              <div class="ad-check">A clear action such as enquire, book, visit, order or learn more.</div>
+              <div class="ad-check">Accurate contact details and destination links.</div>
+            </div>
+          </div>
+
+          <div class="ad-contact-card">
+            <h3>Placement and pricing</h3>
+            <p>
+              Advertising packages can be introduced around placement, duration and campaign requirements rather than forcing every advertiser into one fixed format.
+            </p>
+            <p class="mb-0">
+              When the advertising backend is connected, this page can be extended with live package selection, pricing, booking, creative upload and campaign status.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ad-section section-anchor" id="faq">
+      <div class="container">
+        <div class="ad-section-heading">
+          <p class="ad-section-kicker mb-3">Questions</p>
+          <h2>Advertising information at a glance.</h2>
+        </div>
+
+        <div class="ad-faq">
+          <details>
+            <summary>Who can advertise?</summary>
+            <div class="answer">Businesses, professionals, service providers, event organisers and other relevant organisations or community initiatives can be considered for advertising, subject to the website's review requirements.</div>
+          </details>
+          <details>
+            <summary>Do I need a business directory listing first?</summary>
+            <div class="answer">Not necessarily. Some advertising formats may work alongside a directory listing, while campaign-specific placements can be structured around the content being promoted.</div>
+          </details>
+          <details>
+            <summary>Can I advertise one product or one service rather than my whole business?</summary>
+            <div class="answer">Yes. The planned marketplace advertising experience is specifically intended to support focused promotion of individual products, services and offers.</div>
+          </details>
+          <details>
+            <summary>How will content be reviewed?</summary>
+            <div class="answer">Advertising content can be reviewed before publication so that the material is suitable for the community platform and the selected placement.</div>
+          </details>
+          <details>
+            <summary>Will advertising packages and pricing be available online?</summary>
+            <div class="answer">That can be added as the booking system is implemented. This page is intentionally structured so pricing, durations and placement availability can later be loaded dynamically.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="ad-final section-anchor" id="enquire">
+      <div class="container">
+        <div class="ad-final-card">
+          <p class="ad-section-kicker mb-3">Ready to promote?</p>
+          <h2>Turn your next product, service or event into a community-facing campaign.</h2>
+          <p>
+            The page is ready to become the main advertising entry point for the website. The next stage can connect this experience to a proper advertising enquiry and booking workflow.
+          </p>
+
+          <div class="ad-final-actions">
+            <a class="btn-solid theme-primary btn-lg" href="#advertising-options">Explore Advertising Options</a>
+            <a class="btn-outline theme-secondary btn-lg" href="list-your-business.html">List Your Business</a>
+            <a class="btn-outline theme-secondary btn-lg" href="#faq">Read FAQs</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+<footer class="site-footer bg-2 py-6">
+
+    <div class="container">
+
+      <div class="row g-5">
+
+        <div class="lg:col-4">
+
+          <a
+            class="navbar-brand d-inline-flex align-items-center gap-2 fw-semibold mb-3"
+            href="index.html"
+          >
+
+            <span
+              class="brand-mark"
+              aria-hidden="true"
+            >
+              N
+            </span>
+
+            Nigerians in Northampton
+
+          </a>
+
+          <p class="fg-3 fs-sm mb-0">
+            Connecting Nigerians, supporting local businesses and sharing useful information across Northampton.
+          </p>
+
+        </div>
+
+
+        <div class="sm:col-6 lg:col-2">
+
+          <h3 class="fs-sm fw-semibold mb-3">
+            Community
+          </h3>
+
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="index.html#about">About Us</a></li>
+            <li class="mb-2"><a href="index.html#news">News</a></li>
+            <li class="mb-2"><a href="index.html#events">Events</a></li>
+            <li class="mb-2"><a href="index.html#guides">Newcomer's Guide</a></li>
+          </ul>
+
+        </div>
+
+
+        <div class="sm:col-6 lg:col-2">
+
+          <h3 class="fs-sm fw-semibold mb-3">
+            Businesses
+          </h3>
+
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="businesses.html">Directory</a></li>
+            <li class="mb-2"><a href="index.html#categories">Categories</a></li>
+            <li class="mb-2"><a href="list-your-business.html">List Your Business</a></li>
+            <li class="mb-2"><a href="advertise-with-us.html">Advertise with us</a></li>
+          </ul>
+
+        </div>
+
+
+        <div class="sm:col-6 lg:col-2">
+
+          <h3 class="fs-sm fw-semibold mb-3">
+            Information
+          </h3>
+
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="index.html#about">About</a></li>
+            <li class="mb-2"><a href="#">Contact</a></li>
+            <li class="mb-2"><a href="#">Privacy</a></li>
+            <li class="mb-2"><a href="#">Terms</a></li>
+          </ul>
+
+        </div>
+
+
+        <div class="sm:col-6 lg:col-2">
+
+          <h3 class="fs-sm fw-semibold mb-3">
+            Connect
+          </h3>
+
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#">WhatsApp Community</a></li>
+            <li class="mb-2"><a href="#">Facebook</a></li>
+            <li class="mb-2"><a href="#">Instagram</a></li>
+            <li class="mb-2"><a href="#">Email Us</a></li>
+          </ul>
+
+        </div>
+
+      </div>
+
+      <hr class="my-5">
+
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+
+        <p class="fg-3 fs-xs mb-0">
+          &copy; <span data-year>2026</span> Nigerians in Northampton. All rights reserved.
+        </p>
+
+        <p class="fg-3 fs-xs mb-0">
+          Community • Business • Information
+        </p>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <script type="module" src="assets/js/main.js"></script>
+
+</body>
+</html>
