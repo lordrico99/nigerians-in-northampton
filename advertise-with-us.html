@@ -996,231 +996,307 @@
         margin-top: 12px;
       }
     }
-  </style>
+  
+
+    /* =========================================================
+       ADVERTISE PAGE HEADER / ACCOUNT MENU
+    ========================================================= */
+    .site-header .navbar > .container {
+      min-width: 0;
+    }
+
+    .site-header .navbar-brand {
+      min-width: 0;
+    }
+
+    .site-header .brand-name {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .mobile-account-panel {
+      display: none;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--bs-border-color);
+    }
+
+    .mobile-account-heading,
+    .mobile-account-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .mobile-account-heading > div,
+    .mobile-account-copy {
+      min-width: 0;
+    }
+
+    .mobile-account-heading strong,
+    .mobile-account-copy strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: .9rem;
+    }
+
+    .mobile-account-heading span:not(.mobile-account-icon),
+    .mobile-account-copy span {
+      display: block;
+      color: var(--bs-secondary-color);
+      font-size: .74rem;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .mobile-account-icon,
+    .mobile-account-avatar {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(var(--bs-primary-rgb), .10);
+      color: var(--bs-primary);
+      font-weight: 800;
+    }
+
+    .mobile-account-avatar {
+      background: var(--bs-primary);
+      color: #fff;
+      font-size: .82rem;
+      letter-spacing: .02em;
+    }
+
+    .mobile-account-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .mobile-account-actions-stack {
+      grid-template-columns: 1fr;
+    }
+
+    .mobile-account-actions > * {
+      min-width: 0;
+      width: 100%;
+      justify-content: center;
+    }
+
+    @media (max-width: 991.98px) {
+      .site-header .navbar {
+        padding-top: .68rem;
+        padding-bottom: .68rem;
+      }
+
+      .site-header .navbar > .container {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        flex-wrap: nowrap;
+        gap: .55rem;
+      }
+
+      .site-header .navbar-brand {
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: calc(100vw - 150px);
+        font-size: .94rem;
+      }
+
+      .site-header .brand-mark {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+      }
+
+      .site-header .header-actions {
+        display: flex;
+        flex: 0 0 auto;
+        align-items: center;
+        gap: .35rem;
+        min-width: 0;
+        margin-left: auto;
+      }
+
+      .site-header .header-search-btn,
+      .site-header .header-theme-btn,
+      .site-header .mobile-menu-toggle {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        padding: 0;
+        flex: 0 0 38px;
+        border-radius: .68rem;
+      }
+
+      .site-header .header-desktop-action {
+        display: none !important;
+      }
+
+      .site-header .mobile-menu-toggle .navbar-toggler-icon {
+        display: block;
+      }
+
+      .site-header #navDrawer {
+        width: min(390px, 100vw) !important;
+        max-width: 100vw !important;
+        min-width: 0 !important;
+        right: 0 !important;
+        left: auto !important;
+      }
+
+      .site-header #navDrawer .drawer-body {
+        min-width: 0;
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      .site-header #navDrawer .navbar-nav {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .site-header #navDrawer .nav-item,
+      .site-header #navDrawer .nav-link {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .mobile-account-panel {
+        display: block;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .site-header .navbar-brand {
+        max-width: calc(100vw - 142px);
+      }
+
+      .site-header .brand-name {
+        font-size: .9rem;
+      }
+
+      .mobile-account-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+</style>
 </head>
 <body class="advertise-page">
 
   <a class="visually-hidden-focusable btn-solid theme-primary m-2" href="#advertising-options">Skip to advertising options</a>
 
 <header class="site-header">
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="container">
 
-    <nav
-      class="navbar"
-      aria-label="Main navigation"
-    >
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-semibold" href="index.html">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span class="brand-name">Nigerians in Northampton</span>
+      </a>
 
-      <div class="container">
+      <div class="header-actions">
 
-        <a
-          class="navbar-brand d-flex align-items-center gap-2 fw-semibold"
-          href="index.html"
-        >
-
-          <span
-            class="brand-mark"
-            aria-hidden="true"
-          >
-            N
-          </span>
-
-          Nigerians in Northampton
-
+        <a class="btn-icon header-search-btn" href="businesses.html" aria-label="Search businesses" title="Search businesses">
+          <svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+            <circle cx="7" cy="7" r="4.5"></circle>
+            <path d="m10.5 10.5 4 4"></path>
+          </svg>
         </a>
 
+        <button class="btn-icon header-theme-btn" type="button" id="themeToggle" aria-label="Toggle color mode">
+          <svg class="theme-icon-light" width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <circle cx="8" cy="8" r="3.25"></circle>
+            <path d="M8 1v1.5M8 13.5V15M15 8h-1.5M2.5 8H1m11-4-1 1M5 11l-1 1m0-8 1 1m6 6 1 1"></path>
+          </svg>
+          <svg class="theme-icon-dark" width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"></path>
+          </svg>
+        </button>
 
-        <div class="header-actions">
+        <a class="btn-outline theme-secondary header-cta header-desktop-action" href="advertise-with-us.html" aria-current="page">
+          Advertise With Us
+        </a>
 
-          <a
-            class="btn-icon header-search-btn"
-            href="businesses.html"
-            aria-label="Search businesses"
-            title="Search businesses"
-          >
+        <a class="btn-solid theme-primary header-cta header-desktop-action" href="list-your-business.html">
+          List Your Business
+        </a>
 
-            <svg
-              width="17"
-              height="17"
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"
-              aria-hidden="true"
-            >
-              <circle cx="7" cy="7" r="4.5"></circle>
-              <path d="m10.5 10.5 4 4"></path>
-            </svg>
-
-          </a>
-
-
-          <button
-            class="btn-icon header-theme-btn"
-            type="button"
-            id="themeToggle"
-            aria-label="Toggle color mode"
-          >
-
-            <svg
-              class="theme-icon-light"
-              width="18"
-              height="18"
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              aria-hidden="true"
-            >
-              <circle cx="8" cy="8" r="3.25"></circle>
-              <path d="M8 1v1.5M8 13.5V15M15 8h-1.5M2.5 8H1m11-4-1 1M5 11l-1 1m0-8 1 1m6 6 1 1"></path>
-            </svg>
-
-            <svg
-              class="theme-icon-dark"
-              width="18"
-              height="18"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"></path>
-            </svg>
-
-          </button>
-
-
-          <a
-            class="btn-outline theme-secondary header-cta header-desktop-action"
-            href="advertise-with-us.html" aria-current="page"
-          >
-            Advertise With Us
-          </a>
-
-
-          <a
-            class="btn-solid theme-primary header-cta header-desktop-action"
-            href="list-your-business.html"
-          >
-            List Your Business
-          </a>
-
-
-          <button
-            class="btn-icon mobile-menu-toggle navbar-toggler"
-            type="button"
-            data-bs-toggle="drawer"
-            data-bs-target="#navDrawer"
-            aria-controls="navDrawer"
-            aria-label="Open navigation"
-          >
-
-            <span
-              class="navbar-toggler-icon"
-              aria-hidden="true"
-            ></span>
-
-          </button>
-
-        </div>
-
-
-        <dialog
-          class="drawer drawer-end"
-          tabindex="-1"
-          id="navDrawer"
-          aria-labelledby="navDrawerLabel"
-        >
-
-          <div class="drawer-header">
-
-            <h5
-              class="drawer-title"
-              id="navDrawerLabel"
-            >
-              Menu
-            </h5>
-
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="drawer"
-              aria-label="Close navigation"
-            ></button>
-
-          </div>
-
-
-          <div class="drawer-body">
-
-            <ul class="nav navbar-nav">
-
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                  Home
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="businesses.html">
-                  Businesses
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="index.html#news">
-                  Community
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="index.html#events">
-                  Events
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="index.html#guides">
-                  Guides
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="index.html#about">
-                  About
-                </a>
-              </li>
-
-            </ul>
-
-
-            <div class="mobile-only-actions mt-4 pt-4 border-top">
-
-              <a
-                class="btn-solid theme-primary w-100 mb-2"
-                href="list-your-business.html"
-              >
-                List Your Business
-              </a>
-
-              <a
-                class="btn-outline theme-secondary w-100"
-                href="advertise-with-us.html" aria-current="page"
-              >
-                Advertise With Us
-              </a>
-
-            </div>
-
-          </div>
-
-        </dialog>
-
+        <button class="btn-icon mobile-menu-toggle navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navDrawer" aria-controls="navDrawer" aria-expanded="false" aria-label="Open navigation">
+          <span class="navbar-toggler-icon" aria-hidden="true"></span>
+        </button>
       </div>
 
-    </nav>
+      <dialog class="drawer drawer-end" tabindex="-1" id="navDrawer" aria-labelledby="navDrawerLabel">
+        <div class="drawer-header">
+          <h5 class="drawer-title" id="navDrawerLabel">Menu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close navigation"></button>
+        </div>
 
-  </header>
+        <div class="drawer-body">
+          <ul class="nav navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="businesses.html">Businesses</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#news">Community</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#events">Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#guides">Guides</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+          </ul>
+
+          <section class="mobile-account-panel" id="mobileAccountPanel" aria-label="Account">
+            <div class="mobile-account-signed-out" id="accountSignedOut">
+              <div class="mobile-account-heading">
+                <span class="mobile-account-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4"></circle>
+                    <path d="M4 21a8 8 0 0 1 16 0"></path>
+                  </svg>
+                </span>
+                <div>
+                  <strong>My account</strong>
+                  <span>Sign in to manage your account</span>
+                </div>
+              </div>
+
+              <div class="mobile-account-actions">
+                <a class="btn-solid theme-primary" href="login.html?next=advertise-with-us.html">Sign in</a>
+                <a class="btn-outline theme-secondary" href="login.html?mode=signup&next=advertise-with-us.html">Create account</a>
+              </div>
+            </div>
+
+            <div class="mobile-account-signed-in" id="accountSignedIn" hidden>
+              <div class="mobile-account-profile">
+                <span class="mobile-account-avatar" id="accountAvatar">NN</span>
+                <div class="mobile-account-copy">
+                  <strong id="accountName">Member</strong>
+                  <span id="accountEmail">member@example.com</span>
+                </div>
+              </div>
+
+              <div class="mobile-account-actions mobile-account-actions-stack">
+                <button class="btn-outline theme-secondary" type="button" id="profileButton">Profile</button>
+                <a class="btn-solid theme-primary" href="list-your-business.html">List Your Business</a>
+                <button class="btn-outline theme-secondary" type="button" id="logoutButton">Log out</button>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </dialog>
+    </div>
+  </nav>
+</header>
 
   <main>
 
@@ -1671,6 +1747,246 @@
     </div>
 
   </footer>
+
+  <dialog class="mobile-profile-dialog" id="profileDialog" aria-labelledby="profileDialogTitle">
+    <div class="mobile-profile-dialog-card">
+      <div class="mobile-profile-dialog-head">
+        <div>
+          <p class="ad-section-kicker mb-2">Your account</p>
+          <h2 id="profileDialogTitle">Profile</h2>
+        </div>
+        <button type="button" class="btn-close" id="profileDialogClose" aria-label="Close profile"></button>
+      </div>
+      <div class="mobile-profile-dialog-profile">
+        <span class="mobile-account-avatar" id="profileDialogAvatar">NN</span>
+        <div class="mobile-account-copy">
+          <strong id="profileDialogName">Member</strong>
+          <span id="profileDialogEmail">member@example.com</span>
+        </div>
+      </div>
+      <p class="mobile-profile-dialog-note">You are signed in to your Nigerians in Northampton account.</p>
+      <div class="mobile-profile-dialog-actions">
+        <a class="btn-solid theme-primary" href="list-your-business.html">List Your Business</a>
+        <button class="btn-outline theme-secondary" type="button" id="profileDialogLogout">Log out</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      'use strict';
+
+      const API_BASE_URL = (
+        window.NIN_API_BASE_URL ||
+        'https://nigerians-in-northampton-backend.onrender.com/api'
+      ).replace(/\/$/, '');
+
+      const signedOut = document.getElementById('accountSignedOut');
+      const signedIn = document.getElementById('accountSignedIn');
+      const avatar = document.getElementById('accountAvatar');
+      const name = document.getElementById('accountName');
+      const email = document.getElementById('accountEmail');
+      const profileButton = document.getElementById('profileButton');
+      const logoutButton = document.getElementById('logoutButton');
+      const profileDialog = document.getElementById('profileDialog');
+      const profileDialogClose = document.getElementById('profileDialogClose');
+      const profileDialogLogout = document.getElementById('profileDialogLogout');
+      const profileDialogAvatar = document.getElementById('profileDialogAvatar');
+      const profileDialogName = document.getElementById('profileDialogName');
+      const profileDialogEmail = document.getElementById('profileDialogEmail');
+
+      function getInitials(value) {
+        const parts = String(value || 'Member').trim().split(/\s+/).filter(Boolean);
+        if (!parts.length) return 'M';
+        if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+        return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+      }
+
+      function renderSignedOut() {
+        if (signedOut) signedOut.hidden = false;
+        if (signedIn) signedIn.hidden = true;
+      }
+
+      function renderSignedIn(user) {
+        if (!user) {
+          renderSignedOut();
+          return;
+        }
+
+        const userName = String(user.name || 'Member').trim();
+        const userEmail = String(user.email || '').trim();
+        const initials = getInitials(userName);
+
+        if (avatar) avatar.textContent = initials;
+        if (name) name.textContent = userName;
+        if (email) email.textContent = userEmail || 'Signed-in member';
+        if (profileDialogAvatar) profileDialogAvatar.textContent = initials;
+        if (profileDialogName) profileDialogName.textContent = userName;
+        if (profileDialogEmail) profileDialogEmail.textContent = userEmail || 'Signed-in member';
+
+        if (signedOut) signedOut.hidden = true;
+        if (signedIn) signedIn.hidden = false;
+      }
+
+      function readCachedUser() {
+        try {
+          const raw = localStorage.getItem('nin_auth_user_cache');
+          return raw ? JSON.parse(raw) : null;
+        } catch {
+          return null;
+        }
+      }
+
+      async function loadSession() {
+        renderSignedIn(readCachedUser());
+
+        try {
+          const response = await fetch(`${API_BASE_URL}/auth/me`, {
+            method: 'GET',
+            credentials: 'include',
+            cache: 'no-store'
+          });
+
+          if (!response.ok) {
+            renderSignedOut();
+            return;
+          }
+
+          const payload = await response.json();
+          if (payload?.success && payload?.user) {
+            try {
+              localStorage.setItem('nin_auth_user_cache', JSON.stringify(payload.user));
+            } catch {}
+            renderSignedIn(payload.user);
+          } else {
+            renderSignedOut();
+          }
+        } catch {
+          /* Cached account data keeps the menu useful when the API is temporarily unreachable. */
+        }
+      }
+
+      async function logout() {
+        if (logoutButton) logoutButton.disabled = true;
+        if (profileDialogLogout) profileDialogLogout.disabled = true;
+
+        try {
+          await fetch(`${API_BASE_URL}/auth/logout`, {
+            method: 'POST',
+            credentials: 'include',
+            cache: 'no-store'
+          });
+        } catch {}
+
+        try {
+          localStorage.removeItem('nin_auth_user_cache');
+        } catch {}
+
+        renderSignedOut();
+
+        if (profileDialog?.open) profileDialog.close();
+
+        const navDrawer = document.getElementById('navDrawer');
+        if (navDrawer?.open) navDrawer.close();
+
+        if (logoutButton) logoutButton.disabled = false;
+        if (profileDialogLogout) profileDialogLogout.disabled = false;
+      }
+
+      profileButton?.addEventListener('click', function () {
+        if (!profileDialog) return;
+        if (typeof profileDialog.showModal === 'function') profileDialog.showModal();
+      });
+
+      profileDialogClose?.addEventListener('click', function () {
+        if (profileDialog?.open) profileDialog.close();
+      });
+
+      profileDialog?.addEventListener('click', function (event) {
+        if (event.target === profileDialog && profileDialog.open) profileDialog.close();
+      });
+
+      logoutButton?.addEventListener('click', logout);
+      profileDialogLogout?.addEventListener('click', logout);
+
+      loadSession();
+    });
+  </script>
+
+  <style>
+    .mobile-profile-dialog {
+      width: min(92vw, 430px);
+      max-width: 430px;
+      border: 0;
+      padding: 0;
+      border-radius: 20px;
+      background: transparent;
+      color: var(--bs-body-color);
+    }
+
+    .mobile-profile-dialog::backdrop {
+      background: rgba(15, 23, 42, .42);
+      backdrop-filter: blur(4px);
+    }
+
+    .mobile-profile-dialog-card {
+      padding: 24px;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 20px;
+      background: var(--bs-body-bg);
+      box-shadow: 0 26px 70px rgba(15,23,42,.20);
+    }
+
+    .mobile-profile-dialog-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .mobile-profile-dialog-head h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      letter-spacing: -.03em;
+    }
+
+    .mobile-profile-dialog-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .mobile-profile-dialog-note {
+      margin: 18px 0 0;
+      color: var(--bs-secondary-color);
+      font-size: .84rem;
+      line-height: 1.65;
+    }
+
+    .mobile-profile-dialog-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .mobile-profile-dialog-actions > * {
+      width: 100%;
+      justify-content: center;
+    }
+
+    @media (max-width: 575.98px) {
+      .mobile-profile-dialog {
+        width: calc(100vw - 28px);
+        max-width: none;
+      }
+
+      .mobile-profile-dialog-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 
   <script type="module" src="assets/js/main.js"></script>
 
