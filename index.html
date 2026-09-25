@@ -1,5034 +1,1992 @@
 <!doctype html>
 <html lang="en" data-bs-theme="light">
-
 <head>
-
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
+  <title>Nigerians in Northampton — Community & Business Directory</title>
+  <meta name="description" content="Find Nigerian businesses and services in Northampton, stay informed with community news and events, and discover useful local information.">
 
-  <title>
-    Nigerians in Northampton — Community & Business Directory
-  </title>
+  <link rel="stylesheet" href="assets/vendor/bootstrap6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/header.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 
-  <meta
-    name="description"
-    content="Nigerians in Northampton — discover Nigerian-owned businesses, community news, events, services and useful information in Northampton."
-  >
-
-  <!-- =========================================================
-       GLOBAL CSS
-  ========================================================== -->
-
-  <link
-    rel="stylesheet"
-    href="assets/vendor/bootstrap6/css/bootstrap.min.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="assets/css/base.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="assets/css/style.css"
-  >
-
-  <!-- Shared site header -->
-  <link
-    rel="stylesheet"
-    href="assets/css/header.css"
-  >
-
-  <!-- Leaflet -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    crossorigin=""
-  >
-
+  <!-- Faster connection setup for remote image hosts used on the homepage -->
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="preconnect" href="https://images.pexels.com" crossorigin>
+  <link rel="dns-prefetch" href="//images.unsplash.com">
+  <link rel="dns-prefetch" href="//images.pexels.com">
 
   <style>
-
-    /* =========================================================
-       GLOBAL HORIZONTAL SCROLL FIX
-       Prevents the PAGE from scrolling horizontally while
-       preserving horizontal scrolling inside the carousels.
-    ========================================================= */
-
-    html,
-    body {
+    html, body {
       width: 100%;
       max-width: 100%;
       margin: 0;
       overflow-x: hidden !important;
     }
 
-    body {
-      overflow-y: auto;
-    }
-
-    #main {
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      overflow-x: hidden;
-    }
+    body { overflow-y: auto; }
+    #main, #main > .section { width: 100%; max-width: 100%; min-width: 0; }
+    #main { overflow-x: hidden; }
+    .container, .row, [class*="col-"] { min-width: 0; max-width: 100%; }
+    img, svg, video, canvas { max-width: 100%; }
 
     #main > .section {
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-    }
-
-    .container,
-    .row,
-    [class*="col-"] {
-      min-width: 0;
-      max-width: 100%;
-    }
-
-    img,
-    svg,
-    video,
-    canvas {
-      max-width: 100%;
-    }
-
-
-    /* =========================================================
-       HOMEPAGE COMPACT LAYOUT
-    ========================================================= */
-
-    #main > .section {
-      padding-top: 3.75rem;
-      padding-bottom: 3.75rem;
+      padding-top: 4.25rem;
+      padding-bottom: 4.25rem;
     }
 
     @media (max-width: 991.98px) {
-
-      #main > .section {
-        padding-top: 3rem;
-        padding-bottom: 3rem;
-      }
-
+      #main > .section { padding-top: 3.25rem; padding-bottom: 3.25rem; }
     }
 
-
-    /* =========================================================
-       FEATURED BUSINESS CARDS
-    ========================================================= */
-
-    #homeFeaturedGrid .listing {
-      height: 100%;
-    }
-
-    #homeFeaturedGrid .listing-media {
-      overflow: hidden;
-    }
-
-    #homeFeaturedGrid .listing-media .ph {
-      min-height: 0;
-      height: 100%;
-      display: flex;
-      align-items: flex-end;
-      padding: 14px;
-    }
-
-    #homeFeaturedGrid .listing-save {
-      z-index: 3;
-    }
-
-    #homeFeaturedGrid [data-home-business-id] {
-      min-width: 0;
-    }
-
-    #homeFeaturedGrid .listing.is-map-active {
-      outline: 2px solid var(--bs-primary);
-      outline-offset: 3px;
-    }
-
-
-    /* =========================================================
-       STICKY HEADER ANCHOR OFFSET
-    ========================================================= */
-
-    #businesses,
-    #news,
-    #events,
-    #guides,
-    #products,
-    #business-owner,
-    #about,
-    #advertise {
-      scroll-margin-top: 105px;
-    }
-
-
-    /* =========================================================
-       SEARCH DROPDOWN / STACKING FIX
-    ========================================================= */
-
+    /* ---------------------------------------------------------
+       HERO / SEARCH
+    --------------------------------------------------------- */
     .search-hero {
       position: relative !important;
       z-index: 100 !important;
       overflow: visible !important;
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      isolation: isolate;
+      padding: 5.5rem 0 4.5rem;
     }
 
-    .search-hero .container {
-      position: relative;
-      z-index: 101 !important;
+    .search-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(15,23,42,.16), rgba(15,23,42,.56) 66%, rgba(15,23,42,.72)),
+        linear-gradient(110deg, rgba(15,23,42,.78), rgba(15,23,42,.18) 72%);
+      pointer-events: none;
+    }
+
+    .search-hero .container { position: relative; z-index: 101; }
+    .hero-copy { max-width: 920px; margin-inline: auto; }
+    .hero-kicker { color: rgba(255,255,255,.86); }
+    .hero-title {
+      color: #fff;
+      font-size: clamp(2.35rem, 5vw, 4.75rem);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      text-wrap: balance;
+    }
+    .hero-subtitle {
+      max-width: 760px;
+      margin-inline: auto;
+      color: rgba(255,255,255,.9);
+    }
+
+    .hero-search-wrap {
+      max-width: 1040px;
+      margin: 2rem auto 0;
     }
 
     .search-bar {
       position: relative;
       z-index: 102 !important;
+      display: grid;
+      grid-template-columns: minmax(260px, 1.7fr) minmax(150px, .7fr) minmax(170px, .8fr) auto;
+      gap: .55rem;
+      padding: .55rem;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 1.05rem;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 20px 50px rgba(0,0,0,.18);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
     .search-bar .menu {
       z-index: 99999 !important;
-
-      max-height: min(
-        420px,
-        calc(100vh - 150px)
-      ) !important;
-
+      max-height: min(420px, calc(100vh - 150px)) !important;
       overflow-y: auto;
       overflow-x: hidden;
-
       overscroll-behavior: contain;
     }
 
-    .search-bar .menu::-webkit-scrollbar {
-      width: 7px;
+    .search-bar .menu::-webkit-scrollbar { width: 7px; }
+    .search-bar .menu::-webkit-scrollbar-thumb { border-radius: 999px; background: rgba(100,116,139,.45); }
+    .search-bar .menu::-webkit-scrollbar-track { background: transparent; }
+
+    .hero-search-wrap .form-control,
+    .hero-search-wrap .combobox-toggle {
+      min-height: 54px;
+      border-radius: .78rem;
     }
 
-    .search-bar .menu::-webkit-scrollbar-thumb {
-      border-radius: 999px;
-
-      background:
-        rgba(100, 116, 139, 0.45);
+    .hero-search-wrap .btn-solid {
+      min-height: 54px;
+      padding-inline: 1.35rem;
+      border-radius: .78rem;
+      white-space: nowrap;
     }
 
-    .search-bar .menu::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-
-    /* =========================================================
-       FEATURED MAP
-    ========================================================= */
-
-    .home-map-rail {
-      position: relative;
-
-      width: 100%;
-
-      overflow: hidden;
-
-      border-radius: 0.9rem;
-    }
-
-    #homeFeaturedMap {
-      position: relative;
-
-      width: 100%;
-
-      height: 340px;
-
-      min-height: 300px;
-
-      overflow: hidden;
-
-      background:
-        var(--bs-tertiary-bg);
-
-      border-radius:
-        0.9rem 0.9rem 0 0;
-    }
-
-    #homeFeaturedMap.leaflet-container {
-      width: 100%;
-      height: 340px;
-
-      font-family: inherit;
-    }
-
-    #homeFeaturedMap .leaflet-control-attribution {
-      font-size: 10px;
-      line-height: 1.35;
-    }
-
-    #homeFeaturedMap .leaflet-popup-content {
-      margin: 12px 14px;
-    }
-
-    #homeFeaturedMap .leaflet-popup-content-wrapper {
-      border-radius: 0.75rem;
-    }
-
-
-    /* =========================================================
-       HOME CAROUSELS
-       One slide visible at a time.
-       Supports automatic + manual scrolling.
-    ========================================================= */
-
-    .home-carousel {
-      position: relative;
-      width: 100%;
-    }
-
-    .home-carousel-track {
+    .hero-popular {
       display: flex;
-
-      width: 100%;
-
-      overflow-x: auto;
-
-      scroll-snap-type: x mandatory;
-
-      scroll-behavior: smooth;
-
-      scrollbar-width: none;
-
-      -ms-overflow-style: none;
-
-      overscroll-behavior-x: contain;
-
-      border-radius: 1rem;
-    }
-
-    .home-carousel-track::-webkit-scrollbar {
-      display: none;
-    }
-
-    .home-carousel-slide {
-      flex: 0 0 100%;
-
-      width: 100%;
-
-      min-width: 100%;
-
-      scroll-snap-align: start;
-
-      scroll-snap-stop: always;
-
-      padding: 0.1rem;
-
-      box-sizing: border-box;
-    }
-
-    /* ---------------------------------------------------------
-   HAIR & BEAUTY IMAGE CROP
---------------------------------------------------------- */
-
-.home-carousel-slide:nth-child(2) .marketplace-image {
-  object-position: center center;
-}
-
-.home-carousel-slide:nth-child(1) .marketplace-image {
-  object-position: center center;
-}
-
-@media (max-width: 767.98px) {
-
-  .home-carousel-slide:nth-child(2) .marketplace-image {
-    object-position: center 35%;
-  }
-
-}
-
-
-    /* ---------------------------------------------------------
-       FEATURED STORY CARD
-    --------------------------------------------------------- */
-
-    .home-story-card {
-      position: relative;
-
-      min-height: 335px;
-
-      overflow: hidden;
-
-      border-radius: 1rem;
-
-      background:
-        #111827;
-
-      isolation: isolate;
-    }
-
-    .home-story-card::before {
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      z-index: -2;
-
-      background:
-        linear-gradient(
-          110deg,
-          rgba(15, 23, 42, 0.90),
-          rgba(15, 23, 42, 0.52) 48%,
-          rgba(15, 23, 42, 0.08)
-        );
-    }
-
-    .home-story-image {
-      position: absolute;
-      inset: 0;
-
-      z-index: -3;
-
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      object-position: center 40%;
-    }
-
-    .home-carousel-slide:nth-child(1) .home-story-image {
-      object-position: center 32%;
-    }
-
-    .home-carousel-slide:nth-child(2) .home-story-image {
-      object-position: center 48%;
-    }
-
-
-    .home-story-content {
-      min-height: 335px;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: flex-end;
-
-      width: min(
-        700px,
-        100%
-      );
-
-      padding:
-        2rem;
-    }
-
-    .home-story-content .chip {
-      width: fit-content;
-    }
-
-    .home-story-title {
-      max-width: 680px;
-
-      color: #fff;
-
-      font-size:
-        clamp(
-          1.4rem,
-          2.2vw,
-          2rem
-        );
-
-      line-height: 1.15;
-
-      font-weight: 750;
-
-      letter-spacing: -0.025em;
-    }
-
-    .home-story-description {
-      max-width: 650px;
-
-      color:
-        rgba(
-          255,
-          255,
-          255,
-          0.88
-        );
-    }
-
-    .home-story-date {
-      color:
-        rgba(
-          255,
-          255,
-          255,
-          0.72
-        );
-    }
-
-
-    /* ---------------------------------------------------------
-       CAROUSEL CONTROLS
-    --------------------------------------------------------- */
-
-    .home-carousel-arrow {
-      position: absolute;
-
-      top: 50%;
-
-      z-index: 10;
-
-      width: 40px;
-
-      height: 40px;
-
-      transform:
-        translateY(-50%);
-
-      display: inline-flex;
-
-      align-items: center;
-
+      flex-wrap: wrap;
       justify-content: center;
-
-      border:
-        1px solid
-        rgba(
-          255,
-          255,
-          255,
-          0.24
-        );
-
-      border-radius: 50%;
-
-      background:
-        rgba(
-          15,
-          23,
-          42,
-          0.60
-        );
-
-      color: #fff;
-
-      backdrop-filter: blur(8px);
-
-      -webkit-backdrop-filter: blur(8px);
-
-      cursor: pointer;
-
-      transition:
-        background-color 0.18s ease,
-        transform 0.18s ease;
-    }
-
-    .home-carousel-arrow:hover {
-      background:
-        rgba(
-          15,
-          23,
-          42,
-          0.78
-        );
-
-      transform:
-        translateY(-50%)
-        scale(1.04);
-    }
-
-    .home-carousel-arrow.prev {
-      left: 18px;
-    }
-
-    .home-carousel-arrow.next {
-      right: 18px;
-    }
-
-    .home-carousel-arrow svg {
-      width: 17px;
-      height: 17px;
-    }
-
-
-    /* ---------------------------------------------------------
-       CAROUSEL DOTS
-    --------------------------------------------------------- */
-
-    .home-carousel-footer {
-      display: flex;
-
       align-items: center;
-
-      justify-content: center;
-
-      gap: 0.5rem;
-
+      gap: .5rem;
       margin-top: 1rem;
     }
 
-    .home-carousel-dots {
-      display: inline-flex;
+    .hero-popular-label { color: rgba(255,255,255,.72); font-size: .82rem; }
+    .hero-popular .chip {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.24);
+      color: #fff;
+      backdrop-filter: blur(8px);
+    }
 
-      align-items: center;
-
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-
-      gap: 0.4rem;
+      gap: .75rem;
+      margin-top: 1.5rem;
     }
 
-    .home-carousel-dot {
-      width: 8px;
-      height: 8px;
-
-      padding: 0;
-
-      border: 0;
-
-      border-radius: 50%;
-
-      background:
-        rgba(
-          var(--bs-emphasis-color-rgb),
-          0.20
-        );
-
-      cursor: pointer;
-
-      transition:
-        width 0.18s ease,
-        background-color 0.18s ease;
+    .hero-actions .btn-outline {
+      border-color: rgba(255,255,255,.48);
+      color: #fff;
+      background: rgba(255,255,255,.06);
     }
 
-    .home-carousel-dot.is-active {
-      width: 24px;
-
-      border-radius: 999px;
-
-      background:
-        var(--bs-primary);
+    .hero-trust-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      max-width: 730px;
+      margin: 2.25rem auto 0;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,.18);
     }
 
-    .home-carousel-status {
-      margin-left: 0.35rem;
+    .hero-trust-item { text-align: center; color: rgba(255,255,255,.82); }
+    .hero-trust-value { display: block; color: #fff; font-weight: 750; font-size: 1.15rem; }
+    .hero-trust-label { display: block; margin-top: .15rem; font-size: .77rem; }
 
-      color:
-        var(--bs-secondary-color);
-
-      font-size: 0.72rem;
+    @media (max-width: 900px) {
+      .search-bar { grid-template-columns: 1fr 1fr; }
+      .search-bar .form-control.form-adorn { grid-column: 1 / -1; }
+      .search-bar > .btn-solid { width: 100%; grid-column: 1 / -1; }
     }
 
+    @media (max-width: 575.98px) {
+      .search-hero { min-height: 610px; padding: 4.5rem 0 3.5rem; }
+      .search-bar { grid-template-columns: 1fr; }
+      .search-bar .form-control.form-adorn,
+      .search-bar > .btn-solid { grid-column: auto; }
+      .hero-trust-row { grid-template-columns: 1fr; gap: .9rem; }
+    }
 
-    /* =========================================================
-       MARKETPLACE CAROUSEL
-    ========================================================= */
+    /* ---------------------------------------------------------
+       SECTION HEADERS / QUICK CATEGORIES
+    --------------------------------------------------------- */
+    .section-header { max-width: 760px; }
 
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: .8rem;
+    }
+
+    .category-tile {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 145px;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid var(--bs-border-color);
+      background: var(--bs-body-bg);
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .category-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(15,23,42,.09);
+      border-color: color-mix(in srgb, var(--bs-primary) 30%, var(--bs-border-color));
+    }
+
+    .category-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: .8rem;
+      background: color-mix(in srgb, var(--bs-primary) 10%, transparent);
+      color: var(--bs-primary);
+    }
+
+    .category-name { margin-top: 1rem; font-weight: 700; line-height: 1.15; }
+    .category-note { margin-top: .25rem; color: var(--bs-secondary-color); font-size: .74rem; }
+
+    @media (max-width: 991.98px) {
+      .category-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 575.98px) {
+      .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .category-tile { min-height: 130px; }
+    }
+
+    /* ---------------------------------------------------------
+       FEATURED BUSINESSES / MAP
+    --------------------------------------------------------- */
+    #homeFeaturedGrid .listing { height: 100%; }
+    #homeFeaturedGrid .listing-media { overflow: hidden; }
+    #homeFeaturedGrid .listing-media .ph { min-height: 0; height: 100%; display: flex; align-items: flex-end; padding: 14px; }
+    #homeFeaturedGrid .listing-save { z-index: 3; }
+    #homeFeaturedGrid [data-home-business-id] { min-width: 0; }
+    #homeFeaturedGrid .listing.is-map-active { outline: 2px solid var(--bs-primary); outline-offset: 3px; }
+
+    .featured-shell {
+      border-top: 1px solid var(--bs-border-color);
+      padding-top: 1rem;
+    }
+
+    .home-map-rail { position: relative; width: 100%; overflow: hidden; border-radius: 1rem; border: 1px solid var(--bs-border-color); }
+    #homeFeaturedMap { position: relative; width: 100%; height: 360px; min-height: 300px; overflow: hidden; background: var(--bs-tertiary-bg); border-radius: 1rem 1rem 0 0; }
+    #homeFeaturedMap.leaflet-container { width: 100%; height: 360px; font-family: inherit; }
+    #homeFeaturedMap .leaflet-control-attribution { font-size: 10px; line-height: 1.35; }
+    #homeFeaturedMap .leaflet-popup-content { margin: 12px 14px; }
+    #homeFeaturedMap .leaflet-popup-content-wrapper { border-radius: .75rem; }
+
+    /* ---------------------------------------------------------
+       HOME CAROUSELS
+    --------------------------------------------------------- */
+    .home-carousel { position: relative; width: 100%; }
+    .home-carousel-track {
+      display: flex;
+      width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      overscroll-behavior-x: contain;
+      border-radius: 1rem;
+    }
+    .home-carousel-track::-webkit-scrollbar { display: none; }
+    .home-carousel-slide { flex: 0 0 100%; width: 100%; min-width: 100%; scroll-snap-align: start; scroll-snap-stop: always; padding: .1rem; box-sizing: border-box; }
+
+    .home-story-card { position: relative; min-height: 335px; overflow: hidden; border-radius: 1rem; background: #111827; isolation: isolate; }
+    .home-story-card::before {
+      content: ""; position: absolute; inset: 0; z-index: -2;
+      background: linear-gradient(110deg, rgba(15,23,42,.92), rgba(15,23,42,.52) 48%, rgba(15,23,42,.10));
+    }
+    .home-story-image { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+    .home-carousel-slide:nth-child(1) .home-story-image { object-position: center 32%; }
+    .home-carousel-slide:nth-child(2) .home-story-image { object-position: center 48%; }
+    .home-story-content { min-height: 335px; display: flex; flex-direction: column; justify-content: flex-end; width: min(700px, 100%); padding: 2rem; }
+    .home-story-content .chip { width: fit-content; }
+    .home-story-title { max-width: 680px; color: #fff; font-size: clamp(1.4rem, 2.2vw, 2rem); line-height: 1.15; font-weight: 750; letter-spacing: -.025em; }
+    .home-story-description { max-width: 650px; color: rgba(255,255,255,.88); }
+    .home-story-date { color: rgba(255,255,255,.72); }
+
+    .home-carousel-arrow {
+      position: absolute; top: 50%; z-index: 10; width: 40px; height: 40px; transform: translateY(-50%);
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(255,255,255,.24); border-radius: 50%;
+      background: rgba(15,23,42,.60); color: #fff; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      cursor: pointer; transition: background-color .18s ease, transform .18s ease;
+    }
+    .home-carousel-arrow:hover { background: rgba(15,23,42,.78); transform: translateY(-50%) scale(1.04); }
+    .home-carousel-arrow.prev { left: 18px; }
+    .home-carousel-arrow.next { right: 18px; }
+    .home-carousel-arrow svg { width: 17px; height: 17px; }
+
+    .home-carousel-footer { display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: 1rem; }
+    .home-carousel-dots { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; }
+    .home-carousel-dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: rgba(var(--bs-emphasis-color-rgb), .20); cursor: pointer; transition: width .18s ease, background-color .18s ease; }
+    .home-carousel-dot.is-active { width: 24px; border-radius: 999px; background: var(--bs-primary); }
+    .home-carousel-status { margin-left: .35rem; color: var(--bs-secondary-color); font-size: .72rem; }
+
+    /* ---------------------------------------------------------
+       EVENTS
+    --------------------------------------------------------- */
+    .event-card { position: relative; height: 100%; }
+    .event-date {
+      min-width: 64px;
+      padding: .55rem .45rem;
+      border-radius: .85rem;
+      background: color-mix(in srgb, var(--bs-primary) 8%, var(--bs-body-bg));
+      text-align: center;
+    }
+    .event-date-month { font-size: .68rem; font-weight: 800; letter-spacing: .08em; color: var(--bs-primary); }
+    .event-date-day { margin-top: .05rem; font-size: 1.8rem; line-height: 1; font-weight: 800; }
+    .event-title { line-height: 1.18; }
+
+    /* ---------------------------------------------------------
+       GUIDE TILES
+    --------------------------------------------------------- */
+    .guide-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem; }
+    .guide-tile {
+      position: relative; display: flex; align-items: flex-end; min-height: 165px; aspect-ratio: 1 / .82; padding: 1.1rem;
+      border-radius: .95rem; overflow: hidden; text-decoration: none; background: var(--bs-tertiary-bg); border: 1px solid var(--bs-border-color); isolation: isolate;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .guide-tile::before { content: ""; position: absolute; inset: 0; z-index: -2; background: linear-gradient(180deg, rgba(15,23,42,.02), rgba(15,23,42,.72)); }
+    .guide-tile::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--guide-image) center / cover no-repeat; }
+    .guide-tile:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(15,23,42,.12); }
+    .guide-tile-name { color: #fff; font-size: 1rem; font-weight: 750; line-height: 1.1; text-shadow: 0 2px 8px rgba(0,0,0,.35); }
+    @media (max-width: 767.98px) { .guide-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; } .guide-tile { min-height: 135px; } }
+
+    /* ---------------------------------------------------------
+       MARKETPLACE
+    --------------------------------------------------------- */
     .marketplace-card {
       display: grid;
-
-      grid-template-columns:
-        minmax(260px, 42%)
-        minmax(0, 1fr);
-
+      grid-template-columns: minmax(260px, 42%) minmax(0, 1fr);
       min-height: 320px;
-
       overflow: hidden;
-
       border-radius: 1rem;
-
-      background:
-        var(--bs-body-bg);
-
-      border:
-        1px solid
-        var(--bs-border-color);
+      background: var(--bs-body-bg);
+      border: 1px solid var(--bs-border-color);
     }
-
-.marketplace-image {
-  width: 100%;
-  height: 100%;
-  min-height: 320px;
-  object-fit: cover;
-  object-position: center;
-}
-
-    .marketplace-content {
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
-      padding:
-        2rem 2.2rem;
-    }
-
-    .marketplace-title {
-      font-size:
-        clamp(
-          1.35rem,
-          2vw,
-          1.9rem
-        );
-
-      line-height: 1.16;
-
-      letter-spacing: -0.025em;
-    }
-
-    .marketplace-description {
-      max-width: 600px;
-    }
+    .marketplace-image { width: 100%; height: 100%; min-height: 320px; object-fit: cover; object-position: center; }
+    .marketplace-content { display: flex; flex-direction: column; justify-content: center; padding: 2rem 2.2rem; }
+    .marketplace-title { font-size: clamp(1.35rem, 2vw, 1.9rem); line-height: 1.16; letter-spacing: -.025em; }
+    .marketplace-description { max-width: 600px; }
 
     @media (max-width: 767.98px) {
-
-      .marketplace-card {
-        grid-template-columns: 1fr;
-      }
-
-      .marketplace-image {
-        min-height: 190px;
-        height: 190px;
-      }
-
-      .marketplace-content {
-        padding:
-          1.4rem;
-      }
-
-      .home-story-card,
-      .home-story-content {
-        min-height: 360px;
-      }
-
-      .home-story-content {
-        padding:
-          1.4rem;
-      }
-
-      .home-carousel-arrow {
-        width: 36px;
-        height: 36px;
-      }
-
-      .home-carousel-arrow.prev {
-        left: 10px;
-      }
-
-      .home-carousel-arrow.next {
-        right: 10px;
-      }
-
+      .marketplace-card { grid-template-columns: 1fr; }
+      .marketplace-image { min-height: 195px; height: 195px; }
+      .marketplace-content { padding: 1.4rem; }
+      .home-story-card, .home-story-content { min-height: 360px; }
+      .home-story-content { padding: 1.4rem; }
+      .home-carousel-arrow { width: 36px; height: 36px; }
+      .home-carousel-arrow.prev { left: 10px; }
+      .home-carousel-arrow.next { right: 10px; }
     }
+
+    /* ---------------------------------------------------------
+       CTA PANELS
+    --------------------------------------------------------- */
+    .home-cta-panel {
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      border-radius: 1.15rem;
+      border: 1px solid var(--bs-border-color);
+      background: var(--bs-body-bg);
+    }
+
+    .home-stat-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 1rem;
+      background: var(--bs-border-color);
+    }
+
+    .home-stat { padding: 1rem; background: var(--bs-body-bg); text-align: center; }
+    .home-stat strong { display: block; font-size: 1.4rem; }
+    .home-stat span { display: block; margin-top: .2rem; color: var(--bs-secondary-color); font-size: .75rem; }
+
+    @media (max-width: 575.98px) { .home-stat-strip { grid-template-columns: 1fr; } }
+
+    /* ---------------------------------------------------------
+       STICKY HEADER ANCHORS / ACCESSIBILITY
+    --------------------------------------------------------- */
+    #businesses, #categories, #news, #events, #guides, #products, #business-owner, #about, #advertise { scroll-margin-top: 105px; }
+    .home-carousel-arrow:focus-visible, .home-carousel-dot:focus-visible, .guide-tile:focus-visible, .category-tile:focus-visible { outline: 2px solid var(--bs-primary); outline-offset: 3px; }
+
+    [data-bs-theme="dark"] .search-bar { background: rgba(24,24,27,.96); }
+    [data-bs-theme="dark"] .home-carousel-dot { background: rgba(255,255,255,.20); }
+    [data-bs-theme="dark"] .marketplace-card, [data-bs-theme="dark"] .category-tile, [data-bs-theme="dark"] .home-cta-panel, [data-bs-theme="dark"] .home-stat { background: var(--bs-body-bg); }
 
 
     /* =========================================================
-       NEWCOMER GUIDE — COMPACT SQUARE TILES
-    ========================================================= */
+       NIGERIAN HOMEPAGE THEME
+       Green / white / subtle gold accents. Scoped mainly to
+       the homepage so shared header styles remain untouched.
+    ========================================================== */
 
-    .guide-grid {
-      display: grid;
+    :root {
+      --nin-green: #008751;
+      --nin-green-dark: #006b40;
+      --nin-green-deep: #004f31;
+      --nin-green-soft: #eaf7f0;
+      --nin-gold: #d5a937;
+      --nin-cream: #fbfdfb;
+      --nin-ink: #123126;
+      --nin-muted: #60766c;
+    }
 
-      grid-template-columns:
-        repeat(3, minmax(0, 1fr));
+    body {
+      background: var(--nin-cream);
+      color: var(--nin-ink);
+    }
 
-      gap: 0.9rem;
+    /* Keep page sections visually alternating green and white. */
+    #main > .section.nin-white-section {
+      background: #fff !important;
+      color: var(--nin-ink);
+    }
+
+    #main > .section.nin-green-section {
+      position: relative;
+      background:
+        radial-gradient(circle at 92% 10%, rgba(255,255,255,.09), transparent 30%),
+        radial-gradient(circle at 8% 88%, rgba(213,169,55,.08), transparent 28%),
+        linear-gradient(135deg, var(--nin-green-deep), var(--nin-green));
+      color: #fff;
+      overflow: hidden;
+    }
+
+    #main > .section.nin-green-section::before {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--nin-green), #fff 50%, var(--nin-green));
+      opacity: .9;
+    }
+
+    .nin-green-section .fg-1,
+    .nin-green-section .fg-2,
+    .nin-green-section .fg-3,
+    .nin-green-section .section-header,
+    .nin-green-section h2,
+    .nin-green-section h3,
+    .nin-green-section p,
+    .nin-green-section li,
+    .nin-green-section a:not(.btn-solid):not(.btn-outline):not(.category-tile) {
+      color: #fff;
+    }
+
+    .nin-green-section .fg-2 { color: rgba(255,255,255,.84) !important; }
+    .nin-green-section .fg-3 { color: rgba(255,255,255,.68) !important; }
+    .nin-green-section .eyebrow { color: #bde8d2 !important; }
+
+    .nin-green-section .btn-solid.theme-primary {
+      background: #fff !important;
+      border-color: #fff !important;
+      color: var(--nin-green-deep) !important;
+      box-shadow: 0 10px 22px rgba(0,0,0,.13);
+    }
+
+    .nin-green-section .btn-solid.theme-primary:hover {
+      background: #f6faf7 !important;
+      border-color: #f6faf7 !important;
+      color: var(--nin-green-deep) !important;
+    }
+
+    .nin-green-section .btn-outline.theme-secondary {
+      border-color: rgba(255,255,255,.45) !important;
+      color: #fff !important;
+      background: rgba(255,255,255,.04) !important;
+    }
+
+    .nin-green-section .btn-outline.theme-secondary:hover {
+      background: rgba(255,255,255,.11) !important;
+      border-color: rgba(255,255,255,.72) !important;
+      color: #fff !important;
+    }
+
+    .nin-green-section .chip {
+      color: #effbf5;
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.19);
+    }
+
+    .nin-green-section .surface {
+      background: rgba(255,255,255,.97);
+      color: var(--nin-ink);
+      border-color: rgba(255,255,255,.16);
+    }
+
+    .nin-green-section .event-date {
+      background: #f0fbf5;
+    }
+
+    .nin-green-section .event-date-month {
+      color: var(--nin-green-dark);
+    }
+
+    .nin-green-section .home-carousel-dot.is-active {
+      background: var(--nin-gold);
+    }
+
+    /* Subtle Nigerian-flag accent used between major content areas. */
+    .nin-flag-divider {
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--nin-green) 0 33.33%, #fff 33.33% 66.66%, var(--nin-green) 66.66% 100%);
+      box-shadow: 0 1px 0 rgba(0,0,0,.05);
+    }
+
+    /* ---------------------------------------------------------
+       DYNAMIC HERO
+    --------------------------------------------------------- */
+
+    .search-hero {
+      min-height: 680px;
+      isolation: isolate;
+      overflow: hidden !important;
+      background: var(--nin-green-deep);
+    }
+
+    .search-hero::after {
+      background:
+        linear-gradient(180deg, rgba(0,40,24,.42), rgba(0,39,24,.50) 45%, rgba(0,33,21,.78)),
+        linear-gradient(100deg, rgba(0,64,39,.82), rgba(0,100,60,.25) 65%, rgba(0,0,0,.12));
+      z-index: 1;
+    }
+
+    .search-hero > .hero-bg { display: none !important; }
+
+    .hero-slides {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: -2%;
+      width: 104%;
+      height: 104%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0;
+      transform: scale(1.04);
+      transition: opacity 1.25s ease;
+      will-change: opacity, transform;
+      filter: saturate(.96) contrast(1.02);
+    }
+
+    .hero-slide.is-active {
+      opacity: 1;
+      animation: heroKenBurns 8s ease-out both;
+    }
+
+    .hero-slide:nth-child(2) { object-position: center 42%; }
+    .hero-slide:nth-child(3) { object-position: center 45%; }
+
+    @keyframes heroKenBurns {
+      0% { transform: scale(1.04) translate3d(0, 0, 0); }
+      100% { transform: scale(1.12) translate3d(-1.2%, -1%, 0); }
+    }
+
+    .hero-content-layer {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-identity-row {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .45rem .75rem;
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(0,0,0,.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .hero-flag {
+      display: inline-grid;
+      grid-template-columns: repeat(3, 7px);
+      width: 21px;
+      height: 14px;
+      overflow: hidden;
+      border-radius: 2px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.18);
+    }
+
+    .hero-flag span:nth-child(1),
+    .hero-flag span:nth-child(3) { background: #008751; }
+    .hero-flag span:nth-child(2) { background: #fff; }
+
+    .hero-title { max-width: 980px; }
+
+    .hero-title-accent {
+      color: #dfbd5e;
+      text-shadow: 0 2px 18px rgba(0,0,0,.16);
+    }
+
+    .hero-search-wrap { margin-top: 2.25rem; }
+
+    .hero-search-note {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .5rem 1rem;
+      margin-top: .95rem;
+      color: rgba(255,255,255,.74);
+      font-size: .78rem;
+    }
+
+    .hero-search-note span::before {
+      content: "✓";
+      margin-right: .35rem;
+      color: #bde8d2;
+      font-weight: 800;
+    }
+
+    .hero-transition-indicator {
+      display: flex;
+      justify-content: center;
+      gap: .45rem;
+      margin-top: 1.1rem;
+    }
+
+    .hero-transition-dot {
+      width: 22px;
+      height: 4px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255,255,255,.25);
+      cursor: pointer;
+      transition: width .2s ease, background-color .2s ease;
+    }
+
+    .hero-transition-dot.is-active {
+      width: 38px;
+      background: #fff;
+    }
+
+    .hero-scroll-cue {
+      margin-top: 1rem;
+      text-align: center;
+      color: rgba(255,255,255,.63);
+      font-size: .72rem;
+    }
+
+    /* ---------------------------------------------------------
+       NIGERIAN CATEGORY TILES
+    --------------------------------------------------------- */
+
+    .category-grid {
+      gap: .95rem;
+    }
+
+    .nin-green-section .category-tile {
+      border-color: rgba(255,255,255,.15);
+      background: rgba(255,255,255,.97);
+      box-shadow: 0 10px 24px rgba(0,0,0,.07);
+    }
+
+    .category-tile {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-tile::after {
+      content: "";
+      position: absolute;
+      right: -22px;
+      bottom: -22px;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: rgba(0,135,81,.055);
+      pointer-events: none;
+    }
+
+    .category-icon {
+      background: linear-gradient(135deg, rgba(0,135,81,.10), rgba(213,169,55,.10));
+      color: var(--nin-green-dark);
+      border: 1px solid rgba(0,135,81,.08);
+      font-size: 1.15rem;
+    }
+
+    .category-tile:hover .category-icon {
+      background: linear-gradient(135deg, rgba(0,135,81,.16), rgba(213,169,55,.14));
+    }
+
+    /* ---------------------------------------------------------
+       IMAGE PERFORMANCE / BELOW-FOLD RENDERING
+    --------------------------------------------------------- */
+
+    main > .section:not(:first-child) {
+      content-visibility: auto;
+      contain-intrinsic-size: 760px;
     }
 
     .guide-tile {
-      position: relative;
-
-      display: flex;
-
-      align-items: flex-end;
-
-      min-height: 150px;
-
-      aspect-ratio: 1 / 0.85;
-
-      padding: 1.1rem;
-
-      border-radius:
-        0.95rem;
-
       overflow: hidden;
-
-      text-decoration: none;
-
-      background:
-        var(--bs-tertiary-bg);
-
-      border:
-        1px solid
-        var(--bs-border-color);
-
+      position: relative;
       isolation: isolate;
-
-      transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease;
-    }
-
-    .guide-tile::before {
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      z-index: -2;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(15, 23, 42, 0.02),
-          rgba(15, 23, 42, 0.72)
-        );
     }
 
     .guide-tile::after {
+      transition: transform .35s ease;
+    }
+
+    .guide-tile:hover::after {
+      transform: scale(1.04);
+    }
+
+    /* ---------------------------------------------------------
+       GREEN SECTION CTA / ABOUT PRESENTATION
+    --------------------------------------------------------- */
+
+    .nin-green-section .home-cta-panel,
+    .nin-green-section .home-stat-strip {
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 18px 40px rgba(0,0,0,.10);
+    }
+
+    .nin-green-section .home-cta-panel {
+      background: rgba(0,46,29,.24);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .nin-green-section .home-stat {
+      background: rgba(255,255,255,.98);
+      color: var(--nin-ink);
+    }
+
+    .nin-green-section .home-stat span {
+      color: var(--nin-muted);
+    }
+
+    .nin-footer {
+      position: relative;
+      background: #063e29 !important;
+      color: rgba(255,255,255,.88);
+    }
+
+    .nin-footer::before {
       content: "";
-
       position: absolute;
-
-      inset: 0;
-
-      z-index: -1;
-
-      background:
-        var(--guide-image)
-        center / cover no-repeat;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, #008751 0 33.33%, #fff 33.33% 66.66%, #008751 66.66% 100%);
     }
 
-    .guide-tile:hover {
-      transform:
-        translateY(-3px);
-
-      box-shadow:
-        0 12px 24px
-        rgba(
-          15,
-          23,
-          42,
-          0.12
-        );
+    .nin-footer a,
+    .nin-footer .navbar-brand,
+    .nin-footer h3 {
+      color: #fff !important;
     }
 
-    .guide-tile-name {
-      color: #fff;
+    .nin-footer .fg-3 {
+      color: rgba(255,255,255,.66) !important;
+    }
 
-      font-size:
-        1rem;
+    .nin-footer hr {
+      border-color: rgba(255,255,255,.15);
+    }
 
-      font-weight: 750;
+    .nin-gold-accent {
+      color: var(--nin-gold) !important;
+    }
 
-      line-height: 1.1;
-
-      letter-spacing: -0.015em;
-
-      text-shadow:
-        0 2px 8px
-        rgba(
-          0,
-          0,
-          0,
-          0.35
-        );
+    @media (prefers-reduced-motion: reduce) {
+      .hero-slide.is-active,
+      .guide-tile::after,
+      .category-tile,
+      .home-carousel-track {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
     }
 
     @media (max-width: 767.98px) {
-
-      .guide-grid {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-
-        gap: 0.7rem;
-      }
-
-      .guide-tile {
-        min-height: 130px;
-      }
-
-    }
-
-
-    /* =========================================================
-       COMPACT EVENTS
-    ========================================================= */
-
-    .events-grid .surface {
-      min-height: 0;
-    }
-
-
-    /* =========================================================
-       DARK MODE SUPPORT
-    ========================================================= */
-
-    [data-bs-theme="dark"] {
-
-      .home-carousel-dot {
-        background:
-          rgba(
-            255,
-            255,
-            255,
-            0.20
-          );
-      }
-
-      .marketplace-card {
-        background:
-          var(--bs-body-bg);
-      }
-
-    }
-
-
-    /* =========================================================
-       ACCESSIBILITY
-    ========================================================= */
-
-    .home-carousel-arrow:focus-visible,
-    .home-carousel-dot:focus-visible,
-    .guide-tile:focus-visible {
-      outline:
-        2px solid
-        var(--bs-primary);
-
-      outline-offset:
-        3px;
+      .search-hero { min-height: 700px; }
+      .hero-slide { inset: -3%; width: 106%; height: 106%; }
+      .hero-search-wrap { margin-top: 1.65rem; }
+      .hero-search-note { font-size: .73rem; }
     }
 
   </style>
-
 </head>
 
-
 <body>
-
-
-  <!-- =========================================================
-       SKIP LINK
-  ========================================================= -->
-
-  <a
-    class="visually-hidden-focusable btn-solid theme-primary m-2"
-    href="#businesses"
-  >
-    Skip to businesses
-  </a>
-
-
-  <!-- =========================================================
-       SHARED SITE HEADER
-  ========================================================= -->
-
+  <a class="visually-hidden-focusable btn-solid theme-primary m-2" href="#businesses">Skip to businesses</a>
   <div id="siteHeader"></div>
 
-
   <!-- =========================================================
-       HERO / SEARCH
-  ========================================================= -->
-
+       HERO
+  ========================================================== -->
   <section
     class="search-hero has-hero-img"
-    style="--hero-scrim:linear-gradient(
-      to bottom,
-      color-mix(in oklab, var(--bs-bg-body), transparent 90%),
-      color-mix(in oklab, var(--bs-bg-body), transparent 2%)
-    )"
+    style="--hero-scrim:linear-gradient(to bottom, color-mix(in oklab, var(--bs-bg-body), transparent 90%), color-mix(in oklab, var(--bs-bg-body), transparent 2%))"
   >
-
-    <img
-      class="hero-bg"
-      src="img/hero.jpg"
-      alt=""
-      width="1800"
-      height="900"
-      loading="eager"
-    >
-
-    <div class="container">
-
-      <div class="text-center mb-6">
-
-        <p class="eyebrow fs-sm fg-1 mb-2">
-          Community • Business • Information
-        </p>
-
-        <h1
-          class="fs-5xl fw-bold mb-3"
-          style="letter-spacing:-.035em;text-wrap:balance"
-        >
-          Connecting Nigerians in Northampton
-        </h1>
-
-        <p class="fs-lg fg-2 mb-0">
-          Discover Nigerian-owned businesses, community news, events,
-          services and useful information — all in one place.
-        </p>
-
-      </div>
-
-
-      <!-- SEARCH -->
-
-      <form
-        id="homeSearchForm"
-        class="search-bar"
-        role="search"
+    <div class="hero-slides" aria-hidden="true">
+      <img
+        class="hero-slide is-active"
+        src="img/hero.jpg"
+        alt=""
+        width="1800"
+        height="900"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
       >
 
-        <!-- Keyword -->
+      <img
+        class="hero-slide"
+        src="https://images.pexels.com/photos/30688596/pexels-photo-30688596.jpeg?auto=format&fit=crop&w=1800&q=75"
+        alt=""
+        width="1800"
+        height="900"
+        loading="lazy"
+        fetchpriority="low"
+        decoding="async"
+      >
 
-        <div class="form-control form-adorn">
-
-          <div class="form-adorn-icon">
-
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.6"
-              aria-hidden="true"
-            >
-
-              <circle
-                cx="7"
-                cy="7"
-                r="4.5"
-              />
-
-              <path
-                d="m10.5 10.5 4 4"
-                stroke-linecap="round"
-              />
-
-            </svg>
-
-          </div>
-
-
-          <input
-            type="search"
-            id="homeSearch"
-            class="form-ghost"
-            placeholder="Search businesses, services or information..."
-            aria-label="Search businesses, services or information"
-          >
-
-        </div>
-
-
-        <!-- Area -->
-
-        <button
-          id="homeArea"
-          class="form-control combobox-toggle"
-          type="button"
-          data-bs-toggle="combobox"
-          data-bs-search="true"
-          data-bs-name="area"
-          data-bs-placeholder="Any area"
-        >
-
-          <span class="combobox-value">
-            Any area
-          </span>
-
-          <svg
-            class="combobox-caret"
-            width="10"
-            height="16"
-            viewBox="0 0 10 16"
-            fill="none"
-            aria-hidden="true"
-          >
-
-            <path
-              d="M0.46967 5.46967C0.762563 5.17678 1.23744 5.17678 1.53033 5.46967L5 8.93934L8.46967 5.46967C8.76256 5.17678 9.23744 5.17678 9.53033 5.46967C9.82322 5.76256 9.82322 6.23744 9.53033 6.53033L5.53033 10.5303C5.23756 10.8232 4.76256 10.8232 4.46967 10.5303L0.46967 6.53033C0.176777 6.23756 0.176777 5.76244 0.46967 5.46967Z"
-              fill="currentcolor"
-            />
-
-          </svg>
-
-        </button>
-
-
-        <div class="menu">
-
-          <button
-            class="menu-item"
-            type="button"
-            data-bs-value="all"
-          >
-            All Northampton
-          </button>
-
-          <button
-            class="menu-item"
-            type="button"
-            data-bs-value="town-centre"
-          >
-            Town Centre
-          </button>
-
-          <button
-            class="menu-item"
-            type="button"
-            data-bs-value="abington"
-          >
-            Abington
-          </button>
-
-          <button
-            class="menu-item"
-            type="button"
-            data-bs-value="duston"
-          >
-            Duston
-          </button>
-
-          <button
-            class="menu-item"
-            type="button"
-            data-bs-value="east-northampton"
-          >
-            East Northampton
-          </button>
-
-          <button
-            class="menu-item"
-            type="button"
-            data-bs-value="west-northampton"
-          >
-            West Northampton
-          </button>
-
-        </div>
-
-
-        <!-- Category -->
-
-        <button
-          id="homeCategory"
-          class="form-control combobox-toggle"
-          type="button"
-          data-bs-toggle="combobox"
-          data-bs-search="true"
-          data-bs-multiple="true"
-          data-bs-name="category"
-          data-bs-placeholder="All categories"
-        >
-
-          <span class="combobox-value">
-            All categories
-          </span>
-
-          <svg
-            class="combobox-caret"
-            width="10"
-            height="16"
-            viewBox="0 0 10 16"
-            fill="none"
-            aria-hidden="true"
-          >
-
-            <path
-              d="M0.46967 5.46967C0.76256 5.23744 1.23744 5.23744 1.53033 5.53033L5 9L8.46967 5.53033C8.76256 5.23744 9.23756 5.23756 9.53033 5.53033C9.82322 5.82322 9.82322 6.2981 9.53033 6.59099L5.53033 10.591C5.23744 10.8839 4.76256 10.8839 4.46967 10.591L0.46967 6.59099C0.176777 6.2981 0.176777 5.82322 0.23744 5.53033Z"
-              fill="currentcolor"
-            />
-
-          </svg>
-
-        </button>
-
-
-        <div class="menu">
-
-          <button
-            class="menu-item"
-            type="button"
-            data-bs-value="food"
-          >
-            Restaurants &amp; Food
-          </button>
-
-          <button
-            class="menu-item"
-            type="button"
-            data-bs-value="beauty"
-          >
-            Hair &amp; Beauty
-          </button>
-
-          <button
-            class="menu-item"
-            type="button"
-            data-bs-value="property"
-          >
-            Property &amp; Home
-          </button>
-
-          <button
-            class="menu-item"
-            type="button"
-            data-bs-value="professional"
-          >
-            Professional Services
-          </button>
-
-          <button
-            class="menu-item"
-            type="button"
-            data-bs-value="transport"
-          >
-            Transport
-          </button>
-
-          <button
-            class="menu-item"
-            type="button"
-            data-bs-value="events"
-          >
-            Events &amp; Entertainment
-          </button>
-
-        </div>
-
-
-        <!-- Search -->
-
-        <button
-          class="btn-solid theme-primary btn-lg"
-          type="submit"
-        >
-          Search
-        </button>
-
-      </form>
-
-
-      <!-- Popular searches -->
-
-      <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
-
-        <span class="fs-sm fg-3 me-1">
-          Popular:
-        </span>
-
-        <a
-          class="chip"
-          href="businesses.html?search=Nigerian%20restaurants"
-        >
-          Nigerian restaurants
-        </a>
-
-        <a
-          class="chip"
-          href="businesses.html?search=African%20groceries"
-        >
-          African groceries
-        </a>
-
-        <a
-          class="chip"
-          href="businesses.html?category=beauty"
-        >
-          Hair &amp; beauty
-        </a>
-
-        <a
-          class="chip"
-          href="businesses.html?category=property"
-        >
-          Property
-        </a>
-
-        <a
-          class="chip"
-          href="businesses.html?category=professional"
-        >
-          Professional services
-        </a>
-
-        <a
-          class="chip"
-          href="#events"
-        >
-          Events
-        </a>
-
-      </div>
-
+      <img
+        class="hero-slide"
+        src="https://images.pexels.com/photos/30677719/pexels-photo-30677719.jpeg?auto=compress&cs=tinysrgb&w=1800&q=72"
+        alt=""
+        width="1800"
+        height="900"
+        loading="lazy"
+        fetchpriority="low"
+        decoding="async"
+      >
     </div>
 
+    <div class="container hero-content-layer">
+      <div class="hero-copy text-center">
+        <div class="hero-identity-row mx-auto mb-3" aria-label="Nigerian community in Northampton">
+          <span class="hero-flag" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="fs-xs fw-semibold">Nigerians in Northampton</span>
+        </div>
+
+        <p class="hero-kicker eyebrow fs-sm mb-2">Community · Business · Information</p>
+
+        <h1 class="hero-title fw-bold mb-4">
+          Find <span class="hero-title-accent">Nigerian</span> Businesses &amp; Services in Northampton
+        </h1>
+
+        <p class="hero-subtitle fs-lg mb-0">
+          Discover Nigerian-owned businesses, community news, events, services and useful local information — all in one place.
+        </p>
+      </div>
+
+      <div class="hero-search-wrap">
+        <form id="homeSearchForm" class="search-bar" role="search">
+          <div class="form-control form-adorn">
+            <div class="form-adorn-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <circle cx="7" cy="7" r="4.5"></circle>
+                <path d="m10.5 10.5 4 4" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <input type="search" id="homeSearch" class="form-ghost" placeholder="Search businesses, services or information..." aria-label="Search businesses, services or information">
+          </div>
+
+          <button id="homeArea" class="form-control combobox-toggle" type="button" data-bs-toggle="combobox" data-bs-search="true" data-bs-name="area" data-bs-placeholder="Any area">
+            <span class="combobox-value">Any area</span>
+            <svg class="combobox-caret" width="10" height="16" viewBox="0 0 10 16" fill="none" aria-hidden="true">
+              <path d="M.47 5.47a.75.75 0 0 1 1.06 0L5 8.94l3.47-3.47a.75.75 0 0 1 1.06 1.06l-4 4a.75.75 0 0 1-1.06 0l-4-4a.75.75 0 0 1 0-1.06Z" fill="currentColor"></path>
+            </svg>
+          </button>
+
+          <div class="menu">
+            <button class="menu-item" type="button" data-bs-value="all">All Northampton</button>
+            <button class="menu-item" type="button" data-bs-value="town-centre">Town Centre</button>
+            <button class="menu-item" type="button" data-bs-value="abington">Abington</button>
+            <button class="menu-item" type="button" data-bs-value="duston">Duston</button>
+            <button class="menu-item" type="button" data-bs-value="east-northampton">East Northampton</button>
+            <button class="menu-item" type="button" data-bs-value="west-northampton">West Northampton</button>
+          </div>
+
+          <button id="homeCategory" class="form-control combobox-toggle" type="button" data-bs-toggle="combobox" data-bs-search="true" data-bs-multiple="true" data-bs-name="category" data-bs-placeholder="All categories">
+            <span class="combobox-value">All categories</span>
+            <svg class="combobox-caret" width="10" height="16" viewBox="0 0 10 16" fill="none" aria-hidden="true">
+              <path d="M.47 5.47a.75.75 0 0 1 1.06 0L5 8.94l3.47-3.47a.75.75 0 0 1 1.06 1.06l-4 4a.75.75 0 0 1-1.06 0l-4-4a.75.75 0 0 1 0-1.06Z" fill="currentColor"></path>
+            </svg>
+          </button>
+
+          <div class="menu">
+            <button class="menu-item" type="button" data-bs-value="food">Restaurants &amp; Food</button>
+            <button class="menu-item" type="button" data-bs-value="beauty">Hair &amp; Beauty</button>
+            <button class="menu-item" type="button" data-bs-value="property">Property &amp; Home</button>
+            <button class="menu-item" type="button" data-bs-value="professional">Professional Services</button>
+            <button class="menu-item" type="button" data-bs-value="transport">Transport</button>
+            <button class="menu-item" type="button" data-bs-value="events">Events &amp; Entertainment</button>
+          </div>
+
+          <button class="btn-solid theme-primary btn-lg" type="submit">Search</button>
+        </form>
+
+        <div class="hero-popular">
+          <span class="hero-popular-label">Popular:</span>
+          <a class="chip" href="businesses.html?search=Nigerian%20restaurants">Nigerian restaurants</a>
+          <a class="chip" href="businesses.html?search=African%20groceries">African groceries</a>
+          <a class="chip" href="businesses.html?category=beauty">Hair &amp; beauty</a>
+          <a class="chip" href="businesses.html?category=property">Property</a>
+          <a class="chip" href="businesses.html?category=professional">Professional services</a>
+        </div>
+
+        <div class="hero-search-note" aria-label="Directory benefits">
+          <span>Nigerian-owned businesses</span>
+          <span>Northampton-focused</span>
+          <span>Community information</span>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn-solid theme-primary btn-lg" href="businesses.html">Browse the Directory</a>
+          <a class="btn-outline theme-secondary btn-lg" href="list-your-business.html">List Your Business</a>
+        </div>
+
+        <div class="hero-trust-row" aria-label="Website highlights">
+          <div class="hero-trust-item">
+            <span class="hero-trust-value">Local</span>
+            <span class="hero-trust-label">Businesses &amp; services</span>
+          </div>
+          <div class="hero-trust-item">
+            <span class="hero-trust-value">Community</span>
+            <span class="hero-trust-label">News &amp; events</span>
+          </div>
+          <div class="hero-trust-item">
+            <span class="hero-trust-value">Useful</span>
+            <span class="hero-trust-label">Guides &amp; information</span>
+          </div>
+        </div>
+
+        <div class="hero-transition-indicator" aria-label="Hero image selector">
+          <button class="hero-transition-dot is-active" type="button" data-hero-dot="0" aria-label="Show hero image 1"></button>
+          <button class="hero-transition-dot" type="button" data-hero-dot="1" aria-label="Show hero image 2"></button>
+          <button class="hero-transition-dot" type="button" data-hero-dot="2" aria-label="Show hero image 3"></button>
+        </div>
+
+        <div class="hero-scroll-cue">Scroll to explore the community directory ↓</div>
+      </div>
+    </div>
   </section>
 
+  <div class="nin-flag-divider" aria-hidden="true"></div>
 
   <main id="main">
+    <!-- =======================================================
+         CATEGORIES
+    ======================================================== -->
+    <section class="section nin-green-section" id="categories">
+      <div class="container">
+        <div class="section-header mb-4">
+          <p class="eyebrow fs-sm fg-primary mb-2">Browse by category</p>
+          <h2 class="fs-3xl fw-bold mb-2" style="letter-spacing:-.02em">Find what you need</h2>
+          <p class="fg-2 mb-0">From Nigerian food and hair care to professional services, property and transport — start with what you need.</p>
+        </div>
 
+        <div class="category-grid">
+          <a class="category-tile" href="businesses.html?category=food">
+            <span class="category-icon" aria-hidden="true">🍽️</span>
+            <div>
+              <div class="category-name">Restaurants &amp; Food</div>
+              <div class="category-note">Food · Catering · Groceries</div>
+            </div>
+          </a>
+
+          <a class="category-tile" href="businesses.html?category=beauty">
+            <span class="category-icon" aria-hidden="true">✂️</span>
+            <div>
+              <div class="category-name">Hair &amp; Beauty</div>
+              <div class="category-note">Hair · Braiding · Beauty</div>
+            </div>
+          </a>
+
+          <a class="category-tile" href="businesses.html?category=property">
+            <span class="category-icon" aria-hidden="true">🏠</span>
+            <div>
+              <div class="category-name">Property &amp; Home</div>
+              <div class="category-note">Property · Lettings · Home</div>
+            </div>
+          </a>
+
+          <a class="category-tile" href="businesses.html?category=professional">
+            <span class="category-icon" aria-hidden="true">💼</span>
+            <div>
+              <div class="category-name">Professional Services</div>
+              <div class="category-note">Business · Finance · Legal</div>
+            </div>
+          </a>
+
+          <a class="category-tile" href="businesses.html?category=transport">
+            <span class="category-icon" aria-hidden="true">🚗</span>
+            <div>
+              <div class="category-name">Transport</div>
+              <div class="category-note">Travel · Driving · Logistics</div>
+            </div>
+          </a>
+
+          <a class="category-tile" href="businesses.html?category=events">
+            <span class="category-icon" aria-hidden="true">🎉</span>
+            <div>
+              <div class="category-name">Events &amp; Entertainment</div>
+              <div class="category-note">Events · DJs · Celebrations</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
 
     <!-- =======================================================
          FEATURED BUSINESSES
     ======================================================== -->
-
-    <section
-      class="section"
-      id="businesses"
-    >
-
+    <section class="section nin-white-section" id="businesses">
       <div class="container">
-
-
-        <div
-          class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4"
-        >
-
-          <div>
-
-            <p class="eyebrow fs-sm fg-primary mb-2">
-              Discover
-            </p>
-
-            <h2
-              class="fs-3xl fw-bold mb-2"
-              style="letter-spacing:-.02em"
-            >
-              Featured businesses
-            </h2>
-
-            <p class="fg-2 mb-0">
-              Discover businesses and services within the Nigerian community in Northampton.
-            </p>
-
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+          <div class="section-header">
+            <p class="eyebrow fs-sm fg-primary mb-2">Discover</p>
+            <h2 class="fs-3xl fw-bold mb-2" style="letter-spacing:-.02em">Featured businesses</h2>
+            <p class="fg-2 mb-0">Explore businesses and services being highlighted in the Northampton Nigerian community.</p>
           </div>
-
-
-          <!-- ONLY FILTERS + FEATURED -->
 
           <div class="d-flex gap-2">
-
-            <button
-              class="btn-outline theme-secondary btn-sm"
-              type="button"
-              data-bs-toggle="drawer"
-              data-bs-target="#filterDrawer"
-            >
-
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.6"
-                stroke-linecap="round"
-                aria-hidden="true"
-              >
-
-                <path d="M2 4h12M4 8h8M6 12h4"/>
-
+            <button class="btn-outline theme-secondary btn-sm" type="button" data-bs-toggle="drawer" data-bs-target="#filterDrawer">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+                <path d="M2 4h12M4 8h8M6 12h4"></path>
               </svg>
-
               Filters
-
             </button>
 
-
-            <button
-              class="btn-outline theme-secondary btn-sm"
-              type="button"
-              data-bs-toggle="menu"
-              aria-expanded="false"
-            >
-              Featured
-            </button>
-
-
+            <button class="btn-outline theme-secondary btn-sm" type="button" data-bs-toggle="menu" aria-expanded="false">Featured</button>
             <div class="menu">
-
-              <a
-                class="menu-item"
-                href="businesses.html?sort=featured"
-              >
-                Featured
-              </a>
-
-              <a
-                class="menu-item"
-                href="businesses.html?sort=rating"
-              >
-                Highest rated
-              </a>
-
-              <a
-                class="menu-item"
-                href="businesses.html?sort=nearest"
-              >
-                Nearest
-              </a>
-
-              <a
-                class="menu-item"
-                href="businesses.html?sort=recent"
-              >
-                Recently added
-              </a>
-
-              <a
-                class="menu-item"
-                href="businesses.html?sort=name"
-              >
-                A–Z
-              </a>
-
+              <a class="menu-item" href="businesses.html?sort=featured">Featured</a>
+              <a class="menu-item" href="businesses.html?sort=rating">Highest rated</a>
+              <a class="menu-item" href="businesses.html?sort=nearest">Nearest</a>
+              <a class="menu-item" href="businesses.html?sort=recent">Recently added</a>
+              <a class="menu-item" href="businesses.html?sort=name">A–Z</a>
             </div>
-
           </div>
-
         </div>
 
-
-        <div class="row g-4">
-
-
-          <!-- Business results -->
-
-          <div class="lg:col-8">
-
-            <div
-              class="d-flex flex-wrap align-items-center gap-2 mb-3"
-            >
-
-              <p class="fs-sm fg-2 mb-0 me-auto">
-
-                Showing
-
-                <strong
-                  class="fg-1"
-                  id="homeFeaturedCount"
-                >
-                  0
-                </strong>
-
-                featured businesses
-
-              </p>
-
-            </div>
-
-
-            <div
-              class="filter-bar mb-3"
-              id="homeFeaturedInfo"
-            >
-
-              <span class="chip">
-                Featured listings
-              </span>
-
-            </div>
-
-
-            <div
-              class="row g-4"
-              id="homeFeaturedGrid"
-            >
-            </div>
-
-
-            <div class="text-center mt-4">
-
-              <a
-                class="btn-outline theme-secondary"
-                href="businesses.html"
-              >
-                View All Businesses
-              </a>
-
-            </div>
-
-          </div>
-
-
-          <!-- Map -->
-
-          <aside class="lg:col-4 d-none lg:d-block">
-
-            <div class="map-rail home-map-rail">
-
-              <div
-                id="homeFeaturedMap"
-                aria-label="Interactive map showing featured businesses across Northampton"
-              >
+        <div class="featured-shell">
+          <div class="row g-4">
+            <div class="lg:col-8">
+              <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                <p class="fs-sm fg-2 mb-0 me-auto">Showing <strong class="fg-1" id="homeFeaturedCount">0</strong> featured businesses</p>
+                <a class="fs-sm fw-semibold" href="businesses.html">View directory →</a>
               </div>
 
+              <div class="filter-bar mb-3" id="homeFeaturedInfo">
+                <span class="chip">Featured listings</span>
+              </div>
 
-              <div class="p-3 bg-2">
+              <div class="row g-4" id="homeFeaturedGrid"></div>
 
-                <div class="d-flex align-items-center gap-2 mb-2">
+              <div class="text-center mt-4">
+                <a class="btn-outline theme-secondary" href="businesses.html">View All Businesses</a>
+              </div>
+            </div>
 
-                  <strong class="fs-sm">
-                    Featured businesses across Northampton
-                  </strong>
-
+            <aside class="lg:col-4 d-none lg:d-block">
+              <div class="map-rail home-map-rail">
+                <div id="homeFeaturedMap" aria-label="Interactive map showing featured businesses across Northampton"></div>
+                <div class="p-3 bg-2">
+                  <strong class="fs-sm d-block mb-1">Featured businesses across Northampton</strong>
+                  <p class="fs-xs fg-3 mb-0">Open a marker to view the business listing.</p>
                 </div>
-
-                <p class="fs-xs fg-3 mb-0">
-                  Explore featured businesses on the map and open their listings directly.
-                </p>
-
               </div>
-
-            </div>
-
-          </aside>
-
+            </aside>
+          </div>
         </div>
-
       </div>
-
     </section>
 
-
     <!-- =======================================================
-         COMMUNITY NEWS / BUSINESS / ANNOUNCEMENTS
-         ONE AUTOMATIC + MANUAL SCROLLER
+         COMMUNITY NEWS
     ======================================================== -->
-
-    <section
-      class="section bg-2"
-      id="news"
-    >
-
+    <section class="section nin-green-section" id="news">
       <div class="container">
-
-
-        <div
-          class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4"
-        >
-
-          <div>
-
-            <p class="eyebrow fs-sm fg-primary mb-2">
-              Community
-            </p>
-
-            <h2
-              class="fs-3xl fw-bold mb-2"
-              style="letter-spacing:-.02em"
-            >
-              Community news &amp; announcements
-            </h2>
-
-            <p class="fg-2 mb-0">
-              Stay informed about what is happening across our community.
-            </p>
-
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+          <div class="section-header">
+            <p class="eyebrow fs-sm fg-primary mb-2">Community</p>
+            <h2 class="fs-3xl fw-bold mb-2" style="letter-spacing:-.02em">Community news &amp; announcements</h2>
+            <p class="fg-2 mb-0">Stay informed about community updates, opportunities and useful local information.</p>
           </div>
-
-
-          <a
-            class="btn-outline theme-secondary btn-sm"
-            href="news.html"
-          >
-            View all news
-          </a>
-
+          <a class="btn-outline theme-secondary btn-sm" href="news.html">View all news</a>
         </div>
 
-
-        <div
-          class="home-carousel"
-          data-home-carousel
-          data-interval="5000"
-          aria-label="Community news and announcements"
-        >
-
+        <div class="home-carousel" data-home-carousel data-interval="5000" aria-label="Community news and announcements">
           <div class="home-carousel-track">
-
-
-            <!-- COMMUNITY -->
-
             <article class="home-carousel-slide">
-
               <div class="home-story-card">
-
-                <img
-                  class="home-story-image"
-                  src="https://images.unsplash.com/photo-1644042191329-759b854f880a?auto=format&fit=crop&w=1600&h=450&q=85&crop=faces"
-                  alt="People spending time together in a community setting"
-                  loading="lazy"
-                >
-
+                <img class="home-story-image" src="https://images.unsplash.com/photo-1644042191329-759b854f880a?auto=format&fit=crop&w=1600&h=450&q=85&crop=faces" alt="People spending time together in a community setting" loading="lazy">
                 <div class="home-story-content">
-
-                  <span class="chip mb-3">
-                    Community
-                  </span>
-
-                  <h3 class="home-story-title mb-2">
-                    Building a stronger Nigerian community in Northampton
-                  </h3>
-
-                  <p class="home-story-description fs-sm mb-3">
-                    Updates, initiatives and opportunities designed to connect Nigerians across Northampton.
-                  </p>
-
-                  <p class="home-story-date fs-xs mb-0">
-                    September 2026
-                  </p>
-
+                  <span class="chip mb-3">Community</span>
+                  <h3 class="home-story-title mb-2">Building a stronger Nigerian community in Northampton</h3>
+                  <p class="home-story-description fs-sm mb-3">Updates, initiatives and opportunities designed to connect Nigerians across Northampton.</p>
+                  <p class="home-story-date fs-xs mb-0">September 2026</p>
                 </div>
-
               </div>
-
             </article>
 
-
-            <!-- BUSINESS -->
-
             <article class="home-carousel-slide">
-
               <div class="home-story-card">
-
-                <img
-                  class="home-story-image"
-                  src="https://images.pexels.com/photos/30689114/pexels-photo-30689114.jpeg?auto=format&fit=crop&w=1600&q=85"
-                  alt="African business professionals collaborating with a laptop"
-                  loading="lazy"
-                >
-
+                <img class="home-story-image" src="https://images.pexels.com/photos/30689114/pexels-photo-30689114.jpeg?auto=format&fit=crop&w=1600&q=85" alt="African business professionals collaborating with a laptop" loading="lazy">
                 <div class="home-story-content">
-
-                  <span class="chip mb-3">
-                    Business
-                  </span>
-
-                  <h3 class="home-story-title mb-2">
-                    New businesses joining the Northampton directory
-                  </h3>
-
-                  <p class="home-story-description fs-sm mb-3">
-                    Discover new Nigerian-owned businesses and services now available to the community.
-                  </p>
-
-                  <p class="home-story-date fs-xs mb-0">
-                    September 2026
-                  </p>
-
+                  <span class="chip mb-3">Business</span>
+                  <h3 class="home-story-title mb-2">New businesses joining the Northampton directory</h3>
+                  <p class="home-story-description fs-sm mb-3">Discover new Nigerian-owned businesses and services now available to the community.</p>
+                  <p class="home-story-date fs-xs mb-0">September 2026</p>
                 </div>
-
               </div>
-
             </article>
 
-
-            <!-- ANNOUNCEMENT -->
-
             <article class="home-carousel-slide">
-
               <div class="home-story-card">
-
-                <img
-                  class="home-story-image"
-                  src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1600&q=85"
-                  alt="Newspaper and community information"
-                  loading="lazy"
-                >
-
+                <img class="home-story-image" src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1600&q=85" alt="Newspaper and community information" loading="lazy">
                 <div class="home-story-content">
-
-                  <span class="chip mb-3">
-                    Announcement
-                  </span>
-
-                  <h3 class="home-story-title mb-2">
-                    Important information for new arrivals
-                  </h3>
-
-                  <p class="home-story-description fs-sm mb-3">
-                    Useful local information and resources for Nigerians settling in Northampton.
-                  </p>
-
-                  <p class="home-story-date fs-xs mb-0">
-                    September 2026
-                  </p>
-
+                  <span class="chip mb-3">Announcement</span>
+                  <h3 class="home-story-title mb-2">Important information for new arrivals</h3>
+                  <p class="home-story-description fs-sm mb-3">Useful local information and resources for Nigerians settling in Northampton.</p>
+                  <p class="home-story-date fs-xs mb-0">September 2026</p>
                 </div>
-
               </div>
-
             </article>
-
           </div>
 
-
-          <button
-            class="home-carousel-arrow prev"
-            type="button"
-            aria-label="Previous community story"
-            data-carousel-prev
-          >
-
-            <svg
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m10 3-5 5 5 5"/>
-            </svg>
-
+          <button class="home-carousel-arrow prev" type="button" aria-label="Previous community story" data-carousel-prev>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 3-5 5 5 5"></path></svg>
           </button>
-
-
-          <button
-            class="home-carousel-arrow next"
-            type="button"
-            aria-label="Next community story"
-            data-carousel-next
-          >
-
-            <svg
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m6 3 5 5-5 5"/>
-            </svg>
-
+          <button class="home-carousel-arrow next" type="button" aria-label="Next community story" data-carousel-next>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 3 5 5-5 5"></path></svg>
           </button>
-
 
           <div class="home-carousel-footer">
-
-            <div
-              class="home-carousel-dots"
-              data-carousel-dots
-            >
-            </div>
-
-            <span
-              class="home-carousel-status"
-              data-carousel-status
-            >
-              1 / 3
-            </span>
-
+            <div class="home-carousel-dots" data-carousel-dots></div>
+            <span class="home-carousel-status" data-carousel-status>1 / 3</span>
           </div>
-
         </div>
-
       </div>
-
     </section>
 
-
     <!-- =======================================================
-         UPCOMING EVENTS
+         EVENTS
     ======================================================== -->
-
-    <section
-      class="section"
-      id="events"
-    >
-
+    <section class="section nin-white-section" id="events">
       <div class="container">
-
-
-        <div
-          class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4"
-        >
-
-          <div>
-
-            <p class="eyebrow fs-sm fg-primary mb-2">
-              What's happening
-            </p>
-
-            <h2
-              class="fs-3xl fw-bold mb-2"
-              style="letter-spacing:-.02em"
-            >
-              Upcoming events
-            </h2>
-
-            <p class="fg-2 mb-0">
-              Community gatherings, business events and activities.
-            </p>
-
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+          <div class="section-header">
+            <p class="eyebrow fs-sm fg-primary mb-2">What's happening</p>
+            <h2 class="fs-3xl fw-bold mb-2" style="letter-spacing:-.02em">Upcoming events</h2>
+            <p class="fg-2 mb-0">Community gatherings, business events and activities in Northampton.</p>
           </div>
-
-
-          <a
-            class="btn-outline theme-secondary btn-sm"
-            href="#events"
-          >
-            View all events
-          </a>
-
+          <a class="btn-outline theme-secondary btn-sm" href="#events">View all events</a>
         </div>
 
-
-        <div class="row g-3 events-grid">
-
-
-          <!-- Event 1 -->
-
+        <div class="row g-3">
           <div class="md:col-4">
-
-            <article class="surface lift h-100 p-3">
-
+            <article class="surface lift event-card p-3">
               <div class="d-flex gap-3">
-
-                <div class="text-center">
-
-                  <div class="eyebrow fs-xs fg-primary">
-                    OCT
-                  </div>
-
-                  <div class="fs-3xl fw-bold">
-                    04
-                  </div>
-
-                </div>
-
-
+                <div class="event-date"><div class="event-date-month">OCT</div><div class="event-date-day">04</div></div>
                 <div>
-
-                  <span class="chip mb-2">
-                    Community
-                  </span>
-
-                  <h3 class="fs-lg fw-semibold mb-2">
-                    NIGERIAN INDEPENDENCE DAY CARNIVAL 2026
-                  </h3>
-
-                  <p class="fg-2 fs-sm mb-1">
-                    Abington
-                  </p>
-
-                  <p class="fg-3 fs-xs mb-0">
-                    2:00 PM
-                  </p>
-
+                  <span class="chip mb-2">Community</span>
+                  <h3 class="fs-lg fw-semibold event-title mb-2">NIGERIAN INDEPENDENCE DAY CARNIVAL 2026</h3>
+                  <p class="fg-2 fs-sm mb-1">Abington</p>
+                  <p class="fg-3 fs-xs mb-0">2:00 PM</p>
                 </div>
-
               </div>
-
             </article>
-
           </div>
 
-
-          <!-- Event 2 -->
-
           <div class="md:col-4">
-
-            <article class="surface lift h-100 p-3">
-
+            <article class="surface lift event-card p-3">
               <div class="d-flex gap-3">
-
-                <div class="text-center">
-
-                  <div class="eyebrow fs-xs fg-primary">
-                    OCT
-                  </div>
-
-                  <div class="fs-3xl fw-bold">
-                    03
-                  </div>
-
-                </div>
-
-
+                <div class="event-date"><div class="event-date-month">OCT</div><div class="event-date-day">03</div></div>
                 <div>
-
-                  <span class="chip mb-2">
-                    Business
-                  </span>
-
-                  <h3 class="fs-lg fw-semibold mb-2">
-                    Nigerian Business Networking Evening
-                  </h3>
-
-                  <p class="fg-2 fs-sm mb-1">
-                    Northampton
-                  </p>
-
-                  <p class="fg-3 fs-xs mb-0">
-                    7:00 PM
-                  </p>
-
+                  <span class="chip mb-2">Business</span>
+                  <h3 class="fs-lg fw-semibold event-title mb-2">Nigerian Business Networking Evening</h3>
+                  <p class="fg-2 fs-sm mb-1">Northampton</p>
+                  <p class="fg-3 fs-xs mb-0">7:00 PM</p>
                 </div>
-
               </div>
-
             </article>
-
           </div>
 
-
-          <!-- Event 3 -->
-
           <div class="md:col-4">
-
-            <article class="surface lift h-100 p-3">
-
+            <article class="surface lift event-card p-3">
               <div class="d-flex gap-3">
-
-                <div class="text-center">
-
-                  <div class="eyebrow fs-xs fg-primary">
-                    OCT
-                  </div>
-
-                  <div class="fs-3xl fw-bold">
-                    10
-                  </div>
-
-                </div>
-
-
+                <div class="event-date"><div class="event-date-month">OCT</div><div class="event-date-day">10</div></div>
                 <div>
-
-                  <span class="chip mb-2">
-                    Social
-                  </span>
-
-                  <h3 class="fs-lg fw-semibold mb-2">
-                    Nigerian Community Social Evening
-                  </h3>
-
-                  <p class="fg-2 fs-sm mb-1">
-                    Northampton
-                  </p>
-
-                  <p class="fg-3 fs-xs mb-0">
-                    5:30 PM
-                  </p>
-
+                  <span class="chip mb-2">Social</span>
+                  <h3 class="fs-lg fw-semibold event-title mb-2">Nigerian Community Social Evening</h3>
+                  <p class="fg-2 fs-sm mb-1">Northampton</p>
+                  <p class="fg-3 fs-xs mb-0">5:30 PM</p>
                 </div>
-
               </div>
-
             </article>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
 
-
     <!-- =======================================================
-         NEWCOMER'S GUIDE
-         3 x 2 COMPACT SQUARES
+         NEWCOMER GUIDE
     ======================================================== -->
-
-    <section
-      class="section bg-2"
-      id="guides"
-    >
-
+    <section class="section nin-green-section" id="guides">
       <div class="container">
-
-
-        <div
-          class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4"
-        >
-
-          <div>
-
-            <p class="eyebrow fs-sm fg-primary mb-2">
-              New to Northampton?
-            </p>
-
-            <h2
-              class="fs-3xl fw-bold mb-2"
-              style="letter-spacing:-.02em"
-            >
-              Your guide to settling in
-            </h2>
-
-            <p class="fg-2 mb-0">
-              Practical information to help new arrivals get settled.
-            </p>
-
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+          <div class="section-header">
+            <p class="eyebrow fs-sm fg-primary mb-2">New to Northampton?</p>
+            <h2 class="fs-3xl fw-bold mb-2" style="letter-spacing:-.02em">Your guide to settling in</h2>
+            <p class="fg-2 mb-0">Practical information to help new arrivals find their feet and connect locally.</p>
           </div>
-
-
-          <a
-            class="btn-outline theme-secondary btn-sm"
-            href="#guides"
-          >
-            Explore all guides
-          </a>
-
+          <a class="btn-outline theme-secondary btn-sm" href="#guides">Explore all guides</a>
         </div>
-
 
         <div class="guide-grid">
-
-
-          <!-- HOUSING -->
-
-          <a
-            class="guide-tile"
-            href="#guides"
-            style="--guide-image:url('https://images.pexels.com/photos/5727801/pexels-photo-5727801.jpeg?auto=format&fit=crop&w=900&q=80')"
-          >
-            <span class="guide-tile-name">
-              Housing
-            </span>
-          </a>
-
-
-          <!-- HEALTHCARE -->
-
-          <a
-            class="guide-tile"
-            href="#guides"
-            style="--guide-image:url('https://images.pexels.com/photos/7578811/pexels-photo-7578811.jpeg?auto=format&fit=crop&w=900&q=80')"
-          >
-            <span class="guide-tile-name">
-              Healthcare
-            </span>
-          </a>
-
-
-          <!-- TRANSPORT -->
-
-          <a
-            class="guide-tile"
-            href="#guides"
-            style="--guide-image:url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=80')"
-          >
-            <span class="guide-tile-name">
-              Transport
-            </span>
-          </a>
-
-
-          <!-- EMPLOYMENT -->
-
-          <a
-            class="guide-tile"
-            href="#guides"
-            style="--guide-image:url('https://images.pexels.com/photos/30678212/pexels-photo-30678212.jpeg?auto=format&fit=crop&w=900&q=80')"
-          >
-            <span class="guide-tile-name">
-              Employment
-            </span>
-          </a>
-
-
-          <!-- EDUCATION -->
-
-          <a
-            class="guide-tile"
-            href="#guides"
-            style="--guide-image:url('https://images.pexels.com/photos/4560083/pexels-photo-4560083.jpeg?auto=format&fit=crop&w=900&q=80')"
-          >
-            <span class="guide-tile-name">
-              Education
-            </span>
-          </a>
-
-
-          <!-- COMMUNITY -->
-
-          <a
-            class="guide-tile"
-            href="#guides"
-            style="--guide-image:url('https://images.pexels.com/photos/32617902/pexels-photo-32617902.jpeg?auto=format&fit=crop&w=900&q=80')"
-          >
-            <span class="guide-tile-name">
-              Community
-            </span>
-          </a>
-
+          <a class="guide-tile" href="#guides" style="--guide-image:url('https://images.pexels.com/photos/5727801/pexels-photo-5727801.jpeg?auto=format&fit=crop&w=800&q=72')"><span class="guide-tile-name">Housing</span></a>
+          <a class="guide-tile" href="#guides" style="--guide-image:url('https://images.pexels.com/photos/7578811/pexels-photo-7578811.jpeg?auto=format&fit=crop&w=800&q=72')"><span class="guide-tile-name">Healthcare</span></a>
+          <a class="guide-tile" href="#guides" style="--guide-image:url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=72')"><span class="guide-tile-name">Transport</span></a>
+          <a class="guide-tile" href="#guides" style="--guide-image:url('https://images.pexels.com/photos/30678212/pexels-photo-30678212.jpeg?auto=format&fit=crop&w=800&q=72')"><span class="guide-tile-name">Employment</span></a>
+          <a class="guide-tile" href="#guides" style="--guide-image:url('https://images.pexels.com/photos/4560083/pexels-photo-4560083.jpeg?auto=format&fit=crop&w=800&q=72')"><span class="guide-tile-name">Education</span></a>
+          <a class="guide-tile" href="#guides" style="--guide-image:url('https://images.pexels.com/photos/32617902/pexels-photo-32617902.jpeg?auto=format&fit=crop&w=800&q=72')"><span class="guide-tile-name">Community</span></a>
         </div>
-
       </div>
-
     </section>
-
 
     <!-- =======================================================
          MARKETPLACE
-         ONE AUTOMATIC + MANUAL SCROLLER
     ======================================================== -->
-
-    <section
-      class="section"
-      id="products"
-    >
-
+    <section class="section nin-white-section" id="products">
       <div class="container">
-
-
-        <div
-          class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4"
-        >
-
-          <div>
-
-            <p class="eyebrow fs-sm fg-primary mb-2">
-              Marketplace
-            </p>
-
-            <h2
-              class="fs-3xl fw-bold mb-2"
-              style="letter-spacing:-.02em"
-            >
-              Products &amp; services
-            </h2>
-
-            <p class="fg-2 mb-0">
-              Discover products and services being promoted by local businesses.
-            </p>
-
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+          <div class="section-header">
+            <p class="eyebrow fs-sm fg-primary mb-2">Marketplace</p>
+            <h2 class="fs-3xl fw-bold mb-2" style="letter-spacing:-.02em">Products &amp; services</h2>
+            <p class="fg-2 mb-0">Discover products and services promoted by local businesses.</p>
           </div>
-
-
-          <a
-            class="btn-outline theme-secondary btn-sm"
-            href="advertise-with-us.html"
-          >
-            Promote your business
-          </a>
-
+          <a class="btn-outline theme-secondary btn-sm" href="advertise-with-us.html">Promote your business</a>
         </div>
 
-
-        <div
-          class="home-carousel"
-          data-home-carousel
-          data-interval="5000"
-          aria-label="Marketplace products and services"
-        >
-
+        <div class="home-carousel" data-home-carousel data-interval="5000" aria-label="Marketplace products and services">
           <div class="home-carousel-track">
-
-
-            <!-- CATERING -->
-
             <article class="home-carousel-slide">
-
               <div class="marketplace-card">
-
-<img
-  class="marketplace-image"
-  src="https://images.pexels.com/photos/13915043/pexels-photo-13915043.jpeg?auto=format&fit=crop&w=1400&q=85"
-  alt="Nigerian jollof rice with grilled chicken"
-  loading="lazy"
->
-
+                <img class="marketplace-image" src="https://images.pexels.com/photos/13915043/pexels-photo-13915043.jpeg?auto=format&fit=crop&w=1400&q=72" alt="Nigerian jollof rice with grilled chicken" loading="lazy">
                 <div class="marketplace-content">
-
-                  <span class="chip mb-3">
-                    Featured
-                  </span>
-
-                  <h3 class="marketplace-title fw-semibold mb-3">
-                    Event Catering
-                  </h3>
-
-                  <p class="marketplace-description fg-2 mb-4">
-                    Nigerian catering packages for weddings, birthdays,
-                    celebrations and community events.
-                  </p>
-
-                  <div>
-
-                    <a
-                      class="btn-solid theme-primary"
-                      href="businesses.html?category=food"
-                    >
-                      View service
-                    </a>
-
-                  </div>
-
+                  <span class="chip mb-3">Featured</span>
+                  <h3 class="marketplace-title fw-semibold mb-3">Event Catering</h3>
+                  <p class="marketplace-description fg-2 mb-4">Nigerian catering packages for weddings, birthdays, celebrations and community events.</p>
+                  <div><a class="btn-solid theme-primary" href="businesses.html?category=food">View service</a></div>
                 </div>
-
               </div>
-
             </article>
 
-
-            <!-- BEAUTY -->
-
             <article class="home-carousel-slide">
-
               <div class="marketplace-card">
-
-<img
-  class="marketplace-image"
-  src="https://images.pexels.com/photos/36441633/pexels-photo-36441633.jpeg?auto=format&fit=crop&w=1400&h=950&q=85"
-  alt="African woman having her hair braided in a salon"
-  loading="lazy"
->
-
+                <img class="marketplace-image" src="https://images.pexels.com/photos/36441633/pexels-photo-36441633.jpeg?auto=format&fit=crop&w=1400&h=950&q=72" alt="African woman having her hair braided in a salon" loading="lazy">
                 <div class="marketplace-content">
-
-                  <span class="chip mb-3">
-                    Popular
-                  </span>
-
-                  <h3 class="marketplace-title fw-semibold mb-3">
-                    Hair &amp; Beauty Appointments
-                  </h3>
-
-                  <p class="marketplace-description fg-2 mb-4">
-                    Hair styling, braiding, beauty treatments and
-                    appointments from local service providers.
-                  </p>
-
-                  <div>
-
-                    <a
-                      class="btn-solid theme-primary"
-                      href="businesses.html?category=beauty"
-                    >
-                      View service
-                    </a>
-
-                  </div>
-
+                  <span class="chip mb-3">Popular</span>
+                  <h3 class="marketplace-title fw-semibold mb-3">Hair &amp; Beauty Appointments</h3>
+                  <p class="marketplace-description fg-2 mb-4">Hair styling, braiding, beauty treatments and appointments from local service providers.</p>
+                  <div><a class="btn-solid theme-primary" href="businesses.html?category=beauty">View service</a></div>
                 </div>
-
               </div>
-
             </article>
 
-
-            <!-- PROFESSIONAL -->
-
             <article class="home-carousel-slide">
-
               <div class="marketplace-card">
-
-                <img
-                  class="marketplace-image"
-                  src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85"
-                  alt="Modern professional office workspace"
-                  loading="lazy"
-                >
-
+                <img class="marketplace-image" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=72" alt="Modern professional office workspace" loading="lazy">
                 <div class="marketplace-content">
-
-                  <span class="chip mb-3">
-                    Business
-                  </span>
-
-                  <h3 class="marketplace-title fw-semibold mb-3">
-                    Professional Services
-                  </h3>
-
-                  <p class="marketplace-description fg-2 mb-4">
-                    Discover local professionals offering services to
-                    individuals, families and businesses.
-                  </p>
-
-                  <div>
-
-                    <a
-                      class="btn-solid theme-primary"
-                      href="businesses.html?category=professional"
-                    >
-                      Explore
-                    </a>
-
-                  </div>
-
+                  <span class="chip mb-3">Business</span>
+                  <h3 class="marketplace-title fw-semibold mb-3">Professional Services</h3>
+                  <p class="marketplace-description fg-2 mb-4">Discover local professionals offering services to individuals, families and businesses.</p>
+                  <div><a class="btn-solid theme-primary" href="businesses.html?category=professional">Explore</a></div>
                 </div>
-
               </div>
-
             </article>
-
           </div>
 
-
-          <button
-            class="home-carousel-arrow prev"
-            type="button"
-            aria-label="Previous marketplace item"
-            data-carousel-prev
-          >
-
-            <svg
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m10 3-5 5 5 5"/>
-            </svg>
-
+          <button class="home-carousel-arrow prev" type="button" aria-label="Previous marketplace item" data-carousel-prev>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 3-5 5 5 5"></path></svg>
           </button>
-
-
-          <button
-            class="home-carousel-arrow next"
-            type="button"
-            aria-label="Next marketplace item"
-            data-carousel-next
-          >
-
-            <svg
-              viewBox="0 0 16 16"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m6 3 5 5-5 5"/>
-            </svg>
-
+          <button class="home-carousel-arrow next" type="button" aria-label="Next marketplace item" data-carousel-next>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 3 5 5-5 5"></path></svg>
           </button>
-
 
           <div class="home-carousel-footer">
-
-            <div
-              class="home-carousel-dots"
-              data-carousel-dots
-            >
-            </div>
-
-            <span
-              class="home-carousel-status"
-              data-carousel-status
-            >
-              1 / 3
-            </span>
-
+            <div class="home-carousel-dots" data-carousel-dots></div>
+            <span class="home-carousel-status" data-carousel-status>1 / 3</span>
           </div>
-
         </div>
-
       </div>
-
     </section>
-
 
     <!-- =======================================================
          BUSINESS OWNER CTA
     ======================================================== -->
-
-    <section
-      class="section bg-2"
-      id="business-owner"
-    >
-
+    <section class="section nin-green-section" id="business-owner">
       <div class="container">
-
-        <div class="section-narrow text-center">
-
-          <p class="eyebrow fs-sm fg-primary mb-2">
-            For business owners
-          </p>
-
-          <h2
-            class="fs-3xl fw-bold mb-3"
-            style="letter-spacing:-.02em"
-          >
-            Own a business in Northampton?
-          </h2>
-
-          <p class="fs-lg fg-2 mb-5">
-            Put your business in front of the Nigerian community in
-            Northampton. Create a listing, showcase your services
-            and reach potential customers.
-          </p>
-
-
-          <div class="d-flex flex-wrap justify-content-center gap-3">
-
-            <a
-              class="btn-solid theme-primary btn-lg"
-              href="list-your-business.html"
-            >
-              List Your Business
-            </a>
-
-            <a
-              class="btn-outline theme-secondary btn-lg"
-              href="advertise-with-us.html"
-            >
-              Advertise With Us
-            </a>
-
+        <div class="home-cta-panel">
+          <div class="row g-4 align-items-center">
+            <div class="lg:col-8">
+              <p class="eyebrow fs-sm fg-primary mb-2">For business owners</p>
+              <h2 class="fs-3xl fw-bold mb-3" style="letter-spacing:-.02em">Own a business in Northampton?</h2>
+              <p class="fs-lg fg-2 mb-4">Create a listing, showcase what you offer and make it easier for people in the community to find your business.</p>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="chip">Business directory</span>
+                <span class="chip">Services &amp; products</span>
+                <span class="chip">Community reach</span>
+              </div>
+            </div>
+            <div class="lg:col-4">
+              <div class="d-flex flex-column gap-2">
+                <a class="btn-solid theme-primary btn-lg w-100" href="list-your-business.html">List Your Business</a>
+                <a class="btn-outline theme-secondary btn-lg w-100" href="advertise-with-us.html">Advertise With Us</a>
+              </div>
+            </div>
           </div>
-
         </div>
-
       </div>
-
     </section>
 
-
     <!-- =======================================================
-         COMMUNITY CTA
+         ABOUT / PURPOSE
     ======================================================== -->
-
-    <section
-      class="section"
-      id="about"
-    >
-
+    <section class="section nin-white-section" id="about">
       <div class="container">
-
-        <div class="section-narrow text-center">
-
-          <p class="eyebrow fs-sm fg-primary mb-2">
-            Our community
-          </p>
-
-          <h2
-            class="fs-3xl fw-bold mb-3"
-            style="letter-spacing:-.02em"
-          >
-            Connecting Nigerians in Northampton
-          </h2>
-
-          <p class="fs-lg fg-2 mb-4">
-            We aim to bring Nigerians in Northampton together by
-            sharing useful information, supporting one another,
-            helping new arrivals settle and promoting Nigerian-owned
-            businesses within the local community.
-          </p>
-
-          <a
-            class="btn-outline theme-secondary btn-lg"
-            href="#about"
-          >
-            Learn More About Us
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
-         ADVERTISING CTA
-    ======================================================== -->
-
-    <section
-      class="section bg-2"
-      id="advertise"
-    >
-
-      <div class="container">
-
         <div class="row g-4 align-items-center">
-
-
           <div class="lg:col-7">
-
-            <p class="eyebrow fs-sm fg-primary mb-2">
-              Promote your business
-            </p>
-
-            <h2
-              class="fs-3xl fw-bold mb-3"
-              style="letter-spacing:-.02em"
-            >
-              Reach the Nigerian community in Northampton
-            </h2>
-
-            <p class="fs-lg fg-2 mb-4">
-              Promote your business, products, services or events
-              to people looking for local businesses and community
-              information.
-            </p>
-
-
-            <div class="d-flex flex-wrap gap-2">
-
-              <span class="chip">
-                Featured listings
-              </span>
-
-              <span class="chip">
-                Product promotion
-              </span>
-
-              <span class="chip">
-                Event promotion
-              </span>
-
-              <span class="chip">
-                Homepage advertising
-              </span>
-
-            </div>
-
+            <p class="eyebrow fs-sm fg-primary mb-2">Our community</p>
+            <h2 class="fs-3xl fw-bold mb-3" style="letter-spacing:-.02em">A place to connect, discover and support one another</h2>
+            <p class="fs-lg fg-2 mb-3">Nigerians in Northampton brings together community information, local business discovery, events and practical resources in one place.</p>
+            <p class="fg-2 mb-4">Whether you are new to Northampton, looking for a Nigerian-owned business, promoting a service or simply trying to stay informed, this website is designed to make local information easier to find.</p>
+            <a class="btn-outline theme-secondary" href="#about">Learn More About Us</a>
           </div>
-
-
           <div class="lg:col-5">
-
-            <div class="surface lift p-4">
-
-              <h3 class="fs-lg fw-semibold mb-2">
-                Advertise with us
-              </h3>
-
-              <p class="fg-2 fs-sm mb-4">
-                Get your business or service in front of relevant members of the community.
-              </p>
-
-              <a
-                class="btn-solid theme-primary w-100"
-                href="advertise-with-us.html"
-              >
-                Advertising Information
-              </a>
-
+            <div class="home-stat-strip">
+              <div class="home-stat"><strong>Businesses</strong><span>Discover local services</span></div>
+              <div class="home-stat"><strong>Community</strong><span>News &amp; updates</span></div>
+              <div class="home-stat"><strong>Guides</strong><span>Useful local information</span></div>
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
 
+    <!-- =======================================================
+         ADVERTISE
+    ======================================================== -->
+    <section class="section nin-green-section" id="advertise">
+      <div class="container">
+        <div class="home-cta-panel">
+          <div class="row g-4 align-items-center">
+            <div class="lg:col-8">
+              <p class="eyebrow fs-sm fg-primary mb-2">Promote your business</p>
+              <h2 class="fs-3xl fw-bold mb-3" style="letter-spacing:-.02em">Reach people looking for local Nigerian businesses and services</h2>
+              <p class="fs-lg fg-2 mb-4">Promote your business, products, services or events to the Northampton Nigerian community.</p>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="chip">Featured listings</span>
+                <span class="chip">Product promotion</span>
+                <span class="chip">Event promotion</span>
+                <span class="chip">Homepage advertising</span>
+              </div>
+            </div>
+            <div class="lg:col-4">
+              <a class="btn-solid theme-primary btn-lg w-100" href="advertise-with-us.html">Advertising Information</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-
 
   <!-- =========================================================
        FOOTER
   ========================================================== -->
-
-  <footer class="site-footer bg-2 py-6">
-
+  <footer class="site-footer py-6 nin-footer">
     <div class="container">
-
-
       <div class="row g-4">
-
-
-        <!-- Brand -->
-
         <div class="lg:col-4">
-
-          <a
-            class="navbar-brand d-inline-flex align-items-center gap-2 fw-semibold mb-3"
-            href="index.html"
-          >
-
-            <span
-              class="brand-mark"
-              aria-hidden="true"
-            >
-              N
-            </span>
-
+          <a class="navbar-brand d-inline-flex align-items-center gap-2 fw-semibold mb-3" href="index.html">
+            <span class="brand-mark" aria-hidden="true">N</span>
             Nigerians in Northampton
-
           </a>
-
-          <p class="fg-3 fs-sm mb-0">
-            Connecting Nigerians, supporting local businesses
-            and sharing useful information across Northampton.
-          </p>
-
+          <p class="fg-3 fs-sm mb-0">Connecting Nigerians, supporting local businesses and sharing useful information across Northampton.</p>
         </div>
-
-
-        <!-- Community -->
 
         <div class="sm:col-6 lg:col-2">
-
-          <h3 class="fs-sm fw-semibold mb-3">
-            Community
-          </h3>
-
+          <h3 class="fs-sm fw-semibold mb-3">Community</h3>
           <ul class="list-unstyled mb-0">
-
-            <li class="mb-2">
-              <a href="#about">
-                About Us
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="news.html">
-                News
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#events">
-                Events
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#guides">
-                Newcomer's Guide
-              </a>
-            </li>
-
+            <li class="mb-2"><a href="#about">About Us</a></li>
+            <li class="mb-2"><a href="news.html">News</a></li>
+            <li class="mb-2"><a href="#events">Events</a></li>
+            <li class="mb-2"><a href="#guides">Newcomer's Guide</a></li>
           </ul>
-
         </div>
-
-
-        <!-- Businesses -->
 
         <div class="sm:col-6 lg:col-2">
-
-          <h3 class="fs-sm fw-semibold mb-3">
-            Businesses
-          </h3>
-
+          <h3 class="fs-sm fw-semibold mb-3">Businesses</h3>
           <ul class="list-unstyled mb-0">
-
-            <li class="mb-2">
-              <a href="businesses.html">
-                Directory
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="businesses.html">
-                Categories
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="list-your-business.html">
-                List Your Business
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="advertise-with-us.html">
-                Advertise with us
-              </a>
-            </li>
-
+            <li class="mb-2"><a href="businesses.html">Directory</a></li>
+            <li class="mb-2"><a href="#categories">Categories</a></li>
+            <li class="mb-2"><a href="list-your-business.html">List Your Business</a></li>
+            <li class="mb-2"><a href="advertise-with-us.html">Advertise with us</a></li>
           </ul>
-
         </div>
-
-
-        <!-- Information -->
 
         <div class="sm:col-6 lg:col-2">
-
-          <h3 class="fs-sm fw-semibold mb-3">
-            Information
-          </h3>
-
+          <h3 class="fs-sm fw-semibold mb-3">Information</h3>
           <ul class="list-unstyled mb-0">
-
-            <li class="mb-2">
-              <a href="#about">
-                About
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#">
-                Contact
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#">
-                Privacy
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#">
-                Terms
-              </a>
-            </li>
-
+            <li class="mb-2"><a href="#about">About</a></li>
+            <li class="mb-2"><a href="#">Contact</a></li>
+            <li class="mb-2"><a href="#">Privacy</a></li>
+            <li class="mb-2"><a href="#">Terms</a></li>
           </ul>
-
         </div>
-
-
-        <!-- Social -->
 
         <div class="sm:col-6 lg:col-2">
-
-          <h3 class="fs-sm fw-semibold mb-3">
-            Connect
-          </h3>
-
+          <h3 class="fs-sm fw-semibold mb-3">Connect</h3>
           <ul class="list-unstyled mb-0">
-
-            <li class="mb-2">
-              <a href="#">
-                WhatsApp Community
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#">
-                Facebook
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#">
-                Instagram
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#">
-                Email Us
-              </a>
-            </li>
-
+            <li class="mb-2"><a href="#">WhatsApp Community</a></li>
+            <li class="mb-2"><a href="#">Facebook</a></li>
+            <li class="mb-2"><a href="#">Instagram</a></li>
+            <li class="mb-2"><a href="#">Email Us</a></li>
           </ul>
-
         </div>
-
       </div>
-
 
       <hr class="my-5">
 
-
-      <div
-        class="d-flex flex-wrap justify-content-between align-items-center gap-3"
-      >
-
-        <p class="fg-3 fs-xs mb-0">
-
-          &copy;
-
-          <span data-year>
-            2026
-          </span>
-
-          Nigerians in Northampton.
-          All rights reserved.
-
-        </p>
-
-
-        <p class="fg-3 fs-xs mb-0">
-          Community • Business • Information
-        </p>
-
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <p class="fg-3 fs-xs mb-0">&copy; <span data-year>2026</span> Nigerians in Northampton. All rights reserved.</p>
+        <p class="fg-3 fs-xs mb-0">Community · Business · Information</p>
       </div>
-
     </div>
-
   </footer>
-
 
   <!-- =========================================================
        FILTER DRAWER
   ========================================================== -->
-
-  <dialog
-    class="drawer drawer-end"
-    tabindex="-1"
-    id="filterDrawer"
-    aria-labelledby="filterDrawerLabel"
-  >
-
+  <dialog class="drawer drawer-end" tabindex="-1" id="filterDrawer" aria-labelledby="filterDrawerLabel">
     <div class="drawer-header">
-
-      <h5
-        class="drawer-title"
-        id="filterDrawerLabel"
-      >
-        Filter businesses
-      </h5>
-
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="drawer"
-        aria-label="Close filters"
-      >
-      </button>
-
+      <h5 class="drawer-title" id="filterDrawerLabel">Filter businesses</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="drawer" aria-label="Close filters"></button>
     </div>
-
 
     <div class="drawer-body">
-
-
-      <!-- Category -->
-
       <div class="filter-drawer-group">
-
-        <h3 class="fs-sm fw-semibold mb-3">
-          Category
-        </h3>
-
+        <h3 class="fs-sm fw-semibold mb-3">Category</h3>
         <div class="option-row d-flex flex-wrap gap-2">
-
-          <label class="btn-check btn-outline theme-primary">
-            <input type="checkbox">
-            Restaurants
-          </label>
-
-          <label class="btn-check btn-outline theme-primary">
-            <input type="checkbox">
-            Beauty
-          </label>
-
-          <label class="btn-check btn-outline theme-primary">
-            <input type="checkbox">
-            Property
-          </label>
-
-          <label class="btn-check btn-outline theme-primary">
-            <input type="checkbox">
-            Professional
-          </label>
-
-          <label class="btn-check btn-outline theme-primary">
-            <input type="checkbox">
-            Transport
-          </label>
-
-          <label class="btn-check btn-outline theme-primary">
-            <input type="checkbox">
-            Events
-          </label>
-
+          <label class="btn-check btn-outline theme-primary"><input type="checkbox">Restaurants</label>
+          <label class="btn-check btn-outline theme-primary"><input type="checkbox">Beauty</label>
+          <label class="btn-check btn-outline theme-primary"><input type="checkbox">Property</label>
+          <label class="btn-check btn-outline theme-primary"><input type="checkbox">Professional</label>
+          <label class="btn-check btn-outline theme-primary"><input type="checkbox">Transport</label>
+          <label class="btn-check btn-outline theme-primary"><input type="checkbox">Events</label>
         </div>
-
       </div>
 
-
-      <!-- Location -->
-
       <div class="filter-drawer-group">
-
-        <h3 class="fs-sm fw-semibold mb-3">
-          Area
-        </h3>
-
+        <h3 class="fs-sm fw-semibold mb-3">Area</h3>
         <div class="option-row d-flex flex-wrap gap-2">
-
-          <label class="btn-check btn-outline theme-primary">
-            <input type="checkbox">
-            Town Centre
-          </label>
-
-          <label class="btn-check btn-outline theme-primary">
-            <input type="checkbox">
-            Abington
-          </label>
-
-          <label class="btn-check btn-outline theme-primary">
-            <input type="checkbox">
-            Duston
-          </label>
-
-          <label class="btn-check btn-outline theme-primary">
-            <input type="checkbox">
-            East Northampton
-          </label>
-
-          <label class="btn-check btn-outline theme-primary">
-            <input type="checkbox">
-            West Northampton
-          </label>
-
+          <label class="btn-check btn-outline theme-primary"><input type="checkbox">Town Centre</label>
+          <label class="btn-check btn-outline theme-primary"><input type="checkbox">Abington</label>
+          <label class="btn-check btn-outline theme-primary"><input type="checkbox">Duston</label>
+          <label class="btn-check btn-outline theme-primary"><input type="checkbox">East Northampton</label>
+          <label class="btn-check btn-outline theme-primary"><input type="checkbox">West Northampton</label>
         </div>
-
       </div>
-
-
-      <!-- Rating -->
 
       <div class="filter-drawer-group">
-
-        <h3 class="fs-sm fw-semibold mb-3">
-          Minimum rating
-        </h3>
-
-        <div
-          class="form-range"
-          data-bs-bubble
-        >
-
-          <input
-            type="range"
-            class="form-range-input"
-            id="ratingRange"
-            min="1"
-            max="5"
-            step="0.5"
-            value="4"
-            aria-label="Minimum rating"
-          >
-
+        <h3 class="fs-sm fw-semibold mb-3">Minimum rating</h3>
+        <div class="form-range" data-bs-bubble>
+          <input type="range" class="form-range-input" id="ratingRange" min="1" max="5" step="0.5" value="4" aria-label="Minimum rating">
         </div>
-
-
-        <p class="fs-xs fg-3 mb-0">
-
-          <strong
-            class="fg-1"
-            id="ratingOut"
-          >
-            4.0
-          </strong>
-
-          stars and up
-
-        </p>
-
+        <p class="fs-xs fg-3 mb-0"><strong class="fg-1" id="ratingOut">4.0</strong> stars and up</p>
       </div>
-
-
-      <!-- Business features -->
 
       <div class="filter-drawer-group">
-
-        <h3 class="fs-sm fw-semibold mb-3">
-          Business features
-        </h3>
-
-        <div
-          class="chip-input"
-          data-bs-chips
-        >
-
-          <label
-            class="chip-input-label visually-hidden"
-            for="featureInput"
-          >
-            Business features
-          </label>
-
-          <span class="chip">
-            Verified
-          </span>
-
-          <span class="chip">
-            WhatsApp
-          </span>
-
-          <span class="chip">
-            Website
-          </span>
-
-          <input
-            type="text"
-            class="form-ghost"
-            id="featureInput"
-            placeholder="Add feature…"
-          >
-
+        <h3 class="fs-sm fw-semibold mb-3">Business features</h3>
+        <div class="chip-input" data-bs-chips>
+          <label class="chip-input-label visually-hidden" for="featureInput">Business features</label>
+          <span class="chip">Verified</span>
+          <span class="chip">WhatsApp</span>
+          <span class="chip">Website</span>
+          <input type="text" class="form-ghost" id="featureInput" placeholder="Add feature…">
         </div>
-
       </div>
-
-
-      <!-- Other -->
 
       <div class="filter-drawer-group">
-
-        <h3 class="fs-sm fw-semibold mb-3">
-          Other
-        </h3>
-
-        <div class="form-field mb-2">
-
-          <input
-            type="checkbox"
-            class="check"
-            id="fOpen"
-          >
-
-          <label for="fOpen">
-            Open now
-          </label>
-
-        </div>
-
-
-        <div class="form-field mb-2">
-
-          <input
-            type="checkbox"
-            class="check"
-            id="fVerified"
-          >
-
-          <label for="fVerified">
-            Verified businesses
-          </label>
-
-        </div>
-
-
-        <div class="form-field mb-2">
-
-          <input
-            type="checkbox"
-            class="check"
-            id="fWhatsApp"
-          >
-
-          <label for="fWhatsApp">
-            Contactable on WhatsApp
-          </label>
-
-        </div>
-
-
-        <div class="form-field mb-2">
-
-          <input
-            type="checkbox"
-            class="check"
-            id="fOnline"
-          >
-
-          <label for="fOnline">
-            Online services available
-          </label>
-
-        </div>
-
-
-        <div class="form-field">
-
-          <input
-            type="checkbox"
-            class="check"
-            id="fFeatured"
-          >
-
-          <label for="fFeatured">
-            Featured businesses
-          </label>
-
-        </div>
-
+        <h3 class="fs-sm fw-semibold mb-3">Other</h3>
+        <div class="form-field mb-2"><input type="checkbox" class="check" id="fOpen"><label for="fOpen">Open now</label></div>
+        <div class="form-field mb-2"><input type="checkbox" class="check" id="fVerified"><label for="fVerified">Verified businesses</label></div>
+        <div class="form-field mb-2"><input type="checkbox" class="check" id="fWhatsApp"><label for="fWhatsApp">Contactable on WhatsApp</label></div>
+        <div class="form-field mb-2"><input type="checkbox" class="check" id="fOnline"><label for="fOnline">Online services available</label></div>
+        <div class="form-field"><input type="checkbox" class="check" id="fFeatured"><label for="fFeatured">Featured businesses</label></div>
       </div>
 
-
-      <button
-        class="btn-solid theme-primary w-100 mt-5"
-        type="button"
-        data-bs-dismiss="drawer"
-      >
-        Show businesses
-      </button>
-
+      <button class="btn-solid theme-primary w-100 mt-5" type="button" data-bs-dismiss="drawer">Show businesses</button>
     </div>
-
   </dialog>
 
-
-  <!-- =========================================================
-       BUSINESS DATA
-  ========================================================== -->
-
   <script src="assets/js/business-data.js"></script>
-
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
   <!-- =========================================================
-       LEAFLET JS
+       DYNAMIC HERO IMAGE ROTATOR
+       Three images, automatic cross-fade + subtle motion.
   ========================================================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const hero = document.querySelector(".search-hero");
+      const slides = hero ? hero.querySelectorAll(".hero-slide") : [];
+      const dots = hero ? hero.querySelectorAll("[data-hero-dot]") : [];
+      if (!hero || slides.length < 2) return;
 
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    crossorigin=""
-  ></script>
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let index = 0;
+      let timer = null;
+      const interval = 6500;
 
+      function showHeroSlide(nextIndex, userAction = false) {
+        index = (nextIndex + slides.length) % slides.length;
+
+        slides.forEach(function (slide, i) {
+          slide.classList.toggle("is-active", i === index);
+        });
+
+        dots.forEach(function (dot, i) {
+          const active = i === index;
+          dot.classList.toggle("is-active", active);
+          dot.setAttribute("aria-current", active ? "true" : "false");
+        });
+
+        if (userAction) restart();
+      }
+
+      function stop() {
+        if (timer) {
+          window.clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      function start() {
+        stop();
+        if (reduceMotion.matches) return;
+        timer = window.setInterval(function () {
+          showHeroSlide(index + 1);
+        }, interval);
+      }
+
+      function restart() {
+        stop();
+        window.setTimeout(start, 900);
+      }
+
+      dots.forEach(function (dot) {
+        dot.addEventListener("click", function () {
+          showHeroSlide(Number(dot.dataset.heroDot || 0), true);
+        });
+      });
+
+      /* Prime the next two hero images after the first image has loaded.
+         They remain low priority so the initial page paint wins. */
+      const warmHeroCache = function () {
+        slides.forEach(function (slide, i) {
+          if (i === 0 || !slide.currentSrc && !slide.src) return;
+          const warm = new Image();
+          warm.decoding = "async";
+          warm.fetchPriority = "low";
+          warm.src = slide.currentSrc || slide.src;
+        });
+      };
+
+      if (slides[0].complete) {
+        window.setTimeout(warmHeroCache, 450);
+      } else {
+        slides[0].addEventListener("load", function () {
+          window.setTimeout(warmHeroCache, 250);
+        }, { once: true });
+      }
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) stop();
+        else start();
+      });
+
+      start();
+    });
+  </script>
 
   <!-- =========================================================
        HOMEPAGE FUNCTIONALITY
   ========================================================== -->
-
   <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+      const data = window.NINBusinessData || {};
+      let businesses = Array.isArray(data.businesses) ? [...data.businesses] : [];
 
-    document.addEventListener(
-      "DOMContentLoaded",
-      async function () {
+      const API_BASE_URL = (
+        window.NIN_API_BASE_URL ||
+        "https://nigerians-in-northampton-backend.onrender.com/api"
+      ).replace(/\/$/, "");
 
-        const data =
-          window.NINBusinessData || {};
+      const API_ORIGIN = new URL(API_BASE_URL, window.location.href).origin;
 
-        let businesses =
-          Array.isArray(
-            data.businesses
-          )
-            ? [...data.businesses]
-            : [];
-
-
-        /* =====================================================
-           LIVE DIRECTORY DATA
-        ===================================================== */
-
-        const API_BASE_URL = (
-          window.NIN_API_BASE_URL ||
-          "https://nigerians-in-northampton-backend.onrender.com/api"
-        ).replace(
-          /\/$/,
-          ""
-        );
-
-
-        const API_ORIGIN =
-          new URL(
-            API_BASE_URL,
-            window.location.href
-          ).origin;
-
-
-        function imageURL(value) {
-
-          if (!value) {
-            return "";
-          }
-
-          if (
-            typeof value === "object"
-          ) {
-
-            value =
-              value.url ||
-              value.src ||
-              value.path ||
-              value.filename ||
-              "";
-
-          }
-
-
-          const raw =
-            String(value).trim();
-
-
-          if (!raw) {
-            return "";
-          }
-
-
-          if (
-            /^https?:\/\//i.test(raw)
-          ) {
-            return raw;
-          }
-
-
-          if (
-            raw.startsWith("/")
-          ) {
-            return API_ORIGIN + raw;
-          }
-
-
-          if (
-            raw.startsWith("uploads/")
-          ) {
-            return API_ORIGIN + "/" + raw;
-          }
-
-
-          return (
-            API_ORIGIN +
-            "/uploads/businesses/" +
-            raw
-          );
-
+      function imageURL(value) {
+        if (!value) return "";
+        if (typeof value === "object") {
+          value = value.url || value.src || value.path || value.filename || "";
         }
+        const raw = String(value).trim();
+        if (!raw) return "";
+        if (/^https?:\/\//i.test(raw)) return raw;
+        if (raw.startsWith("/")) return API_ORIGIN + raw;
+        if (raw.startsWith("uploads/")) return API_ORIGIN + "/" + raw;
+        return API_ORIGIN + "/uploads/businesses/" + raw;
+      }
 
+      function normaliseBusiness(raw) {
+        const categoryKey = raw.categoryKey || raw.category || "";
+        const areaKey = raw.areaKey || raw.area || "";
+        const services = Array.isArray(raw.services) ? raw.services : [];
+        const image = raw.image || raw.coverImage?.url || raw.coverImage || "";
 
-        function normaliseBusiness(raw) {
+        return {
+          ...raw,
+          id: String(raw.id || raw._id || raw.slug || ""),
+          name: raw.name || raw.businessName || "",
+          category: raw.category || raw.categoryLabel || categoryKey,
+          categoryLabel: raw.categoryLabel || raw.category || categoryKey,
+          area: raw.area || raw.areaLabel || areaKey,
+          areaLabel: raw.areaLabel || raw.area || areaKey,
+          rating: Number(raw.rating || 0),
+          reviews: Number(raw.reviews ?? raw.reviewCount ?? 0),
+          featured: raw.featured === true,
+          description: raw.description || "",
+          services,
+          phone: raw.phone || "",
+          whatsappNumber: raw.whatsappNumber || raw.phone || "",
+          email: raw.email || "",
+          websiteUrl: raw.websiteUrl || raw.website || "",
+          website: Boolean(raw.website || raw.websiteUrl),
+          whatsapp: Boolean(raw.whatsapp ?? raw.hasWhatsApp),
+          online: Boolean(raw.online ?? raw.hasOnline),
+          booking: Boolean(raw.booking ?? raw.hasBooking),
+          image: imageURL(image),
+          gallery: Array.isArray(raw.gallery) ? raw.gallery.map(imageURL).filter(Boolean) : Array.isArray(raw.galleryImages) ? raw.galleryImages.map(imageURL).filter(Boolean) : [],
+          tags: Array.isArray(raw.tags) ? raw.tags : services.slice(0, 6),
+          statusText: raw.statusText || (raw.open ? "Open now" : "Currently closed"),
+          secondaryStatus: Array.isArray(raw.secondaryStatus) ? raw.secondaryStatus : [],
+          open: Boolean(raw.open),
+          hours: raw.hours && typeof raw.hours === "object" ? raw.hours : {},
+          lat: Number(raw.lat),
+          lng: Number(raw.lng)
+        };
+      }
 
-          const categoryKey =
-            raw.categoryKey ||
-            raw.category ||
-            "";
-
-
-          const areaKey =
-            raw.areaKey ||
-            raw.area ||
-            "";
-
-
-          const services =
-            Array.isArray(
-              raw.services
-            )
-              ? raw.services
-              : [];
-
-
-          const image =
-            raw.image ||
-            raw.coverImage?.url ||
-            raw.coverImage ||
-            "";
-
-
-          return {
-
-            ...raw,
-
-            id: String(
-              raw.id ||
-              raw._id ||
-              raw.slug ||
-              ""
-            ),
-
-            name:
-              raw.name ||
-              raw.businessName ||
-              "",
-
-            category:
-              raw.category ||
-              raw.categoryLabel ||
-              categoryKey,
-
-            categoryLabel:
-              raw.categoryLabel ||
-              raw.category ||
-              categoryKey,
-
-            area:
-              raw.area ||
-              raw.areaLabel ||
-              areaKey,
-
-            areaLabel:
-              raw.areaLabel ||
-              raw.area ||
-              areaKey,
-
-            rating:
-              Number(
-                raw.rating || 0
-              ),
-
-            reviews:
-              Number(
-                raw.reviews ??
-                raw.reviewCount ??
-                0
-              ),
-
-            featured:
-              raw.featured === true,
-
-            description:
-              raw.description ||
-              "",
-
-            services,
-
-            phone:
-              raw.phone ||
-              "",
-
-            whatsappNumber:
-              raw.whatsappNumber ||
-              raw.phone ||
-              "",
-
-            email:
-              raw.email ||
-              "",
-
-            websiteUrl:
-              raw.websiteUrl ||
-              raw.website ||
-              "",
-
-            website:
-              Boolean(
-                raw.website ||
-                raw.websiteUrl
-              ),
-
-            whatsapp:
-              Boolean(
-                raw.whatsapp ??
-                raw.hasWhatsApp
-              ),
-
-            online:
-              Boolean(
-                raw.online ??
-                raw.hasOnline
-              ),
-
-            booking:
-              Boolean(
-                raw.booking ??
-                raw.hasBooking
-              ),
-
-            image:
-              imageURL(image),
-
-            gallery:
-              Array.isArray(
-                raw.gallery
-              )
-                ? raw.gallery
-                    .map(imageURL)
-                    .filter(Boolean)
-                : Array.isArray(
-                    raw.galleryImages
-                  )
-                  ? raw.galleryImages
-                      .map(imageURL)
-                      .filter(Boolean)
-                  : [],
-
-            tags:
-              Array.isArray(
-                raw.tags
-              )
-                ? raw.tags
-                : services.slice(
-                    0,
-                    6
-                  ),
-
-            statusText:
-              raw.statusText ||
-              (
-                raw.open
-                  ? "Open now"
-                  : "Currently closed"
-              ),
-
-            secondaryStatus:
-              Array.isArray(
-                raw.secondaryStatus
-              )
-                ? raw.secondaryStatus
-                : [],
-
-            open:
-              Boolean(
-                raw.open
-              ),
-
-            hours:
-              raw.hours &&
-              typeof raw.hours === "object"
-                ? raw.hours
-                : {},
-
-            lat:
-              Number(
-                raw.lat
-              ),
-
-            lng:
-              Number(
-                raw.lng
-              )
-
-          };
-
+      try {
+        const response = await fetch(`${API_BASE_URL}/businesses`);
+        if (response.ok) {
+          const payload = await response.json();
+          const liveBusinesses = Array.isArray(payload?.businesses) ? payload.businesses : [];
+          if (liveBusinesses.length) businesses = [...businesses, ...liveBusinesses];
         }
+      } catch (error) {
+        console.warn("Directory API unavailable; using local business data.", error);
+      }
 
+      businesses = businesses.map(normaliseBusiness).filter((business) => Boolean(business.id));
 
-        try {
+      const seenBusinessIds = new Set();
+      businesses = businesses.filter((business) => {
+        if (seenBusinessIds.has(business.id)) return false;
+        seenBusinessIds.add(business.id);
+        return true;
+      });
 
-          const response =
-            await fetch(
-              `${API_BASE_URL}/businesses`
-            );
+      const escapeHTML = (value) => String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
+      const featuredBusinesses = businesses
+        .filter((business) => business.featured === true)
+        .sort((a, b) => {
+          const ratingDifference = Number(b.rating || 0) - Number(a.rating || 0);
+          if (ratingDifference !== 0) return ratingDifference;
+          return String(b.createdAt || "").localeCompare(String(a.createdAt || ""));
+        });
 
-          if (response.ok) {
+      const featuredGrid = document.getElementById("homeFeaturedGrid");
+      const featuredCount = document.getElementById("homeFeaturedCount");
+      if (featuredCount) featuredCount.textContent = featuredBusinesses.length;
 
-            const payload =
-              await response.json();
-
-
-            const liveBusinesses =
-              Array.isArray(
-                payload?.businesses
-              )
-                ? payload.businesses
-                : [];
-
-
-            if (
-              liveBusinesses.length
-            ) {
-
-              /* Keep the original local placeholder businesses.
-                 Add approved businesses returned by the API
-                 instead of replacing the local data. */
-              businesses = [
-                ...businesses,
-                ...liveBusinesses
-              ];
-
-            }
-
-          }
-
+      if (!featuredBusinesses.length) {
+        if (featuredGrid) {
+          featuredGrid.innerHTML = `
+            <div class="col-12">
+              <div class="surface p-5 text-center">
+                <h3 class="h5 mb-2">No featured businesses yet</h3>
+                <p class="fg-3 mb-0">Featured businesses will appear here when they are added to the directory.</p>
+              </div>
+            </div>`;
         }
+      } else if (featuredGrid) {
+        featuredGrid.innerHTML = featuredBusinesses.map((business) => {
+          const tags = Array.isArray(business.tags) ? business.tags.slice(0, 3) : [];
+          const secondaryStatus = Array.isArray(business.secondaryStatus) ? business.secondaryStatus : [];
+          const image = escapeHTML(business.image || "");
 
-        catch (error) {
+          return `
+            <div class="md:col-6" data-home-business-id="${escapeHTML(business.id)}">
+              <article class="listing surface lift" tabindex="0">
+                <div class="listing-media">
+                  <span class="badge theme-primary listing-flag">Featured</span>
+                  <button class="btn-icon btn-sm listing-save" type="button" aria-label="Save ${escapeHTML(business.name)}">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                      <path d="M8 13.5S2 10 2 6.2A2.7 2.7 0 0 1 8 4.6 2.7 2.7 0 0 1 14 6.2C14 10 8 13.5 8 13.5" stroke-linejoin="round"></path>
+                    </svg>
+                  </button>
 
-          console.warn(
-            "Directory API unavailable; using local business data.",
-            error
-          );
-
-        }
-
-
-        businesses =
-          businesses
-            .map(
-              normaliseBusiness
-            )
-            .filter(
-              (business) =>
-                Boolean(
-                  business.id
-                )
-            );
-
-
-        /* Remove duplicate IDs while preserving the local
-           placeholder when the same ID appears twice. */
-        const seenBusinessIds = new Set();
-
-        businesses =
-          businesses.filter(
-            (business) => {
-              if (seenBusinessIds.has(business.id)) {
-                return false;
-              }
-
-              seenBusinessIds.add(business.id);
-              return true;
-            }
-          );
-
-
-        if (
-          !businesses.length
-        ) {
-
-          console.error(
-            "No business data is available."
-          );
-
-
-          const grid =
-            document.getElementById(
-              "homeFeaturedGrid"
-            );
-
-
-          if (grid) {
-
-            grid.innerHTML = `
-
-              <div class="col-12">
-
-                <div
-                  class="surface p-5 text-center"
-                >
-
-                  <h3 class="h5 mb-2">
-                    Featured businesses unavailable
-                  </h3>
-
-                  <p class="fg-3 mb-0">
-                    Business data could not be loaded.
-                  </p>
-
+                  <div class="ph ph-16x9" style="background-image:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.32)),url('${image}');background-size:cover;background-position:center;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.65);">
+                    ${escapeHTML(business.coverLabel || business.category || "Business")}
+                  </div>
                 </div>
 
-              </div>
-
-            `;
-
-          }
-
-          return;
-
-        }
-
-
-        /* =====================================================
-           HTML ESCAPING
-        ===================================================== */
-
-        const escapeHTML =
-          (value) => {
-
-            return String(
-              value ?? ""
-            )
-              .replaceAll(
-                "&",
-                "&amp;"
-              )
-              .replaceAll(
-                "<",
-                "&lt;"
-              )
-              .replaceAll(
-                ">",
-                "&gt;"
-              )
-              .replaceAll(
-                '"',
-                "&quot;"
-              )
-              .replaceAll(
-                "'",
-                "&#039;"
-              );
-
-          };
-
-
-        /* =====================================================
-           FEATURED BUSINESSES
-        ===================================================== */
-
-        const featuredBusinesses =
-          businesses
-            .filter(
-              (business) =>
-                business.featured === true
-            )
-            .sort(
-              (a, b) => {
-
-                const ratingDifference =
-                  Number(
-                    b.rating || 0
-                  ) -
-                  Number(
-                    a.rating || 0
-                  );
-
-
-                if (
-                  ratingDifference !== 0
-                ) {
-
-                  return ratingDifference;
-
-                }
-
-
-                return String(
-                  b.createdAt || ""
-                ).localeCompare(
-                  String(
-                    a.createdAt || ""
-                  )
-                );
-
-              }
-            );
-
-
-        const featuredGrid =
-          document.getElementById(
-            "homeFeaturedGrid"
-          );
-
-
-        const featuredCount =
-          document.getElementById(
-            "homeFeaturedCount"
-          );
-
-
-        if (
-          featuredCount
-        ) {
-
-          featuredCount.textContent =
-            featuredBusinesses.length;
-
-        }
-
-
-        /* =====================================================
-           NO FEATURED LISTINGS
-        ===================================================== */
-
-        if (
-          !featuredBusinesses.length
-        ) {
-
-          if (
-            featuredGrid
-          ) {
-
-            featuredGrid.innerHTML = `
-
-              <div class="col-12">
-
-                <div
-                  class="surface p-5 text-center"
-                >
-
-                  <h3 class="h5 mb-2">
-                    No featured businesses yet
+                <div class="listing-body">
+                  <h3 class="listing-title">
+                    <a href="listing.html?id=${encodeURIComponent(business.id)}">${escapeHTML(business.name)}</a>
                   </h3>
 
-                  <p class="fg-3 mb-0">
-                    Featured businesses will appear here
-                    when they are added to the directory.
-                  </p>
-
-                </div>
-
-              </div>
-
-            `;
-
-          }
-
-        }
-
-
-        else {
-
-          /* ===================================================
-             GENERATE CARDS
-          ==================================================== */
-
-          featuredGrid.innerHTML =
-            featuredBusinesses
-              .map(
-                (business) => {
-
-                  const tags =
-                    Array.isArray(
-                      business.tags
-                    )
-                      ? business.tags.slice(
-                          0,
-                          3
-                        )
-                      : [];
-
-
-                  const secondaryStatus =
-                    Array.isArray(
-                      business.secondaryStatus
-                    )
-                      ? business.secondaryStatus
-                      : [];
-
-
-                  return `
-
-                    <div
-                      class="md:col-6"
-                      data-home-business-id="${escapeHTML(
-                        business.id
-                      )}"
-                    >
-
-                      <article
-                        class="listing surface lift"
-                        tabindex="0"
-                      >
-
-                        <div class="listing-media">
-
-                          <span
-                            class="badge theme-primary listing-flag"
-                          >
-                            Featured
-                          </span>
-
-
-                          <button
-                            class="btn-icon btn-sm listing-save"
-                            type="button"
-                            aria-label="Save ${escapeHTML(
-                              business.name
-                            )}"
-                          >
-
-                            <svg
-                              width="15"
-                              height="15"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="1.5"
-                              aria-hidden="true"
-                            >
-
-                              <path
-                                d="M8 13.5S2 10 2 6.2A2.7 2.7 0 0 1 8 4.6 2.7 2.7 0 0 1 14 6.2C14 10 8 13.5 8 13.5"
-                                stroke-linejoin="round"
-                              />
-
-                            </svg>
-
-                          </button>
-
-
-                          <div
-                            class="ph ph-16x9"
-                            style="
-                              background-image:
-                                linear-gradient(
-                                  180deg,
-                                  rgba(0,0,0,.04),
-                                  rgba(0,0,0,.32)
-                                ),
-                                url('${escapeHTML(
-                                  business.image || ""
-                                )}');
-                              background-size:cover;
-                              background-position:center;
-                              color:#fff;
-                              text-shadow:0 1px 4px rgba(0,0,0,.65);
-                            "
-                          >
-
-                            ${escapeHTML(
-                              business.coverLabel ||
-                              business.category ||
-                              "Business"
-                            )}
-
-                          </div>
-
-                        </div>
-
-
-                        <div class="listing-body">
-
-                          <h3 class="listing-title">
-
-                            <a
-                              href="listing.html?id=${encodeURIComponent(
-                                business.id
-                              )}"
-                            >
-
-                              ${escapeHTML(
-                                business.name
-                              )}
-
-                            </a>
-
-                          </h3>
-
-
-                          <div class="listing-meta mb-2">
-
-                            <span class="rating">
-
-                              <svg
-                                viewBox="0 0 16 16"
-                                fill="currentColor"
-                                aria-hidden="true"
-                              >
-
-                                <path d="m8 1.5 1.9 4 4.35.6-3.15 3.05.76 4.35L8 11.45 4.14 13.5l.76-4.35L1.75 6.1 6.1 5.5z"/>
-
-                              </svg>
-
-
-                              ${escapeHTML(
-                                Number(
-                                  business.rating || 0
-                                ).toFixed(1)
-                              )}
-
-                            </span>
-
-
-                            <span>
-
-                              ${escapeHTML(
-                                business.reviews || 0
-                              )}
-
-                              reviews
-
-                            </span>
-
-
-                            <span
-                              aria-hidden="true"
-                            >
-                              ·
-                            </span>
-
-
-                            <span>
-
-                              ${escapeHTML(
-                                business.category ||
-                                ""
-                              )}
-
-                            </span>
-
-
-                            <span
-                              aria-hidden="true"
-                            >
-                              ·
-                            </span>
-
-
-                            <span>
-
-                              ${escapeHTML(
-                                business.area ||
-                                ""
-                              )}
-
-                            </span>
-
-                          </div>
-
-
-                          <p
-                            class="fg-2 fs-sm mb-3"
-                          >
-
-                            ${escapeHTML(
-                              business.description ||
-                              ""
-                            )}
-
-                          </p>
-
-
-                          <div
-                            class="d-flex flex-wrap gap-2 mb-3"
-                          >
-
-                            ${tags
-                              .map(
-                                (tag) => `
-
-                                  <span class="chip">
-                                    ${escapeHTML(tag)}
-                                  </span>
-
-                                `
-                              )
-                              .join("")
-                            }
-
-                          </div>
-
-
-                          <p
-                            class="listing-meta mb-0 mt-auto"
-                          >
-
-                            <span class="open-now">
-
-                              ${escapeHTML(
-                                business.statusText ||
-                                (
-                                  business.open
-                                    ? "Open now"
-                                    : "Currently closed"
-                                )
-                              )}
-
-                            </span>
-
-
-                            ${secondaryStatus
-                              .map(
-                                (status) => `
-
-                                  <span
-                                    aria-hidden="true"
-                                  >
-                                    ·
-                                  </span>
-
-                                  ${escapeHTML(
-                                    status
-                                  )}
-
-                                `
-                              )
-                              .join("")
-                            }
-
-                          </p>
-
-                        </div>
-
-                      </article>
-
-                    </div>
-
-                  `;
-
-                }
-              )
-              .join("");
-
-        }
-
-
-        /* =====================================================
-           FEATURED MAP
-        ===================================================== */
-
-        const mapCanvas =
-          document.getElementById(
-            "homeFeaturedMap"
-          );
-
-
-        if (
-          mapCanvas &&
-          window.L
-        ) {
-
-          const validBusinesses =
-            featuredBusinesses.filter(
-              (business) =>
-                Number.isFinite(
-                  Number(
-                    business.lat
-                  )
-                ) &&
-                Number.isFinite(
-                  Number(
-                    business.lng
-                  )
-                )
-            );
-
-
-          const map =
-            L.map(
-              mapCanvas,
-              {
-                scrollWheelZoom: false,
-                zoomControl: true
-              }
-            );
-
-
-          const defaultCenter = [
-            52.2400,
-            -0.8990
-          ];
-
-
-          map.setView(
-            defaultCenter,
-            13
-          );
-
-
-          L.tileLayer(
-            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            {
-              maxZoom: 19,
-
-              attribution:
-                "&copy; OpenStreetMap contributors"
-            }
-          ).addTo(
-            map
-          );
-
-
-          const mapPoints = [];
-
-
-          validBusinesses.forEach(
-            (business) => {
-
-              const lat =
-                Number(
-                  business.lat
-                );
-
-
-              const lng =
-                Number(
-                  business.lng
-                );
-
-
-              const point = [
-                lat,
-                lng
-              ];
-
-
-              mapPoints.push(
-                point
-              );
-
-
-              const marker =
-                L.marker(
-                  point
-                ).addTo(
-                  map
-                );
-
-
-              const name =
-                escapeHTML(
-                  business.name ||
-                  "Business"
-                );
-
-
-              const category =
-                escapeHTML(
-                  business.category ||
-                  ""
-                );
-
-
-              const area =
-                escapeHTML(
-                  business.area ||
-                  ""
-                );
-
-
-              const listingUrl =
-                `listing.html?id=${encodeURIComponent(
-                  business.id
-                )}`;
-
-
-              marker.bindPopup(`
-
-                <div
-                  style="
-                    min-width:190px;
-                  "
-                >
-
-                  <strong
-                    style="
-                      display:block;
-                      margin-bottom:4px;
-                    "
-                  >
-                    ${name}
-                  </strong>
-
-
-                  <div
-                    style="
-                      font-size:12px;
-                      color:#6b7280;
-                      margin-bottom:10px;
-                    "
-                  >
-
-                    ${category}
-
-                    ${
-                      area
-                        ? ` · ${area}`
-                        : ""
-                    }
-
+                  <div class="listing-meta mb-2">
+                    <span class="rating">
+                      <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="m8 1.5 1.9 4 4.35.6-3.15 3.05.76 4.35L8 11.45 4.14 13.5l.76-4.35L1.75 6.1 6.1 5.5z"></path></svg>
+                      ${escapeHTML(Number(business.rating || 0).toFixed(1))}
+                    </span>
+                    <span>${escapeHTML(business.reviews || 0)} reviews</span>
+                    <span aria-hidden="true">·</span>
+                    <span>${escapeHTML(business.category || "")}</span>
+                    <span aria-hidden="true">·</span>
+                    <span>${escapeHTML(business.area || "")}</span>
                   </div>
 
+                  <p class="fg-2 fs-sm mb-3">${escapeHTML(business.description || "")}</p>
 
-                  <a
-                    href="${listingUrl}"
-                    class="btn btn-sm btn-primary"
-                  >
-                    View business
-                  </a>
+                  <div class="d-flex flex-wrap gap-2 mb-3">
+                    ${tags.map((tag) => `<span class="chip">${escapeHTML(tag)}</span>`).join("")}
+                  </div>
 
+                  <p class="listing-meta mb-0 mt-auto">
+                    <span class="open-now">${escapeHTML(business.statusText || (business.open ? "Open now" : "Currently closed"))}</span>
+                    ${secondaryStatus.map((status) => `<span aria-hidden="true">·</span>${escapeHTML(status)}`).join("")}
+                  </p>
                 </div>
-
-              `);
-
-            }
-          );
-
-
-          if (
-            mapPoints.length > 1
-          ) {
-
-            map.fitBounds(
-              mapPoints,
-              {
-                padding: [
-                  30,
-                  30
-                ]
-              }
-            );
-
-          }
-
-          else if (
-            mapPoints.length === 1
-          ) {
-
-            map.setView(
-              mapPoints[0],
-              14
-            );
-
-          }
-
-
-          window.setTimeout(
-            () => {
-
-              map.invalidateSize();
-
-            },
-            150
-          );
-
-
-          window.setTimeout(
-            () => {
-
-              map.invalidateSize();
-
-            },
-            500
-          );
-
-
-          if (
-            "ResizeObserver" in window
-          ) {
-
-            const observer =
-              new ResizeObserver(
-                () => {
-
-                  map.invalidateSize();
-
-                }
-              );
-
-
-            observer.observe(
-              mapCanvas
-            );
-
-          }
-
-
-          window.addEventListener(
-            "resize",
-            () => {
-
-              map.invalidateSize();
-
-            }
-          );
-
-        }
-
-
-        /* =====================================================
-           HOMEPAGE SEARCH
-        ===================================================== */
-
-        const form =
-          document.getElementById(
-            "homeSearchForm"
-          );
-
-
-        const searchInput =
-          document.getElementById(
-            "homeSearch"
-          );
-
-
-        const areaButton =
-          document.getElementById(
-            "homeArea"
-          );
-
-
-        const categoryButton =
-          document.getElementById(
-            "homeCategory"
-          );
-
-
-        if (!form) {
-          return;
-        }
-
-
-        let selectedArea = "";
-
-
-        const selectedCategories =
-          new Set();
-
-
-        /* =====================================================
-           AREA SELECTION
-        ===================================================== */
-
-        const areaMenu =
-          areaButton?.nextElementSibling;
-
-
-        if (areaMenu) {
-
-          areaMenu
-            .querySelectorAll(
-              ".menu-item[data-bs-value]"
-            )
-            .forEach(
-              (item) => {
-
-                item.addEventListener(
-                  "click",
-                  () => {
-
-                    selectedArea =
-                      item.getAttribute(
-                        "data-bs-value"
-                      ) || "";
-
-                  }
-                );
-
-              }
-            );
-
-        }
-
-
-        /* =====================================================
-           CATEGORY SELECTION
-        ===================================================== */
-
-        const categoryMenu =
-          categoryButton?.nextElementSibling;
-
-
-        if (categoryMenu) {
-
-          categoryMenu
-            .querySelectorAll(
-              ".menu-item[data-bs-value]"
-            )
-            .forEach(
-              (item) => {
-
-                item.addEventListener(
-                  "click",
-                  () => {
-
-                    const value =
-                      item.getAttribute(
-                        "data-bs-value"
-                      );
-
-
-                    if (!value) {
-                      return;
-                    }
-
-
-                    if (
-                      selectedCategories.has(
-                        value
-                      )
-                    ) {
-
-                      selectedCategories.delete(
-                        value
-                      );
-
-                    }
-
-                    else {
-
-                      selectedCategories.add(
-                        value
-                      );
-
-                    }
-
-                  }
-                );
-
-              }
-            );
-
-        }
-
-
-        /* =====================================================
-           SUBMIT HOMEPAGE SEARCH
-        ===================================================== */
-
-        form.addEventListener(
-          "submit",
-          (event) => {
-
-            event.preventDefault();
-
-
-            const params =
-              new URLSearchParams();
-
-
-            const search =
-              searchInput?.value.trim();
-
-
-            if (search) {
-
-              params.set(
-                "search",
-                search
-              );
-
-            }
-
-
-            if (
-              selectedArea &&
-              selectedArea !== "all"
-            ) {
-
-              params.set(
-                "area",
-                selectedArea
-              );
-
-            }
-
-
-            if (
-              selectedCategories.size > 0
-            ) {
-
-              params.set(
-                "category",
-                Array.from(
-                  selectedCategories
-                ).join(",")
-              );
-
-            }
-
-
-            const query =
-              params.toString();
-
-
-            window.location.href =
-              "businesses.html" +
-              (
-                query
-                  ? "?" + query
-                  : ""
-              );
-
-          }
-        );
-
+              </article>
+            </div>`;
+        }).join("");
       }
-    );
 
-
-    /* =========================================================
-       HOME CAROUSELS
-       Automatic every 5 seconds.
-       Manual scrolling is fully supported.
-    ========================================================== */
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      function () {
-
-        const carousels =
-          document.querySelectorAll(
-            "[data-home-carousel]"
-          );
-
-
-        carousels.forEach(
-          function (carousel) {
-
-            const track =
-              carousel.querySelector(
-                ".home-carousel-track"
-              );
-
-
-            const slides =
-              carousel.querySelectorAll(
-                ".home-carousel-slide"
-              );
-
-
-            const prevButton =
-              carousel.querySelector(
-                "[data-carousel-prev]"
-              );
-
-
-            const nextButton =
-              carousel.querySelector(
-                "[data-carousel-next]"
-              );
-
-
-            const dotsContainer =
-              carousel.querySelector(
-                "[data-carousel-dots]"
-              );
-
-
-            const status =
-              carousel.querySelector(
-                "[data-carousel-status]"
-              );
-
-
-            if (
-              !track ||
-              !slides.length
-            ) {
-              return;
-            }
-
-
-            let currentIndex = 0;
-
-            let timer = null;
-
-            let userInteracting = false;
-
-
-            const interval =
-              Math.max(
-                3000,
-                Number(
-                  carousel.dataset.interval ||
-                  5000
-                )
-              );
-
-
-            /* -------------------------------------------------
-               DOTS
-            ------------------------------------------------- */
-
-            if (dotsContainer) {
-
-              slides.forEach(
-                function (_, index) {
-
-                  const dot =
-                    document.createElement(
-                      "button"
-                    );
-
-
-                  dot.type =
-                    "button";
-
-
-                  dot.className =
-                    "home-carousel-dot";
-
-
-                  dot.setAttribute(
-                    "aria-label",
-                    `Go to slide ${index + 1}`
-                  );
-
-
-                  dot.addEventListener(
-                    "click",
-                    function () {
-
-                      goTo(
-                        index,
-                        true
-                      );
-
-                    }
-                  );
-
-
-                  dotsContainer.appendChild(
-                    dot
-                  );
-
-                }
-              );
-
-            }
-
-
-            function updateUI() {
-
-              const dots =
-                dotsContainer
-                  ? dotsContainer.querySelectorAll(
-                      ".home-carousel-dot"
-                    )
-                  : [];
-
-
-              dots.forEach(
-                function (dot, index) {
-
-                  dot.classList.toggle(
-                    "is-active",
-                    index === currentIndex
-                  );
-
-                }
-              );
-
-
-              if (status) {
-
-                status.textContent =
-                  `${currentIndex + 1} / ${slides.length}`;
-
-              }
-
-            }
-
-
-            function goTo(
-              index,
-              userAction = false
-            ) {
-
-              currentIndex =
-                (
-                  index +
-                  slides.length
-                ) %
-                slides.length;
-
-
-              const targetLeft =
-                slides[
-                  currentIndex
-                ].offsetLeft;
-
-
-              track.scrollTo(
-                {
-                  left:
-                    targetLeft,
-
-                  behavior:
-                    "smooth"
-                }
-              );
-
-
-              updateUI();
-
-
-              if (userAction) {
-
-                restartTimer();
-
-              }
-
-            }
-
-
-            function next() {
-
-              goTo(
-                currentIndex + 1
-              );
-
-            }
-
-
-            function prev() {
-
-              goTo(
-                currentIndex - 1,
-                true
-              );
-
-            }
-
-
-            function stopTimer() {
-
-              if (timer) {
-
-                window.clearInterval(
-                  timer
-                );
-
-                timer = null;
-
-              }
-
-            }
-
-
-            function startTimer() {
-
-              stopTimer();
-
-
-              timer =
-                window.setInterval(
-                  function () {
-
-                    if (
-                      !userInteracting
-                    ) {
-
-                      next();
-
-                    }
-
-                  },
-                  interval
-                );
-
-            }
-
-
-            function restartTimer() {
-
-              stopTimer();
-
-
-              window.setTimeout(
-                function () {
-
-                  startTimer();
-
-                },
-                700
-              );
-
-            }
-
-
-            /* -------------------------------------------------
-               BUTTONS
-            ------------------------------------------------- */
-
-            if (nextButton) {
-
-              nextButton.addEventListener(
-                "click",
-                function () {
-
-                  next();
-
-                  restartTimer();
-
-                }
-              );
-
-            }
-
-
-            if (prevButton) {
-
-              prevButton.addEventListener(
-                "click",
-                function () {
-
-                  prev();
-
-                  restartTimer();
-
-                }
-              );
-
-            }
-
-
-            /* -------------------------------------------------
-               MANUAL SCROLL
-            ------------------------------------------------- */
-
-            let scrollEndTimer = null;
-
-
-            track.addEventListener(
-              "pointerdown",
-              function () {
-
-                userInteracting = true;
-
-                stopTimer();
-
-              }
-            );
-
-
-            track.addEventListener(
-              "pointerup",
-              function () {
-
-                window.clearTimeout(
-                  scrollEndTimer
-                );
-
-
-                scrollEndTimer =
-                  window.setTimeout(
-                    function () {
-
-                      userInteracting =
-                        false;
-
-
-                      syncIndexToScroll();
-
-                      startTimer();
-
-                    },
-                    350
-                  );
-
-              }
-            );
-
-
-            track.addEventListener(
-              "pointercancel",
-              function () {
-
-                userInteracting =
-                  false;
-
-                syncIndexToScroll();
-
-                startTimer();
-
-              }
-            );
-
-
-            track.addEventListener(
-              "scroll",
-              function () {
-
-                window.clearTimeout(
-                  scrollEndTimer
-                );
-
-
-                scrollEndTimer =
-                  window.setTimeout(
-                    function () {
-
-                      syncIndexToScroll();
-
-                    },
-                    120
-                  );
-
-              }
-            );
-
-
-            /* -------------------------------------------------
-               MOUSE HOVER PAUSE
-            ------------------------------------------------- */
-
-            carousel.addEventListener(
-              "mouseenter",
-              function () {
-
-                stopTimer();
-
-              }
-            );
-
-
-            carousel.addEventListener(
-              "mouseleave",
-              function () {
-
-                if (
-                  !userInteracting
-                ) {
-
-                  startTimer();
-
-                }
-
-              }
-            );
-
-
-            /* -------------------------------------------------
-               TOUCH / MANUAL SWIPE
-            ------------------------------------------------- */
-
-            carousel.addEventListener(
-              "touchstart",
-              function () {
-
-                userInteracting = true;
-
-                stopTimer();
-
-              },
-              {
-                passive: true
-              }
-            );
-
-
-            carousel.addEventListener(
-              "touchend",
-              function () {
-
-                userInteracting =
-                  false;
-
-                syncIndexToScroll();
-
-                startTimer();
-
-              },
-              {
-                passive: true
-              }
-            );
-
-
-            /* -------------------------------------------------
-               DETERMINE ACTIVE SLIDE AFTER MANUAL SCROLL
-            ------------------------------------------------- */
-
-            function syncIndexToScroll() {
-
-              if (
-                !slides.length
-              ) {
-                return;
-              }
-
-
-              const scrollLeft =
-                track.scrollLeft;
-
-
-              let nearestIndex =
-                0;
-
-
-              let nearestDistance =
-                Infinity;
-
-
-              slides.forEach(
-                function (
-                  slide,
-                  index
-                ) {
-
-                  const distance =
-                    Math.abs(
-                      slide.offsetLeft -
-                      scrollLeft
-                    );
-
-
-                  if (
-                    distance <
-                    nearestDistance
-                  ) {
-
-                    nearestDistance =
-                      distance;
-
-                    nearestIndex =
-                      index;
-
-                  }
-
-                }
-              );
-
-
-              currentIndex =
-                nearestIndex;
-
-
-              updateUI();
-
-            }
-
-
-            /* -------------------------------------------------
-               KEYBOARD CONTROL
-            ------------------------------------------------- */
-
-            track.setAttribute(
-              "tabindex",
-              "0"
-            );
-
-
-            track.addEventListener(
-              "keydown",
-              function (event) {
-
-                if (
-                  event.key === "ArrowRight"
-                ) {
-
-                  event.preventDefault();
-
-                  next();
-
-                  restartTimer();
-
-                }
-
-
-                if (
-                  event.key === "ArrowLeft"
-                ) {
-
-                  event.preventDefault();
-
-                  prev();
-
-                  restartTimer();
-
-                }
-
-              }
-            );
-
-
-            /* -------------------------------------------------
-               INITIAL STATE
-            ------------------------------------------------- */
-
-            updateUI();
-
+      const mapCanvas = document.getElementById("homeFeaturedMap");
+      if (mapCanvas && window.L) {
+        const validBusinesses = featuredBusinesses.filter((business) => Number.isFinite(Number(business.lat)) && Number.isFinite(Number(business.lng)));
+        const map = L.map(mapCanvas, { scrollWheelZoom: false, zoomControl: true });
+        const defaultCenter = [52.2400, -0.8990];
+        map.setView(defaultCenter, 13);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "&copy; OpenStreetMap contributors" }).addTo(map);
+
+        const mapPoints = [];
+        validBusinesses.forEach((business) => {
+          const point = [Number(business.lat), Number(business.lng)];
+          mapPoints.push(point);
+
+          const marker = L.marker(point).addTo(map);
+          const name = escapeHTML(business.name || "Business");
+          const category = escapeHTML(business.category || "");
+          const area = escapeHTML(business.area || "");
+          const listingUrl = `listing.html?id=${encodeURIComponent(business.id)}`;
+
+          marker.bindPopup(`
+            <div style="min-width:190px">
+              <strong style="display:block;margin-bottom:4px">${name}</strong>
+              <div style="font-size:12px;color:#6b7280;margin-bottom:10px">${category}${area ? ` · ${area}` : ""}</div>
+              <a href="${listingUrl}" class="btn btn-sm btn-primary">View business</a>
+            </div>`);
+        });
+
+        if (mapPoints.length > 1) map.fitBounds(mapPoints, { padding: [30, 30] });
+        else if (mapPoints.length === 1) map.setView(mapPoints[0], 14);
+
+        window.setTimeout(() => map.invalidateSize(), 150);
+        window.setTimeout(() => map.invalidateSize(), 500);
+        if ("ResizeObserver" in window) {
+          const observer = new ResizeObserver(() => map.invalidateSize());
+          observer.observe(mapCanvas);
+        }
+        window.addEventListener("resize", () => map.invalidateSize());
+      }
+
+      const form = document.getElementById("homeSearchForm");
+      const searchInput = document.getElementById("homeSearch");
+      const areaButton = document.getElementById("homeArea");
+      const categoryButton = document.getElementById("homeCategory");
+      if (!form) return;
+
+      let selectedArea = "";
+      const selectedCategories = new Set();
+
+      const areaMenu = areaButton?.nextElementSibling;
+      if (areaMenu) {
+        areaMenu.querySelectorAll(".menu-item[data-bs-value]").forEach((item) => {
+          item.addEventListener("click", () => {
+            selectedArea = item.getAttribute("data-bs-value") || "";
+          });
+        });
+      }
+
+      const categoryMenu = categoryButton?.nextElementSibling;
+      if (categoryMenu) {
+        categoryMenu.querySelectorAll(".menu-item[data-bs-value]").forEach((item) => {
+          item.addEventListener("click", () => {
+            const value = item.getAttribute("data-bs-value");
+            if (!value) return;
+            if (selectedCategories.has(value)) selectedCategories.delete(value);
+            else selectedCategories.add(value);
+          });
+        });
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const params = new URLSearchParams();
+        const search = searchInput?.value.trim();
+        if (search) params.set("search", search);
+        if (selectedArea && selectedArea !== "all") params.set("area", selectedArea);
+        if (selectedCategories.size > 0) params.set("category", Array.from(selectedCategories).join(","));
+        const query = params.toString();
+        window.location.href = "businesses.html" + (query ? "?" + query : "");
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const carousels = document.querySelectorAll("[data-home-carousel]");
+
+      carousels.forEach(function (carousel) {
+        const track = carousel.querySelector(".home-carousel-track");
+        const slides = carousel.querySelectorAll(".home-carousel-slide");
+        const prevButton = carousel.querySelector("[data-carousel-prev]");
+        const nextButton = carousel.querySelector("[data-carousel-next]");
+        const dotsContainer = carousel.querySelector("[data-carousel-dots]");
+        const status = carousel.querySelector("[data-carousel-status]");
+        if (!track || !slides.length) return;
+
+        let currentIndex = 0;
+        let timer = null;
+        let userInteracting = false;
+        const interval = Math.max(3000, Number(carousel.dataset.interval || 5000));
+
+        if (dotsContainer) {
+          slides.forEach(function (_, index) {
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.className = "home-carousel-dot";
+            dot.setAttribute("aria-label", `Go to slide ${index + 1}`);
+            dot.addEventListener("click", function () { goTo(index, true); });
+            dotsContainer.appendChild(dot);
+          });
+        }
+
+        function updateUI() {
+          const dots = dotsContainer ? dotsContainer.querySelectorAll(".home-carousel-dot") : [];
+          dots.forEach(function (dot, index) { dot.classList.toggle("is-active", index === currentIndex); });
+          if (status) status.textContent = `${currentIndex + 1} / ${slides.length}`;
+        }
+
+        function goTo(index, userAction = false) {
+          currentIndex = (index + slides.length) % slides.length;
+          track.scrollTo({ left: slides[currentIndex].offsetLeft, behavior: "smooth" });
+          updateUI();
+          if (userAction) restartTimer();
+        }
+
+        function next() { goTo(currentIndex + 1); }
+        function prev() { goTo(currentIndex - 1, true); }
+        function stopTimer() { if (timer) { window.clearInterval(timer); timer = null; } }
+        function startTimer() {
+          stopTimer();
+          timer = window.setInterval(function () {
+            if (!userInteracting) next();
+          }, interval);
+        }
+        function restartTimer() {
+          stopTimer();
+          window.setTimeout(startTimer, 700);
+        }
+
+        if (nextButton) nextButton.addEventListener("click", function () { next(); restartTimer(); });
+        if (prevButton) prevButton.addEventListener("click", function () { prev(); restartTimer(); });
+
+        let scrollEndTimer = null;
+        track.addEventListener("pointerdown", function () { userInteracting = true; stopTimer(); });
+        track.addEventListener("pointerup", function () {
+          window.clearTimeout(scrollEndTimer);
+          scrollEndTimer = window.setTimeout(function () {
+            userInteracting = false;
+            syncIndexToScroll();
             startTimer();
+          }, 350);
+        });
+        track.addEventListener("pointercancel", function () {
+          userInteracting = false;
+          syncIndexToScroll();
+          startTimer();
+        });
+        track.addEventListener("scroll", function () {
+          window.clearTimeout(scrollEndTimer);
+          scrollEndTimer = window.setTimeout(syncIndexToScroll, 120);
+        });
 
-          }
-        );
+        carousel.addEventListener("mouseenter", stopTimer);
+        carousel.addEventListener("mouseleave", function () { if (!userInteracting) startTimer(); });
+        carousel.addEventListener("touchstart", function () { userInteracting = true; stopTimer(); }, { passive: true });
+        carousel.addEventListener("touchend", function () { userInteracting = false; syncIndexToScroll(); startTimer(); }, { passive: true });
 
-      }
-    );
+        function syncIndexToScroll() {
+          if (!slides.length) return;
+          const scrollLeft = track.scrollLeft;
+          let nearestIndex = 0;
+          let nearestDistance = Infinity;
+          slides.forEach(function (slide, index) {
+            const distance = Math.abs(slide.offsetLeft - scrollLeft);
+            if (distance < nearestDistance) { nearestDistance = distance; nearestIndex = index; }
+          });
+          currentIndex = nearestIndex;
+          updateUI();
+        }
 
+        track.setAttribute("tabindex", "0");
+        track.addEventListener("keydown", function (event) {
+          if (event.key === "ArrowRight") { event.preventDefault(); next(); restartTimer(); }
+          if (event.key === "ArrowLeft") { event.preventDefault(); prev(); restartTimer(); }
+        });
+
+        updateUI();
+        startTimer();
+      });
+    });
   </script>
-
-
-  <!-- =========================================================
-       SHARED SITE HEADER LOADER
-  ========================================================== -->
 
   <script>
-    document.addEventListener(
-      "nin:header-loaded",
-      function () {
-
-        import("./assets/js/main.js")
-          .catch(
-            function (error) {
-
-              console.error(
-                "Could not load main.js:",
-                error
-              );
-
-            }
-          );
-
-      },
-      {
-        once: true
-      }
-    );
+    document.addEventListener("nin:header-loaded", function () {
+      import("./assets/js/main.js").catch(function (error) {
+        console.error("Could not load main.js:", error);
+      });
+    }, { once: true });
   </script>
 
-
   <script src="assets/js/config.js"></script>
-
-
-  <script
-    src="assets/js/site-header.js"
-  ></script>
-
+  <script src="assets/js/site-header.js"></script>
 </body>
-
 </html>
