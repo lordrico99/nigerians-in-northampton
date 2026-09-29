@@ -28,8 +28,7 @@ body {
 
 /* =========================================================
    SHARED FOOTER WRAPPER
-   IMPORTANT:
-   The wrapper must not create its own layout box.
+   The wrapper must not create a separate layout box.
 ========================================================= */
 
 #siteFooter {
@@ -114,26 +113,35 @@ body {
 
 /* =========================================================
    SOCIAL ICONS
+   Keep all four icons on one line.
 ========================================================= */
 
 .nin-footer-socials {
 
   display: flex;
 
-  flex-wrap: wrap;
+  flex-wrap: nowrap !important;
 
   align-items: center;
 
-  gap: .65rem;
+  gap: .45rem;
+
+  width: 100%;
+
+  max-width: 100%;
 
 }
 
 
 .nin-footer-social {
 
-  width: 42px;
+  width: 40px;
 
-  height: 42px;
+  height: 40px;
+
+  min-width: 40px;
+
+  flex: 0 0 40px;
 
   display: inline-flex;
 
@@ -233,6 +241,10 @@ body {
 }
 
 
+/* =========================================================
+   SOCIAL NOTE
+========================================================= */
+
 .nin-footer-social-note {
 
   margin-top:
@@ -251,7 +263,7 @@ body {
 
 
 /* =========================================================
-   FOOTER EXTERNAL SPACING
+   NEWS PAGE — NO SPACE AFTER FOOTER
 ========================================================= */
 
 body.news-page {
@@ -261,7 +273,21 @@ body.news-page {
   padding: 0 !important;
 
   min-height: 100vh !important;
+
   min-height: 100dvh !important;
+
+}
+
+
+/* =========================================================
+   FOOTER EXTERNAL SPACING
+========================================================= */
+
+body.news-page footer.site-footer,
+body.news-page footer.nin-footer {
+
+  margin:
+    0 !important;
 
 }
 
@@ -279,6 +305,19 @@ body.news-page {
 
   }
 
+  .nin-footer-socials {
+
+    flex-wrap:
+      nowrap !important;
+
+    gap:
+      .4rem;
+
+    overflow:
+      visible;
+
+  }
+
   .nin-footer-social {
 
     width:
@@ -286,6 +325,12 @@ body.news-page {
 
     height:
       40px;
+
+    min-width:
+      40px;
+
+    flex:
+      0 0 40px;
 
   }
 
