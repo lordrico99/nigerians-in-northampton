@@ -61,6 +61,7 @@
     body {
       width: 100%;
       max-width: 100%;
+      min-height: 100%;
       margin: 0;
       overflow-x: hidden !important;
     }
@@ -88,6 +89,45 @@
     [class*="col-"] {
       min-width: 0;
       max-width: 100%;
+    }
+
+
+    /* =========================================================
+       STICKY FOOTER / REMOVE WHITE SPACE BELOW FOOTER
+    ========================================================== */
+
+    body.news-page {
+      min-height: 100vh !important;
+      display: flex !important;
+      flex-direction: column !important;
+      padding-bottom: 0 !important;
+    }
+
+    body.news-page > #siteHeader,
+    body.news-page > .news-notice,
+    body.news-page > .news-hero,
+    body.news-page > .news-topics,
+    body.news-page > main {
+      flex: 0 0 auto;
+    }
+
+    body.news-page > main {
+      flex: 1 0 auto;
+      width: 100%;
+      min-width: 0;
+    }
+
+    body.news-page > #siteFooter {
+      flex: 0 0 auto;
+      width: 100%;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding: 0 !important;
+    }
+
+    body.news-page > #siteFooter > .site-footer {
+      width: 100%;
+      margin: 0 !important;
     }
 
 
@@ -4346,14 +4386,6 @@
 
   <script
     src="assets/js/site-header.js"
-  ></script>
-
-  <!-- =========================================================
-       SHARED SITE FOOTER
-  ========================================================== -->
-
-  <script
-    src="assets/js/site-footer.js"
   ></script>
 
 </body>
