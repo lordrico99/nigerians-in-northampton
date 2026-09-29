@@ -55,42 +55,70 @@
 
     html,
     body {
-      width: 100%;
-      max-width: 100%;
-      min-height: 100%;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow-x: hidden !important;
+
+      width:
+        100%;
+
+      max-width:
+        100%;
+
+      min-height:
+        100%;
+
+      margin:
+        0 !important;
+
+      padding:
+        0 !important;
+
+      overflow-x:
+        hidden !important;
+
     }
 
 
     /* =========================================================
-       PAGE LAYOUT / STICKY FOOTER
+       PAGE LAYOUT
+       Keep the footer at the bottom without changing the
+       internal footer layout.
     ========================================================== */
 
     body.news-page {
 
-      min-height: 100vh !important;
-      min-height: 100dvh !important;
+      min-height:
+        100vh !important;
 
-      display: flex !important;
-      flex-direction: column !important;
+      min-height:
+        100dvh !important;
 
-      width: 100% !important;
+      display:
+        flex !important;
 
-      margin: 0 !important;
-      padding: 0 !important;
+      flex-direction:
+        column !important;
 
-      overflow-x: hidden !important;
+      width:
+        100% !important;
+
+      margin:
+        0 !important;
+
+      padding:
+        0 !important;
+
+      overflow-x:
+        hidden !important;
 
     }
 
 
     body.news-page > #siteHeader {
 
-      flex: 0 0 auto !important;
+      flex:
+        0 0 auto !important;
 
-      width: 100% !important;
+      width:
+        100% !important;
 
     }
 
@@ -101,39 +129,65 @@
     body.news-page > .news-hero-wrap,
     body.news-page > .news-topics {
 
-      flex: 0 0 auto !important;
+      flex:
+        0 0 auto !important;
 
-      width: 100% !important;
+      width:
+        100% !important;
 
     }
 
 
     body.news-page > main {
 
-      flex: 1 0 auto !important;
+      flex:
+        1 0 auto !important;
 
-      width: 100% !important;
+      width:
+        100% !important;
 
-      min-width: 0 !important;
+      min-width:
+        0 !important;
 
-      margin: 0 !important;
+      margin:
+        0 !important;
 
     }
 
 
     /* =========================================================
-       FINAL FOOTER LAYOUT FIX
-
-       #siteFooter does not create a second layout box.
-       The actual footer becomes the flex item.
+       FOOTER LAYOUT
+       Match index.html / businesses.html / other pages.
     ========================================================== */
 
     body.news-page > #siteFooter {
 
-      display: contents !important;
+      display:
+        block !important;
 
-      margin: 0 !important;
-      padding: 0 !important;
+      flex:
+        0 0 auto !important;
+
+      width:
+        100% !important;
+
+      max-width:
+        100% !important;
+
+      height:
+        auto !important;
+
+      min-height:
+        0 !important;
+
+      margin:
+        0 !important;
+
+      padding:
+        0 !important;
+
+      background:
+        transparent !important;
 
     }
 
@@ -141,49 +195,88 @@
     body.news-page > #siteFooter > footer.site-footer,
     body.news-page > #siteFooter > footer.nin-footer {
 
-      display: block !important;
+      display:
+        block !important;
 
-      position: relative !important;
+      position:
+        relative !important;
 
-      flex: 0 0 auto !important;
+      width:
+        100% !important;
 
-      width: 100% !important;
+      max-width:
+        100% !important;
 
-      max-width: 100% !important;
+      height:
+        auto !important;
 
-      height: auto !important;
+      min-height:
+        0 !important;
 
-      min-height: 0 !important;
-
-      margin: 0 !important;
-
-      line-height: normal !important;
+      margin:
+        0 !important;
 
     }
 
+
+    /* =========================================================
+       FOOTER INTERNAL ROW
+       Allow the normal shared footer Bootstrap/custom column
+       system to control spacing exactly as on other pages.
+    ========================================================== */
+
+    body.news-page > #siteFooter > footer.site-footer > .container > .row,
+    body.news-page > #siteFooter > footer.nin-footer > .container > .row {
+
+      display:
+        flex !important;
+
+      flex-wrap:
+        wrap !important;
+
+      margin-top:
+        0 !important;
+
+      margin-bottom:
+        0 !important;
+
+    }
+
+
+    body.news-page > #siteFooter > footer.site-footer > .container > .row > [class*="col-"],
+    body.news-page > #siteFooter > footer.nin-footer > .container > .row > [class*="col-"] {
+
+      min-width:
+        0 !important;
+
+    }
+
+
+    /* =========================================================
+       DO NOT CREATE EXTRA CONTENT FROM THE FOOTER WRAPPER
+    ========================================================== */
 
     body.news-page > #siteFooter::before,
     body.news-page > #siteFooter::after {
 
-      content: none !important;
+      content:
+        none !important;
 
-      display: none !important;
-
-    }
-
-
-    body.news-page > #siteFooter > footer.site-footer::after,
-    body.news-page > #siteFooter > footer.nin-footer::after {
-
-      content: none !important;
+      display:
+        none !important;
 
     }
 
+
+    /* =========================================================
+       REMOVE EXTERNAL BOTTOM SPACE
+    ========================================================== */
 
     body.news-page footer.site-footer,
     body.news-page footer.nin-footer {
 
-      margin-bottom: 0 !important;
+      margin-bottom:
+        0 !important;
 
     }
 
@@ -194,17 +287,23 @@
 
     body.news-page > .modal {
 
-      position: fixed !important;
+      position:
+        fixed !important;
 
-      inset: 0 !important;
+      inset:
+        0 !important;
 
-      width: 100% !important;
+      width:
+        100% !important;
 
-      max-width: none !important;
+      max-width:
+        none !important;
 
-      height: 100% !important;
+      height:
+        100% !important;
 
-      margin: 0 !important;
+      margin:
+        0 !important;
 
     }
 
@@ -215,14 +314,29 @@
 
     .news-page {
 
-      --news-primary: #174a8b;
-      --news-primary-dark: #0f3566;
-      --news-primary-soft: #edf4ff;
-      --news-ink: #122033;
-      --news-muted: #68758a;
-      --news-border: #e5eaf1;
-      --news-surface: #ffffff;
-      --news-surface-2: #f6f8fb;
+      --news-primary:
+        #174a8b;
+
+      --news-primary-dark:
+        #0f3566;
+
+      --news-primary-soft:
+        #edf4ff;
+
+      --news-ink:
+        #122033;
+
+      --news-muted:
+        #68758a;
+
+      --news-border:
+        #e5eaf1;
+
+      --news-surface:
+        #ffffff;
+
+      --news-surface-2:
+        #f6f8fb;
 
       background:
         radial-gradient(
@@ -243,7 +357,10 @@
 
 
     .news-page a {
-      text-decoration: none;
+
+      text-decoration:
+        none;
+
     }
 
 
@@ -268,26 +385,34 @@
 
     .news-notice-inner {
 
-      display: flex;
+      display:
+        flex;
 
-      align-items: center;
+      align-items:
+        center;
 
-      justify-content: space-between;
+      justify-content:
+        space-between;
 
-      gap: 16px;
+      gap:
+        16px;
 
-      flex-wrap: wrap;
+      flex-wrap:
+        wrap;
 
     }
 
 
     .news-notice-label {
 
-      display: inline-flex;
+      display:
+        inline-flex;
 
-      align-items: center;
+      align-items:
+        center;
 
-      gap: 8px;
+      gap:
+        8px;
 
       font-size:
         12px;
@@ -323,11 +448,14 @@
 
     .news-sample-badge {
 
-      display: inline-flex;
+      display:
+        inline-flex;
 
-      align-items: center;
+      align-items:
+        center;
 
-      gap: 7px;
+      gap:
+        7px;
 
       padding:
         7px 11px;
@@ -2122,7 +2250,7 @@
 
 
     /* =========================================================
-       MODAL
+       MODAL IMAGE
     ========================================================== */
 
     .news-modal-image {
@@ -2529,9 +2657,7 @@
         ></div>
 
 
-        <div
-          class="news-slider-arrows"
-        >
+        <div class="news-slider-arrows">
 
           <button
             type="button"
@@ -3595,11 +3721,15 @@
       id="northampton"
       class="news-section"
     >
+
       <div class="container">
+
         <div class="visually-hidden">
           Northampton community news and information.
         </div>
+
       </div>
+
     </section>
 
 
