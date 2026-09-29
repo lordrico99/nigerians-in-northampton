@@ -1,63 +1,199 @@
 (function () {
   "use strict";
 
+  /* =========================================================
+     LOAD SHARED SITE FOOTER
+  ========================================================== */
+
   async function loadSiteFooter() {
-    const container = document.getElementById("siteFooter");
+
+    /*
+     * Find the shared footer placeholder.
+     * If the page still has an old inline footer and no
+     * placeholder, create the placeholder immediately before it.
+     */
+
+    let container =
+      document.getElementById("siteFooter");
+
+
+    const existingFooters =
+      Array.from(
+        document.querySelectorAll(
+          "footer.site-footer"
+        )
+      );
+
 
     if (!container) {
-      return;
-    }
 
-    try {
-      const footerURL = new URL(
-        "partials/footer.html",
-        document.baseURI
-      );
+      container =
+        document.createElement("div");
 
-      const response = await fetch(footerURL, {
-        cache: "no-cache"
-      });
+      container.id =
+        "siteFooter";
 
-      if (!response.ok) {
-        throw new Error(
-          `Footer request failed: ${response.status}`
+
+      if (existingFooters.length) {
+
+        existingFooters[0]
+          .parentNode
+          .insertBefore(
+            container,
+            existingFooters[0]
+          );
+
+      }
+      else {
+
+        document.body.appendChild(
+          container
         );
+
       }
 
-      const html = await response.text();
+    }
 
-      container.innerHTML = html;
 
-      /* Update footer year automatically */
-      container.querySelectorAll("[data-year]").forEach(function (node) {
-        node.textContent = new Date().getFullYear();
-      });
+    try {
 
-      /* Notify other scripts that the footer is ready */
-      document.dispatchEvent(
-        new CustomEvent("nin:footer-loaded", {
-          detail: {
-            container: container
+      /* =======================================================
+         LOAD SHARED FOOTER PARTIAL
+      ======================================================== */
+
+      const footerURL =
+        new URL(
+          "partials/footer.html",
+          document.baseURI
+        );
+
+
+      const response =
+        await fetch(
+          footerURL,
+          {
+            cache: "no-store"
           }
-        })
+        );
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          `Could not load shared footer (${response.status})`
+        );
+
+      }
+
+
+      const html =
+        await response.text();
+
+
+      /*
+       * Insert the shared footer.
+       */
+
+      container.innerHTML =
+        html;
+
+
+      /* =======================================================
+         REMOVE OLD INLINE FOOTERS
+         This prevents duplicate/conflicting footers.
+      ======================================================== */
+
+      document
+        .querySelectorAll(
+          "footer.site-footer"
+        )
+        .forEach(
+          function (footer) {
+
+            if (
+              !container.contains(
+                footer
+              )
+            ) {
+
+              footer.remove();
+
+            }
+
+          }
+        );
+
+
+      /* =======================================================
+         UPDATE COPYRIGHT YEAR
+      ======================================================== */
+
+      container
+        .querySelectorAll(
+          "[data-year]"
+        )
+        .forEach(
+          function (node) {
+
+            node.textContent =
+              new Date().getFullYear();
+
+          }
+        );
+
+
+      /* =======================================================
+         FOOTER LOADED EVENT
+      ======================================================== */
+
+      document.dispatchEvent(
+        new CustomEvent(
+          "nin:footer-loaded",
+          {
+            detail: {
+              container:
+                container
+            }
+          }
+        )
       );
 
-    } catch (error) {
+
+    }
+    catch (error) {
+
       console.error(
         "Could not load shared footer:",
         error
       );
+
     }
+
   }
 
-  if (document.readyState === "loading") {
+
+  /* =========================================================
+     START
+  ========================================================== */
+
+  if (
+    document.readyState ===
+    "loading"
+  ) {
+
     document.addEventListener(
       "DOMContentLoaded",
       loadSiteFooter,
-      { once: true }
+      {
+        once: true
+      }
     );
-  } else {
+
+  }
+  else {
+
     loadSiteFooter();
+
   }
 
 })();

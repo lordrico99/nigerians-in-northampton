@@ -78,9 +78,7 @@
 
 
     /* =========================================================
-       PAGE LAYOUT
-       Keep the footer at the bottom without changing the
-       internal footer layout.
+       NEWS PAGE LAYOUT
     ========================================================== */
 
     body.news-page {
@@ -100,6 +98,9 @@
       width:
         100% !important;
 
+      max-width:
+        100% !important;
+
       margin:
         0 !important;
 
@@ -112,58 +113,11 @@
     }
 
 
-    body.news-page > #siteHeader {
-
-      flex:
-        0 0 auto !important;
-
-      width:
-        100% !important;
-
-    }
-
-
-    body.news-page > .news-notice,
-    body.news-page > .news-topline,
-    body.news-page > .news-hero,
-    body.news-page > .news-hero-wrap,
-    body.news-page > .news-topics {
-
-      flex:
-        0 0 auto !important;
-
-      width:
-        100% !important;
-
-    }
-
-
-    body.news-page > main {
-
-      flex:
-        1 0 auto !important;
-
-      width:
-        100% !important;
-
-      min-width:
-        0 !important;
-
-      margin:
-        0 !important;
-
-    }
-
-
     /* =========================================================
-       FOOTER LAYOUT
-       Match index.html / businesses.html / other pages.
+       SHARED HEADER
     ========================================================== */
 
-    body.news-page > #siteFooter {
-
-      display:
-        block !important;
+    body.news-page > #siteHeader {
 
       flex:
         0 0 auto !important;
@@ -173,6 +127,90 @@
 
       max-width:
         100% !important;
+
+    }
+
+
+    /* =========================================================
+       TOP NOTICE + HERO
+    ========================================================== */
+
+    body.news-page > .news-notice,
+    body.news-page > .news-topline,
+    body.news-page > .news-hero-wrap {
+
+      flex:
+        0 0 auto !important;
+
+      width:
+        100% !important;
+
+      max-width:
+        100% !important;
+
+    }
+
+
+    /* =========================================================
+       MAIN
+       Main expands naturally.
+       Footer stays below content without altering its internal
+       grid.
+    ========================================================== */
+
+    body.news-page > main {
+
+      flex:
+        1 0 auto !important;
+
+      width:
+        100% !important;
+
+      max-width:
+        100% !important;
+
+      min-width:
+        0 !important;
+
+      margin:
+        0 !important;
+
+      padding:
+        0 !important;
+
+    }
+
+
+    /* =========================================================
+       SHARED FOOTER WRAPPER
+       IMPORTANT:
+       This must remain a normal block.
+
+       Do NOT use:
+       display: contents;
+       display: grid;
+       justify-content: center;
+    ========================================================== */
+
+    body.news-page > #siteFooter {
+
+      display:
+        block !important;
+
+      position:
+        relative !important;
+
+      flex:
+        0 0 auto !important;
+
+      width:
+        100% !important;
+
+      max-width:
+        100% !important;
+
+      min-width:
+        0 !important;
 
       height:
         auto !important;
@@ -192,6 +230,10 @@
     }
 
 
+    /* =========================================================
+       ACTUAL SHARED FOOTER
+    ========================================================== */
+
     body.news-page > #siteFooter > footer.site-footer,
     body.news-page > #siteFooter > footer.nin-footer {
 
@@ -207,6 +249,9 @@
       max-width:
         100% !important;
 
+      min-width:
+        0 !important;
+
       height:
         auto !important;
 
@@ -220,31 +265,25 @@
 
 
     /* =========================================================
-       FOOTER INTERNAL ROW
-       Allow the normal shared footer Bootstrap/custom column
-       system to control spacing exactly as on other pages.
+       DO NOT MODIFY THE FOOTER ROW
+       
+       The shared footer owns its own:
+       
+       .row g-5
+       lg:col-4
+       sm:col-6 lg:col-2
+       
+       Leave those classes untouched.
     ========================================================== */
 
     body.news-page > #siteFooter > footer.site-footer > .container > .row,
     body.news-page > #siteFooter > footer.nin-footer > .container > .row {
 
-      display:
-        flex !important;
+      width:
+        auto !important;
 
-      flex-wrap:
-        wrap !important;
-
-      margin-top:
-        0 !important;
-
-      margin-bottom:
-        0 !important;
-
-    }
-
-
-    body.news-page > #siteFooter > footer.site-footer > .container > .row > [class*="col-"],
-    body.news-page > #siteFooter > footer.nin-footer > .container > .row > [class*="col-"] {
+      max-width:
+        none !important;
 
       min-width:
         0 !important;
@@ -253,7 +292,22 @@
 
 
     /* =========================================================
-       DO NOT CREATE EXTRA CONTENT FROM THE FOOTER WRAPPER
+       FOOTER COLUMNS
+       Only prevent accidental shrinking/clipping.
+       Do not change their widths or alignment.
+    ========================================================== */
+
+    body.news-page > #siteFooter > footer.site-footer > .container > .row > *,
+    body.news-page > #siteFooter > footer.nin-footer > .container > .row > * {
+
+      min-width:
+        0 !important;
+
+    }
+
+
+    /* =========================================================
+       REMOVE PSEUDO ELEMENTS FROM THE WRAPPER ONLY
     ========================================================== */
 
     body.news-page > #siteFooter::before,
@@ -269,20 +323,7 @@
 
 
     /* =========================================================
-       REMOVE EXTERNAL BOTTOM SPACE
-    ========================================================== */
-
-    body.news-page footer.site-footer,
-    body.news-page footer.nin-footer {
-
-      margin-bottom:
-        0 !important;
-
-    }
-
-
-    /* =========================================================
-       MODAL MUST NOT CREATE DOCUMENT HEIGHT
+       MODAL
     ========================================================== */
 
     body.news-page > .modal {

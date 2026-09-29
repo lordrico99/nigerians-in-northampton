@@ -1,146 +1,3 @@
-<style>
-  /* =========================================================
-     SHARED SITE FOOTER
-  ========================================================== */
-
-  .nin-footer {
-    position: relative;
-    width: 100%;
-    margin: 0 !important;
-    background: #063e29 !important;
-    color: rgba(255,255,255,.88);
-  }
-
-  .nin-footer::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 4px;
-    background:
-      linear-gradient(
-        90deg,
-        #008751 0 33.33%,
-        #fff 33.33% 66.66%,
-        #008751 66.66% 100%
-      );
-  }
-
-  .nin-footer a,
-  .nin-footer .navbar-brand,
-  .nin-footer h3 {
-    color: #fff !important;
-  }
-
-  .nin-footer .fg-3 {
-    color: rgba(255,255,255,.66) !important;
-  }
-
-  .nin-footer hr {
-    border-color: rgba(255,255,255,.15);
-  }
-
-
-  /* =========================================================
-     CONNECT ICONS
-  ========================================================== */
-
-  .nin-footer-socials {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: .5rem;
-    width: 100%;
-  }
-
-  .nin-footer-social {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    flex: 0 0 40px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid rgba(255,255,255,.18);
-    border-radius: 50%;
-
-    background: rgba(255,255,255,.06);
-    color: #fff !important;
-
-    text-decoration: none;
-
-    transition:
-      transform .2s ease,
-      background-color .2s ease,
-      border-color .2s ease,
-      box-shadow .2s ease;
-  }
-
-  .nin-footer-social svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-    flex: 0 0 auto;
-  }
-
-  .nin-footer-social:hover {
-    transform: translateY(-3px);
-    background: rgba(255,255,255,.13);
-    border-color: rgba(255,255,255,.36);
-    box-shadow: 0 10px 22px rgba(0,0,0,.16);
-  }
-
-  .nin-footer-social:focus-visible {
-    outline: 2px solid #dfbd5e;
-    outline-offset: 3px;
-  }
-
-  .nin-footer-social.nin-whatsapp {
-    background: rgba(37,211,102,.12);
-    border-color: rgba(37,211,102,.30);
-  }
-
-  .nin-footer-social.nin-whatsapp:hover {
-    background: rgba(37,211,102,.20);
-    border-color: rgba(37,211,102,.48);
-  }
-
-  .nin-footer-social-note {
-    margin-top: .75rem;
-    color: rgba(255,255,255,.62);
-    font-size: .74rem;
-    line-height: 1.45;
-  }
-
-
-  /* =========================================================
-     MOBILE
-  ========================================================== */
-
-  @media (max-width: 575.98px) {
-
-    .nin-footer-socials {
-      flex-wrap: nowrap;
-      gap: .4rem;
-    }
-
-    .nin-footer-social {
-      width: 40px;
-      height: 40px;
-      min-width: 40px;
-      flex: 0 0 40px;
-    }
-
-    .nin-footer-social svg {
-      width: 19px;
-      height: 19px;
-    }
-
-  }
-</style>
-
-
 <!-- =========================================================
      SHARED SITE FOOTER
 ========================================================== -->
@@ -174,6 +31,7 @@
 
         </a>
 
+
         <p class="fg-3 fs-sm mb-0">
 
           Connecting Nigerians, supporting local businesses
@@ -182,6 +40,7 @@
         </p>
 
       </div>
+
 
 
       <!-- =====================================================
@@ -193,6 +52,7 @@
         <h3 class="fs-sm fw-semibold mb-3">
           Community
         </h3>
+
 
         <ul class="list-unstyled mb-0">
 
@@ -225,6 +85,7 @@
       </div>
 
 
+
       <!-- =====================================================
            BUSINESSES
       ====================================================== -->
@@ -235,6 +96,7 @@
           Businesses
         </h3>
 
+
         <ul class="list-unstyled mb-0">
 
           <li class="mb-2">
@@ -244,7 +106,7 @@
           </li>
 
           <li class="mb-2">
-            <a href="index.html#categories">
+            <a href="businesses.html">
               Categories
             </a>
           </li>
@@ -257,13 +119,14 @@
 
           <li class="mb-2">
             <a href="advertise-with-us.html">
-              Advertise
+              Advertise with us
             </a>
           </li>
 
         </ul>
 
       </div>
+
 
 
       <!-- =====================================================
@@ -275,6 +138,7 @@
         <h3 class="fs-sm fw-semibold mb-3">
           Information
         </h3>
+
 
         <ul class="list-unstyled mb-0">
 
@@ -307,6 +171,7 @@
       </div>
 
 
+
       <!-- =====================================================
            CONNECT
       ====================================================== -->
@@ -323,16 +188,15 @@
           aria-label="Social media and contact links"
         >
 
-
-          <!-- WHATSAPP -->
+          <!-- WhatsApp -->
 
           <a
             class="nin-footer-social nin-whatsapp"
             href="https://chat.whatsapp.com/REPLACE_WITH_GROUP_INVITE_CODE"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Join the WhatsApp Community — admin approval required"
-            title="Join WhatsApp Community — admin approval required"
+            aria-label="Join the WhatsApp Community"
+            title="Join WhatsApp Community"
           >
 
             <svg
@@ -348,7 +212,7 @@
           </a>
 
 
-          <!-- FACEBOOK -->
+          <!-- Facebook -->
 
           <a
             class="nin-footer-social"
@@ -370,7 +234,7 @@
           </a>
 
 
-          <!-- INSTAGRAM -->
+          <!-- Instagram -->
 
           <a
             class="nin-footer-social"
@@ -385,14 +249,14 @@
               focusable="false"
             >
 
-              <path d="M7.2 2h9.6A5.2 5.2 0 0 1 22 7.2v9.6a5.2 5.2 0 0 1-5.2 5.2H7.2A5.2 5.2 0 0 1 2 16.8V7.2A5.2 5.2 0 0 1 7.2 2Zm0 1.9a3.3 3.3 0 0 0-3.3 3.3v9.6a3.3 3.3 0 0 0 3.3 3.3h9.6a3.3 3.3 0 0 0 3.3-3.3V7.2a3.3 3.3 0 0 0-3.3-3.3H7.2Zm4.8 3.2A4.9 4.9 0 1 1 7.1 12a4.9 4.9 0 0 1 4.9-4.9Zm0 1.9A3 3 0 1 0 15 12a3 3 0 0 0-3-3Zm5.25-2.35a1.15 1.15 0 1 1-1.15 1.15 1.15 0 0 1-1.15-1.15Z"/>
+              <path d="M7.2 2h9.6A5.2 5.2 0 0 1 22 7.2v9.6a5.2 5.2 0 0 1-5.2 5.2H7.2A5.2 5.2 0 0 1 2 16.8V7.2A5.2 5.2 0 0 1 7.2 2Zm0 1.9a3.3 3.3 0 0 0-3.3 3.3v9.6a3.3 3.3 0 0 0 3.3 3.3h9.6a3.3 3.3 0 0 0 3.3-3.3V7.2a3.3 3.3 0 0 0-3.3-3.3H7.2Zm4.8 3.2A4.9 4.9 0 1 1 7.1 12a4.9 4.9 0 0 1 4.9-4.9Zm0 1.9A3 3 0 1 0 15 12a3 3 0 0 0-3-3Zm5.25-2.35a1.15 1.15 0 1 1-1.15 1.15 1.15 0 0 1 1.15-1.15Z"/>
 
             </svg>
 
           </a>
 
 
-          <!-- EMAIL -->
+          <!-- Email -->
 
           <a
             class="nin-footer-social"
@@ -417,7 +281,10 @@
 
 
         <p class="nin-footer-social-note mb-0">
-          WhatsApp join requests are reviewed by an admin before access is granted.
+
+          WhatsApp join requests are reviewed by an admin
+          before access is granted.
+
         </p>
 
       </div>
@@ -425,12 +292,12 @@
     </div>
 
 
-    <!-- =====================================================
-         FOOTER BOTTOM
-    ====================================================== -->
-
     <hr class="my-5">
 
+
+    <!-- =====================================================
+         COPYRIGHT
+    ====================================================== -->
 
     <div
       class="d-flex flex-wrap justify-content-between align-items-center gap-3"
@@ -439,7 +306,11 @@
       <p class="fg-3 fs-xs mb-0">
 
         &copy;
-        <span data-year>2026</span>
+
+        <span data-year>
+          2026
+        </span>
+
         Nigerians in Northampton.
         All rights reserved.
 
@@ -447,9 +318,7 @@
 
 
       <p class="fg-3 fs-xs mb-0">
-
-        Community • Business • Information
-
+        Community · Business · Information
       </p>
 
     </div>
