@@ -10,11 +10,13 @@
     content="width=device-width, initial-scale=1"
   >
 
-  <title>Community News — Nigerians in Northampton</title>
+  <title>
+    Community News — Nigerian Community in Northamptonampton
+  </title>
 
   <meta
     name="description"
-    content="Community news, local stories, events, opportunities and updates for Nigerians in Northampton and the wider Northampton community."
+    content="Community news, events, business updates and useful information for Nigerian Community in Northamptonampton."
   >
 
   <!-- =========================================================
@@ -36,822 +38,390 @@
     href="assets/css/style.css"
   >
 
+  <!-- Shared site header -->
   <link
     rel="stylesheet"
     href="assets/css/header.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="assets/css/footer.css"
   >
 
 
   <style>
 
     /* =========================================================
-       BASE
+       GLOBAL NEWS PAGE FIXES
     ========================================================== */
 
     html,
     body {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      overflow-x: hidden !important;
+    }
 
-      width:
-        100%;
+    body {
+      overflow-y: auto;
+    }
 
-      max-width:
-        100%;
+    img,
+    svg,
+    video,
+    canvas {
+      max-width: 100%;
+    }
 
-      min-height:
-        100%;
+    #main {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow-x: hidden;
+    }
 
-      margin:
-        0 !important;
-
-      padding:
-        0 !important;
-
-      overflow-x:
-        hidden !important;
-
+    .container,
+    .row,
+    [class*="col-"] {
+      min-width: 0;
+      max-width: 100%;
     }
 
 
     /* =========================================================
-       NEWS PAGE LAYOUT
-    ========================================================== */
-
-    body.news-page {
-
-      min-height:
-        100vh !important;
-
-      min-height:
-        100dvh !important;
-
-      display:
-        flex !important;
-
-      flex-direction:
-        column !important;
-
-      width:
-        100% !important;
-
-      max-width:
-        100% !important;
-
-      margin:
-        0 !important;
-
-      padding:
-        0 !important;
-
-      overflow-x:
-        hidden !important;
-
-    }
-
-
-    /* =========================================================
-       SHARED HEADER
-    ========================================================== */
-
-    body.news-page > #siteHeader {
-
-      flex:
-        0 0 auto !important;
-
-      width:
-        100% !important;
-
-      max-width:
-        100% !important;
-
-    }
-
-
-    /* =========================================================
-       TOP NOTICE + HERO
-    ========================================================== */
-
-    body.news-page > .news-notice,
-    body.news-page > .news-topline,
-    body.news-page > .news-hero-wrap {
-
-      flex:
-        0 0 auto !important;
-
-      width:
-        100% !important;
-
-      max-width:
-        100% !important;
-
-    }
-
-
-    /* =========================================================
-       MAIN
-       Main expands naturally.
-       Footer stays below content without altering its internal
-       grid.
-    ========================================================== */
-
-    body.news-page > main {
-
-      flex:
-        1 0 auto !important;
-
-      width:
-        100% !important;
-
-      max-width:
-        100% !important;
-
-      min-width:
-        0 !important;
-
-      margin:
-        0 !important;
-
-      padding:
-        0 !important;
-
-    }
-
-
-    /* =========================================================
-       SHARED FOOTER WRAPPER
-       IMPORTANT:
-       This must remain a normal block.
-
-       Do NOT use:
-       display: contents;
-       display: grid;
-       justify-content: center;
-    ========================================================== */
-
-    body.news-page > #siteFooter {
-
-      display:
-        block !important;
-
-      position:
-        relative !important;
-
-      flex:
-        0 0 auto !important;
-
-      width:
-        100% !important;
-
-      max-width:
-        100% !important;
-
-      min-width:
-        0 !important;
-
-      height:
-        auto !important;
-
-      min-height:
-        0 !important;
-
-      margin:
-        0 !important;
-
-      padding:
-        0 !important;
-
-      background:
-        transparent !important;
-
-    }
-
-
-    /* =========================================================
-       ACTUAL SHARED FOOTER
-    ========================================================== */
-
-    body.news-page > #siteFooter > footer.site-footer,
-    body.news-page > #siteFooter > footer.nin-footer {
-
-      display:
-        block !important;
-
-      position:
-        relative !important;
-
-      width:
-        100% !important;
-
-      max-width:
-        100% !important;
-
-      min-width:
-        0 !important;
-
-      height:
-        auto !important;
-
-      min-height:
-        0 !important;
-
-      margin:
-        0 !important;
-
-    }
-
-
-    /* =========================================================
-       DO NOT MODIFY THE FOOTER ROW
-       
-       The shared footer owns its own:
-       
-       .row g-5
-       lg:col-4
-       sm:col-6 lg:col-2
-       
-       Leave those classes untouched.
-    ========================================================== */
-
-    body.news-page > #siteFooter > footer.site-footer > .container > .row,
-    body.news-page > #siteFooter > footer.nin-footer > .container > .row {
-
-      width:
-        auto !important;
-
-      max-width:
-        none !important;
-
-      min-width:
-        0 !important;
-
-    }
-
-
-    /* =========================================================
-       FOOTER COLUMNS
-       Only prevent accidental shrinking/clipping.
-       Do not change their widths or alignment.
-    ========================================================== */
-
-    body.news-page > #siteFooter > footer.site-footer > .container > .row > *,
-    body.news-page > #siteFooter > footer.nin-footer > .container > .row > * {
-
-      min-width:
-        0 !important;
-
-    }
-
-
-    /* =========================================================
-       REMOVE PSEUDO ELEMENTS FROM THE WRAPPER ONLY
-    ========================================================== */
-
-    body.news-page > #siteFooter::before,
-    body.news-page > #siteFooter::after {
-
-      content:
-        none !important;
-
-      display:
-        none !important;
-
-    }
-
-
-    /* =========================================================
-       MODAL
-    ========================================================== */
-
-    body.news-page > .modal {
-
-      position:
-        fixed !important;
-
-      inset:
-        0 !important;
-
-      width:
-        100% !important;
-
-      max-width:
-        none !important;
-
-      height:
-        100% !important;
-
-      margin:
-        0 !important;
-
-    }
-
-
-    /* =========================================================
-       NEWS PAGE
+       NEWS PAGE VARIABLES
     ========================================================== */
 
     .news-page {
 
-      --news-primary:
-        #174a8b;
-
-      --news-primary-dark:
-        #0f3566;
-
-      --news-primary-soft:
-        #edf4ff;
-
-      --news-ink:
-        #122033;
-
-      --news-muted:
-        #68758a;
-
-      --news-border:
-        #e5eaf1;
-
-      --news-surface:
-        #ffffff;
-
-      --news-surface-2:
-        #f6f8fb;
-
-      background:
-        radial-gradient(
-          circle at 90% 7%,
-          rgba(23, 74, 139, .045),
-          transparent 28%
-        ),
-        linear-gradient(
-          180deg,
-          #fff 0%,
-          #f8fafc 100%
-        );
-
-      color:
-        var(--news-ink);
-
-    }
-
-
-    .news-page a {
-
-      text-decoration:
-        none;
+      --news-blue: #174a8b;
+      --news-blue-dark: #0f3566;
+      --news-soft: #edf4ff;
+      --news-ink: #122033;
+      --news-muted: #68758a;
+      --news-border: #e5eaf1;
 
     }
 
 
     /* =========================================================
-       NEWS NOTICE
+       TOP NOTICE
     ========================================================== */
 
     .news-notice {
-
-      padding:
-        14px 0;
-
+      padding: 0.7rem 0;
       border-bottom:
         1px solid
-        var(--news-border);
+        var(--bs-border-color);
 
       background:
-        rgba(255,255,255,.94);
-
+        var(--bs-body-bg);
     }
-
 
     .news-notice-inner {
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        16px;
-
-      flex-wrap:
-        wrap;
-
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
-
 
     .news-notice-label {
-
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      gap:
-        8px;
-
-      font-size:
-        12px;
-
-      font-weight:
-        700;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
 
       color:
-        var(--news-muted);
+        var(--bs-secondary-color);
 
+      font-size: 0.78rem;
+      font-weight: 600;
     }
-
 
     .news-notice-dot {
+      width: 7px;
+      height: 7px;
 
-      width:
-        7px;
+      flex: 0 0 auto;
 
-      height:
-        7px;
-
-      flex:
-        0 0 auto;
-
-      border-radius:
-        50%;
+      border-radius: 50%;
 
       background:
-        var(--news-primary);
-
+        var(--bs-primary);
     }
 
+    .news-notice-badge {
+      display: inline-flex;
+      align-items: center;
 
-    .news-sample-badge {
+      padding: 0.32rem 0.65rem;
 
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      gap:
-        7px;
-
-      padding:
-        7px 11px;
-
-      border:
-        1px solid
-        #dbe7f7;
-
-      border-radius:
-        999px;
+      border-radius: 999px;
 
       background:
-        var(--news-primary-soft);
+        var(--news-soft);
 
       color:
-        var(--news-primary);
+        var(--news-blue);
 
-      font-size:
-        11px;
-
-      font-weight:
-        800;
-
-      letter-spacing:
-        .06em;
-
-      text-transform:
-        uppercase;
-
+      font-size: 0.7rem;
+      font-weight: 700;
     }
 
-
-    .news-sample-badge span {
-
-      width:
-        7px;
-
-      height:
-        7px;
-
-      border-radius:
-        50%;
-
+    [data-bs-theme="dark"] .news-notice-badge {
       background:
-        var(--news-primary);
+        rgba(59, 130, 246, 0.14);
 
+      color:
+        #93c5fd;
     }
 
 
     /* =========================================================
-       HERO
+       HERO CAROUSEL
+       Full width + compact height
     ========================================================== */
 
-    .news-hero-wrap {
-
-      padding:
-        34px 0 18px;
-
-    }
-
-
     .news-hero {
+      position: relative;
 
-      position:
-        relative;
+      width: 100%;
 
-      overflow:
-        hidden;
-
-      min-height:
-        540px;
-
-      border-radius:
-        26px;
+      overflow: hidden;
 
       background:
-        #122033;
-
-      box-shadow:
-        0 24px 70px
-        rgba(20,32,54,.14);
-
+        #111827;
     }
 
+    .news-hero-track {
+      display: flex;
 
-    .news-slide {
+      width: 100%;
 
-      position:
-        absolute;
+      overflow-x: auto;
 
-      inset:
-        0;
+      scroll-snap-type: x mandatory;
 
-      display:
-        grid;
+      scroll-behavior: smooth;
 
-      grid-template-columns:
-        minmax(0,1.05fr)
-        minmax(320px,.95fr);
+      scrollbar-width: none;
 
-      opacity:
-        0;
+      -ms-overflow-style: none;
 
-      visibility:
-        hidden;
-
-      transform:
-        scale(1.015);
-
-      transition:
-        opacity .55s ease,
-        transform .7s ease,
-        visibility .55s ease;
-
+      overscroll-behavior-x: contain;
     }
 
-
-    .news-slide.is-active {
-
-      opacity:
-        1;
-
-      visibility:
-        visible;
-
-      transform:
-        scale(1);
-
+    .news-hero-track::-webkit-scrollbar {
+      display: none;
     }
 
+    .news-hero-slide {
 
-    .news-slide-copy {
+      position: relative;
 
-      position:
-        relative;
+      flex: 0 0 100%;
 
-      z-index:
-        2;
+      width: 100%;
 
-      display:
-        flex;
+      min-width: 100%;
 
-      flex-direction:
-        column;
+      height: 420px;
 
-      justify-content:
-        flex-end;
+      scroll-snap-align: start;
 
-      padding:
-        54px;
+      scroll-snap-stop: always;
 
-      color:
-        #fff;
+      overflow: hidden;
+
+      isolation: isolate;
 
       background:
-        linear-gradient(
-          125deg,
-          rgba(10,31,59,.98) 0%,
-          rgba(17,57,102,.94) 64%,
-          rgba(17,57,102,.65) 100%
-        );
-
+        #111827;
     }
 
+    .news-hero-image {
 
-    .news-slide-kicker {
+      position: absolute;
 
-      display:
-        inline-flex;
+      inset: 0;
 
-      align-items:
-        center;
+      width: 100%;
+      height: 100%;
 
-      gap:
-        8px;
+      object-fit: cover;
 
-      margin-bottom:
-        15px;
+      object-position: center 20%;
 
-      color:
-        rgba(255,255,255,.76);
-
-      font-size:
-        11px;
-
-      font-weight:
-        800;
-
-      letter-spacing:
-        .12em;
-
-      text-transform:
-        uppercase;
-
+      z-index: -3;
     }
 
+    .news-hero-slide::before {
 
-    .news-slide-kicker::before {
+      content: "";
 
-      content:
-        "";
+      position: absolute;
 
-      width:
-        24px;
+      inset: 0;
 
-      height:
-        2px;
-
-      border-radius:
-        999px;
-
-      background:
-        rgba(255,255,255,.72);
-
-    }
-
-
-    .news-slide h1 {
-
-      max-width:
-        680px;
-
-      margin:
-        0 0 17px;
-
-      color:
-        #fff;
-
-      font-size:
-        clamp(
-          34px,
-          4.3vw,
-          60px
-        );
-
-      line-height:
-        1.02;
-
-      letter-spacing:
-        -.045em;
-
-    }
-
-
-    .news-slide p {
-
-      max-width:
-        650px;
-
-      margin:
-        0 0 26px;
-
-      color:
-        rgba(255,255,255,.79);
-
-      font-size:
-        16px;
-
-      line-height:
-        1.7;
-
-    }
-
-
-    .news-slide-meta {
-
-      display:
-        flex;
-
-      flex-wrap:
-        wrap;
-
-      align-items:
-        center;
-
-      gap:
-        10px 16px;
-
-      color:
-        rgba(255,255,255,.72);
-
-      font-size:
-        12px;
-
-      font-weight:
-        700;
-
-    }
-
-
-    .news-slide-image {
-
-      position:
-        relative;
-
-      min-height:
-        100%;
-
-      background-size:
-        cover;
-
-      background-position:
-        center;
-
-    }
-
-
-    .news-slide-image::after {
-
-      content:
-        "";
-
-      position:
-        absolute;
-
-      inset:
-        0;
+      z-index: -2;
 
       background:
         linear-gradient(
           90deg,
-          rgba(9,28,53,.28),
-          rgba(0,0,0,.08)
+          rgba(8, 19, 37, 0.90) 0%,
+          rgba(8, 19, 37, 0.68) 38%,
+          rgba(8, 19, 37, 0.24) 72%,
+          rgba(8, 19, 37, 0.10) 100%
         );
-
     }
 
+    .news-hero-slide::after {
 
-    .news-slide-1 .news-slide-image {
+      content: "";
 
-      background-image:
-        url(
-          'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1500&q=85'
+      position: absolute;
+
+      inset: 0;
+
+      z-index: -1;
+
+      background:
+        linear-gradient(
+          0deg,
+          rgba(8, 19, 37, 0.48),
+          transparent 55%
         );
-
     }
 
+    .news-hero-content {
 
-    .news-slide-2 .news-slide-image {
+      position: relative;
 
-      background-image:
-        url(
-          'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1500&q=85'
-        );
+      z-index: 2;
 
+      height: 100%;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: flex-end;
+
+      padding:
+        2.5rem
+        max(1.25rem, calc((100vw - 1320px) / 2));
+
+      padding-left:
+        max(1.25rem, calc((100vw - 1320px) / 2));
+
+      padding-right:
+        max(1.25rem, calc((100vw - 1320px) / 2));
+
+      color: #fff;
     }
 
+    .news-hero-content-inner {
+      width: min(760px, 100%);
+    }
 
-    .news-slide-3 .news-slide-image {
+    .news-hero-chip {
 
-      background-image:
-        url(
-          'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1500&q=85'
+      display: inline-flex;
+
+      align-items: center;
+
+      width: fit-content;
+
+      padding:
+        0.4rem
+        0.75rem;
+
+      margin-bottom: 0.8rem;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.25);
+
+      border-radius: 999px;
+
+      background:
+        rgba(15,23,42,0.35);
+
+      color: #fff;
+
+      font-size: 0.72rem;
+
+      font-weight: 700;
+
+      backdrop-filter:
+        blur(8px);
+
+      -webkit-backdrop-filter:
+        blur(8px);
+    }
+
+    .news-hero-title {
+
+      max-width: 760px;
+
+      margin-bottom: 0.75rem;
+
+      color: #fff;
+
+      font-size:
+        clamp(
+          1.8rem,
+          4vw,
+          3.15rem
         );
 
+      line-height: 1.05;
+
+      font-weight: 800;
+
+      letter-spacing:
+        -0.035em;
+    }
+
+    .news-hero-description {
+
+      max-width: 700px;
+
+      margin-bottom: 1rem;
+
+      color:
+        rgba(255,255,255,0.88);
+
+      font-size:
+        clamp(
+          0.9rem,
+          1.4vw,
+          1.05rem
+        );
+
+      line-height: 1.55;
+    }
+
+    .news-hero-meta {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      align-items: center;
+
+      gap: 0.55rem;
+
+      color:
+        rgba(255,255,255,0.76);
+
+      font-size: 0.78rem;
+    }
+
+    .news-hero-meta span + span::before {
+
+      content: "·";
+
+      margin-right: 0.55rem;
+
+      color:
+        rgba(255,255,255,0.48);
     }
 
 
@@ -861,596 +431,569 @@
 
     .news-slide-controls {
 
-      position:
-        absolute;
+      position: absolute;
 
-      left:
-        54px;
+      left: 0;
+      right: 0;
 
-      bottom:
-        25px;
+      top: 50%;
 
-      z-index:
-        5;
+      z-index: 5;
 
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      gap:
-        9px;
-
+      pointer-events: none;
     }
 
+    .news-slide-arrow {
 
-    .news-slider-dot {
+      position: absolute;
 
-      width:
-        34px;
+      top: 50%;
 
-      height:
-        4px;
+      width: 42px;
+      height: 42px;
 
-      padding:
-        0;
+      transform:
+        translateY(-50%);
 
-      border:
-        0;
+      display: inline-flex;
 
-      border-radius:
-        999px;
+      align-items: center;
 
-      background:
-        rgba(255,255,255,.28);
-
-      cursor:
-        pointer;
-
-      transition:
-        width .2s ease,
-        background-color .2s ease;
-
-    }
-
-
-    .news-slider-dot.is-active {
-
-      width:
-        54px;
-
-      background:
-        #fff;
-
-    }
-
-
-    .news-slider-arrows {
-
-      position:
-        absolute;
-
-      right:
-        26px;
-
-      bottom:
-        24px;
-
-      z-index:
-        5;
-
-      display:
-        flex;
-
-      gap:
-        8px;
-
-    }
-
-
-    .news-slider-button {
-
-      width:
-        42px;
-
-      height:
-        42px;
-
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
+      justify-content: center;
 
       border:
         1px solid
-        rgba(255,255,255,.18);
+        rgba(255,255,255,0.25);
 
-      border-radius:
-        12px;
+      border-radius: 50%;
 
       background:
-        rgba(10,31,59,.44);
+        rgba(15,23,42,0.56);
 
-      color:
-        #fff;
+      color: #fff;
 
-      cursor:
-        pointer;
+      cursor: pointer;
+
+      pointer-events: auto;
 
       backdrop-filter:
         blur(8px);
 
+      -webkit-backdrop-filter:
+        blur(8px);
+
+      transition:
+        background-color 0.18s ease,
+        transform 0.18s ease;
     }
 
-
-    .news-slider-button:hover {
+    .news-slide-arrow:hover {
 
       background:
-        rgba(10,31,59,.68);
+        rgba(15,23,42,0.78);
 
+      transform:
+        translateY(-50%)
+        scale(1.04);
+    }
+
+    .news-slide-arrow.prev {
+      left: 18px;
+    }
+
+    .news-slide-arrow.next {
+      right: 18px;
+    }
+
+    .news-slide-arrow svg {
+      width: 17px;
+      height: 17px;
     }
 
 
     /* =========================================================
-       SECTION
+       HERO DOTS
     ========================================================== */
 
-    .news-section {
+    .news-hero-footer {
+
+      position: absolute;
+
+      left: 0;
+      right: 0;
+      bottom: 1.2rem;
+
+      z-index: 5;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      pointer-events: none;
+    }
+
+    .news-hero-dots {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 0.4rem;
 
       padding:
-        74px 0 0;
+        0.45rem
+        0.65rem;
 
+      border-radius: 999px;
+
+      background:
+        rgba(15,23,42,0.35);
+
+      backdrop-filter:
+        blur(8px);
+
+      -webkit-backdrop-filter:
+        blur(8px);
     }
 
+    .news-hero-dot {
 
-    .news-section-head {
+      width: 8px;
+      height: 8px;
 
-      display:
-        flex;
+      padding: 0;
 
-      align-items:
-        flex-end;
+      border: 0;
 
-      justify-content:
-        space-between;
+      border-radius: 999px;
 
-      gap:
-        18px;
+      background:
+        rgba(255,255,255,0.42);
 
-      margin-bottom:
-        28px;
+      cursor: pointer;
 
-      flex-wrap:
-        wrap;
+      pointer-events: auto;
 
+      transition:
+        width 0.18s ease,
+        background-color 0.18s ease;
     }
 
+    .news-hero-dot.is-active {
 
-    .news-section-kicker {
+      width: 24px;
 
-      margin:
-        0 0 8px;
-
-      color:
-        var(--news-primary);
-
-      font-size:
-        11px;
-
-      font-weight:
-        900;
-
-      letter-spacing:
-        .12em;
-
-      text-transform:
-        uppercase;
-
-    }
-
-
-    .news-section-title {
-
-      margin:
-        0;
-
-      font-size:
-        clamp(
-          28px,
-          3.1vw,
-          42px
-        );
-
-      line-height:
-        1.06;
-
-      letter-spacing:
-        -.035em;
-
-    }
-
-
-    .news-section-subtitle {
-
-      max-width:
-        650px;
-
-      margin:
-        10px 0 0;
-
-      color:
-        var(--news-muted);
-
-      font-size:
-        14px;
-
-      line-height:
-        1.65;
-
-    }
-
-
-    .news-text-link {
-
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      gap:
-        8px;
-
-      color:
-        var(--news-primary);
-
-      font-size:
-        13px;
-
-      font-weight:
-        800;
-
-    }
-
-
-    .news-text-link:hover {
-
-      color:
-        var(--news-primary-dark);
-
+      background: #fff;
     }
 
 
     /* =========================================================
-       TOPICS
+       TOPIC NAVIGATION
     ========================================================== */
 
     .news-topics {
 
-      display:
-        flex;
+      border-bottom:
+        1px solid
+        var(--bs-border-color);
 
-      gap:
-        10px;
-
-      overflow-x:
-        auto;
-
-      padding-bottom:
-        4px;
-
-      scrollbar-width:
-        thin;
-
+      background:
+        var(--bs-body-bg);
     }
 
+    .news-topics-inner {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 0.55rem;
+
+      overflow-x: auto;
+
+      padding:
+        0.85rem 0;
+
+      scrollbar-width: none;
+
+      -ms-overflow-style: none;
+    }
+
+    .news-topics-inner::-webkit-scrollbar {
+      display: none;
+    }
 
     .news-topic {
 
-      flex:
-        0 0 auto;
+      flex: 0 0 auto;
+
+      display: inline-flex;
+
+      align-items: center;
 
       padding:
-        11px 16px;
+        0.5rem
+        0.8rem;
 
       border:
         1px solid
-        var(--news-border);
+        var(--bs-border-color);
 
-      border-radius:
-        999px;
-
-      background:
-        #fff;
+      border-radius: 999px;
 
       color:
-        #45536a;
-
-      font-size:
-        12px;
-
-      font-weight:
-        800;
-
-      box-shadow:
-        0 5px 16px
-        rgba(20,32,54,.035);
-
-    }
-
-
-    .news-topic:hover,
-    .news-topic.is-active {
-
-      border-color:
-        #c9daef;
+        var(--bs-secondary-color);
 
       background:
-        var(--news-primary-soft);
+        var(--bs-body-bg);
 
-      color:
-        var(--news-primary);
+      text-decoration: none;
 
-    }
+      font-size: 0.78rem;
 
-
-    /* =========================================================
-       FEATURE GRID
-    ========================================================== */
-
-    .news-feature-grid {
-
-      display:
-        grid;
-
-      grid-template-columns:
-        minmax(0,1.35fr)
-        minmax(300px,.75fr)
-        minmax(300px,.75fr);
-
-      gap:
-        18px;
-
-    }
-
-
-    .news-card {
-
-      position:
-        relative;
-
-      overflow:
-        hidden;
-
-      min-width:
-        0;
-
-      border:
-        1px solid
-        var(--news-border);
-
-      border-radius:
-        18px;
-
-      background:
-        #fff;
-
-      box-shadow:
-        0 14px 40px
-        rgba(20,32,54,.08);
-
-    }
-
-
-    .news-card-media {
-
-      position:
-        relative;
-
-      aspect-ratio:
-        16 / 9;
-
-      overflow:
-        hidden;
-
-      background:
-        #dbe6f2;
-
-    }
-
-
-    .news-card-media img {
-
-      width:
-        100%;
-
-      height:
-        100%;
-
-      display:
-        block;
-
-      object-fit:
-        cover;
+      font-weight: 600;
 
       transition:
-        transform .45s ease;
-
+        border-color 0.18s ease,
+        color 0.18s ease,
+        background-color 0.18s ease;
     }
 
+    .news-topic:hover {
 
-    .news-card:hover .news-card-media img {
+      color:
+        var(--bs-primary);
 
-      transform:
-        scale(1.04);
-
-    }
-
-
-    .news-card-body {
-
-      padding:
-        21px;
-
-    }
-
-
-    .news-tag {
-
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      padding:
-        7px 10px;
-
-      border-radius:
-        999px;
+      border-color:
+        var(--bs-primary);
 
       background:
-        var(--news-primary-soft);
-
-      color:
-        var(--news-primary);
-
-      font-size:
-        10px;
-
-      font-weight:
-        900;
-
-      letter-spacing:
-        .07em;
-
-      text-transform:
-        uppercase;
-
-    }
-
-
-    .news-card-title {
-
-      margin:
-        12px 0 9px;
-
-      font-size:
-        21px;
-
-      line-height:
-        1.18;
-
-      letter-spacing:
-        -.025em;
-
-    }
-
-
-    .news-card-title a {
-
-      color:
-        var(--news-ink);
-
-    }
-
-
-    .news-card-title a:hover {
-
-      color:
-        var(--news-primary);
-
-    }
-
-
-    .news-card-excerpt {
-
-      margin:
-        0 0 16px;
-
-      color:
-        var(--news-muted);
-
-      font-size:
-        13px;
-
-      line-height:
-        1.7;
-
-    }
-
-
-    .news-card-meta {
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        10px;
-
-      color:
-        #8a95a5;
-
-      font-size:
-        11px;
-
-      font-weight:
-        700;
-
+        var(--bs-tertiary-bg);
     }
 
 
     /* =========================================================
-       COMMUNITY STORY STRIP
+       GENERAL NEWS SECTION
     ========================================================== */
 
-    .news-story-strip {
+    .news-section {
+      padding:
+        4rem 0;
+    }
 
-      position:
-        relative;
+    .news-section.bg-soft {
+      background:
+        var(--bs-tertiary-bg);
+    }
 
+    .news-section-heading {
+
+      max-width: 720px;
+
+      margin-bottom: 2rem;
+    }
+
+    .news-section-heading h2 {
+
+      margin-bottom: 0.5rem;
+
+      font-size:
+        clamp(
+          1.55rem,
+          3vw,
+          2.15rem
+        );
+
+      line-height: 1.15;
+
+      letter-spacing:
+        -0.025em;
+    }
+
+    .news-section-heading p {
+      margin-bottom: 0;
+      color:
+        var(--bs-secondary-color);
     }
 
 
-    .news-story-track {
+    /* =========================================================
+       EDITOR'S PICKS
+    ========================================================== */
 
-      display:
-        flex;
+    .news-feature-card {
 
-      flex-wrap:
-        nowrap;
+      position: relative;
 
-      gap:
-        16px;
+      min-height: 360px;
 
-      width:
-        100%;
+      overflow: hidden;
 
-      max-width:
-        100%;
+      border-radius: 1rem;
 
-      min-width:
-        0;
+      background:
+        #111827;
 
-      overflow-x:
-        auto;
+      isolation: isolate;
+    }
 
-      overflow-y:
-        hidden;
+    .news-feature-card::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      z-index: -2;
+
+      background:
+        linear-gradient(
+          115deg,
+          rgba(15,23,42,0.92),
+          rgba(15,23,42,0.48) 55%,
+          rgba(15,23,42,0.12)
+        );
+    }
+
+    .news-feature-image {
+
+      position: absolute;
+
+      inset: 0;
+
+      z-index: -3;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      object-position: center;
+    }
+
+    .news-feature-content {
+
+      min-height: 360px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: flex-end;
+
+      padding: 2rem;
+
+      color: #fff;
+    }
+
+    .news-feature-content h3 {
+
+      max-width: 650px;
+
+      color: #fff;
+
+      font-size:
+        clamp(
+          1.35rem,
+          2.5vw,
+          2rem
+        );
+
+      line-height: 1.15;
+
+      letter-spacing:
+        -0.025em;
+    }
+
+    .news-feature-content p {
+
+      max-width: 650px;
+
+      color:
+        rgba(255,255,255,0.84);
+    }
+
+    .news-feature-meta {
+
+      color:
+        rgba(255,255,255,0.68);
+
+      font-size: 0.75rem;
+    }
+
+
+    .news-small-card {
+
+      height: 100%;
+
+      display: flex;
+
+      flex-direction: column;
+
+      overflow: hidden;
+
+      border:
+        1px solid
+        var(--bs-border-color);
+
+      border-radius: 1rem;
+
+      background:
+        var(--bs-body-bg);
+
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .news-small-card:hover {
+
+      transform:
+        translateY(-3px);
+
+      box-shadow:
+        0 12px 28px
+        rgba(15,23,42,0.10);
+    }
+
+    [data-bs-theme="dark"] .news-small-card:hover {
+
+      box-shadow:
+        0 12px 28px
+        rgba(0,0,0,0.24);
+    }
+
+    .news-small-image {
+
+      width: 100%;
+      height: 185px;
+
+      object-fit: cover;
+    }
+
+    .news-small-content {
+
+      display: flex;
+
+      flex-direction: column;
+
+      flex: 1;
+
+      padding: 1.15rem;
+    }
+
+    .news-small-content h3 {
+
+      font-size: 1.05rem;
+
+      line-height: 1.25;
+
+      letter-spacing:
+        -0.015em;
+    }
+
+    .news-small-content p {
+
+      color:
+        var(--bs-secondary-color);
+
+      font-size: 0.85rem;
+
+      line-height: 1.55;
+    }
+
+
+    /* =========================================================
+       CATEGORY LABEL
+    ========================================================== */
+
+    .news-category {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      width: fit-content;
 
       padding:
-        4px 3px 18px;
+        0.35rem
+        0.6rem;
+
+      border-radius: 999px;
+
+      background:
+        var(--news-soft);
+
+      color:
+        var(--news-blue);
+
+      font-size: 0.68rem;
+
+      font-weight: 750;
+
+      letter-spacing:
+        0.01em;
+    }
+
+    [data-bs-theme="dark"] .news-category {
+
+      background:
+        rgba(59,130,246,0.14);
+
+      color:
+        #93c5fd;
+    }
+
+
+    /* =========================================================
+       COMMUNITY HORIZONTAL SCROLLER
+       WORKS WITH:
+       - desktop mouse drag
+       - mobile touch/swipe
+       - wheel
+       - arrows
+       - keyboard
+    ========================================================== */
+
+    .community-slider {
+
+      position: relative;
+
+      width: 100%;
+
+      min-width: 0;
+    }
+
+    .community-slider-viewport {
+
+      width: 100%;
+
+      min-width: 0;
+
+      overflow: visible;
+    }
+
+    .community-story-rail {
+
+      display: flex;
+
+      gap: 1rem;
+
+      width: 100%;
+
+      min-width: 0;
+
+      overflow-x: auto;
+
+      overflow-y: hidden;
+
+      padding:
+        0.25rem
+        0.1rem
+        1rem;
 
       scroll-snap-type:
         x proximity;
@@ -1458,449 +1001,369 @@
       scroll-behavior:
         smooth;
 
+      scrollbar-width:
+        thin;
+
       -webkit-overflow-scrolling:
         touch;
 
+      overscroll-behavior-x:
+        contain;
+
       touch-action:
-        auto;
+        pan-x;
 
       cursor:
         grab;
-
     }
 
-
-    .news-story-track.is-dragging {
+    .community-story-rail.is-dragging {
 
       cursor:
         grabbing;
 
+      scroll-behavior:
+        auto;
+
       user-select:
         none;
-
     }
 
-
-    .news-story-mini {
+    .community-story-card {
 
       flex:
-        0 0 min(360px,82vw);
+        0 0 300px;
 
-      overflow:
-        hidden;
+      width: 300px;
+
+      min-width: 300px;
 
       scroll-snap-align:
         start;
 
+      overflow: hidden;
+
       border:
         1px solid
-        var(--news-border);
+        var(--bs-border-color);
 
       border-radius:
-        16px;
+        1rem;
 
       background:
-        #fff;
+        var(--bs-body-bg);
+
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .community-story-card:hover {
+
+      transform:
+        translateY(-3px);
 
       box-shadow:
-        0 14px 40px
-        rgba(20,32,54,.08);
-
+        0 12px 26px
+        rgba(15,23,42,0.10);
     }
 
+    .community-story-image {
 
-    .news-story-mini-media {
+      display: block;
 
-      aspect-ratio:
-        16 / 9;
+      width: 100%;
 
-      overflow:
-        hidden;
+      height: 175px;
 
+      object-fit: cover;
+
+      object-position: center;
     }
 
+    .community-story-body {
 
-    .news-story-mini-media img {
-
-      width:
-        100%;
-
-      height:
-        100%;
-
-      display:
-        block;
-
-      object-fit:
-        cover;
-
+      padding: 1rem;
     }
 
-
-    .news-story-mini-body {
-
-      padding:
-        17px;
-
-    }
-
-
-    .news-story-mini-title {
-
-      margin:
-        9px 0 8px;
+    .community-story-body h3 {
 
       font-size:
-        17px;
+        1rem;
 
       line-height:
-        1.25;
+        1.28;
 
       letter-spacing:
-        -.02em;
-
+        -0.015em;
     }
 
-
-    .news-story-mini-title a {
-
-      color:
-        var(--news-ink);
-
-    }
-
-
-    .news-story-mini-excerpt {
-
-      margin:
-        0;
+    .community-story-body p {
 
       color:
-        var(--news-muted);
+        var(--bs-secondary-color);
 
       font-size:
-        12px;
+        0.82rem;
 
       line-height:
-        1.65;
-
+        1.5;
     }
 
+    .community-slider-controls {
 
-    .news-strip-controls {
+      display: flex;
 
-      display:
-        flex;
+      justify-content: flex-end;
 
-      gap:
-        8px;
+      gap: 0.5rem;
 
-      flex:
-        0 0 auto;
-
+      margin-bottom: 0.75rem;
     }
 
+    .community-slider-button {
 
-    .news-strip-button {
+      width: 38px;
+      height: 38px;
 
-      width:
-        40px;
+      display: inline-flex;
 
-      height:
-        40px;
+      align-items: center;
 
-      display:
-        inline-flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
+      justify-content: center;
 
       border:
         1px solid
-        var(--news-border);
+        var(--bs-border-color);
 
-      border-radius:
-        11px;
+      border-radius: 50%;
 
       background:
-        #fff;
+        var(--bs-body-bg);
 
       color:
-        #435269;
+        var(--bs-body-color);
 
-      cursor:
-        pointer;
+      cursor: pointer;
 
+      transition:
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
     }
 
-
-    .news-strip-button:hover {
+    .community-slider-button:hover {
 
       border-color:
-        #cdd8e7;
+        var(--bs-primary);
 
       background:
-        var(--news-surface-2);
+        var(--bs-tertiary-bg);
 
+      transform:
+        translateY(-1px);
+    }
+
+    .community-slider-button svg {
+
+      width: 16px;
+      height: 16px;
     }
 
 
     /* =========================================================
-       NEWSROOM
+       LATEST STORIES
     ========================================================== */
 
-    .newsroom-grid {
+    .latest-story {
 
-      display:
-        grid;
-
-      grid-template-columns:
-        minmax(0,1.35fr)
-        minmax(300px,.65fr);
-
-      gap:
-        24px;
-
-      align-items:
-        start;
-
-    }
-
-
-    .news-list {
-
-      display:
-        grid;
-
-      gap:
-        14px;
-
-    }
-
-
-    .news-list-card {
-
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
-        190px
-        minmax(0,1fr);
+        180px
+        minmax(0, 1fr);
 
-      gap:
-        16px;
+      gap: 1rem;
 
       padding:
-        13px;
+        1rem 0;
+
+      border-bottom:
+        1px solid
+        var(--bs-border-color);
+    }
+
+    .latest-story:first-child {
+      padding-top: 0;
+    }
+
+    .latest-story:last-child {
+      border-bottom: 0;
+    }
+
+    .latest-story-image {
+
+      width: 180px;
+      height: 120px;
+
+      object-fit: cover;
+
+      border-radius:
+        0.8rem;
+    }
+
+    .latest-story h3 {
+
+      margin-bottom: 0.4rem;
+
+      font-size:
+        1.05rem;
+
+      line-height:
+        1.3;
+
+      letter-spacing:
+        -0.015em;
+    }
+
+    .latest-story p {
+
+      margin-bottom: 0.45rem;
+
+      color:
+        var(--bs-secondary-color);
+
+      font-size:
+        0.83rem;
+
+      line-height:
+        1.5;
+    }
+
+    .latest-story-meta {
+
+      color:
+        var(--bs-tertiary-color);
+
+      font-size:
+        0.72rem;
+    }
+
+
+    /* =========================================================
+       SIDEBAR
+    ========================================================== */
+
+    .news-sidebar-card {
+
+      padding:
+        1.2rem;
 
       border:
         1px solid
-        var(--news-border);
+        var(--bs-border-color);
 
       border-radius:
-        16px;
+        1rem;
 
       background:
-        #fff;
-
-      box-shadow:
-        0 7px 24px
-        rgba(20,32,54,.045);
-
+        var(--bs-body-bg);
     }
 
+    .most-read-item {
 
-    .news-list-media {
-
-      min-height:
-        128px;
-
-      overflow:
-        hidden;
-
-      border-radius:
-        12px;
-
-      background:
-        #dbe6f2;
-
-    }
-
-
-    .news-list-media img {
-
-      width:
-        100%;
-
-      height:
-        100%;
-
-      display:
-        block;
-
-      object-fit:
-        cover;
-
-    }
-
-
-    .news-list-title {
-
-      margin:
-        8px 0;
-
-      font-size:
-        18px;
-
-      line-height:
-        1.25;
-
-      letter-spacing:
-        -.02em;
-
-    }
-
-
-    .news-list-title a {
-
-      color:
-        var(--news-ink);
-
-    }
-
-
-    .news-list-title a:hover {
-
-      color:
-        var(--news-primary);
-
-    }
-
-
-    .news-list-excerpt {
-
-      margin:
-        0 0 9px;
-
-      color:
-        var(--news-muted);
-
-      font-size:
-        12px;
-
-      line-height:
-        1.65;
-
-    }
-
-
-    .news-sidebar {
-
-      display:
-        grid;
-
-      gap:
-        15px;
-
-    }
-
-
-    .news-side-card {
-
-      padding:
-        19px;
-
-      border:
-        1px solid
-        var(--news-border);
-
-      border-radius:
-        18px;
-
-      background:
-        #fff;
-
-      box-shadow:
-        0 14px 40px
-        rgba(20,32,54,.08);
-
-    }
-
-
-    .news-side-title {
-
-      margin:
-        0 0 14px;
-
-      font-size:
-        16px;
-
-      letter-spacing:
-        -.02em;
-
-    }
-
-
-    .news-most-read {
-
-      display:
-        grid;
-
-      gap:
-        10px;
-
-    }
-
-
-    .news-most-read-item {
-
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         30px
         minmax(0,1fr);
 
       gap:
-        10px;
+        0.7rem;
 
-      align-items:
-        start;
-
-      padding-bottom:
-        10px;
+      padding:
+        0.85rem 0;
 
       border-bottom:
         1px solid
-        var(--news-border);
+        var(--bs-border-color);
+    }
 
+    .most-read-item:last-child {
+      border-bottom: 0;
+    }
+
+    .most-read-number {
+
+      color:
+        var(--bs-primary);
+
+      font-size:
+        0.8rem;
+
+      font-weight:
+        800;
+    }
+
+    .most-read-title {
+
+      color:
+        var(--bs-body-color);
+
+      text-decoration:
+        none;
+
+      font-size:
+        0.82rem;
+
+      font-weight:
+        650;
+
+      line-height:
+        1.35;
+    }
+
+    .most-read-title:hover {
+      color:
+        var(--bs-primary);
     }
 
 
-    .news-most-read-item:last-child {
+    /* =========================================================
+       COMMUNITY CALENDAR
+    ========================================================== */
 
-      padding-bottom:
-        0;
-
-      border-bottom:
-        0;
-
-    }
-
-
-    .news-most-read-number {
-
-      width:
-        28px;
-
-      height:
-        28px;
+    .calendar-item {
 
       display:
-        inline-flex;
+        grid;
+
+      grid-template-columns:
+        54px
+        minmax(0,1fr);
+
+      gap:
+        0.8rem;
+
+      padding:
+        0.8rem 0;
+
+      border-bottom:
+        1px solid
+        var(--bs-border-color);
+    }
+
+    .calendar-item:last-child {
+      border-bottom: 0;
+    }
+
+    .calendar-date {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
 
       align-items:
         center;
@@ -1908,185 +1371,42 @@
       justify-content:
         center;
 
+      min-height:
+        54px;
+
+      border:
+        1px solid
+        var(--bs-border-color);
+
       border-radius:
-        9px;
+        0.75rem;
 
       background:
-        var(--news-primary-soft);
-
-      color:
-        var(--news-primary);
-
-      font-size:
-        11px;
-
-      font-weight:
-        900;
-
+        var(--bs-tertiary-bg);
     }
 
-
-    .news-most-read-title {
-
-      margin:
-        0;
+    .calendar-date-month {
 
       color:
-        #344257;
+        var(--bs-primary);
 
       font-size:
-        12px;
+        0.65rem;
+
+      font-weight:
+        800;
+    }
+
+    .calendar-date-day {
+
+      font-size:
+        1.15rem;
 
       font-weight:
         800;
 
       line-height:
-        1.45;
-
-    }
-
-
-    /* =========================================================
-       CALENDAR
-    ========================================================== */
-
-    .news-calendar {
-
-      display:
-        grid;
-
-      gap:
-        10px;
-
-    }
-
-
-    .news-event {
-
-      display:
-        grid;
-
-      grid-template-columns:
-        58px
-        minmax(0,1fr);
-
-      gap:
-        11px;
-
-      align-items:
-        center;
-
-      padding:
-        11px;
-
-      border:
-        1px solid
-        var(--news-border);
-
-      border-radius:
-        13px;
-
-      background:
-        var(--news-surface-2);
-
-    }
-
-
-    .news-event-date {
-
-      display:
-        grid;
-
-      place-items:
-        center;
-
-      min-height:
-        55px;
-
-      border-radius:
-        11px;
-
-      background:
-        #fff;
-
-      border:
-        1px solid
-        var(--news-border);
-
-      text-align:
-        center;
-
-    }
-
-
-    .news-event-date strong {
-
-      display:
-        block;
-
-      font-size:
-        17px;
-
-      line-height:
         1;
-
-    }
-
-
-    .news-event-date span {
-
-      margin-top:
-        4px;
-
-      color:
-        var(--news-primary);
-
-      font-size:
-        9px;
-
-      font-weight:
-        900;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        .08em;
-
-    }
-
-
-    .news-event-title {
-
-      margin:
-        0 0 4px;
-
-      color:
-        var(--news-ink);
-
-      font-size:
-        12px;
-
-      font-weight:
-        850;
-
-      line-height:
-        1.4;
-
-    }
-
-
-    .news-event-meta {
-
-      margin:
-        0;
-
-      color:
-        var(--news-muted);
-
-      font-size:
-        10px;
-
     }
 
 
@@ -2094,142 +1414,43 @@
        NEWSLETTER
     ========================================================== */
 
-    .news-newsletter {
-
-      position:
-        relative;
-
-      overflow:
-        hidden;
-
-      margin-top:
-        74px;
+    .newsletter-box {
 
       padding:
-        40px;
+        2.25rem;
 
       border-radius:
-        24px;
+        1rem;
 
       background:
-        radial-gradient(
-          circle at 88% 20%,
-          rgba(255,255,255,.13),
-          transparent 28%
-        ),
-        linear-gradient(
-          135deg,
-          #123b70 0%,
-          #174a8b 65%,
-          #1e5ba5 100%
-        );
+        var(--news-blue);
 
       color:
         #fff;
-
-      box-shadow:
-        0 24px 70px
-        rgba(20,32,54,.14);
-
     }
 
-
-    .news-newsletter-grid {
-
-      position:
-        relative;
-
-      z-index:
-        2;
-
-      display:
-        grid;
-
-      grid-template-columns:
-        minmax(0,1fr)
-        minmax(300px,.8fr);
-
-      gap:
-        28px;
-
-      align-items:
-        center;
-
+    .newsletter-box h2 {
+      color: #fff;
     }
 
-
-    .news-newsletter h2 {
-
-      margin:
-        0 0 10px;
-
+    .newsletter-box p {
       color:
-        #fff;
-
-      font-size:
-        clamp(
-          27px,
-          3vw,
-          40px
-        );
-
-      line-height:
-        1.05;
-
-      letter-spacing:
-        -.035em;
-
+        rgba(255,255,255,0.80);
     }
 
-
-    .news-newsletter p {
-
-      max-width:
-        650px;
-
-      margin:
-        0;
-
-      color:
-        rgba(255,255,255,.76);
-
-      font-size:
-        13px;
-
-      line-height:
-        1.7;
-
-    }
-
-
-    .news-newsletter-form {
+    .newsletter-form {
 
       display:
         flex;
 
       gap:
-        9px;
+        0.65rem;
 
-      padding:
-        7px;
-
-      border:
-        1px solid
-        rgba(255,255,255,.17);
-
-      border-radius:
-        14px;
-
-      background:
-        rgba(255,255,255,.08);
-
-      backdrop-filter:
-        blur(8px);
-
+      max-width:
+        620px;
     }
 
-
-    .news-newsletter-form input {
+    .newsletter-form input {
 
       min-width:
         0;
@@ -2238,75 +1459,153 @@
         1;
 
       border:
-        0;
+        1px solid
+        rgba(255,255,255,0.25);
+
+      border-radius:
+        0.65rem;
+
+      padding:
+        0.8rem 0.95rem;
+
+      background:
+        rgba(255,255,255,0.10);
+
+      color:
+        #fff;
 
       outline:
-        0;
-
-      padding:
-        11px 12px;
-
-      border-radius:
-        9px;
-
-      background:
-        rgba(255,255,255,.08);
-
-      color:
-        #fff;
-
-      font-size:
-        12px;
-
+        none;
     }
 
+    .newsletter-form input::placeholder {
 
-    .news-newsletter-form button {
+      color:
+        rgba(255,255,255,0.62);
+    }
 
-      border:
-        0;
+    .newsletter-form input:focus {
 
-      padding:
-        0 16px;
+      border-color:
+        rgba(255,255,255,0.65);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(255,255,255,0.10);
+    }
+
+    .newsletter-form button {
+
+      flex:
+        0 0 auto;
+
+      border: 0;
 
       border-radius:
-        9px;
+        0.65rem;
+
+      padding:
+        0.8rem 1rem;
 
       background:
         #fff;
 
       color:
-        var(--news-primary-dark);
-
-      font-size:
-        12px;
+        var(--news-blue);
 
       font-weight:
-        900;
+        750;
 
       cursor:
         pointer;
-
     }
 
 
     /* =========================================================
-       MODAL IMAGE
+       STORY MODAL
     ========================================================== */
 
     .news-modal-image {
 
-      width:
-        100%;
+      width: 100%;
 
-      aspect-ratio:
-        16 / 7;
+      max-height:
+        360px;
 
       object-fit:
         cover;
 
-      display:
-        block;
+      border-radius:
+        0.85rem;
+    }
+
+
+    /* =========================================================
+       FOOTER
+       Matches index.html
+    ========================================================== */
+
+    .site-footer a {
+
+      color:
+        var(--bs-secondary-color);
+
+      text-decoration:
+        none;
+    }
+
+    .site-footer a:hover {
+
+      color:
+        var(--bs-primary);
+    }
+
+    .site-footer .brand-mark {
+
+      width: 30px;
+      height: 30px;
+
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 8px;
+
+      background:
+        var(--bs-primary);
+
+      color:
+        #fff;
+
+      font-size: 0.85rem;
+
+      font-weight: 800;
+    }
+
+
+    /* =========================================================
+       DARK MODE
+    ========================================================== */
+
+    [data-bs-theme="dark"] {
+
+      .news-feature-card,
+      .news-hero-slide {
+        background: #020617;
+      }
+
+      .community-story-card,
+      .news-small-card,
+      .news-sidebar-card {
+        background:
+          var(--bs-body-bg);
+      }
+
+      .news-soft {
+        background:
+          rgba(59,130,246,0.14);
+      }
 
     }
 
@@ -2315,73 +1614,32 @@
        RESPONSIVE
     ========================================================== */
 
-    @media (max-width: 1100px) {
-
-      .news-feature-grid {
-
-        grid-template-columns:
-          repeat(
-            2,
-            minmax(0,1fr)
-          );
-
-      }
-
-    }
-
-
     @media (max-width: 991.98px) {
 
-      .news-hero {
-
-        min-height:
-          590px;
-
-      }
-
-      .news-slide {
-
-        grid-template-columns:
-          1fr;
-
-      }
-
-      .news-slide-image {
-
-        position:
-          absolute;
-
-        inset:
-          0;
-
-        opacity:
-          .43;
-
-      }
-
-      .news-slide-copy {
-
-        min-height:
-          590px;
-
+      .news-section {
         padding:
-          42px 34px 84px;
-
-        background:
-          linear-gradient(
-            125deg,
-            rgba(10,31,59,.98),
-            rgba(17,57,102,.78)
-          );
-
+          3rem 0;
       }
 
-      .newsroom-grid,
-      .news-newsletter-grid {
+      .news-hero-slide {
+        height:
+          390px;
+      }
 
+      .news-hero-content {
+        padding:
+          2rem 1.25rem;
+      }
+
+      .latest-story {
         grid-template-columns:
-          1fr;
+          150px
+          minmax(0,1fr);
+      }
 
+      .latest-story-image {
+        width: 150px;
+        height: 105px;
       }
 
     }
@@ -2389,84 +1647,144 @@
 
     @media (max-width: 767.98px) {
 
-      .news-hero-wrap {
-
-        padding-top:
-          18px;
-
-      }
-
-      .news-hero,
-      .news-slide-copy {
-
-        min-height:
-          620px;
-
-      }
-
-      .news-slide-copy {
-
-        padding:
-          34px 23px 85px;
-
-      }
-
-      .news-slide h1 {
-
-        font-size:
-          38px;
-
-      }
-
-      .news-slide p {
-
-        font-size:
-          14px;
-
-      }
-
-      .news-feature-grid {
-
-        grid-template-columns:
-          1fr;
-
-      }
-
-      .news-list-card {
-
-        grid-template-columns:
-          1fr;
-
-      }
-
-      .news-list-media {
-
-        min-height:
-          200px;
-
-      }
-
-      .news-newsletter {
-
-        padding:
-          28px 22px;
-
-      }
-
-      .news-newsletter-form {
+      .news-notice-inner {
+        align-items:
+          flex-start;
 
         flex-direction:
           column;
 
+        gap:
+          0.45rem;
       }
 
-      .news-newsletter-form button {
+      .news-hero-slide {
+        height:
+          380px;
+      }
 
+      .news-hero-content {
+        padding:
+          1.4rem 1rem 2.8rem;
+      }
+
+      .news-hero-title {
+        font-size:
+          clamp(
+            1.65rem,
+            8vw,
+            2.25rem
+          );
+      }
+
+      .news-hero-description {
+        font-size:
+          0.86rem;
+      }
+
+      .news-slide-arrow {
+
+        width: 36px;
+        height: 36px;
+      }
+
+      .news-slide-arrow.prev {
+        left:
+          9px;
+      }
+
+      .news-slide-arrow.next {
+        right:
+          9px;
+      }
+
+      .news-hero-footer {
+        bottom:
+          0.8rem;
+      }
+
+      .news-feature-card,
+      .news-feature-content {
         min-height:
-          42px;
-
+          340px;
       }
 
+      .news-feature-content {
+        padding:
+          1.35rem;
+      }
+
+      .community-story-card {
+
+        flex-basis:
+          82vw;
+
+        width:
+          82vw;
+
+        min-width:
+          82vw;
+      }
+
+      .community-story-rail {
+        gap:
+          0.8rem;
+
+        padding-bottom:
+          0.75rem;
+      }
+
+      .latest-story {
+
+        grid-template-columns:
+          1fr;
+
+        gap:
+          0.75rem;
+      }
+
+      .latest-story-image {
+
+        width: 100%;
+
+        height:
+          180px;
+      }
+
+      .newsletter-box {
+        padding:
+          1.4rem;
+      }
+
+      .newsletter-form {
+
+        flex-direction:
+          column;
+      }
+
+      .newsletter-form button {
+        width:
+          100%;
+      }
+
+    }
+
+
+    /* =========================================================
+       ACCESSIBILITY
+    ========================================================== */
+
+    .news-slide-arrow:focus-visible,
+    .news-hero-dot:focus-visible,
+    .community-slider-button:focus-visible,
+    .news-topic:focus-visible {
+
+      outline:
+        2px solid
+        var(--bs-primary);
+
+      outline-offset:
+        3px;
     }
 
   </style>
@@ -2490,14 +1808,15 @@
 
 
   <!-- =========================================================
-       SHARED HEADER
+       SHARED SITE HEADER
+       Same header as index.html
   ========================================================== -->
 
   <div id="siteHeader"></div>
 
 
   <!-- =========================================================
-       NEWS NOTICE
+       COMMUNITY NEWS NOTICE
   ========================================================== -->
 
   <div class="news-notice">
@@ -2519,15 +1838,8 @@
 
         </div>
 
-
-        <span class="news-sample-badge">
-
-          <span
-            aria-hidden="true"
-          ></span>
-
+        <span class="news-notice-badge">
           Community stories &amp; local updates
-
         </span>
 
       </div>
@@ -2538,295 +1850,321 @@
 
 
   <!-- =========================================================
-       HERO
+       HERO CAROUSEL
   ========================================================== -->
 
-  <div class="news-hero-wrap">
+  <section
+    class="news-hero"
+    aria-label="Featured community stories"
+  >
 
-    <div class="container">
-
-      <section
-        class="news-hero"
-        aria-label="Featured community stories"
-      >
-
-
-        <!-- SLIDE 1 -->
-
-        <article
-          class="news-slide news-slide-1 is-active"
-          data-slide="0"
-        >
-
-          <div class="news-slide-copy">
-
-            <div>
-
-              <div class="news-slide-kicker">
-                Community News
-              </div>
-
-              <h1>
-                Stories, events and updates from our community.
-              </h1>
-
-              <p>
-                Stay connected with the Nigerian community in
-                Northampton through local news, community stories,
-                business updates, events and useful information.
-              </p>
-
-              <div class="news-slide-meta">
-
-                <span>
-                  Nigerians in Northampton
-                </span>
-
-                <span>
-                  Community News
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
+    <div
+      class="news-hero-track"
+      id="newsHeroTrack"
+      tabindex="0"
+    >
 
 
-          <div class="news-slide-image"></div>
+      <!-- =====================================================
+           HERO 1 — INDEPENDENCE DAY CARNIVAL
+      ====================================================== -->
 
-        </article>
+      <article class="news-hero-slide">
 
+        <img
+  class="news-hero-image"
+  src="img/nigerian-independence-parade.jpg"
+  alt="Nigerian Independence Day Parade"
+  width="1920"
+  height="1080"
+  loading="eager"
+  referrerpolicy="no-referrer"
+>
 
-        <!-- SLIDE 2 -->
+        <div class="news-hero-content">
 
-        <article
-          class="news-slide news-slide-2"
-          data-slide="1"
-        >
+          <div class="news-hero-content-inner">
 
-          <div class="news-slide-copy">
+            <span class="news-hero-chip">
+              Events
+            </span>
 
-            <div>
+            <h1 class="news-hero-title">
+              NIGERIAN INDEPENDENCE DAY CARNIVAL 2026
+            </h1>
 
-              <div class="news-slide-kicker">
-                Local Business
-              </div>
+            <p class="news-hero-description">
+              Join Nigerians and friends of Nigeria in Northampton
+              for a colourful community carnival celebrating Nigeria's
+              Independence Day, with music, culture, food, family
+              activities and an opportunity to connect with the community.
+            </p>
 
-              <h1>
-                Discover Nigerian-owned businesses in Northampton.
-              </h1>
+            <div class="news-hero-meta">
 
-              <p>
-                Find businesses, services and professionals serving
-                Nigerians and the wider community across Northampton.
-              </p>
+              <span>
+                Sunday, October 4, 2026
+              </span>
 
-              <div class="news-slide-meta">
-
-                <span>
-                  Business Directory
-                </span>
-
-                <span>
-                  Explore local businesses
-                </span>
-
-              </div>
+              <span>
+                Community Centre, Abington
+              </span>
 
             </div>
 
           </div>
-
-
-          <div class="news-slide-image"></div>
-
-        </article>
-
-
-        <!-- SLIDE 3 -->
-
-        <article
-          class="news-slide news-slide-3"
-          data-slide="2"
-        >
-
-          <div class="news-slide-copy">
-
-            <div>
-
-              <div class="news-slide-kicker">
-                Newcomer's Guide
-              </div>
-
-              <h1>
-                New to Northampton? Start here.
-              </h1>
-
-              <p>
-                Find useful local information, services and community
-                connections to help make settling into Northampton easier.
-              </p>
-
-              <div class="news-slide-meta">
-
-                <span>
-                  Northampton
-                </span>
-
-                <span>
-                  Useful information
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="news-slide-image"></div>
-
-        </article>
-
-
-        <!-- HERO CONTROLS -->
-
-        <div
-          class="news-slide-controls"
-          id="newsSlideControls"
-        ></div>
-
-
-        <div class="news-slider-arrows">
-
-          <button
-            type="button"
-            class="news-slider-button"
-            id="newsPrev"
-            aria-label="Previous story"
-          >
-            &#10094;
-          </button>
-
-          <button
-            type="button"
-            class="news-slider-button"
-            id="newsNext"
-            aria-label="Next story"
-          >
-            &#10095;
-          </button>
 
         </div>
 
-      </section>
+      </article>
+
+
+      <!-- =====================================================
+           HERO 2 — BUSINESS
+      ====================================================== -->
+
+      <article class="news-hero-slide">
+
+        <img
+          class="news-hero-image"
+          src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=format&fit=crop&w=1800&q=85"
+          alt="Business professionals collaborating"
+          width="1800"
+          height="900"
+          loading="lazy"
+        >
+
+        <div class="news-hero-content">
+
+          <div class="news-hero-content-inner">
+
+            <span class="news-hero-chip">
+              Business
+            </span>
+
+            <h2 class="news-hero-title">
+              Local founders are turning community connections
+              into new opportunities.
+            </h2>
+
+            <p class="news-hero-description">
+              Discover Nigerian-owned businesses and services
+              helping to grow the local community and create new
+              opportunities across Northampton.
+            </p>
+
+            <div class="news-hero-meta">
+
+              <span>
+                September 22, 2026
+              </span>
+
+              <span>
+                4 min read
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- =====================================================
+           HERO 3 — NEWCOMER'S GUIDE
+      ====================================================== -->
+
+      <article class="news-hero-slide">
+
+        <img
+          class="news-hero-image"
+          src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1800&q=85"
+          alt="Newspaper and community information"
+          width="1800"
+          height="900"
+          loading="lazy"
+        >
+
+        <div class="news-hero-content">
+
+          <div class="news-hero-content-inner">
+
+            <span class="news-hero-chip">
+              Newcomer's Guide
+            </span>
+
+            <h2 class="news-hero-title">
+              Starting fresh in Northampton?
+              Here are the first local things to know.
+            </h2>
+
+            <p class="news-hero-description">
+              A practical starting point for finding local
+              services, getting settled and connecting with
+              the Nigerian community.
+            </p>
+
+            <div class="news-hero-meta">
+
+              <span>
+                September 19, 2026
+              </span>
+
+              <span>
+                5 min read
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
 
     </div>
 
-  </div>
+
+    <!-- HERO ARROWS -->
+
+    <div class="news-slide-controls">
+
+      <button
+        class="news-slide-arrow prev"
+        type="button"
+        id="newsHeroPrev"
+        aria-label="Previous featured story"
+      >
+
+        <svg
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m10 3-5 5 5 5"/>
+        </svg>
+
+      </button>
+
+
+      <button
+        class="news-slide-arrow next"
+        type="button"
+        id="newsHeroNext"
+        aria-label="Next featured story"
+      >
+
+        <svg
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m6 3 5 5-5 5"/>
+        </svg>
+
+      </button>
+
+    </div>
+
+
+    <!-- HERO DOTS -->
+
+    <div class="news-hero-footer">
+
+      <div
+        class="news-hero-dots"
+        id="newsHeroDots"
+      ></div>
+
+    </div>
+
+  </section>
 
 
   <!-- =========================================================
-       MAIN CONTENT
+       TOPICS
   ========================================================== -->
+
+  <nav
+    class="news-topics"
+    aria-label="News topics"
+  >
+
+    <div class="container">
+
+      <div class="news-topics-inner">
+
+        <a
+          class="news-topic"
+          href="#community"
+        >
+          Community
+        </a>
+
+        <a
+          class="news-topic"
+          href="#business"
+        >
+          Business
+        </a>
+
+        <a
+          class="news-topic"
+          href="#events"
+        >
+          Events
+        </a>
+
+        <a
+          class="news-topic"
+          href="#local-life"
+        >
+          Local Life
+        </a>
+
+        <a
+          class="news-topic"
+          href="#newcomers"
+        >
+          Newcomer's Guide
+        </a>
+
+        <a
+          class="news-topic"
+          href="#opportunities"
+        >
+          Opportunities
+        </a>
+
+        <a
+          class="news-topic"
+          href="#northampton"
+        >
+          Northampton
+        </a>
+
+      </div>
+
+    </div>
+
+  </nav>
+
 
   <main id="main">
 
 
     <!-- =======================================================
-         TOPICS
-    ======================================================== -->
-
-    <section class="news-section">
-
-      <div class="container">
-
-        <div class="news-section-head">
-
-          <div>
-
-            <p class="news-section-kicker">
-              Explore
-            </p>
-
-            <h2 class="news-section-title">
-              Browse community topics
-            </h2>
-
-            <p class="news-section-subtitle">
-              Find stories, information and updates that matter
-              to Nigerians in Northampton.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <nav
-          class="news-topics"
-          aria-label="News topics"
-        >
-
-          <a
-            class="news-topic is-active"
-            href="#community"
-          >
-            Community
-          </a>
-
-          <a
-            class="news-topic"
-            href="#business"
-          >
-            Business
-          </a>
-
-          <a
-            class="news-topic"
-            href="#events"
-          >
-            Events
-          </a>
-
-          <a
-            class="news-topic"
-            href="#local-life"
-          >
-            Local Life
-          </a>
-
-          <a
-            class="news-topic"
-            href="#newcomers"
-          >
-            Newcomer's Guide
-          </a>
-
-          <a
-            class="news-topic"
-            href="#opportunities"
-          >
-            Opportunities
-          </a>
-
-          <a
-            class="news-topic"
-            href="#northampton"
-          >
-            Northampton
-          </a>
-
-        </nav>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
-         FEATURED STORIES
+         EDITOR'S PICKS
     ======================================================== -->
 
     <section
@@ -2836,198 +2174,173 @@
 
       <div class="container">
 
-        <div class="news-section-head">
+        <div class="news-section-heading">
 
-          <div>
+          <p class="eyebrow fs-sm fg-primary mb-2">
+            Editor's picks
+          </p>
 
-            <p class="news-section-kicker">
-              Editor's picks
-            </p>
+          <h2>
+            Stories worth catching up on
+          </h2>
 
-            <h2 class="news-section-title">
-              Stories worth catching up on
-            </h2>
-
-            <p class="news-section-subtitle">
-              Community stories, useful information and updates
-              from Northampton.
-            </p>
-
-          </div>
+          <p>
+            Community stories, local events and useful updates
+            for Nigerian Community in Northamptonampton.
+          </p>
 
         </div>
 
 
-        <div class="news-feature-grid">
+        <div class="row g-4">
 
 
-          <!-- FEATURE 1 -->
+          <!-- FEATURED CARNIVAL -->
 
-          <article class="news-card">
+          <div class="lg:col-7">
 
-            <div class="news-card-media">
+            <article
+              class="news-feature-card news-open-story"
+              role="button"
+              tabindex="0"
+              data-category="Events"
+              data-title="Nigerian Independence Day Carnival 2026"
+              data-image="https://commons.wikimedia.org/wiki/Special:FilePath/CGI_Nigeria_Flag.png"
+              data-copy="Join Nigerians and friends of Nigeria in Northampton for a colourful community carnival celebrating Nigeria's Independence Day. The event takes place on Sunday, October 4, 2026 at the Community Centre, Abington, bringing together families, friends and members of the Nigerian community for music, culture, food and community connection."
+            >
 
               <img
-                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1500&q=85"
-                alt="People gathered together at a community event"
+                class="news-feature-image"
+                src="img/CGI_Nigeria_Flag-optimized.jpg"
+                alt="Nigerian flag waving for Nigerian Independence Day"
                 loading="lazy"
+                referrerpolicy="no-referrer"
               >
 
-            </div>
+              <div class="news-feature-content">
 
-
-            <div class="news-card-body">
-
-              <span class="news-tag">
-                Community
-              </span>
-
-              <h3 class="news-card-title">
-
-                <a href="#">
-
-                  Connecting Nigerians and building community
-                  in Northampton
-
-                </a>
-
-              </h3>
-
-              <p class="news-card-excerpt">
-                The Nigerian community continues to create
-                opportunities for people to connect, share
-                information and support one another.
-              </p>
-
-              <div class="news-card-meta">
-
-                <span>
-                  Community
+                <span class="news-hero-chip">
+                  Events
                 </span>
 
-                <span>
-                  September 2026
-                </span>
+                <h3 class="mb-2">
+                  NIGERIAN INDEPENDENCE DAY CARNIVAL 2026
+                </h3>
+
+                <p class="mb-3">
+                  A colourful community carnival celebrating
+                  Nigeria's Independence Day, bringing Nigerians
+                  and friends of Nigeria together in Northampton.
+                </p>
+
+                <div class="news-feature-meta">
+
+                  Sunday, October 4, 2026
+                  &nbsp; · &nbsp;
+                  Community Centre, Abington
+
+                </div>
 
               </div>
 
-            </div>
+            </article>
 
-          </article>
+          </div>
 
 
-          <!-- FEATURE 2 -->
+          <!-- BUSINESS -->
 
-          <article
-            class="news-card"
-            id="business"
-          >
+          <div class="md:col-6 lg:col-5">
 
-            <div class="news-card-media">
+            <article
+              class="news-small-card news-open-story"
+              role="button"
+              tabindex="0"
+              data-category="Business"
+              data-title="Local founders are turning community connections into new opportunities."
+              data-image="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=format&fit=crop&w=1200&q=85"
+              data-copy="Nigerian-owned businesses and professionals continue to build connections across Northampton, creating opportunities for customers, entrepreneurs and members of the wider community."
+            >
 
               <img
-                src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85"
-                alt="People working together in an office"
+                class="news-small-image"
+                src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=format&fit=crop&w=1200&q=85"
+                alt="Business professionals collaborating"
                 loading="lazy"
               >
 
-            </div>
+              <div class="news-small-content">
 
-
-            <div class="news-card-body">
-
-              <span class="news-tag">
-                Business
-              </span>
-
-              <h3 class="news-card-title">
-
-                <a href="#">
-
-                  Nigerian businesses making an impact
-                  across Northampton
-
-                </a>
-
-              </h3>
-
-              <p class="news-card-excerpt">
-                Discover local businesses, services and
-                professionals through the community directory.
-              </p>
-
-              <div class="news-card-meta">
-
-                <span>
+                <span class="news-category mb-3">
                   Business
                 </span>
 
-                <span>
+                <h3 class="mb-2">
+                  Local founders are turning community connections into new opportunities.
+                </h3>
+
+                <p class="mb-3">
+                  Discover local businesses, services and
+                  opportunities across the Nigerian community.
+                </p>
+
+                <span class="fs-xs fg-3 mt-auto">
                   September 2026
                 </span>
 
               </div>
 
-            </div>
+            </article>
 
-          </article>
+          </div>
 
 
-          <!-- FEATURE 3 -->
+          <!-- NEWCOMER -->
 
-          <article
-            class="news-card"
-            id="newcomers"
-          >
+          <div class="md:col-6 lg:col-5">
 
-            <div class="news-card-media">
+            <article
+              class="news-small-card news-open-story"
+              role="button"
+              tabindex="0"
+              data-category="Newcomer's Guide"
+              data-title="Starting fresh in Northampton? Here are the first local things to know."
+              data-image="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1200&q=85"
+              data-copy="A practical starting point for new arrivals looking for local services, information, community connections and useful resources across Northampton."
+            >
 
               <img
-                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=85"
-                alt="Students and young people learning together"
+                class="news-small-image"
+                src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1200&q=85"
+                alt="Newspaper and community information"
                 loading="lazy"
               >
 
-            </div>
+              <div class="news-small-content">
 
-
-            <div class="news-card-body">
-
-              <span class="news-tag">
-                Newcomer's Guide
-              </span>
-
-              <h3 class="news-card-title">
-
-                <a href="#">
-
-                  New to Northampton?
-                  Here are some useful places to start.
-
-                </a>
-
-              </h3>
-
-              <p class="news-card-excerpt">
-                Useful information for finding services,
-                community connections and everyday support.
-              </p>
-
-              <div class="news-card-meta">
-
-                <span>
-                  Guide
+                <span class="news-category mb-3">
+                  Newcomer's Guide
                 </span>
 
-                <span>
+                <h3 class="mb-2">
+                  Starting fresh in Northampton?
+                  Here are the first local things to know.
+                </h3>
+
+                <p class="mb-3">
+                  Useful local information for Nigerians settling
+                  into Northampton and getting connected.
+                </p>
+
+                <span class="fs-xs fg-3 mt-auto">
                   September 2026
                 </span>
 
               </div>
 
-            </div>
+            </article>
 
-          </article>
+          </div>
 
         </div>
 
@@ -3037,53 +2350,82 @@
 
 
     <!-- =======================================================
-         COMMUNITY STORIES SLIDER
+         MORE FROM THE COMMUNITY
+         WORKING HORIZONTAL SCROLLER
     ======================================================== -->
 
     <section
-      class="news-section"
+      class="news-section bg-soft"
       id="local-life"
     >
 
       <div class="container">
 
-        <div class="news-section-head">
+        <div
+          class="d-flex flex-wrap justify-content-between
+                 align-items-end gap-3 mb-3"
+        >
 
-          <div>
+          <div class="news-section-heading mb-0">
 
-            <p class="news-section-kicker">
+            <p class="eyebrow fs-sm fg-primary mb-2">
               Around Northampton
             </p>
 
-            <h2 class="news-section-title">
+            <h2>
               More from the community
             </h2>
 
-            <p class="news-section-subtitle">
+            <p>
               Food, culture, opportunities, education and local life.
             </p>
 
           </div>
 
 
-          <div class="news-strip-controls">
+          <div class="community-slider-controls">
 
             <button
+              class="community-slider-button"
               type="button"
-              class="news-strip-button"
               id="communityPrev"
               aria-label="Previous community stories"
             >
-              &#10094;
+
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m10 3-5 5 5 5"/>
+              </svg>
+
             </button>
 
+
             <button
+              class="community-slider-button"
               type="button"
-              class="news-strip-button"
               id="communityNext"
               aria-label="Next community stories"
             >
-              &#10095;
+
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m6 3 5 5-5 5"/>
+              </svg>
+
             </button>
 
           </div>
@@ -3091,189 +2433,175 @@
         </div>
 
 
-        <div class="news-story-strip">
+        <div class="community-slider">
 
-          <div
-            class="news-story-track"
-            id="communityRail"
-          >
+          <div class="community-slider-viewport">
+
+            <div
+              class="community-story-rail"
+              id="communityStoryRail"
+              tabindex="0"
+              aria-label="More community stories"
+            >
 
 
-            <article class="news-story-mini">
+              <!-- FOOD -->
 
-              <div class="news-story-mini-media">
+              <article class="community-story-card">
 
                 <img
+                  class="community-story-image"
                   src="https://images.pexels.com/photos/13915043/pexels-photo-13915043.jpeg?auto=format&fit=crop&w=1000&q=85"
-                  alt="Nigerian food"
+                  alt="Nigerian jollof rice with grilled chicken"
                   loading="lazy"
                 >
 
-              </div>
+                <div class="community-story-body">
 
-              <div class="news-story-mini-body">
+                  <span class="news-category mb-3">
+                    Food &amp; Culture
+                  </span>
 
-                <span class="news-tag">
-                  Food &amp; Culture
-                </span>
+                  <h3>
+                    Where to find Nigerian food and groceries in Northampton
+                  </h3>
 
-                <h3 class="news-story-mini-title">
-                  <a href="#">
-                    Where to find Nigerian food and groceries
-                    in Northampton
-                  </a>
-                </h3>
+                  <p class="mb-0">
+                    Explore local food businesses, restaurants and
+                    services serving familiar Nigerian favourites.
+                  </p>
 
-                <p class="news-story-mini-excerpt">
-                  Explore local food businesses, restaurants and
-                  services serving familiar Nigerian favourites.
-                </p>
+                </div>
 
-              </div>
-
-            </article>
+              </article>
 
 
-            <article class="news-story-mini">
+              <!-- OPPORTUNITIES -->
 
-              <div class="news-story-mini-media">
+              <article class="community-story-card">
 
                 <img
+                  class="community-story-image"
                   src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=format&fit=crop&w=1000&q=85"
-                  alt="Business professionals"
+                  alt="Professionals discussing opportunities"
                   loading="lazy"
                 >
 
-              </div>
+                <div class="community-story-body">
 
-              <div class="news-story-mini-body">
+                  <span class="news-category mb-3">
+                    Opportunities
+                  </span>
 
-                <span class="news-tag">
-                  Opportunities
-                </span>
+                  <h3>
+                    Finding work and professional opportunities locally
+                  </h3>
 
-                <h3 class="news-story-mini-title">
-                  <a href="#">
-                    Finding work and professional opportunities
-                    locally
-                  </a>
-                </h3>
+                  <p class="mb-0">
+                    Useful ideas for building professional connections
+                    and discovering opportunities in Northampton.
+                  </p>
 
-                <p class="news-story-mini-excerpt">
-                  Useful ideas for building professional connections
-                  and discovering opportunities in Northampton.
-                </p>
+                </div>
 
-              </div>
-
-            </article>
+              </article>
 
 
-            <article class="news-story-mini">
+              <!-- EDUCATION -->
 
-              <div class="news-story-mini-media">
+              <article class="community-story-card">
 
                 <img
+                  class="community-story-image"
                   src="https://images.pexels.com/photos/4560083/pexels-photo-4560083.jpeg?auto=format&fit=crop&w=1000&q=85"
                   alt="Students studying together"
                   loading="lazy"
                 >
 
-              </div>
+                <div class="community-story-body">
 
-              <div class="news-story-mini-body">
+                  <span class="news-category mb-3">
+                    Education
+                  </span>
 
-                <span class="news-tag">
-                  Education
-                </span>
-
-                <h3 class="news-story-mini-title">
-                  <a href="#">
+                  <h3>
                     Education and learning resources for families
-                  </a>
-                </h3>
+                  </h3>
 
-                <p class="news-story-mini-excerpt">
-                  Information about learning, schools and useful
-                  educational resources in the local area.
-                </p>
+                  <p class="mb-0">
+                    Information about learning, schools and useful
+                    educational resources in the local area.
+                  </p>
 
-              </div>
+                </div>
 
-            </article>
+              </article>
 
 
-            <article class="news-story-mini">
+              <!-- LOCAL LIFE -->
 
-              <div class="news-story-mini-media">
+              <article class="community-story-card">
 
                 <img
+                  class="community-story-image"
                   src="https://images.pexels.com/photos/32617902/pexels-photo-32617902.jpeg?auto=format&fit=crop&w=1000&q=85"
-                  alt="People spending time together"
+                  alt="People enjoying time together"
                   loading="lazy"
                 >
 
-              </div>
+                <div class="community-story-body">
 
-              <div class="news-story-mini-body">
+                  <span class="news-category mb-3">
+                    Local Life
+                  </span>
 
-                <span class="news-tag">
-                  Local Life
-                </span>
-
-                <h3 class="news-story-mini-title">
-                  <a href="#">
+                  <h3>
                     Making Northampton feel more like home
-                  </a>
-                </h3>
+                  </h3>
 
-                <p class="news-story-mini-excerpt">
-                  Discover places, activities and community
-                  connections that can help make settling in easier.
-                </p>
+                  <p class="mb-0">
+                    Discover places, activities and community connections
+                    that can help make settling in easier.
+                  </p>
 
-              </div>
+                </div>
 
-            </article>
+              </article>
 
 
-            <article
-              class="news-story-mini"
-              id="events"
-            >
+              <!-- EVENTS -->
 
-              <div class="news-story-mini-media">
+              <article class="community-story-card">
 
                 <img
-                  src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1000&q=85"
-                  alt="Community event"
+                  class="community-story-image"
+                  src="img/CGI_Nigeria_Flag-optimized.jpg"
+                  alt="Nigerian flag"
                   loading="lazy"
+                  referrerpolicy="no-referrer"
                 >
 
-              </div>
+                <div class="community-story-body">
 
-              <div class="news-story-mini-body">
+                  <span class="news-category mb-3">
+                    Events
+                  </span>
 
-                <span class="news-tag">
-                  Events
-                </span>
+                  <h3>
+                    Nigerian Independence Day Carnival 2026
+                  </h3>
 
-                <h3 class="news-story-mini-title">
+                  <p class="mb-0">
+                    Sunday, October 4 at the Community Centre,
+                    Abington. A day of culture, celebration and
+                    community connection.
+                  </p>
 
-                  <a href="#">
-                    Nigerian community events in Northampton
-                  </a>
+                </div>
 
-                </h3>
+              </article>
 
-                <p class="news-story-mini-excerpt">
-                  Stay informed about community gatherings,
-                  celebrations and upcoming events.
-                </p>
-
-              </div>
-
-            </article>
+            </div>
 
           </div>
 
@@ -3285,7 +2613,7 @@
 
 
     <!-- =======================================================
-         NEWSROOM
+         LATEST STORIES
     ======================================================== -->
 
     <section
@@ -3295,279 +2623,282 @@
 
       <div class="container">
 
-        <div class="newsroom-grid">
+        <div class="row g-5">
 
 
           <!-- STORIES -->
 
-          <div>
+          <div class="lg:col-8">
 
-            <div class="news-section-head">
+            <div class="news-section-heading">
+
+              <p class="eyebrow fs-sm fg-primary mb-2">
+                The newsroom
+              </p>
+
+              <h2>
+                Latest stories &amp; community updates
+              </h2>
+
+              <p>
+                More useful information from around Northampton.
+              </p>
+
+            </div>
+
+
+            <!-- STORY 1 -->
+
+            <article
+              class="latest-story news-open-story"
+              role="button"
+              tabindex="0"
+              data-category="Health & Wellness"
+              data-title="Looking after your health when settling into a new city"
+              data-image="https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=format&fit=crop&w=1000&q=85"
+              data-copy="Finding the right healthcare services is an important part of settling into a new community. This guide highlights useful steps and local information to help residents navigate everyday healthcare needs."
+            >
+
+              <img
+                class="latest-story-image"
+                src="https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=format&fit=crop&w=1000&q=85"
+                alt="Healthcare professional"
+                loading="lazy"
+              >
 
               <div>
 
-                <p class="news-section-kicker">
-                  The newsroom
+                <span class="news-category mb-2">
+                  Health &amp; Wellness
+                </span>
+
+                <h3>
+                  Looking after your health when settling into a new city
+                </h3>
+
+                <p>
+                  Useful information for residents getting familiar
+                  with local healthcare services.
                 </p>
 
-                <h2 class="news-section-title">
-                  Latest stories &amp; community updates
-                </h2>
-
-                <p class="news-section-subtitle">
-                  More useful information from around Northampton.
-                </p>
+                <div class="latest-story-meta">
+                  September 2026 · 4 min read
+                </div>
 
               </div>
 
-            </div>
+            </article>
 
 
-            <div class="news-list">
+            <!-- STORY 2 -->
 
+            <article
+              class="latest-story news-open-story"
+              role="button"
+              tabindex="0"
+              data-category="Work & Careers"
+              data-title="Building your professional network in Northampton"
+              data-image="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=format&fit=crop&w=1000&q=85"
+              data-copy="Professional relationships can open doors to useful information, referrals and opportunities. Community networks can be a valuable starting point for anyone building a career locally."
+            >
 
-              <article class="news-list-card">
+              <img
+                class="latest-story-image"
+                src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=format&fit=crop&w=1000&q=85"
+                alt="Professionals networking"
+                loading="lazy"
+              >
 
-                <div class="news-list-media">
+              <div>
 
-                  <img
-                    src="https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=format&fit=crop&w=1000&q=85"
-                    alt="Healthcare professional"
-                    loading="lazy"
-                  >
+                <span class="news-category mb-2">
+                  Work &amp; Careers
+                </span>
 
+                <h3>
+                  Building your professional network in Northampton
+                </h3>
+
+                <p>
+                  Practical ideas for meeting people, sharing knowledge
+                  and discovering career opportunities.
+                </p>
+
+                <div class="latest-story-meta">
+                  September 2026 · 5 min read
                 </div>
 
+              </div>
 
-                <div>
+            </article>
 
-                  <span class="news-tag">
-                    Health &amp; Wellness
-                  </span>
 
-                  <h3 class="news-list-title">
+            <!-- STORY 3 -->
 
-                    <a href="#">
-                      Looking after your health when settling
-                      into a new city
-                    </a>
+            <article
+              class="latest-story news-open-story"
+              role="button"
+              tabindex="0"
+              data-category="Northampton"
+              data-title="Useful local services every newcomer should know"
+              data-image="https://images.unsplash.com/photo-1524666041070-9c8764154a8e?auto=format&fit=crop&w=1000&q=85"
+              data-copy="From transport and local information to everyday services, knowing where to find help can make settling into Northampton easier."
+            >
 
-                  </h3>
+              <img
+                class="latest-story-image"
+                src="img/northampton-environment-optimized.jpg"
+                alt="Northampton city environment"
+                loading="lazy"
+              >
 
-                  <p class="news-list-excerpt">
-                    Useful information for residents getting
-                    familiar with local healthcare services.
-                  </p>
+              <div>
 
-                  <small>
-                    September 2026 · 4 min read
-                  </small>
+                <span class="news-category mb-2">
+                  Northampton
+                </span>
 
+                <h3>
+                  Useful local services every newcomer should know
+                </h3>
+
+                <p>
+                  A quick guide to everyday services and information
+                  that can help residents settle in.
+                </p>
+
+                <div class="latest-story-meta">
+                  September 2026 · 4 min read
                 </div>
 
-              </article>
+              </div>
+
+            </article>
 
 
-              <article class="news-list-card">
+            <!-- STORY 4 -->
 
-                <div class="news-list-media">
+            <article
+              class="latest-story news-open-story"
+              role="button"
+              tabindex="0"
+              data-category="Local Business"
+              data-title="Why adding your business to the community directory matters"
+              data-image="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=format&fit=crop&w=1000&q=85"
+              data-copy="The community directory helps residents discover Nigerian-owned businesses and services in Northampton while giving local business owners another way to reach potential customers."
+            >
 
-                  <img
-                    src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=format&fit=crop&w=1000&q=85"
-                    alt="Professionals networking"
-                    loading="lazy"
-                  >
+              <img
+                class="latest-story-image"
+                src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=format&fit=crop&w=1000&q=85"
+                alt="Business owners collaborating"
+                loading="lazy"
+              >
 
+              <div>
+
+                <span class="news-category mb-2">
+                  Local Business
+                </span>
+
+                <h3>
+                  Why adding your business to the community directory matters
+                </h3>
+
+                <p>
+                  Help people find Nigerian-owned businesses and services
+                  across Northampton.
+                </p>
+
+                <div class="latest-story-meta">
+                  September 2026 · 4 min read
                 </div>
 
+              </div>
 
-                <div>
-
-                  <span class="news-tag">
-                    Work &amp; Careers
-                  </span>
-
-                  <h3 class="news-list-title">
-
-                    <a href="#">
-                      Building your professional network
-                      in Northampton
-                    </a>
-
-                  </h3>
-
-                  <p class="news-list-excerpt">
-                    Practical ideas for meeting people,
-                    sharing knowledge and discovering opportunities.
-                  </p>
-
-                  <small>
-                    September 2026 · 5 min read
-                  </small>
-
-                </div>
-
-              </article>
-
-
-              <article class="news-list-card">
-
-                <div class="news-list-media">
-
-                  <img
-                    src="img/northampton-environment-optimized.jpg"
-                    alt="Northampton"
-                    loading="lazy"
-                  >
-
-                </div>
-
-
-                <div>
-
-                  <span class="news-tag">
-                    Northampton
-                  </span>
-
-                  <h3 class="news-list-title">
-
-                    <a href="#">
-                      Useful local services every newcomer
-                      should know
-                    </a>
-
-                  </h3>
-
-                  <p class="news-list-excerpt">
-                    A quick guide to everyday services and
-                    information that can help residents settle in.
-                  </p>
-
-                  <small>
-                    September 2026 · 4 min read
-                  </small>
-
-                </div>
-
-              </article>
-
-
-              <article class="news-list-card">
-
-                <div class="news-list-media">
-
-                  <img
-                    src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=format&fit=crop&w=1000&q=85"
-                    alt="Business professionals"
-                    loading="lazy"
-                  >
-
-                </div>
-
-
-                <div>
-
-                  <span class="news-tag">
-                    Local Business
-                  </span>
-
-                  <h3 class="news-list-title">
-
-                    <a href="#">
-                      Why adding your business to the
-                      community directory matters
-                    </a>
-
-                  </h3>
-
-                  <p class="news-list-excerpt">
-                    Help people find Nigerian-owned businesses
-                    and services across Northampton.
-                  </p>
-
-                  <small>
-                    September 2026 · 4 min read
-                  </small>
-
-                </div>
-
-              </article>
-
-            </div>
+            </article>
 
           </div>
 
 
           <!-- SIDEBAR -->
 
-          <aside class="news-sidebar">
+          <aside class="lg:col-4">
 
 
             <!-- MOST READ -->
 
-            <div class="news-side-card">
+            <div class="news-sidebar-card mb-4">
 
-              <h3 class="news-side-title">
+              <h3 class="fs-lg fw-semibold mb-2">
                 Most read this week
               </h3>
 
-
-              <div class="news-most-read">
-
-
-                <div class="news-most-read-item">
-
-                  <span class="news-most-read-number">
-                    01
-                  </span>
-
-                  <p class="news-most-read-title">
-                    Nigerian community events happening
-                    in Northampton
-                  </p>
-
-                </div>
+              <p class="fg-3 fs-xs mb-3">
+                Popular community stories and useful information.
+              </p>
 
 
-                <div class="news-most-read-item">
+              <div class="most-read-item">
 
-                  <span class="news-most-read-number">
-                    02
-                  </span>
+                <span class="most-read-number">
+                  01
+                </span>
 
-                  <p class="news-most-read-title">
-                    Discover Nigerian-owned businesses
-                    and services
-                  </p>
+                <a
+                  href="#community"
+                  class="most-read-title"
+                >
+                  Nigerian Independence Day Carnival 2026
+                </a>
 
-                </div>
-
-
-                <div class="news-most-read-item">
-
-                  <span class="news-most-read-number">
-                    03
-                  </span>
-
-                  <p class="news-most-read-title">
-                    Building professional connections
-                    in Northampton
-                  </p>
-
-                </div>
+              </div>
 
 
-                <div class="news-most-read-item">
+              <div class="most-read-item">
 
-                  <span class="news-most-read-number">
-                    04
-                  </span>
+                <span class="most-read-number">
+                  02
+                </span>
 
-                  <p class="news-most-read-title">
-                    Useful services for newcomers
-                  </p>
+                <a
+                  href="#opportunities"
+                  class="most-read-title"
+                >
+                  Building your professional network in Northampton
+                </a>
 
-                </div>
+              </div>
+
+
+              <div class="most-read-item">
+
+                <span class="most-read-number">
+                  03
+                </span>
+
+                <a
+                  href="#northampton"
+                  class="most-read-title"
+                >
+                  Useful local services every newcomer should know
+                </a>
+
+              </div>
+
+
+              <div class="most-read-item">
+
+                <span class="most-read-number">
+                  04
+                </span>
+
+                <a
+                  href="businesses.html"
+                  class="most-read-title"
+                >
+                  Discover Nigerian-owned businesses in Northampton
+                </a>
 
               </div>
 
@@ -3576,102 +2907,119 @@
 
             <!-- CALENDAR -->
 
-            <div class="news-side-card">
+            <div
+              class="news-sidebar-card"
+              id="events"
+            >
 
-              <h3 class="news-side-title">
+              <h3 class="fs-lg fw-semibold mb-2">
                 Community calendar
               </h3>
 
-
-              <div class="news-calendar">
-
-
-                <div class="news-event">
-
-                  <div class="news-event-date">
-
-                    <strong>
-                      04
-                    </strong>
-
-                    <span>
-                      Oct
-                    </span>
-
-                  </div>
+              <p class="fg-3 fs-xs mb-3">
+                Upcoming dates for the community.
+              </p>
 
 
-                  <div>
+              <!-- OCT 4 -->
 
-                    <p class="news-event-title">
-                      Nigerian Independence Day Carnival
-                    </p>
+              <div class="calendar-item">
 
-                    <p class="news-event-meta">
-                      Northampton
-                    </p>
+                <div class="calendar-date">
 
-                  </div>
+                  <span class="calendar-date-month">
+                    OCT
+                  </span>
+
+                  <span class="calendar-date-day">
+                    04
+                  </span>
 
                 </div>
 
+                <div>
 
-                <div class="news-event">
+                  <span class="news-category mb-1">
+                    Events
+                  </span>
 
-                  <div class="news-event-date">
+                  <h4 class="fs-sm fw-semibold mb-1">
+                    Nigerian Independence Day Carnival 2026
+                  </h4>
 
-                    <strong>
-                      10
-                    </strong>
-
-                    <span>
-                      Oct
-                    </span>
-
-                  </div>
-
-
-                  <div>
-
-                    <p class="news-event-title">
-                      Nigerian Community Social Evening
-                    </p>
-
-                    <p class="news-event-meta">
-                      Northampton
-                    </p>
-
-                  </div>
+                  <p class="fg-3 fs-xs mb-0">
+                    Community Centre, Abington
+                  </p>
 
                 </div>
 
-
-                <div class="news-event">
-
-                  <div class="news-event-date">
-
-                    <strong>
-                      17
-                    </strong>
-
-                    <span>
-                      Oct
-                    </span>
-
-                  </div>
+              </div>
 
 
-                  <div>
+              <!-- OCT 3 -->
 
-                    <p class="news-event-title">
-                      Community Business Networking
-                    </p>
+              <div class="calendar-item">
 
-                    <p class="news-event-meta">
-                      Northampton
-                    </p>
+                <div class="calendar-date">
 
-                  </div>
+                  <span class="calendar-date-month">
+                    OCT
+                  </span>
+
+                  <span class="calendar-date-day">
+                    03
+                  </span>
+
+                </div>
+
+                <div>
+
+                  <span class="news-category mb-1">
+                    Business
+                  </span>
+
+                  <h4 class="fs-sm fw-semibold mb-1">
+                    Nigerian Business Networking Evening
+                  </h4>
+
+                  <p class="fg-3 fs-xs mb-0">
+                    Northampton
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <!-- OCT 10 -->
+
+              <div class="calendar-item">
+
+                <div class="calendar-date">
+
+                  <span class="calendar-date-month">
+                    OCT
+                  </span>
+
+                  <span class="calendar-date-day">
+                    10
+                  </span>
+
+                </div>
+
+                <div>
+
+                  <span class="news-category mb-1">
+                    Social
+                  </span>
+
+                  <h4 class="fs-sm fw-semibold mb-1">
+                    Nigerian Community Social Evening
+                  </h4>
+
+                  <p class="fg-3 fs-xs mb-0">
+                    Northampton
+                  </p>
 
                 </div>
 
@@ -3689,44 +3037,92 @@
 
 
     <!-- =======================================================
-         COMMUNITY CTA
+         BUSINESS / STORY CTA
+    ======================================================== -->
+
+    <section class="news-section bg-soft">
+
+      <div class="container">
+
+        <div class="section-narrow text-center">
+
+          <p class="eyebrow fs-sm fg-primary mb-2">
+            Community voices
+          </p>
+
+          <h2 class="fs-3xl fw-bold mb-3">
+            Want your story featured?
+          </h2>
+
+          <p class="fs-lg fg-2 mb-4">
+            Have a community announcement, event or business update
+            you would like people in Northampton to know about?
+          </p>
+
+          <a
+            class="btn-solid theme-primary"
+            href="list-your-business.html"
+          >
+            Share Your Business
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         NEWSLETTER
     ======================================================== -->
 
     <section class="news-section">
 
       <div class="container">
 
-        <div class="news-newsletter">
+        <div class="newsletter-box">
 
-          <div class="news-newsletter-grid">
+          <div class="row g-4 align-items-center">
 
+            <div class="lg:col-6">
 
-            <div>
+              <p class="eyebrow fs-sm mb-2">
+                Stay connected
+              </p>
 
-              <h2>
-                Stay connected with the community.
+              <h2 class="fs-3xl fw-bold mb-2">
+                Get community updates
               </h2>
 
-              <p>
-                Get useful community news, events,
-                opportunities and local information.
+              <p class="mb-0">
+                Receive useful community news, events and local
+                information when they are available.
               </p>
 
             </div>
 
 
-            <div>
+            <div class="lg:col-6">
 
               <form
-                class="news-newsletter-form"
+                class="newsletter-form"
                 id="newsletterForm"
               >
+
+                <label
+                  class="visually-hidden"
+                  for="newsletterEmail"
+                >
+                  Email address
+                </label>
 
                 <input
                   type="email"
                   id="newsletterEmail"
                   placeholder="Your email address"
-                  aria-label="Your email address"
+                  autocomplete="email"
                   required
                 >
 
@@ -3738,10 +3134,13 @@
 
               </form>
 
-              <div class="news-newsletter-note">
-                Newsletter subscription will be connected
-                to the site's mailing service.
-              </div>
+              <p
+                id="newsletterMessage"
+                class="fs-xs mt-2 mb-0"
+                style="color:rgba(255,255,255,.68)"
+              >
+                Newsletter subscription is being prepared.
+              </p>
 
             </div>
 
@@ -3753,47 +3152,322 @@
 
     </section>
 
-
-    <!-- =======================================================
-         NORTHAMPTON ANCHOR
-    ======================================================== -->
-
-    <section
-      id="northampton"
-      class="news-section"
-    >
-
-      <div class="container">
-
-        <div class="visually-hidden">
-          Northampton community news and information.
-        </div>
-
-      </div>
-
-    </section>
-
-
   </main>
 
 
   <!-- =========================================================
-       SHARED FOOTER
-       Loaded by site-footer.js
+       FOOTER
+       MATCHES INDEX.HTML
   ========================================================== -->
 
-  <div id="siteFooter"></div>
+  <footer class="site-footer bg-2 py-6">
+
+    <div class="container">
+
+
+      <div class="row g-4">
+
+
+        <!-- Brand -->
+
+        <div class="lg:col-4">
+
+          <a
+            class="navbar-brand d-inline-flex align-items-center gap-2 fw-semibold mb-3"
+            href="index.html"
+          >
+
+            <span
+              class="brand-mark"
+              aria-hidden="true"
+            >
+              N
+            </span>
+
+            Nigerian Community in Northamptonampton
+
+          </a>
+
+          <p class="fg-3 fs-sm mb-0">
+            Connecting Nigerians, supporting local businesses
+            and sharing useful information across Northampton.
+          </p>
+
+        </div>
+
+
+        <!-- Community -->
+
+        <div class="sm:col-6 lg:col-2">
+
+          <h3 class="fs-sm fw-semibold mb-3">
+            Community
+          </h3>
+
+          <ul class="list-unstyled mb-0">
+
+            <li class="mb-2">
+              <a href="index.html#about">
+                About Us
+              </a>
+            </li>
+
+            <li class="mb-2">
+              <a href="news.html">
+                News
+              </a>
+            </li>
+
+            <li class="mb-2">
+              <a href="index.html#events">
+                Events
+              </a>
+            </li>
+
+            <li class="mb-2">
+              <a href="index.html#guides">
+                Newcomer's Guide
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- Businesses -->
+
+        <div class="sm:col-6 lg:col-2">
+
+          <h3 class="fs-sm fw-semibold mb-3">
+            Businesses
+          </h3>
+
+          <ul class="list-unstyled mb-0">
+
+            <li class="mb-2">
+              <a href="businesses.html">
+                Directory
+              </a>
+            </li>
+
+            <li class="mb-2">
+              <a href="businesses.html">
+                Categories
+              </a>
+            </li>
+
+            <li class="mb-2">
+              <a href="list-your-business.html">
+                List Your Business
+              </a>
+            </li>
+
+            <li class="mb-2">
+              <a href="advertise-with-us.html">
+                Advertise with us
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- Information -->
+
+        <div class="sm:col-6 lg:col-2">
+
+          <h3 class="fs-sm fw-semibold mb-3">
+            Information
+          </h3>
+
+          <ul class="list-unstyled mb-0">
+
+            <li class="mb-2">
+              <a href="index.html#about">
+                About
+              </a>
+            </li>
+
+            <li class="mb-2">
+              <a href="#">
+                Contact
+              </a>
+            </li>
+
+            <li class="mb-2">
+              <a href="#">
+                Privacy
+              </a>
+            </li>
+
+            <li class="mb-2">
+              <a href="#">
+                Terms
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- Social -->
+
+        <div class="sm:col-6 lg:col-2">
+
+          <h3 class="fs-sm fw-semibold mb-3">
+            Connect
+          </h3>
+
+          <ul class="list-unstyled mb-0">
+
+            <li class="mb-2">
+              <a href="#">
+                WhatsApp Community
+              </a>
+            </li>
+
+            <li class="mb-2">
+              <a href="#">
+                Facebook
+              </a>
+            </li>
+
+            <li class="mb-2">
+              <a href="#">
+                Instagram
+              </a>
+            </li>
+
+            <li class="mb-2">
+              <a href="#">
+                Email Us
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <hr class="my-5">
+
+
+      <div
+        class="d-flex flex-wrap justify-content-between align-items-center gap-3"
+      >
+
+        <p class="fg-3 fs-xs mb-0">
+
+          &copy;
+
+          <span data-year>
+            2026
+          </span>
+
+          Nigerian Community in Northamptonampton.
+          All rights reserved.
+
+        </p>
+
+
+        <p class="fg-3 fs-xs mb-0">
+          Community • Business • Information
+        </p>
+
+      </div>
+
+    </div>
+
+  </footer>
 
 
   <!-- =========================================================
-       BOOTSTRAP
+       STORY MODAL
+  ========================================================== -->
+
+  <div
+    class="modal fade"
+    id="newsStoryModal"
+    tabindex="-1"
+    aria-labelledby="newsStoryModalLabel"
+    aria-hidden="true"
+  >
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+      <div class="modal-content">
+
+        <div class="modal-header">
+
+          <h2
+            class="modal-title fs-4"
+            id="newsStoryModalLabel"
+          >
+            Community story
+          </h2>
+
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+          <img
+            id="newsModalImage"
+            class="news-modal-image mb-4"
+            src=""
+            alt=""
+          >
+
+          <span
+            id="newsModalCategory"
+            class="news-category mb-3"
+          >
+            Community
+          </span>
+
+          <h3
+            id="newsModalTitle"
+            class="fs-2 fw-bold mb-3"
+          >
+            Community story
+          </h3>
+
+          <p
+            id="newsModalCopy"
+            class="fg-2 mb-0"
+          >
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       BOOTSTRAP JS
   ========================================================== -->
 
   <script src="assets/vendor/bootstrap6/js/bootstrap.bundle.min.js"></script>
 
 
   <!-- =========================================================
-       NEWS PAGE JS
+       NEWS PAGE FUNCTIONALITY
   ========================================================== -->
 
   <script>
@@ -3802,233 +3476,543 @@
       "DOMContentLoaded",
       function () {
 
+
         /* =====================================================
-           HERO SLIDER
+           FOOTER YEAR
         ===================================================== */
 
-        const slides =
-          Array.from(
-            document.querySelectorAll(
-              ".news-slide"
-            )
+        document
+          .querySelectorAll("[data-year]")
+          .forEach(
+            function (element) {
+
+              element.textContent =
+                new Date().getFullYear();
+
+            }
           );
 
-        const controls =
+
+        /* =====================================================
+           HERO CAROUSEL
+        ===================================================== */
+
+        const heroTrack =
           document.getElementById(
-            "newsSlideControls"
+            "newsHeroTrack"
           );
 
-        const previousButton =
+        const heroSlides =
+          heroTrack
+            ? heroTrack.querySelectorAll(
+                ".news-hero-slide"
+              )
+            : [];
+
+        const heroPrev =
           document.getElementById(
-            "newsPrev"
+            "newsHeroPrev"
           );
 
-        const nextButton =
+        const heroNext =
           document.getElementById(
-            "newsNext"
+            "newsHeroNext"
+          );
+
+        const heroDots =
+          document.getElementById(
+            "newsHeroDots"
           );
 
 
-        let currentSlide =
-          0;
+        if (
+          heroTrack &&
+          heroSlides.length
+        ) {
 
-        let heroTimer =
-          null;
+          let currentHero =
+            0;
+
+          let heroTimer =
+            null;
+
+          let heroInteracting =
+            false;
+
+          let heroScrollTimer =
+            null;
 
 
-        function renderDots() {
+          /* ---------------------------------------------------
+             CREATE DOTS
+          --------------------------------------------------- */
 
-          if (!controls) {
-            return;
-          }
-
-          controls.innerHTML = "";
-
-          slides.forEach(
+          heroSlides.forEach(
             function (_, index) {
 
-              const button =
+              const dot =
                 document.createElement(
                   "button"
                 );
 
-              button.type =
+              dot.type =
                 "button";
 
-              button.className =
-                "news-slider-dot";
+              dot.className =
+                "news-hero-dot";
 
-              button.setAttribute(
+              dot.setAttribute(
                 "aria-label",
-                `Go to story ${index + 1}`
+                `Go to featured story ${index + 1}`
               );
 
-
-              button.addEventListener(
+              dot.addEventListener(
                 "click",
                 function () {
 
-                  goToSlide(index);
+                  goToHero(
+                    index,
+                    true
+                  );
 
                 }
               );
 
-
-              controls.appendChild(
-                button
-              );
-
-            }
-          );
-
-        }
-
-
-        function updateSlide() {
-
-          slides.forEach(
-            function (
-              slide,
-              index
-            ) {
-
-              slide.classList.toggle(
-                "is-active",
-                index === currentSlide
+              heroDots.appendChild(
+                dot
               );
 
             }
           );
 
 
-          const dots =
-            controls
-              ? controls.querySelectorAll(
-                  ".news-slider-dot"
-                )
-              : [];
+          function updateHeroUI() {
 
-
-          dots.forEach(
-            function (
-              dot,
-              index
-            ) {
-
-              dot.classList.toggle(
-                "is-active",
-                index === currentSlide
+            const dots =
+              heroDots.querySelectorAll(
+                ".news-hero-dot"
               );
 
-            }
-          );
+            dots.forEach(
+              function (
+                dot,
+                index
+              ) {
 
-        }
+                dot.classList.toggle(
+                  "is-active",
+                  index === currentHero
+                );
 
-
-        function goToSlide(
-          index
-        ) {
-
-          if (!slides.length) {
-            return;
-          }
-
-          currentSlide =
-            (
-              index +
-              slides.length
-            ) %
-            slides.length;
-
-          updateSlide();
-
-          restartHeroTimer();
-
-        }
-
-
-        function restartHeroTimer() {
-
-          if (heroTimer) {
-
-            clearInterval(
-              heroTimer
+              }
             );
 
           }
 
 
-          heroTimer =
-            setInterval(
+          function goToHero(
+            index,
+            userAction = false
+          ) {
+
+            currentHero =
+              (
+                index +
+                heroSlides.length
+              ) %
+              heroSlides.length;
+
+
+            const target =
+              heroSlides[
+                currentHero
+              ];
+
+
+            heroTrack.scrollTo(
+              {
+                left:
+                  target.offsetLeft,
+
+                behavior:
+                  "smooth"
+              }
+            );
+
+
+            updateHeroUI();
+
+
+            if (
+              userAction
+            ) {
+
+              restartHeroTimer();
+
+            }
+
+          }
+
+
+          function syncHeroIndex() {
+
+            let nearest =
+              0;
+
+            let distance =
+              Infinity;
+
+            const scrollLeft =
+              heroTrack.scrollLeft;
+
+
+            heroSlides.forEach(
+              function (
+                slide,
+                index
+              ) {
+
+                const currentDistance =
+                  Math.abs(
+                    slide.offsetLeft -
+                    scrollLeft
+                  );
+
+
+                if (
+                  currentDistance <
+                  distance
+                ) {
+
+                  distance =
+                    currentDistance;
+
+                  nearest =
+                    index;
+
+                }
+
+              }
+            );
+
+
+            currentHero =
+              nearest;
+
+            updateHeroUI();
+
+          }
+
+
+          function stopHeroTimer() {
+
+            if (
+              heroTimer
+            ) {
+
+              window.clearInterval(
+                heroTimer
+              );
+
+              heroTimer =
+                null;
+
+            }
+
+          }
+
+
+          function startHeroTimer() {
+
+            stopHeroTimer();
+
+
+            heroTimer =
+              window.setInterval(
+                function () {
+
+                  if (
+                    !heroInteracting
+                  ) {
+
+                    goToHero(
+                      currentHero + 1
+                    );
+
+                  }
+
+                },
+                6500
+              );
+
+          }
+
+
+          function restartHeroTimer() {
+
+            stopHeroTimer();
+
+
+            window.setTimeout(
               function () {
 
-                currentSlide =
-                  (
-                    currentSlide +
-                    1
-                  ) %
-                  slides.length;
+                if (
+                  !heroInteracting
+                ) {
 
-                updateSlide();
+                  startHeroTimer();
+
+                }
 
               },
-              6500
+              700
             );
 
-        }
+          }
 
 
-        if (slides.length) {
+          if (
+            heroNext
+          ) {
 
-          renderDots();
+            heroNext.addEventListener(
+              "click",
+              function () {
 
-          updateSlide();
+                goToHero(
+                  currentHero + 1,
+                  true
+                );
 
-          restartHeroTimer();
+              }
+            );
 
-        }
+          }
 
 
-        if (previousButton) {
+          if (
+            heroPrev
+          ) {
 
-          previousButton.addEventListener(
-            "click",
+            heroPrev.addEventListener(
+              "click",
+              function () {
+
+                goToHero(
+                  currentHero - 1,
+                  true
+                );
+
+              }
+            );
+
+          }
+
+
+          /* ---------------------------------------------------
+             MANUAL SCROLL / SWIPE
+          --------------------------------------------------- */
+
+          heroTrack.addEventListener(
+            "pointerdown",
             function () {
 
-              goToSlide(
-                currentSlide - 1
-              );
+              heroInteracting =
+                true;
+
+              stopHeroTimer();
 
             }
           );
 
-        }
 
-
-        if (nextButton) {
-
-          nextButton.addEventListener(
-            "click",
+          heroTrack.addEventListener(
+            "pointerup",
             function () {
 
-              goToSlide(
-                currentSlide + 1
+              window.clearTimeout(
+                heroScrollTimer
               );
+
+
+              heroScrollTimer =
+                window.setTimeout(
+                  function () {
+
+                    syncHeroIndex();
+
+                    heroInteracting =
+                      false;
+
+                    startHeroTimer();
+
+                  },
+                  300
+                );
 
             }
           );
+
+
+          heroTrack.addEventListener(
+            "pointercancel",
+            function () {
+
+              heroInteracting =
+                false;
+
+              syncHeroIndex();
+
+              startHeroTimer();
+
+            }
+          );
+
+
+          heroTrack.addEventListener(
+            "scroll",
+            function () {
+
+              window.clearTimeout(
+                heroScrollTimer
+              );
+
+
+              heroScrollTimer =
+                window.setTimeout(
+                  function () {
+
+                    syncHeroIndex();
+
+                  },
+                  100
+                );
+
+            }
+          );
+
+
+          /* ---------------------------------------------------
+             HOVER PAUSE
+          --------------------------------------------------- */
+
+          heroTrack.addEventListener(
+            "mouseenter",
+            function () {
+
+              heroInteracting =
+                true;
+
+              stopHeroTimer();
+
+            }
+          );
+
+
+          heroTrack.addEventListener(
+            "mouseleave",
+            function () {
+
+              heroInteracting =
+                false;
+
+              startHeroTimer();
+
+            }
+          );
+
+
+          /* ---------------------------------------------------
+             TOUCH
+          --------------------------------------------------- */
+
+          heroTrack.addEventListener(
+            "touchstart",
+            function () {
+
+              heroInteracting =
+                true;
+
+              stopHeroTimer();
+
+            },
+            {
+              passive: true
+            }
+          );
+
+
+          heroTrack.addEventListener(
+            "touchend",
+            function () {
+
+              syncHeroIndex();
+
+              heroInteracting =
+                false;
+
+              startHeroTimer();
+
+            },
+            {
+              passive: true
+            }
+          );
+
+
+          /* ---------------------------------------------------
+             KEYBOARD
+          --------------------------------------------------- */
+
+          heroTrack.addEventListener(
+            "keydown",
+            function (event) {
+
+              if (
+                event.key === "ArrowRight"
+              ) {
+
+                event.preventDefault();
+
+                goToHero(
+                  currentHero + 1,
+                  true
+                );
+
+              }
+
+
+              if (
+                event.key === "ArrowLeft"
+              ) {
+
+                event.preventDefault();
+
+                goToHero(
+                  currentHero - 1,
+                  true
+                );
+
+              }
+
+            }
+          );
+
+
+          updateHeroUI();
+
+          startHeroTimer();
 
         }
 
 
         /* =====================================================
-           COMMUNITY HORIZONTAL SCROLLER
+           MORE FROM COMMUNITY SCROLLER
         ===================================================== */
 
-        const rail =
+        const communityRail =
           document.getElementById(
-            "communityRail"
+            "communityStoryRail"
           );
 
         const communityPrev =
@@ -4042,22 +4026,40 @@
           );
 
 
-        if (rail) {
+        if (
+          communityRail
+        ) {
+
+          let isDragging =
+            false;
+
+          let dragStarted =
+            false;
+
+          let startX =
+            0;
+
+          let startScrollLeft =
+            0;
 
 
-          function scrollStories(
+          function scrollCommunity(
             direction
           ) {
 
-            rail.scrollBy(
+            const amount =
+              Math.max(
+                260,
+                communityRail.clientWidth *
+                0.78
+              );
+
+
+            communityRail.scrollBy(
               {
                 left:
                   direction *
-                  Math.max(
-                    300,
-                    rail.clientWidth *
-                    .75
-                  ),
+                  amount,
 
                 behavior:
                   "smooth"
@@ -4067,13 +4069,15 @@
           }
 
 
-          if (communityPrev) {
+          if (
+            communityPrev
+          ) {
 
             communityPrev.addEventListener(
               "click",
               function () {
 
-                scrollStories(
+                scrollCommunity(
                   -1
                 );
 
@@ -4083,13 +4087,15 @@
           }
 
 
-          if (communityNext) {
+          if (
+            communityNext
+          ) {
 
             communityNext.addEventListener(
               "click",
               function () {
 
-                scrollStories(
+                scrollCommunity(
                   1
                 );
 
@@ -4099,53 +4105,53 @@
           }
 
 
-          let dragging =
-            false;
+          /* ---------------------------------------------------
+             MOUSE / POINTER DRAG
+          --------------------------------------------------- */
 
-          let startX =
-            0;
-
-          let startScroll =
-            0;
-
-
-          rail.addEventListener(
+          communityRail.addEventListener(
             "pointerdown",
             function (event) {
 
-              dragging =
+              isDragging =
                 true;
+
+              dragStarted =
+                false;
 
               startX =
                 event.clientX;
 
-              startScroll =
-                rail.scrollLeft;
+              startScrollLeft =
+                communityRail.scrollLeft;
 
-              rail.classList.add(
+              communityRail.classList.add(
                 "is-dragging"
               );
 
-
               try {
 
-                rail.setPointerCapture(
+                communityRail.setPointerCapture(
                   event.pointerId
                 );
 
               }
 
-              catch (error) {}
+              catch (error) {
+                /* Ignore unsupported pointer capture */
+              }
 
             }
           );
 
 
-          rail.addEventListener(
+          communityRail.addEventListener(
             "pointermove",
             function (event) {
 
-              if (!dragging) {
+              if (
+                !isDragging
+              ) {
                 return;
               }
 
@@ -4155,70 +4161,126 @@
                 startX;
 
 
-              rail.scrollLeft =
-                startScroll -
-                distance;
+              if (
+                Math.abs(distance) >
+                5
+              ) {
+
+                dragStarted =
+                  true;
+
+              }
+
+
+              if (
+                dragStarted
+              ) {
+
+                event.preventDefault();
+
+                communityRail.scrollLeft =
+                  startScrollLeft -
+                  distance;
+
+              }
 
             }
           );
 
 
-          function stopDragging(
+          function stopCommunityDrag(
             event
           ) {
 
-            dragging =
+            if (
+              !isDragging
+            ) {
+              return;
+            }
+
+
+            isDragging =
               false;
 
-            rail.classList.remove(
+            communityRail.classList.remove(
               "is-dragging"
             );
 
 
-            try {
+            if (
+              event &&
+              event.pointerId !== undefined
+            ) {
 
-              if (
-                event &&
-                event.pointerId !== undefined
-              ) {
+              try {
 
-                rail.releasePointerCapture(
+                communityRail.releasePointerCapture(
                   event.pointerId
                 );
 
               }
 
-            }
+              catch (error) {
+                /* Ignore */
+              }
 
-            catch (error) {}
+            }
 
           }
 
 
-          rail.addEventListener(
+          communityRail.addEventListener(
             "pointerup",
-            stopDragging
+            stopCommunityDrag
           );
 
-
-          rail.addEventListener(
+          communityRail.addEventListener(
             "pointercancel",
-            stopDragging
+            stopCommunityDrag
           );
 
 
-          rail.addEventListener(
+          communityRail.addEventListener(
+            "pointerleave",
+            function () {
+
+              if (
+                isDragging
+              ) {
+
+                isDragging =
+                  false;
+
+                communityRail.classList.remove(
+                  "is-dragging"
+                );
+
+              }
+
+            }
+          );
+
+
+          /* ---------------------------------------------------
+             MOUSE WHEEL → HORIZONTAL
+          --------------------------------------------------- */
+
+          communityRail.addEventListener(
             "wheel",
             function (event) {
 
               if (
-                Math.abs(event.deltaY) >
-                Math.abs(event.deltaX)
+                Math.abs(
+                  event.deltaY
+                ) >
+                Math.abs(
+                  event.deltaX
+                )
               ) {
 
                 event.preventDefault();
 
-                rail.scrollLeft +=
+                communityRail.scrollLeft +=
                   event.deltaY;
 
               }
@@ -4229,41 +4291,221 @@
             }
           );
 
+
+          /* ---------------------------------------------------
+             KEYBOARD
+          --------------------------------------------------- */
+
+          communityRail.addEventListener(
+            "keydown",
+            function (event) {
+
+              if (
+                event.key === "ArrowRight"
+              ) {
+
+                event.preventDefault();
+
+                scrollCommunity(
+                  1
+                );
+
+              }
+
+
+              if (
+                event.key === "ArrowLeft"
+              ) {
+
+                event.preventDefault();
+
+                scrollCommunity(
+                  -1
+                );
+
+              }
+
+            }
+          );
+
         }
+
+
+        /* =====================================================
+           STORY MODAL
+        ===================================================== */
+
+        const modalElement =
+          document.getElementById(
+            "newsStoryModal"
+          );
+
+        const modalImage =
+          document.getElementById(
+            "newsModalImage"
+          );
+
+        const modalCategory =
+          document.getElementById(
+            "newsModalCategory"
+          );
+
+        const modalTitle =
+          document.getElementById(
+            "newsModalTitle"
+          );
+
+        const modalCopy =
+          document.getElementById(
+            "newsModalCopy"
+          );
+
+
+        let storyModal =
+          null;
+
+
+        if (
+          modalElement &&
+          window.bootstrap
+        ) {
+
+          storyModal =
+            new bootstrap.Modal(
+              modalElement
+            );
+
+        }
+
+
+        function openStory(
+          element
+        ) {
+
+          const category =
+            element.dataset.category ||
+            "Community";
+
+          const title =
+            element.dataset.title ||
+            "Community story";
+
+          const image =
+            element.dataset.image ||
+            "";
+
+          const copy =
+            element.dataset.copy ||
+            "";
+
+
+          modalCategory.textContent =
+            category;
+
+          modalTitle.textContent =
+            title;
+
+          modalCopy.textContent =
+            copy;
+
+          modalImage.src =
+            image;
+
+          modalImage.alt =
+            title;
+
+
+          if (
+            storyModal
+          ) {
+
+            storyModal.show();
+
+          }
+
+        }
+
+
+        document
+          .querySelectorAll(
+            ".news-open-story"
+          )
+          .forEach(
+            function (element) {
+
+              element.addEventListener(
+                "click",
+                function () {
+
+                  openStory(
+                    element
+                  );
+
+                }
+              );
+
+
+              element.addEventListener(
+                "keydown",
+                function (event) {
+
+                  if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                  ) {
+
+                    event.preventDefault();
+
+                    openStory(
+                      element
+                    );
+
+                  }
+
+                }
+              );
+
+            }
+          );
 
 
         /* =====================================================
            NEWSLETTER
         ===================================================== */
 
-        const newsletter =
+        const newsletterForm =
           document.getElementById(
             "newsletterForm"
           );
 
-        if (newsletter) {
+        const newsletterMessage =
+          document.getElementById(
+            "newsletterMessage"
+          );
 
-          newsletter.addEventListener(
+
+        if (
+          newsletterForm
+        ) {
+
+          newsletterForm.addEventListener(
             "submit",
             function (event) {
 
               event.preventDefault();
 
-              const email =
-                document.getElementById(
-                  "newsletterEmail"
-                );
 
-              if (email) {
+              if (
+                newsletterMessage
+              ) {
 
-                email.value =
-                  "";
+                newsletterMessage.textContent =
+                  "Thanks. Newsletter subscriptions will be connected here when the mailing service is enabled.";
 
               }
 
-              alert(
-                "Thanks. Newsletter subscriptions will be connected here."
-              );
+
+              newsletterForm.reset();
 
             }
           );
@@ -4277,7 +4519,9 @@
 
 
   <!-- =========================================================
-       MAIN.JS AFTER SHARED HEADER
+       SHARED SITE HEADER LOADER
+       Same mechanism as index.html
+       This also allows main.js to initialise the theme toggle.
   ========================================================== -->
 
   <script>
@@ -4286,19 +4530,17 @@
       "nin:header-loaded",
       function () {
 
-        import(
-          "./assets/js/main.js"
-        )
-        .catch(
-          function (error) {
+        import("./assets/js/main.js")
+          .catch(
+            function (error) {
 
-            console.error(
-              "Could not load main.js:",
-              error
-            );
+              console.error(
+                "Could not load main.js:",
+                error
+              );
 
-          }
-        );
+            }
+          );
 
       },
       {
@@ -4310,25 +4552,19 @@
 
 
   <!-- =========================================================
-       CONFIG
+       SITE CONFIG
   ========================================================== -->
 
   <script src="assets/js/config.js"></script>
 
 
   <!-- =========================================================
-       SHARED HEADER
+       SHARED SITE HEADER
   ========================================================== -->
 
-  <script src="assets/js/site-header.js"></script>
-
-
-  <!-- =========================================================
-       SHARED FOOTER
-  ========================================================== -->
-
-  <script src="assets/js/site-footer.js"></script>
-
+  <script
+    src="assets/js/site-header.js"
+  ></script>
 
 </body>
 
