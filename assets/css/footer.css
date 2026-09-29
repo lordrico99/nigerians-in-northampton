@@ -15,9 +15,14 @@ body {
   display: block;
 
   width: 100%;
+
   max-width: 100%;
 
   margin: 0 !important;
+
+  padding-top: 4rem !important;
+
+  padding-bottom: 4rem !important;
 
   background: #063e29 !important;
 
@@ -27,8 +32,7 @@ body {
 
 
 /* =========================================================
-   SHARED FOOTER WRAPPER
-   The wrapper must not create a separate layout box.
+   FOOTER WRAPPER
 ========================================================= */
 
 #siteFooter {
@@ -36,25 +40,121 @@ body {
   display: contents !important;
 
   margin: 0 !important;
+
   padding: 0 !important;
 
 }
 
 
 /* =========================================================
-   ACTUAL FOOTER
+   FOOTER CONTAINER
 ========================================================= */
 
-#siteFooter > .nin-footer {
+.nin-footer > .container {
 
-  display: block !important;
+  width: 100%;
+
+}
+
+
+/* =========================================================
+   FOOTER MAIN GRID
+   Exact 5-column arrangement:
+   Brand | Community | Businesses | Information | Connect
+========================================================= */
+
+.nin-footer > .container > .row {
+
+  display: grid !important;
+
+  grid-template-columns:
+    minmax(280px, 2fr)
+    repeat(4, minmax(150px, 1fr));
+
+  gap: 2rem !important;
 
   width: 100% !important;
-  max-width: 100% !important;
-
-  min-height: 0 !important;
 
   margin: 0 !important;
+
+}
+
+
+/* Remove Bootstrap/custom column sizing inside footer */
+
+.nin-footer > .container > .row > [class*="col-"] {
+
+  width: auto !important;
+
+  max-width: none !important;
+
+  min-width: 0 !important;
+
+  margin: 0 !important;
+
+  padding-left: 0 !important;
+
+  padding-right: 0 !important;
+
+}
+
+
+/* =========================================================
+   FOOTER BRAND COLUMN
+========================================================= */
+
+.nin-footer > .container > .row > .lg\:col-4 {
+
+  grid-column: span 1;
+
+}
+
+
+/* =========================================================
+   REMAINING FOOTER COLUMNS
+========================================================= */
+
+.nin-footer > .container > .row > .lg\:col-2 {
+
+  grid-column: span 1;
+
+}
+
+
+/* =========================================================
+   FOOTER HEADINGS
+========================================================= */
+
+.nin-footer h3 {
+
+  margin-top: 0;
+
+}
+
+
+/* =========================================================
+   FOOTER LINKS
+========================================================= */
+
+.nin-footer a,
+.nin-footer .navbar-brand,
+.nin-footer h3 {
+
+  color: #fff !important;
+
+}
+
+.nin-footer .fg-3 {
+
+  color:
+    rgba(255,255,255,.66) !important;
+
+}
+
+.nin-footer hr {
+
+  border-color:
+    rgba(255,255,255,.15);
 
 }
 
@@ -85,46 +185,18 @@ body {
 
 
 /* =========================================================
-   FOOTER TEXT / LINKS
-========================================================= */
-
-.nin-footer a,
-.nin-footer .navbar-brand,
-.nin-footer h3 {
-
-  color: #fff !important;
-
-}
-
-.nin-footer .fg-3 {
-
-  color:
-    rgba(255,255,255,.66) !important;
-
-}
-
-.nin-footer hr {
-
-  border-color:
-    rgba(255,255,255,.15);
-
-}
-
-
-/* =========================================================
    SOCIAL ICONS
-   Keep all four icons on one line.
 ========================================================= */
 
 .nin-footer-socials {
 
-  display: flex;
+  display: flex !important;
 
   flex-wrap: nowrap !important;
 
   align-items: center;
 
-  gap: .45rem;
+  gap: .5rem;
 
   width: 100%;
 
@@ -135,13 +207,15 @@ body {
 
 .nin-footer-social {
 
-  width: 40px;
+  width: 40px !important;
 
-  height: 40px;
+  height: 40px !important;
 
-  min-width: 40px;
+  min-width: 40px !important;
 
-  flex: 0 0 40px;
+  max-width: 40px !important;
+
+  flex: 0 0 40px !important;
 
   display: inline-flex;
 
@@ -263,7 +337,20 @@ body {
 
 
 /* =========================================================
-   NEWS PAGE — NO SPACE AFTER FOOTER
+   FOOTER BOTTOM ROW
+========================================================= */
+
+.nin-footer > .container > .d-flex {
+
+  width: 100%;
+
+  margin: 0 !important;
+
+}
+
+
+/* =========================================================
+   NEWS PAGE BODY
 ========================================================= */
 
 body.news-page {
@@ -280,14 +367,35 @@ body.news-page {
 
 
 /* =========================================================
-   FOOTER EXTERNAL SPACING
+   TABLET
 ========================================================= */
 
-body.news-page footer.site-footer,
-body.news-page footer.nin-footer {
+@media (max-width: 991.98px) {
 
-  margin:
-    0 !important;
+  .nin-footer > .container > .row {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 2.25rem 1.5rem !important;
+
+  }
+
+
+  .nin-footer > .container > .row > .lg\:col-4 {
+
+    grid-column:
+      1 / -1;
+
+  }
+
+
+  .nin-footer > .container > .row > .lg\:col-2 {
+
+    grid-column:
+      span 1;
+
+  }
 
 }
 
@@ -300,10 +408,34 @@ body.news-page footer.nin-footer {
 
   .nin-footer {
 
+    padding-top:
+      3rem !important;
+
     padding-bottom:
-      2rem;
+      2rem !important;
 
   }
+
+
+  .nin-footer > .container > .row {
+
+    grid-template-columns:
+      1fr;
+
+    gap:
+      2rem !important;
+
+  }
+
+
+  .nin-footer > .container > .row > .lg\:col-4,
+  .nin-footer > .container > .row > .lg\:col-2 {
+
+    grid-column:
+      1 / -1;
+
+  }
+
 
   .nin-footer-socials {
 
@@ -313,26 +445,28 @@ body.news-page footer.nin-footer {
     gap:
       .4rem;
 
-    overflow:
-      visible;
-
   }
+
 
   .nin-footer-social {
 
     width:
-      40px;
+      40px !important;
 
     height:
-      40px;
+      40px !important;
 
     min-width:
-      40px;
+      40px !important;
+
+    max-width:
+      40px !important;
 
     flex:
-      0 0 40px;
+      0 0 40px !important;
 
   }
+
 
   .nin-footer-social svg {
 
