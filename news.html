@@ -11,12 +11,12 @@
   >
 
   <title>
-    Community News — Nigerian Community in Northamptonampton
+    Community News — Nigerians in Northampton
   </title>
 
   <meta
     name="description"
-    content="Community news, events, business updates and useful information for Nigerian Community in Northamptonampton."
+    content="Community news, events, business updates and useful information for Nigerians in Northampton."
   >
 
   <!-- =========================================================
@@ -44,6 +44,12 @@
     href="assets/css/header.css"
   >
 
+  <!-- Shared site footer -->
+  <link
+    rel="stylesheet"
+    href="assets/css/footer.css"
+  >
+
 
   <style>
 
@@ -55,7 +61,9 @@
     body {
       width: 100%;
       max-width: 100%;
-      margin: 0;
+      min-height: 100%;
+      margin: 0 !important;
+      padding: 0 !important;
       overflow-x: hidden !important;
     }
 
@@ -86,6 +94,116 @@
 
 
     /* =========================================================
+       PAGE / FOOTER LAYOUT
+       Keeps footer at the bottom without changing content flow
+    ========================================================== */
+
+    body.news-page {
+      min-height: 100vh !important;
+      min-height: 100dvh !important;
+
+      display: flex !important;
+      flex-direction: column !important;
+
+      width: 100% !important;
+      max-width: 100% !important;
+
+      margin: 0 !important;
+      padding: 0 !important;
+
+      overflow-x: hidden !important;
+    }
+
+    body.news-page > #siteHeader {
+      flex: 0 0 auto !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    body.news-page > .news-notice,
+    body.news-page > .news-hero,
+    body.news-page > .news-topics {
+      flex: 0 0 auto !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    body.news-page > main {
+      flex: 1 0 auto !important;
+
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    body.news-page > #siteFooter {
+      display: block !important;
+      position: relative !important;
+
+      flex: 0 0 auto !important;
+
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+
+      height: auto !important;
+      min-height: 0 !important;
+
+      margin: 0 !important;
+      padding: 0 !important;
+
+      background: transparent !important;
+    }
+
+    body.news-page > #siteFooter > footer.site-footer,
+    body.news-page > #siteFooter > footer.nin-footer {
+      display: block !important;
+      position: relative !important;
+
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+
+      height: auto !important;
+      min-height: 0 !important;
+
+      margin: 0 !important;
+    }
+
+    body.news-page > #siteFooter > footer.site-footer > .container > .row,
+    body.news-page > #siteFooter > footer.nin-footer > .container > .row {
+      width: auto !important;
+      max-width: none !important;
+      min-width: 0 !important;
+    }
+
+    body.news-page > #siteFooter > footer.site-footer > .container > .row > *,
+    body.news-page > #siteFooter > footer.nin-footer > .container > .row > * {
+      min-width: 0 !important;
+    }
+
+    body.news-page > #siteFooter::before,
+    body.news-page > #siteFooter::after {
+      content: none !important;
+      display: none !important;
+    }
+
+    body.news-page > .modal {
+      position: fixed !important;
+      inset: 0 !important;
+
+      width: 100% !important;
+      height: 100% !important;
+
+      max-width: none !important;
+      margin: 0 !important;
+    }
+
+
+    /* =========================================================
        NEWS PAGE VARIABLES
     ========================================================== */
 
@@ -107,6 +225,7 @@
 
     .news-notice {
       padding: 0.7rem 0;
+
       border-bottom:
         1px solid
         var(--bs-border-color);
@@ -117,20 +236,26 @@
 
     .news-notice-inner {
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
       gap: 1rem;
     }
 
     .news-notice-label {
       display: flex;
+
       align-items: center;
+
       gap: 0.55rem;
 
       color:
         var(--bs-secondary-color);
 
       font-size: 0.78rem;
+
       font-weight: 600;
     }
 
@@ -148,9 +273,12 @@
 
     .news-notice-badge {
       display: inline-flex;
+
       align-items: center;
 
-      padding: 0.32rem 0.65rem;
+      padding:
+        0.32rem
+        0.65rem;
 
       border-radius: 999px;
 
@@ -161,6 +289,7 @@
         var(--news-blue);
 
       font-size: 0.7rem;
+
       font-weight: 700;
     }
 
@@ -175,7 +304,6 @@
 
     /* =========================================================
        HERO CAROUSEL
-       Full width + compact height
     ========================================================== */
 
     .news-hero {
@@ -196,15 +324,18 @@
 
       overflow-x: auto;
 
-      scroll-snap-type: x mandatory;
+      scroll-snap-type:
+        x mandatory;
 
-      scroll-behavior: smooth;
+      scroll-behavior:
+        smooth;
 
       scrollbar-width: none;
 
       -ms-overflow-style: none;
 
-      overscroll-behavior-x: contain;
+      overscroll-behavior-x:
+        contain;
     }
 
     .news-hero-track::-webkit-scrollbar {
@@ -212,20 +343,20 @@
     }
 
     .news-hero-slide {
-
       position: relative;
 
       flex: 0 0 100%;
 
       width: 100%;
-
       min-width: 100%;
 
       height: 420px;
 
-      scroll-snap-align: start;
+      scroll-snap-align:
+        start;
 
-      scroll-snap-stop: always;
+      scroll-snap-stop:
+        always;
 
       overflow: hidden;
 
@@ -236,7 +367,6 @@
     }
 
     .news-hero-image {
-
       position: absolute;
 
       inset: 0;
@@ -246,13 +376,13 @@
 
       object-fit: cover;
 
-      object-position: center 20%;
+      object-position:
+        center 20%;
 
       z-index: -3;
     }
 
     .news-hero-slide::before {
-
       content: "";
 
       position: absolute;
@@ -272,7 +402,6 @@
     }
 
     .news-hero-slide::after {
-
       content: "";
 
       position: absolute;
@@ -290,7 +419,6 @@
     }
 
     .news-hero-content {
-
       position: relative;
 
       z-index: 2;
@@ -317,11 +445,11 @@
     }
 
     .news-hero-content-inner {
-      width: min(760px, 100%);
+      width:
+        min(760px, 100%);
     }
 
     .news-hero-chip {
-
       display: inline-flex;
 
       align-items: center;
@@ -332,22 +460,27 @@
         0.4rem
         0.75rem;
 
-      margin-bottom: 0.8rem;
+      margin-bottom:
+        0.8rem;
 
       border:
         1px solid
         rgba(255,255,255,0.25);
 
-      border-radius: 999px;
+      border-radius:
+        999px;
 
       background:
         rgba(15,23,42,0.35);
 
-      color: #fff;
+      color:
+        #fff;
 
-      font-size: 0.72rem;
+      font-size:
+        0.72rem;
 
-      font-weight: 700;
+      font-weight:
+        700;
 
       backdrop-filter:
         blur(8px);
@@ -357,12 +490,13 @@
     }
 
     .news-hero-title {
-
       max-width: 760px;
 
-      margin-bottom: 0.75rem;
+      margin-bottom:
+        0.75rem;
 
-      color: #fff;
+      color:
+        #fff;
 
       font-size:
         clamp(
@@ -371,19 +505,21 @@
           3.15rem
         );
 
-      line-height: 1.05;
+      line-height:
+        1.05;
 
-      font-weight: 800;
+      font-weight:
+        800;
 
       letter-spacing:
         -0.035em;
     }
 
     .news-hero-description {
-
       max-width: 700px;
 
-      margin-bottom: 1rem;
+      margin-bottom:
+        1rem;
 
       color:
         rgba(255,255,255,0.88);
@@ -395,30 +531,33 @@
           1.05rem
         );
 
-      line-height: 1.55;
+      line-height:
+        1.55;
     }
 
     .news-hero-meta {
-
       display: flex;
 
       flex-wrap: wrap;
 
       align-items: center;
 
-      gap: 0.55rem;
+      gap:
+        0.55rem;
 
       color:
         rgba(255,255,255,0.76);
 
-      font-size: 0.78rem;
+      font-size:
+        0.78rem;
     }
 
     .news-hero-meta span + span::before {
+      content:
+        "·";
 
-      content: "·";
-
-      margin-right: 0.55rem;
+      margin-right:
+        0.55rem;
 
       color:
         rgba(255,255,255,0.48);
@@ -430,7 +569,6 @@
     ========================================================== */
 
     .news-slide-controls {
-
       position: absolute;
 
       left: 0;
@@ -444,7 +582,6 @@
     }
 
     .news-slide-arrow {
-
       position: absolute;
 
       top: 50%;
@@ -470,11 +607,14 @@
       background:
         rgba(15,23,42,0.56);
 
-      color: #fff;
+      color:
+        #fff;
 
-      cursor: pointer;
+      cursor:
+        pointer;
 
-      pointer-events: auto;
+      pointer-events:
+        auto;
 
       backdrop-filter:
         blur(8px);
@@ -488,7 +628,6 @@
     }
 
     .news-slide-arrow:hover {
-
       background:
         rgba(15,23,42,0.78);
 
@@ -516,7 +655,6 @@
     ========================================================== */
 
     .news-hero-footer {
-
       position: absolute;
 
       left: 0;
@@ -535,18 +673,19 @@
     }
 
     .news-hero-dots {
-
       display: inline-flex;
 
       align-items: center;
 
-      gap: 0.4rem;
+      gap:
+        0.4rem;
 
       padding:
         0.45rem
         0.65rem;
 
-      border-radius: 999px;
+      border-radius:
+        999px;
 
       background:
         rgba(15,23,42,0.35);
@@ -559,7 +698,6 @@
     }
 
     .news-hero-dot {
-
       width: 8px;
       height: 8px;
 
@@ -567,14 +705,17 @@
 
       border: 0;
 
-      border-radius: 999px;
+      border-radius:
+        999px;
 
       background:
         rgba(255,255,255,0.42);
 
-      cursor: pointer;
+      cursor:
+        pointer;
 
-      pointer-events: auto;
+      pointer-events:
+        auto;
 
       transition:
         width 0.18s ease,
@@ -582,10 +723,10 @@
     }
 
     .news-hero-dot.is-active {
-
       width: 24px;
 
-      background: #fff;
+      background:
+        #fff;
     }
 
 
@@ -594,7 +735,6 @@
     ========================================================== */
 
     .news-topics {
-
       border-bottom:
         1px solid
         var(--bs-border-color);
@@ -604,21 +744,23 @@
     }
 
     .news-topics-inner {
-
       display: flex;
 
       align-items: center;
 
-      gap: 0.55rem;
+      gap:
+        0.55rem;
 
       overflow-x: auto;
 
       padding:
         0.85rem 0;
 
-      scrollbar-width: none;
+      scrollbar-width:
+        none;
 
-      -ms-overflow-style: none;
+      -ms-overflow-style:
+        none;
     }
 
     .news-topics-inner::-webkit-scrollbar {
@@ -626,7 +768,6 @@
     }
 
     .news-topic {
-
       flex: 0 0 auto;
 
       display: inline-flex;
@@ -641,7 +782,8 @@
         1px solid
         var(--bs-border-color);
 
-      border-radius: 999px;
+      border-radius:
+        999px;
 
       color:
         var(--bs-secondary-color);
@@ -649,11 +791,14 @@
       background:
         var(--bs-body-bg);
 
-      text-decoration: none;
+      text-decoration:
+        none;
 
-      font-size: 0.78rem;
+      font-size:
+        0.78rem;
 
-      font-weight: 600;
+      font-weight:
+        600;
 
       transition:
         border-color 0.18s ease,
@@ -662,7 +807,6 @@
     }
 
     .news-topic:hover {
-
       color:
         var(--bs-primary);
 
@@ -689,15 +833,16 @@
     }
 
     .news-section-heading {
+      max-width:
+        720px;
 
-      max-width: 720px;
-
-      margin-bottom: 2rem;
+      margin-bottom:
+        2rem;
     }
 
     .news-section-heading h2 {
-
-      margin-bottom: 0.5rem;
+      margin-bottom:
+        0.5rem;
 
       font-size:
         clamp(
@@ -706,14 +851,17 @@
           2.15rem
         );
 
-      line-height: 1.15;
+      line-height:
+        1.15;
 
       letter-spacing:
         -0.025em;
     }
 
     .news-section-heading p {
-      margin-bottom: 0;
+      margin-bottom:
+        0;
+
       color:
         var(--bs-secondary-color);
     }
@@ -724,30 +872,36 @@
     ========================================================== */
 
     .news-feature-card {
-
       position: relative;
 
-      min-height: 360px;
+      min-height:
+        360px;
 
-      overflow: hidden;
+      overflow:
+        hidden;
 
-      border-radius: 1rem;
+      border-radius:
+        1rem;
 
       background:
         #111827;
 
-      isolation: isolate;
+      isolation:
+        isolate;
     }
 
     .news-feature-card::before {
+      content:
+        "";
 
-      content: "";
+      position:
+        absolute;
 
-      position: absolute;
+      inset:
+        0;
 
-      inset: 0;
-
-      z-index: -2;
+      z-index:
+        -2;
 
       background:
         linear-gradient(
@@ -759,41 +913,54 @@
     }
 
     .news-feature-image {
+      position:
+        absolute;
 
-      position: absolute;
+      inset:
+        0;
 
-      inset: 0;
+      z-index:
+        -3;
 
-      z-index: -3;
+      width:
+        100%;
 
-      width: 100%;
-      height: 100%;
+      height:
+        100%;
 
-      object-fit: cover;
+      object-fit:
+        cover;
 
-      object-position: center;
+      object-position:
+        center;
     }
 
     .news-feature-content {
+      min-height:
+        360px;
 
-      min-height: 360px;
+      display:
+        flex;
 
-      display: flex;
+      flex-direction:
+        column;
 
-      flex-direction: column;
+      justify-content:
+        flex-end;
 
-      justify-content: flex-end;
+      padding:
+        2rem;
 
-      padding: 2rem;
-
-      color: #fff;
+      color:
+        #fff;
     }
 
     .news-feature-content h3 {
+      max-width:
+        650px;
 
-      max-width: 650px;
-
-      color: #fff;
+      color:
+        #fff;
 
       font-size:
         clamp(
@@ -802,44 +969,49 @@
           2rem
         );
 
-      line-height: 1.15;
+      line-height:
+        1.15;
 
       letter-spacing:
         -0.025em;
     }
 
     .news-feature-content p {
-
-      max-width: 650px;
+      max-width:
+        650px;
 
       color:
         rgba(255,255,255,0.84);
     }
 
     .news-feature-meta {
-
       color:
         rgba(255,255,255,0.68);
 
-      font-size: 0.75rem;
+      font-size:
+        0.75rem;
     }
 
 
     .news-small-card {
+      height:
+        100%;
 
-      height: 100%;
+      display:
+        flex;
 
-      display: flex;
+      flex-direction:
+        column;
 
-      flex-direction: column;
-
-      overflow: hidden;
+      overflow:
+        hidden;
 
       border:
         1px solid
         var(--bs-border-color);
 
-      border-radius: 1rem;
+      border-radius:
+        1rem;
 
       background:
         var(--bs-body-bg);
@@ -850,7 +1022,6 @@
     }
 
     .news-small-card:hover {
-
       transform:
         translateY(-3px);
 
@@ -860,49 +1031,56 @@
     }
 
     [data-bs-theme="dark"] .news-small-card:hover {
-
       box-shadow:
         0 12px 28px
         rgba(0,0,0,0.24);
     }
 
     .news-small-image {
+      width:
+        100%;
 
-      width: 100%;
-      height: 185px;
+      height:
+        185px;
 
-      object-fit: cover;
+      object-fit:
+        cover;
     }
 
     .news-small-content {
+      display:
+        flex;
 
-      display: flex;
+      flex-direction:
+        column;
 
-      flex-direction: column;
+      flex:
+        1;
 
-      flex: 1;
-
-      padding: 1.15rem;
+      padding:
+        1.15rem;
     }
 
     .news-small-content h3 {
+      font-size:
+        1.05rem;
 
-      font-size: 1.05rem;
-
-      line-height: 1.25;
+      line-height:
+        1.25;
 
       letter-spacing:
         -0.015em;
     }
 
     .news-small-content p {
-
       color:
         var(--bs-secondary-color);
 
-      font-size: 0.85rem;
+      font-size:
+        0.85rem;
 
-      line-height: 1.55;
+      line-height:
+        1.55;
     }
 
 
@@ -911,18 +1089,21 @@
     ========================================================== */
 
     .news-category {
+      display:
+        inline-flex;
 
-      display: inline-flex;
+      align-items:
+        center;
 
-      align-items: center;
-
-      width: fit-content;
+      width:
+        fit-content;
 
       padding:
         0.35rem
         0.6rem;
 
-      border-radius: 999px;
+      border-radius:
+        999px;
 
       background:
         var(--news-soft);
@@ -930,16 +1111,17 @@
       color:
         var(--news-blue);
 
-      font-size: 0.68rem;
+      font-size:
+        0.68rem;
 
-      font-weight: 750;
+      font-weight:
+        750;
 
       letter-spacing:
         0.01em;
     }
 
     [data-bs-theme="dark"] .news-category {
-
       background:
         rgba(59,130,246,0.14);
 
@@ -950,45 +1132,48 @@
 
     /* =========================================================
        COMMUNITY HORIZONTAL SCROLLER
-       WORKS WITH:
-       - desktop mouse drag
-       - mobile touch/swipe
-       - wheel
-       - arrows
-       - keyboard
     ========================================================== */
 
     .community-slider {
+      position:
+        relative;
 
-      position: relative;
+      width:
+        100%;
 
-      width: 100%;
-
-      min-width: 0;
+      min-width:
+        0;
     }
 
     .community-slider-viewport {
+      width:
+        100%;
 
-      width: 100%;
+      min-width:
+        0;
 
-      min-width: 0;
-
-      overflow: visible;
+      overflow:
+        visible;
     }
 
     .community-story-rail {
+      display:
+        flex;
 
-      display: flex;
+      gap:
+        1rem;
 
-      gap: 1rem;
+      width:
+        100%;
 
-      width: 100%;
+      min-width:
+        0;
 
-      min-width: 0;
+      overflow-x:
+        auto;
 
-      overflow-x: auto;
-
-      overflow-y: hidden;
+      overflow-y:
+        hidden;
 
       padding:
         0.25rem
@@ -1018,7 +1203,6 @@
     }
 
     .community-story-rail.is-dragging {
-
       cursor:
         grabbing;
 
@@ -1030,18 +1214,20 @@
     }
 
     .community-story-card {
-
       flex:
         0 0 300px;
 
-      width: 300px;
+      width:
+        300px;
 
-      min-width: 300px;
+      min-width:
+        300px;
 
       scroll-snap-align:
         start;
 
-      overflow: hidden;
+      overflow:
+        hidden;
 
       border:
         1px solid
@@ -1059,7 +1245,6 @@
     }
 
     .community-story-card:hover {
-
       transform:
         translateY(-3px);
 
@@ -1069,25 +1254,28 @@
     }
 
     .community-story-image {
+      display:
+        block;
 
-      display: block;
+      width:
+        100%;
 
-      width: 100%;
+      height:
+        175px;
 
-      height: 175px;
+      object-fit:
+        cover;
 
-      object-fit: cover;
-
-      object-position: center;
+      object-position:
+        center;
     }
 
     .community-story-body {
-
-      padding: 1rem;
+      padding:
+        1rem;
     }
 
     .community-story-body h3 {
-
       font-size:
         1rem;
 
@@ -1099,7 +1287,6 @@
     }
 
     .community-story-body p {
-
       color:
         var(--bs-secondary-color);
 
@@ -1111,32 +1298,41 @@
     }
 
     .community-slider-controls {
+      display:
+        flex;
 
-      display: flex;
+      justify-content:
+        flex-end;
 
-      justify-content: flex-end;
+      gap:
+        0.5rem;
 
-      gap: 0.5rem;
-
-      margin-bottom: 0.75rem;
+      margin-bottom:
+        0.75rem;
     }
 
     .community-slider-button {
+      width:
+        38px;
 
-      width: 38px;
-      height: 38px;
+      height:
+        38px;
 
-      display: inline-flex;
+      display:
+        inline-flex;
 
-      align-items: center;
+      align-items:
+        center;
 
-      justify-content: center;
+      justify-content:
+        center;
 
       border:
         1px solid
         var(--bs-border-color);
 
-      border-radius: 50%;
+      border-radius:
+        50%;
 
       background:
         var(--bs-body-bg);
@@ -1144,7 +1340,8 @@
       color:
         var(--bs-body-color);
 
-      cursor: pointer;
+      cursor:
+        pointer;
 
       transition:
         background-color 0.18s ease,
@@ -1153,7 +1350,6 @@
     }
 
     .community-slider-button:hover {
-
       border-color:
         var(--bs-primary);
 
@@ -1165,9 +1361,11 @@
     }
 
     .community-slider-button svg {
+      width:
+        16px;
 
-      width: 16px;
-      height: 16px;
+      height:
+        16px;
     }
 
 
@@ -1176,14 +1374,15 @@
     ========================================================== */
 
     .latest-story {
-
-      display: grid;
+      display:
+        grid;
 
       grid-template-columns:
         180px
         minmax(0, 1fr);
 
-      gap: 1rem;
+      gap:
+        1rem;
 
       padding:
         1rem 0;
@@ -1194,27 +1393,32 @@
     }
 
     .latest-story:first-child {
-      padding-top: 0;
+      padding-top:
+        0;
     }
 
     .latest-story:last-child {
-      border-bottom: 0;
+      border-bottom:
+        0;
     }
 
     .latest-story-image {
+      width:
+        180px;
 
-      width: 180px;
-      height: 120px;
+      height:
+        120px;
 
-      object-fit: cover;
+      object-fit:
+        cover;
 
       border-radius:
         0.8rem;
     }
 
     .latest-story h3 {
-
-      margin-bottom: 0.4rem;
+      margin-bottom:
+        0.4rem;
 
       font-size:
         1.05rem;
@@ -1227,8 +1431,8 @@
     }
 
     .latest-story p {
-
-      margin-bottom: 0.45rem;
+      margin-bottom:
+        0.45rem;
 
       color:
         var(--bs-secondary-color);
@@ -1241,7 +1445,6 @@
     }
 
     .latest-story-meta {
-
       color:
         var(--bs-tertiary-color);
 
@@ -1255,7 +1458,6 @@
     ========================================================== */
 
     .news-sidebar-card {
-
       padding:
         1.2rem;
 
@@ -1271,8 +1473,8 @@
     }
 
     .most-read-item {
-
-      display: grid;
+      display:
+        grid;
 
       grid-template-columns:
         30px
@@ -1290,11 +1492,11 @@
     }
 
     .most-read-item:last-child {
-      border-bottom: 0;
+      border-bottom:
+        0;
     }
 
     .most-read-number {
-
       color:
         var(--bs-primary);
 
@@ -1306,7 +1508,6 @@
     }
 
     .most-read-title {
-
       color:
         var(--bs-body-color);
 
@@ -1334,7 +1535,6 @@
     ========================================================== */
 
     .calendar-item {
-
       display:
         grid;
 
@@ -1354,11 +1554,11 @@
     }
 
     .calendar-item:last-child {
-      border-bottom: 0;
+      border-bottom:
+        0;
     }
 
     .calendar-date {
-
       display:
         flex;
 
@@ -1386,7 +1586,6 @@
     }
 
     .calendar-date-month {
-
       color:
         var(--bs-primary);
 
@@ -1398,7 +1597,6 @@
     }
 
     .calendar-date-day {
-
       font-size:
         1.15rem;
 
@@ -1415,7 +1613,6 @@
     ========================================================== */
 
     .newsletter-box {
-
       padding:
         2.25rem;
 
@@ -1430,7 +1627,8 @@
     }
 
     .newsletter-box h2 {
-      color: #fff;
+      color:
+        #fff;
     }
 
     .newsletter-box p {
@@ -1439,7 +1637,6 @@
     }
 
     .newsletter-form {
-
       display:
         flex;
 
@@ -1451,7 +1648,6 @@
     }
 
     .newsletter-form input {
-
       min-width:
         0;
 
@@ -1466,7 +1662,8 @@
         0.65rem;
 
       padding:
-        0.8rem 0.95rem;
+        0.8rem
+        0.95rem;
 
       background:
         rgba(255,255,255,0.10);
@@ -1479,13 +1676,11 @@
     }
 
     .newsletter-form input::placeholder {
-
       color:
         rgba(255,255,255,0.62);
     }
 
     .newsletter-form input:focus {
-
       border-color:
         rgba(255,255,255,0.65);
 
@@ -1495,17 +1690,18 @@
     }
 
     .newsletter-form button {
-
       flex:
         0 0 auto;
 
-      border: 0;
+      border:
+        0;
 
       border-radius:
         0.65rem;
 
       padding:
-        0.8rem 1rem;
+        0.8rem
+        1rem;
 
       background:
         #fff;
@@ -1526,8 +1722,8 @@
     ========================================================== */
 
     .news-modal-image {
-
-      width: 100%;
+      width:
+        100%;
 
       max-height:
         360px;
@@ -1537,76 +1733,6 @@
 
       border-radius:
         0.85rem;
-    }
-
-
-    /* =========================================================
-       FOOTER
-       Matches index.html
-    ========================================================== */
-
-    .site-footer a {
-
-      color:
-        var(--bs-secondary-color);
-
-      text-decoration:
-        none;
-    }
-
-    .site-footer a:hover {
-
-      color:
-        var(--bs-primary);
-    }
-
-    .site-footer .brand-mark {
-
-      width: 30px;
-      height: 30px;
-
-      display: inline-flex;
-
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 8px;
-
-      background:
-        var(--bs-primary);
-
-      color:
-        #fff;
-
-      font-size: 0.85rem;
-
-      font-weight: 800;
-    }
-
-
-    /* =========================================================
-       DARK MODE
-    ========================================================== */
-
-    [data-bs-theme="dark"] {
-
-      .news-feature-card,
-      .news-hero-slide {
-        background: #020617;
-      }
-
-      .community-story-card,
-      .news-small-card,
-      .news-sidebar-card {
-        background:
-          var(--bs-body-bg);
-      }
-
-      .news-soft {
-        background:
-          rgba(59,130,246,0.14);
-      }
-
     }
 
 
@@ -1638,8 +1764,11 @@
       }
 
       .latest-story-image {
-        width: 150px;
-        height: 105px;
+        width:
+          150px;
+
+        height:
+          105px;
       }
 
     }
@@ -1683,9 +1812,11 @@
       }
 
       .news-slide-arrow {
+        width:
+          36px;
 
-        width: 36px;
-        height: 36px;
+        height:
+          36px;
       }
 
       .news-slide-arrow.prev {
@@ -1715,7 +1846,6 @@
       }
 
       .community-story-card {
-
         flex-basis:
           82vw;
 
@@ -1735,7 +1865,6 @@
       }
 
       .latest-story {
-
         grid-template-columns:
           1fr;
 
@@ -1744,8 +1873,8 @@
       }
 
       .latest-story-image {
-
-        width: 100%;
+        width:
+          100%;
 
         height:
           180px;
@@ -1757,7 +1886,6 @@
       }
 
       .newsletter-form {
-
         flex-direction:
           column;
       }
@@ -1765,6 +1893,33 @@
       .newsletter-form button {
         width:
           100%;
+      }
+
+    }
+
+
+    /* =========================================================
+       DARK MODE
+    ========================================================== */
+
+    [data-bs-theme="dark"] {
+
+      .news-feature-card,
+      .news-hero-slide {
+        background:
+          #020617;
+      }
+
+      .community-story-card,
+      .news-small-card,
+      .news-sidebar-card {
+        background:
+          var(--bs-body-bg);
+      }
+
+      .news-soft {
+        background:
+          rgba(59,130,246,0.14);
       }
 
     }
@@ -1809,7 +1964,7 @@
 
   <!-- =========================================================
        SHARED SITE HEADER
-       Same header as index.html
+       Loaded from partials/header.html
   ========================================================== -->
 
   <div id="siteHeader"></div>
@@ -1872,14 +2027,14 @@
       <article class="news-hero-slide">
 
         <img
-  class="news-hero-image"
-  src="img/nigerian-independence-parade.jpg"
-  alt="Nigerian Independence Day Parade"
-  width="1920"
-  height="1080"
-  loading="eager"
-  referrerpolicy="no-referrer"
->
+          class="news-hero-image"
+          src="img/nigerian-independence-parade.jpg"
+          alt="Nigerian Independence Day Parade"
+          width="1920"
+          height="1080"
+          loading="eager"
+          referrerpolicy="no-referrer"
+        >
 
         <div class="news-hero-content">
 
@@ -2186,7 +2341,7 @@
 
           <p>
             Community stories, local events and useful updates
-            for Nigerian Community in Northamptonampton.
+            for Nigerians in Northampton.
           </p>
 
         </div>
@@ -2234,11 +2389,9 @@
                 </p>
 
                 <div class="news-feature-meta">
-
                   Sunday, October 4, 2026
                   &nbsp; · &nbsp;
                   Community Centre, Abington
-
                 </div>
 
               </div>
@@ -2351,7 +2504,6 @@
 
     <!-- =======================================================
          MORE FROM THE COMMUNITY
-         WORKING HORIZONTAL SCROLLER
     ======================================================== -->
 
     <section
@@ -2741,7 +2893,7 @@
               tabindex="0"
               data-category="Northampton"
               data-title="Useful local services every newcomer should know"
-              data-image="https://images.unsplash.com/photo-1524666041070-9c8764154a8e?auto=format&fit=crop&w=1000&q=85"
+              data-image="img/northampton-environment-optimized.jpg"
               data-copy="From transport and local information to everyday services, knowing where to find help can make settling into Northampton easier."
             >
 
@@ -3040,7 +3192,9 @@
          BUSINESS / STORY CTA
     ======================================================== -->
 
-    <section class="news-section bg-soft">
+    <section
+      class="news-section bg-soft"
+    >
 
       <div class="container">
 
@@ -3064,7 +3218,6 @@
             href="list-your-business.html"
           >
             Share Your Business
-
           </a>
 
         </div>
@@ -3078,7 +3231,9 @@
          NEWSLETTER
     ======================================================== -->
 
-    <section class="news-section">
+    <section
+      class="news-section"
+    >
 
       <div class="container">
 
@@ -3156,234 +3311,11 @@
 
 
   <!-- =========================================================
-       FOOTER
-       MATCHES INDEX.HTML
+       SHARED SITE FOOTER
+       Loaded from partials/footer.html
   ========================================================== -->
 
-  <footer class="site-footer bg-2 py-6">
-
-    <div class="container">
-
-
-      <div class="row g-4">
-
-
-        <!-- Brand -->
-
-        <div class="lg:col-4">
-
-          <a
-            class="navbar-brand d-inline-flex align-items-center gap-2 fw-semibold mb-3"
-            href="index.html"
-          >
-
-            <span
-              class="brand-mark"
-              aria-hidden="true"
-            >
-              N
-            </span>
-
-            Nigerian Community in Northamptonampton
-
-          </a>
-
-          <p class="fg-3 fs-sm mb-0">
-            Connecting Nigerians, supporting local businesses
-            and sharing useful information across Northampton.
-          </p>
-
-        </div>
-
-
-        <!-- Community -->
-
-        <div class="sm:col-6 lg:col-2">
-
-          <h3 class="fs-sm fw-semibold mb-3">
-            Community
-          </h3>
-
-          <ul class="list-unstyled mb-0">
-
-            <li class="mb-2">
-              <a href="index.html#about">
-                About Us
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="news.html">
-                News
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="index.html#events">
-                Events
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="index.html#guides">
-                Newcomer's Guide
-              </a>
-            </li>
-
-          </ul>
-
-        </div>
-
-
-        <!-- Businesses -->
-
-        <div class="sm:col-6 lg:col-2">
-
-          <h3 class="fs-sm fw-semibold mb-3">
-            Businesses
-          </h3>
-
-          <ul class="list-unstyled mb-0">
-
-            <li class="mb-2">
-              <a href="businesses.html">
-                Directory
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="businesses.html">
-                Categories
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="list-your-business.html">
-                List Your Business
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="advertise-with-us.html">
-                Advertise with us
-              </a>
-            </li>
-
-          </ul>
-
-        </div>
-
-
-        <!-- Information -->
-
-        <div class="sm:col-6 lg:col-2">
-
-          <h3 class="fs-sm fw-semibold mb-3">
-            Information
-          </h3>
-
-          <ul class="list-unstyled mb-0">
-
-            <li class="mb-2">
-              <a href="index.html#about">
-                About
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#">
-                Contact
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#">
-                Privacy
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#">
-                Terms
-              </a>
-            </li>
-
-          </ul>
-
-        </div>
-
-
-        <!-- Social -->
-
-        <div class="sm:col-6 lg:col-2">
-
-          <h3 class="fs-sm fw-semibold mb-3">
-            Connect
-          </h3>
-
-          <ul class="list-unstyled mb-0">
-
-            <li class="mb-2">
-              <a href="#">
-                WhatsApp Community
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#">
-                Facebook
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#">
-                Instagram
-              </a>
-            </li>
-
-            <li class="mb-2">
-              <a href="#">
-                Email Us
-              </a>
-            </li>
-
-          </ul>
-
-        </div>
-
-      </div>
-
-
-      <hr class="my-5">
-
-
-      <div
-        class="d-flex flex-wrap justify-content-between align-items-center gap-3"
-      >
-
-        <p class="fg-3 fs-xs mb-0">
-
-          &copy;
-
-          <span data-year>
-            2026
-          </span>
-
-          Nigerian Community in Northamptonampton.
-          All rights reserved.
-
-        </p>
-
-
-        <p class="fg-3 fs-xs mb-0">
-          Community • Business • Information
-        </p>
-
-      </div>
-
-    </div>
-
-  </footer>
+  <div id="siteFooter"></div>
 
 
   <!-- =========================================================
@@ -3447,8 +3379,7 @@
           <p
             id="newsModalCopy"
             class="fg-2 mb-0"
-          >
-          </p>
+          ></p>
 
         </div>
 
@@ -3475,22 +3406,6 @@
     document.addEventListener(
       "DOMContentLoaded",
       function () {
-
-
-        /* =====================================================
-           FOOTER YEAR
-        ===================================================== */
-
-        document
-          .querySelectorAll("[data-year]")
-          .forEach(
-            function (element) {
-
-              element.textContent =
-                new Date().getFullYear();
-
-            }
-          );
 
 
         /* =====================================================
@@ -4520,8 +4435,8 @@
 
   <!-- =========================================================
        SHARED SITE HEADER LOADER
-       Same mechanism as index.html
-       This also allows main.js to initialise the theme toggle.
+       site-header.js loads partials/header.html
+       and applies active navigation state.
   ========================================================== -->
 
   <script>
@@ -4564,6 +4479,15 @@
 
   <script
     src="assets/js/site-header.js"
+  ></script>
+
+
+  <!-- =========================================================
+       SHARED SITE FOOTER
+  ========================================================== -->
+
+  <script
+    src="assets/js/site-footer.js"
   ></script>
 
 </body>
