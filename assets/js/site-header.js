@@ -3,7 +3,7 @@
 
   /* =========================================================
      LOAD SHARED HEADER
-  ========================================================= */
+  ========================================================== */
 
   async function loadSiteHeader() {
 
@@ -22,6 +22,7 @@
           document.baseURI
         );
 
+
       const response =
         await fetch(
           headerURL,
@@ -29,6 +30,7 @@
             cache: "no-store"
           }
         );
+
 
       if (!response.ok) {
 
@@ -38,24 +40,22 @@
 
       }
 
+
       container.innerHTML =
         await response.text();
+
 
       setActiveNavigation();
 
       await loadAuthUI();
 
-      /*
-       * main.js is loaded after this event.
-       * That means Locale's base.js sees the
-       * shared header elements when it initializes.
-       */
 
       document.dispatchEvent(
         new CustomEvent(
           "nin:header-loaded"
         )
       );
+
 
     }
     catch (error) {
@@ -64,6 +64,7 @@
         "NIN site header could not be loaded:",
         error
       );
+
 
       container.innerHTML = `
         <div
@@ -81,108 +82,98 @@
 
   /* =========================================================
      ACTIVE NAVIGATION
-  ========================================================= */
+     
+     One mapping is used for the entire shared header.
+     Desktop and mobile items use the same data-header-page
+     values, so the active state stays consistent.
+  ========================================================== */
 
   function setActiveNavigation() {
 
     const currentPage =
-      window.location.pathname
-        .split("/")
-        .pop()
-        .toLowerCase() ||
-      "index.html";
+      getCurrentPage();
 
-    const items =
-      document.querySelectorAll(
-        "#siteHeader [data-header-page]"
-      );
 
-    items.forEach(
-      (item) => {
+    const pageMap = {
 
-        item.classList.remove(
-          "active"
-        );
+      "index.html":
+        "home",
 
-        item.removeAttribute(
-          "aria-current"
-        );
+      "businesses.html":
+        "businesses",
 
-      }
-    );
+      "listing.html":
+        "businesses",
 
-    let activePage =
+      "list-your-business.html":
+        "businesses",
+
+      "community.html":
+        "community",
+
+      "news.html":
+        "news",
+
+      "events.html":
+        "events",
+
+      "guides.html":
+        "guides",
+
+      "about.html":
+        "about"
+
+    };
+
+
+    const activePage =
+      pageMap[currentPage] ||
       null;
 
-    if (
-      currentPage ===
-      "index.html"
-    ) {
 
-      activePage =
-        "home";
+    /* ---------------------------------------------------------
+       Clear ALL active states first
+    ---------------------------------------------------------- */
 
-    }
-    else if (
-      currentPage ===
-        "businesses.html" ||
-      currentPage ===
-        "listing.html" ||
-      currentPage ===
-        "list-your-business.html"
-    ) {
+    document
+      .querySelectorAll(
+        "#siteHeader [data-header-page]"
+      )
+      .forEach(
+        function (item) {
 
-      activePage =
-        "businesses";
+          item.classList.remove(
+            "active"
+          );
 
-    }
-    else if (
-      currentPage ===
-      "community.html"
-    ) {
+          item.removeAttribute(
+            "aria-current"
+          );
 
-      activePage =
-        "community";
+        }
+      );
 
-    }
-    else if (
-      currentPage ===
-      "events.html"
-    ) {
 
-      activePage =
-        "events";
-
-    }
-    else if (
-      currentPage ===
-      "guides.html"
-    ) {
-
-      activePage =
-        "guides";
-
-    }
-    else if (
-      currentPage ===
-      "about.html"
-    ) {
-
-      activePage =
-        "about";
-
-    }
+    /* ---------------------------------------------------------
+       Nothing to activate for pages not represented in the
+       main navigation.
+    ---------------------------------------------------------- */
 
     if (!activePage) {
       return;
     }
+
+
+    /* ---------------------------------------------------------
+       Activate every matching desktop/mobile navigation item.
+    ---------------------------------------------------------- */
 
     document
       .querySelectorAll(
         `#siteHeader [data-header-page="${activePage}"]`
       )
       .forEach(
-        (item) => {
+        function (item) {
 
           item.classList.add(
             "active"
@@ -200,13 +191,49 @@
 
 
   /* =========================================================
+     CURRENT PAGE
+     
+     Handles:
+     - /index.html
+     - /
+     - /news.html
+     - query strings
+     - hash fragments
+  ========================================================== */
+
+  function getCurrentPage() {
+
+    const pathname =
+      window.location.pathname
+        .split("/")
+        .pop()
+        .toLowerCase();
+
+
+    /*
+     * Root URL:
+     * /  -> index.html
+     */
+    if (!pathname) {
+
+      return "index.html";
+
+    }
+
+
+    return pathname;
+
+  }
+
+
+  /* =========================================================
      AUTH UI
-  ========================================================= */
+  ========================================================== */
 
   function loadAuthUI() {
 
     return new Promise(
-      (resolve, reject) => {
+      function (resolve, reject) {
 
         if (
           window.NINAuthUILoaded
@@ -218,10 +245,12 @@
 
         }
 
+
         const script =
           document.createElement(
             "script"
           );
+
 
         script.src =
           new URL(
@@ -229,11 +258,13 @@
             document.baseURI
           ).href;
 
+
         script.async =
           false;
 
+
         script.onload =
-          () => {
+          function () {
 
             window.NINAuthUILoaded =
               true;
@@ -242,8 +273,9 @@
 
           };
 
+
         script.onerror =
-          () => {
+          function () {
 
             reject(
               new Error(
@@ -252,6 +284,7 @@
             );
 
           };
+
 
         document.body.appendChild(
           script
@@ -265,7 +298,7 @@
 
   /* =========================================================
      START
-  ========================================================= */
+  ========================================================== */
 
   if (
     document.readyState ===
@@ -274,7 +307,10 @@
 
     document.addEventListener(
       "DOMContentLoaded",
-      loadSiteHeader
+      loadSiteHeader,
+      {
+        once: true
+      }
     );
 
   }
