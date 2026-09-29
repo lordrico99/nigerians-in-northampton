@@ -2,17 +2,78 @@
    SHARED NIGERIAN COMMUNITY FOOTER
 ========================================================= */
 
-.nin-footer {
-  position: relative;
-  background: #063e29 !important;
-  color: rgba(255,255,255,.88);
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
+.nin-footer {
+
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0 !important;
+
+  background: #063e29 !important;
+
+  color: rgba(255,255,255,.88);
+
+}
+
+
+/* =========================================================
+   SHARED FOOTER WRAPPER
+   IMPORTANT:
+   The wrapper must not create its own layout box.
+========================================================= */
+
+#siteFooter {
+
+  display: contents !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+}
+
+
+/* =========================================================
+   ACTUAL FOOTER
+========================================================= */
+
+#siteFooter > .nin-footer {
+
+  display: block !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  min-height: 0 !important;
+
+  margin: 0 !important;
+
+}
+
+
+/* =========================================================
+   NIGERIAN FLAG TOP LINE
+========================================================= */
+
 .nin-footer::before {
+
   content: "";
+
   position: absolute;
+
   inset: 0 0 auto 0;
+
   height: 4px;
+
   background:
     linear-gradient(
       90deg,
@@ -20,46 +81,77 @@
       #fff 33.33% 66.66%,
       #008751 66.66% 100%
     );
+
 }
+
+
+/* =========================================================
+   FOOTER TEXT / LINKS
+========================================================= */
 
 .nin-footer a,
 .nin-footer .navbar-brand,
 .nin-footer h3 {
+
   color: #fff !important;
+
 }
 
 .nin-footer .fg-3 {
-  color: rgba(255,255,255,.66) !important;
+
+  color:
+    rgba(255,255,255,.66) !important;
+
 }
 
 .nin-footer hr {
-  border-color: rgba(255,255,255,.15);
+
+  border-color:
+    rgba(255,255,255,.15);
+
 }
 
-/* ---------------------------------------------------------
+
+/* =========================================================
    SOCIAL ICONS
---------------------------------------------------------- */
+========================================================= */
 
 .nin-footer-socials {
+
   display: flex;
+
   flex-wrap: wrap;
+
   align-items: center;
+
   gap: .65rem;
+
 }
 
+
 .nin-footer-social {
+
   width: 42px;
+
   height: 42px;
 
   display: inline-flex;
+
   align-items: center;
+
   justify-content: center;
 
-  border: 1px solid rgba(255,255,255,.18);
+  border:
+    1px solid
+    rgba(255,255,255,.18);
+
   border-radius: 50%;
 
-  background: rgba(255,255,255,.06);
-  color: #fff !important;
+  background:
+    rgba(255,255,255,.06);
+
+  color:
+    #fff !important;
 
   text-decoration: none;
 
@@ -68,64 +160,143 @@
     background-color .2s ease,
     border-color .2s ease,
     box-shadow .2s ease;
+
 }
+
 
 .nin-footer-social svg {
+
   width: 20px;
+
   height: 20px;
+
   fill: currentColor;
+
   flex: 0 0 auto;
+
 }
+
 
 .nin-footer-social:hover {
-  transform: translateY(-3px);
-  background: rgba(255,255,255,.13);
-  border-color: rgba(255,255,255,.36);
-  box-shadow: 0 10px 22px rgba(0,0,0,.16);
+
+  transform:
+    translateY(-3px);
+
+  background:
+    rgba(255,255,255,.13);
+
+  border-color:
+    rgba(255,255,255,.36);
+
+  box-shadow:
+    0 10px 22px
+    rgba(0,0,0,.16);
+
 }
+
 
 .nin-footer-social:focus-visible {
-  outline: 2px solid #dfbd5e;
-  outline-offset: 3px;
+
+  outline:
+    2px solid
+    #dfbd5e;
+
+  outline-offset:
+    3px;
+
 }
 
-/* ---------------------------------------------------------
+
+/* =========================================================
    WHATSAPP
---------------------------------------------------------- */
+========================================================= */
 
 .nin-footer-social.nin-whatsapp {
-  background: rgba(37,211,102,.12);
-  border-color: rgba(37,211,102,.30);
+
+  background:
+    rgba(37,211,102,.12);
+
+  border-color:
+    rgba(37,211,102,.30);
+
 }
+
 
 .nin-footer-social.nin-whatsapp:hover {
-  background: rgba(37,211,102,.20);
-  border-color: rgba(37,211,102,.48);
+
+  background:
+    rgba(37,211,102,.20);
+
+  border-color:
+    rgba(37,211,102,.48);
+
 }
+
 
 .nin-footer-social-note {
-  margin-top: .75rem;
-  color: rgba(255,255,255,.62);
-  font-size: .74rem;
-  line-height: 1.45;
+
+  margin-top:
+    .75rem;
+
+  color:
+    rgba(255,255,255,.62);
+
+  font-size:
+    .74rem;
+
+  line-height:
+    1.45;
+
 }
 
-/* ---------------------------------------------------------
+
+/* =========================================================
+   FOOTER EXTERNAL SPACING
+========================================================= */
+
+body.news-page {
+
+  margin: 0 !important;
+
+  padding: 0 !important;
+
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+
+}
+
+
+/* =========================================================
    MOBILE
---------------------------------------------------------- */
+========================================================= */
 
 @media (max-width: 575.98px) {
+
   .nin-footer {
-    padding-bottom: 2rem;
+
+    padding-bottom:
+      2rem;
+
   }
 
   .nin-footer-social {
-    width: 40px;
-    height: 40px;
+
+    width:
+      40px;
+
+    height:
+      40px;
+
   }
 
   .nin-footer-social svg {
-    width: 19px;
-    height: 19px;
+
+    width:
+      19px;
+
+    height:
+      19px;
+
   }
+
 }
