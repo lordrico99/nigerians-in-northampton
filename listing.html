@@ -623,6 +623,105 @@
 
     }
 
+        /* =========================================================
+       HORIZONTAL OVERFLOW FIX
+       Listing page only — does not change layout/content
+    ========================================================== */
+
+    html,
+    body {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow-x: hidden !important;
+    }
+
+    body {
+      min-width: 0 !important;
+    }
+
+    #siteHeader,
+    #listingContent,
+    #listingPage {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      overflow-x: hidden !important;
+    }
+
+    #listingContent *,
+    #listingPage * {
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    #listingContent .container,
+    #listingContent .row,
+    #listingContent [class*="col-"] {
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+
+    .listing-cover,
+    .listing-cover-grid,
+    .listing-main-column,
+    .listing-card,
+    .listing-card-body,
+    .listing-map-wrap,
+    #listingMap {
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+
+    .listing-profile-head,
+    .listing-title-row,
+    .listing-actions,
+    .listing-service-list {
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+
+    .listing-profile-head > *,
+    .listing-title-row > *,
+    .listing-actions > *,
+    .listing-card-body > * {
+      min-width: 0 !important;
+    }
+
+    .listing-contact-item,
+    .listing-contact-item > div:last-child {
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+
+    .listing-contact-item span,
+    .listing-contact-item a,
+    .listing-card p,
+    .listing-card h1,
+    .listing-card h2,
+    .listing-card h3,
+    .listing-card h4,
+    .listing-card strong {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .listing-hours {
+      max-width: 100% !important;
+      table-layout: fixed;
+    }
+
+    .listing-hours td {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .similar-business-card {
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+
   </style>
 
 </head>
