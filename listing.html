@@ -44,6 +44,12 @@
     href="assets/css/header.css"
   >
 
+  <!-- Shared site footer -->
+  <link
+    rel="stylesheet"
+    href="assets/css/footer.css"
+  >
+
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -194,7 +200,7 @@
 
     /* =========================================================
        COVER IMAGE OVERLAY
-    ========================================================= */
+    ========================================================== */
 
     .listing-cover-main.has-image::after,
     .listing-cover-side > div.has-image::after {
@@ -623,7 +629,8 @@
 
     }
 
-        /* =========================================================
+
+    /* =========================================================
        HORIZONTAL OVERFLOW FIX
        Listing page only — does not change layout/content
     ========================================================== */
@@ -722,6 +729,25 @@
       max-width: 100% !important;
     }
 
+
+    /* =========================================================
+       SHARED FOOTER CONTAINER
+       Keeps shared footer in normal document flow
+    ========================================================== */
+
+    #siteFooter {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      display: block;
+    }
+
+    #siteFooter > footer {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
   </style>
 
 </head>
@@ -775,156 +801,11 @@
 
 
   <!-- =======================================================
-       FOOTER
+       SHARED SITE FOOTER
+       Loaded from partials/footer.html
   ======================================================== -->
 
-  <footer class="site-footer mt-5">
-
-    <div class="container py-5">
-
-      <div class="row g-4">
-
-
-        <div class="col-12 lg:col-4">
-
-          <a
-            href="index.html"
-            class="brand d-inline-flex align-items-center gap-2 text-decoration-none"
-          >
-
-            <span class="brand-mark">
-              N
-            </span>
-
-            <span>
-
-              <strong class="d-block lh-1">
-                Nigerian Community in Northampton
-              </strong>
-
-              <span class="fs-xs fg-3">
-                Community Directory
-              </span>
-
-            </span>
-
-          </a>
-
-
-          <p class="fg-3 mt-3 mb-0">
-            Connecting Nigerians, businesses and useful local information across Northampton.
-          </p>
-
-        </div>
-
-
-        <div class="col-6 sm:col-3 lg:col-2">
-
-          <strong class="d-block mb-3">
-            Directory
-          </strong>
-
-          <div class="d-grid gap-2 fs-sm">
-
-            <a href="businesses.html">
-              Businesses
-            </a>
-
-            <a href="index.html#categories">
-              Categories
-            </a>
-
-            <a href="list-your-business.html">
-              List Your Business
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <div class="col-6 sm:col-3 lg:col-2">
-
-          <strong class="d-block mb-3">
-            Community
-          </strong>
-
-          <div class="d-grid gap-2 fs-sm">
-
-            <a href="index.html#news">
-              News &amp; Events
-            </a>
-
-            <a href="index.html#guides">
-              Guides
-            </a>
-
-            <a href="index.html#about">
-              About Us
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <div class="col-12 lg:col-4">
-
-          <strong class="d-block mb-3">
-            Need help?
-          </strong>
-
-          <p class="fg-3 fs-sm mb-3">
-            Use the directory to discover businesses and services,
-            or get in touch with the community team.
-          </p>
-
-          <a
-            class="btn btn-outline-primary btn-sm"
-            href="index.html#contact"
-          >
-            Contact the community
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="
-          border-top
-          mt-4
-          pt-4
-          fs-xs
-          fg-3
-          d-flex
-          justify-content-between
-          gap-3
-          flex-wrap
-        "
-      >
-
-        <span>
-
-          ©
-
-          <span id="footerYear"></span>
-
-          Nigerian Community in Northampton
-
-        </span>
-
-
-        <span>
-          Built for the Northampton Nigerian community
-        </span>
-
-      </div>
-
-    </div>
-
-  </footer>
+  <div id="siteFooter"></div>
 
 
   <!-- =======================================================
@@ -966,22 +847,8 @@
           );
 
 
-        const year =
-          document.getElementById(
-            "footerYear"
-          );
-
-
         const businessData =
           window.NINBusinessData || {};
-
-
-        if (year) {
-
-          year.textContent =
-            new Date().getFullYear();
-
-        }
 
 
         if (!listingRoot) {
@@ -1170,30 +1037,30 @@
 
 
         function galleryImagesFor(
-  business
-) {
+          business
+        ) {
 
-  const gallery =
-    Array.isArray(
-      business.galleryImages
-    )
-      ? business.galleryImages
-      : Array.isArray(
-          business.gallery
-        )
-          ? business.gallery
-          : [];
+          const gallery =
+            Array.isArray(
+              business.galleryImages
+            )
+              ? business.galleryImages
+              : Array.isArray(
+                  business.gallery
+                )
+                  ? business.gallery
+                  : [];
 
 
-  return gallery
-    .map(
-      imageURL
-    )
-    .filter(
-      Boolean
-    );
+          return gallery
+            .map(
+              imageURL
+            )
+            .filter(
+              Boolean
+            );
 
-}
+        }
 
 
         /* =====================================================
@@ -3325,7 +3192,9 @@
        LOAD SHARED HEADER
   ======================================================== -->
 
-  <script src="assets/js/site-header.js"></script>
+  <script
+    src="assets/js/site-header.js"
+  ></script>
 
 
   <!-- =======================================================
@@ -3359,6 +3228,15 @@
     );
 
   </script>
+
+
+  <!-- =======================================================
+       LOAD SHARED FOOTER
+  ======================================================== -->
+
+  <script
+    src="assets/js/site-footer.js"
+  ></script>
 
 
 </body>
